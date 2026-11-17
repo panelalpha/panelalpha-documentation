@@ -1,6 +1,6 @@
 ---
-title: Single Server Edition
-description: Overview of PanelAlpha Single Server Edition features, requirements, and documentation sections.
+title: "PanelAlpha Single Server Edition"
+description: "PanelAlpha Single Server Edition is a web hosting panel you install on your own VPS. You open it in a browser and look after your sites there. The Engine..."
 nav:
   group: Single Server
   order: 1
@@ -13,63 +13,81 @@ section:
       path: index.md
       collapsable: false
     - title: Getting Started
-    - title: Client Area Instances
-      path: client-area-instances/index.md
-    - title: Client Area Hosting
-      path: client-area-hosting/index.md
-    - title: Admin Area
-      path: admin-area/index.md
-    - title: Configuration
-      path: admin-area/default-plan.md
+    - title: Projects
+    - title: Looking After a Project
+    - title: The Panel
+    - title: Editions
 card:
   title: Single Server Edition
-  description: Deploy and manage PanelAlpha on a single Linux server with a streamlined operational model.
+  description: A web hosting panel you install on your own VPS. It runs on PanelAlpha Engine 2.3.0 or later.
   order: 1
 ---
 
+# PanelAlpha Single Server Edition
 
-# Single Server Edition
+> [!NOTE]
+> **This documentation covers PanelAlpha Single Server Edition, which runs on PanelAlpha Engine 2.3.0 or later.** An older Engine is not supported.
 
-Welcome to the **PanelAlpha Single Server Edition** documentation. Single Server Edition is designed for teams that manage WordPress hosting on one Linux server, combining a client-facing interface (**Client Area**) with administrator tooling (**Admin Area**) in one deployment so you can provision WordPress sites, manage hosting resources, monitor activity, and control platform-level policies without switching between separate systems.
+## What is PanelAlpha Single Server Edition?
 
-## Key Features
+PanelAlpha Single Server Edition is a web hosting panel you install on your own VPS. You open it in a browser and look after your sites there. The Engine does the hosting underneath, and the panel gives you a screen for it.
 
-- Fast WordPress provisioning and import workflows
-- Instance operations: staging, local backups, monitoring, plugins, and advanced settings
-- Hosting toolkit: domains, FTP/SFTP, MySQL, cron jobs, and file manager
-- Admin controls for users, services, plans, migrations, logs, and notifications
-- Integration support for SSL automation, analytics, preview URLs, and more
+The free edition is for one person and has no project limit. In the panel you can:
 
-## System Requirements
+- Create a WordPress site, or deploy an app from Git or from files
+- Import a WordPress site from another host
+- Add domains, with certificates from Let's Encrypt
+- Take backups by hand or on a schedule, and restore them
+- Keep a staging copy of a site and push it live
+- Manage databases, cron jobs, FTP and SFTP accounts and PHP settings
+- See visitor statistics, usage and logs
+- Connect an AI assistant and manage your projects by chat
+- Connect the server to your PanelAlpha Hub account and sign in with it
 
-- Debian `12/13` or Ubuntu `22.04/24.04`
-- Root SSH access
-- Minimum `4 GB RAM`
-- Minimum `20 GB` disk space
-- Open inbound ports: `80`, `443`, `8443`, `8444`
-- Optional inbound ports (for FTP/SFTP access): `21`, `30000-30009`, `2222`
+Setting it up takes three steps: [Getting started](#getting-started).
 
-## General Questions
+## How it works
 
-### Is this edition really limited to one server?
-Yes. Single Server Edition is intended for one server environment.
+![How the panel fits on your server: you and your AI assistant reach the panel through nginx-proxy; the panel asks the Engine API, which runs every site in its own container; you reach the engine over SSH with pae; visitors reach the sites through nginx-proxy; the panel checks the licence server, the engine gets certificates from Let's Encrypt and writes backups to a store](../assets/single-server/architecture.gif)
 
-### Which URL is for clients and which is for admins?
-- Client Area: `https://YOUR_DOMAIN_OR_IP:8444`
-- Admin Area: `https://YOUR_DOMAIN_OR_IP:8443`
+The panel is one project on the Engine, in its own container. When you create a site, the panel asks the Engine API to do it, and the Engine gives that site a project of its own. One panel manages the Engine it runs on.
 
-### Can I import existing WordPress websites?
-Yes. See [Importing Existing Instance](client-area-instances/importing-existing-instance.md).
+Removing the panel deletes only the panel's project. Your sites keep running: [Removing the panel](getting-started/removing.md).
 
-### Can I add more users or services?
-No. The platform uses the default owner account (`#1`) and default service (`#1`) as the standard operating model.
+## Getting started
 
-### Where do I start if something fails?
-Start with [Troubleshooting Center](../troubleshooting-center/index.md).
+### 1. Install the panel on your VPS
 
-## Documentation Sections
+You need a fresh Debian 12/13 or Ubuntu 22.04/24.04/26.04 server with 2 GB of RAM, `root` access over SSH and a domain pointed at it. **Port 80 must be open to everyone**, because Let's Encrypt uses it.
 
-- **[Getting Started](getting-started/index.md)** — Installation, first access, SSL, updates, and language setup.
-- **[Client Area Instances](client-area-instances/index.md)** — WordPress instance operations: creation, import, maintenance, and monitoring.
-- **[Client Area Hosting](client-area-hosting/index.md)** — Hosting operations: usage, domains, files, databases, access, and automation.
-- **[Admin Area](admin-area/index.md)** — Platform administration: users, services, logs, migrations, configuration, and notifications.
+```bash
+curl -fsSL get.panelalpha.com/single-server | sh
+```
+
+Every option and the Engine version the panel needs: [Installing the panel](getting-started/install.md).
+
+### 2. Sign in
+
+Open `https://panel.example.com`. The setup wizard creates your account, or connects your PanelAlpha Hub account, and opens the panel: [First login](getting-started/first-login.md).
+
+### 3. Create your first site
+
+Go to **My Projects**, select **Create First Project** and choose **WordPress**, **Git** or **Files**. You can also drop a `.zip` or `.tar.gz` archive straight onto the project list: [Create a project](projects/create-a-project.md).
+
+## How to use it
+
+- **[Getting started](getting-started/requirements.md)**: [Requirements](getting-started/requirements.md), [installing the panel](getting-started/install.md), [first login](getting-started/first-login.md), [the panel address](getting-started/panel-address.md), [updating](getting-started/updating.md) and [removing](getting-started/removing.md) the panel.
+- **[Projects](projects/projects.md)**: [Creating a project](projects/create-a-project.md), [managing WordPress](projects/wordpress.md), [importing a WordPress site](projects/importing-wordpress.md), [Git](projects/git.md) and [staging and preview links](projects/staging-and-preview.md).
+- **[Looking after a project](looking-after-a-project/domains-and-ssl.md)**: [Domains and SSL](looking-after-a-project/domains-and-ssl.md), [databases](looking-after-a-project/databases.md), [backups](looking-after-a-project/backups.md), [files, FTP and SFTP](looking-after-a-project/files-and-access.md), [cron jobs and PHP](looking-after-a-project/cron-and-php.md) and [statistics and logs](looking-after-a-project/statistics-and-logs.md).
+- **[The panel](the-panel/settings.md)**: [Settings](the-panel/settings.md), [tasks](the-panel/tasks.md), [your account](the-panel/your-account.md), [Connect AI](the-panel/connect-ai.md) and [around the panel](the-panel/around-the-panel.md).
+- **[Editions](editions/editions-and-licence.md)**: [Editions and licence](editions/editions-and-licence.md), [the Admin Area](editions/admin-area.md) and [sharing projects](editions/sharing-projects.md).
+
+## Editions
+
+| Edition | People | Admin Area | Licence key |
+|---|---|---|---|
+| Single Server Free | one | no | not needed |
+| Single Server Plus | one default user | yes | yes |
+| Single Server Pro | many, with shared access to projects | yes | yes |
+
+What each one allows and what the limits are: [Editions and licence](editions/editions-and-licence.md).
