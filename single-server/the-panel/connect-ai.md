@@ -16,15 +16,39 @@ The assistant can reach all your live and staging projects. It cannot reach the 
 
 ## Connecting your tool
 
-You connect your tool from the panel. Every step below is on the **Connect AI** page.
+Every tool connects the same way: you create a token in the panel, then put the panel's address and the token into your tool. The sections below give the steps for each tool:
 
-1. Open **Connect AI** in the top menu and pick your tool under **Your tool**: Claude Code, ChatGPT, Codex, Claude, Cursor, Windsurf, VS Code or Other tool. The page for that tool lists the steps in order. A **One-click connect** banner on each page is marked `Coming soon`. It does nothing yet, so follow the steps on the page.
+- [Claude Code](#claude-code)
+- [ChatGPT](#chatgpt)
+- [Codex](#codex)
+- [Claude](#claude)
+- [Cursor](#cursor)
+- [Windsurf](#windsurf)
+- [VS Code](#vs-code)
+- [Other tool](#other-tool)
+
+The **Connect AI** page shows the same steps. Pick your tool under **Your tool** and the page fills in your panel address for you, with a **Copy** button on each part to paste. A **One-click connect** banner on each page is marked `Coming soon`. It does nothing yet.
+
+In the examples below the panel address is `https://panel.example.com`. Use your own.
+
+## Creating a token
+
+You need a token for every tool except the Claude app.
+
+1. Open **Connect AI** in the top menu and pick your tool under **Your tool**.
 2. Under **Generate an MCP token**, select **Create Token**. Enter a **Token Name**, such as `Claude on my laptop`, and create it. If you already have a token, select **use one you already have** instead.
 3. **The token is shown once.** You cannot see it again after you close the dialog. Copy the token, then confirm with `I have saved my token in a safe place`.
 
    ![Connect AI: Create Token, the Token Name Claude on my laptop, the new token shown once (hidden here) with the warning to save it, the confirmation I have saved my token in a safe place and Continue](../../assets/single-server/connect-ai-token-created.gif)
 
-4. The next step shows what to put into your tool, with your panel address already filled in. Select **Copy**, paste it into your tool and replace `YOUR_TOKEN` with your token. For Claude Code it is a command for your terminal:
+In every step below, replace `YOUR_TOKEN` with your token.
+
+## Claude Code
+
+Run and manage this server straight from your terminal.
+
+1. Create a token: [Creating a token](#creating-a-token).
+2. Run this in a terminal on your own computer, with your token:
 
    ```bash
    claude mcp add --transport http panelalpha \
@@ -32,11 +56,137 @@ You connect your tool from the panel. Every step below is on the **Connect AI** 
      --header "Authorization: Bearer YOUR_TOKEN"
    ```
 
-5. Follow **Verify the connection** on the same page. For Claude Code: restart it or run `/mcp` to confirm PanelAlpha is connected.
+3. Restart Claude Code or run `/mcp` to confirm PanelAlpha is connected.
 
-Then ask in the chat, for example `List my projects.`
+Claude Code's own guide: [Connect Claude Code to tools via MCP](https://code.claude.com/docs/en/mcp).
 
-The Claude app does not work yet, because it has no place to paste a token. Its page says so and offers **Set up Claude Code instead**.
+## ChatGPT
+
+Connect this server to ChatGPT and control it by asking.
+
+1. Create a token: [Creating a token](#creating-a-token).
+2. In ChatGPT, open **Settings → Connectors** and choose **Create**. Name it `PanelAlpha` and select **URL server connection**.
+3. Paste your server URL: `https://panel.example.com/mcp`.
+4. Choose **Access token / API key**, set the header scheme to **Bearer**, and paste your token.
+5. Confirm the notice and create. PanelAlpha is now connected.
+
+ChatGPT's own guide: [Connect from ChatGPT](https://developers.openai.com/apps-sdk/deploy/connect-chatgpt).
+
+## Codex
+
+Give Codex direct access to this server.
+
+1. Create a token: [Creating a token](#creating-a-token).
+2. Add PanelAlpha to your Codex config file, `~/.codex/config.toml`:
+
+   ```toml
+   [mcp_servers.panelalpha]
+   url = "https://panel.example.com/mcp"
+   http_headers = { "Authorization" = "Bearer YOUR_TOKEN" }
+   ```
+
+3. Restart Codex or run `/mcp` to confirm the connection.
+
+Codex's own guide: [Model Context Protocol](https://developers.openai.com/codex/mcp).
+
+## Claude
+
+The Claude app cannot connect yet. It has no place to paste a token, so it cannot reach your server. Its page on **Connect AI** says so and offers **Set up Claude Code instead**: [Claude Code](#claude-code).
+
+## Cursor
+
+Let Cursor manage this server as you build.
+
+1. Create a token: [Creating a token](#creating-a-token).
+2. In Cursor, open **Settings → Tools & MCP** and click **New MCP server**. This opens the `mcp.json` file.
+3. Add PanelAlpha:
+
+   ```json
+   {
+     "mcpServers": {
+       "panelalpha": {
+         "url": "https://panel.example.com/mcp",
+         "headers": {
+           "Authorization": "Bearer YOUR_TOKEN"
+         }
+       }
+     }
+   }
+   ```
+
+4. Save the file. PanelAlpha appears in **Settings → Tools & MCP** with a green dot when it is connected.
+
+Cursor's own guide: [Model Context Protocol](https://cursor.com/docs/mcp).
+
+## Windsurf
+
+Connect Windsurf to this server.
+
+1. Create a token: [Creating a token](#creating-a-token).
+2. In Windsurf, open **Settings → Manage MCPs** and choose **View raw config**.
+3. Add PanelAlpha:
+
+   ```json
+   {
+     "mcpServers": {
+       "panelalpha": {
+         "serverUrl": "https://panel.example.com/mcp",
+         "headers": {
+           "Authorization": "Bearer YOUR_TOKEN"
+         }
+       }
+     }
+   }
+   ```
+
+4. Save, then restart Windsurf or run `/mcp` to confirm PanelAlpha is connected.
+
+Windsurf's own guide: [Model Context Protocol](https://docs.devin.ai/windsurf/plugins/cascade/mcp).
+
+## VS Code
+
+Use this server from GitHub Copilot in VS Code.
+
+1. Create a token: [Creating a token](#creating-a-token).
+2. Open the Command Palette, run **MCP: Add Server** and choose **HTTP**. Or edit `.vscode/mcp.json` directly.
+3. Use this config:
+
+   ```json
+   {
+     "servers": {
+       "panelalpha": {
+         "type": "http",
+         "url": "https://panel.example.com/mcp",
+         "headers": {
+           "Authorization": "Bearer YOUR_TOKEN"
+         }
+       }
+     }
+   }
+   ```
+
+4. Trust the server when VS Code asks.
+
+VS Code's own guide: [MCP servers](https://code.visualstudio.com/docs/agent-customization/mcp-servers).
+
+## Other tool
+
+Any MCP tool that supports a remote HTTP server and custom headers works.
+
+1. Create a token: [Creating a token](#creating-a-token).
+2. In your tool's MCP settings, add a new remote HTTP server.
+3. Paste your server URL: `https://panel.example.com/mcp`.
+4. Add the auth header:
+
+   ```text
+   Authorization: Bearer YOUR_TOKEN
+   ```
+
+The MCP authorization specification: [Authorization](https://modelcontextprotocol.io/specification/draft/basic/authorization).
+
+## After connecting
+
+Ask in the chat, for example `List my projects.`
 
 ## The MCP address
 
