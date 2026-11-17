@@ -146,13 +146,13 @@ The panel tests the token before it saves it. It reads the repository with the t
 
 ## Deploy key
 
-An SSH repository uses a **deploy key**. **Advanced > Git** shows its **Public key** and **Fingerprint**. Add the key in the **Deploy keys** settings of your repository. Read-only access is enough.
+An SSH repository uses a **deploy key**. **Advanced > Git** shows it in the **Deploy key (SSH)** card: the public key and its **Fingerprint**. Add the key in the **Deploy keys** settings of your repository. Read-only access is enough.
 
-**A new key replaces the old one, and pull and deploy stop working until you add the new key to the repository.** If you **Delete** the key, pull and deploy over SSH stop working. Remove the key at your Git provider as well.
+**Generate a new key replaces the old one, and pull and deploy stop working until you add the new key to the repository.** If you select **Delete key**, pull and deploy over SSH stop working. Remove the key at your Git provider as well.
 
 ![Getting a deploy key in Advanced > Git of a WordPress project: an SSH address (git@github.com:example/northwind-theme.git) and a branch in the Connect repository card, then Generate deploy key shows the public key to add to the repository, with Connect and deploy](../../assets/single-server/git-deploy-key.gif)
 
-<!-- TODO screenshot: assets/single-server/git-deploy-key-card.png. Show the deploy key card of a project connected over SSH: the Public key (an example key, shortened), the Fingerprint and the Delete button. Needs a repository that has the key added. -->
+![Advanced > Git of a project connected over SSH (git@github.com:example/sleepboard.git): the Deploy key (SSH) card with the public key, its Fingerprint, Generate a new key and Delete key](../../assets/single-server/git-deploy-key-card.gif)
 
 ## Auto-deploy
 
@@ -167,7 +167,7 @@ If there is no token, or the provider refuses it, the switch goes back off and t
 
 Turning **Auto-deploy on push** off removes the webhook at your Git provider.
 
-<!-- TODO screenshot: assets/git-auto-deploy-card.png. Show the Auto-deploy card with the Auto-deploy on push switch turned on. -->
+![Advanced > Git of a project from a private repository: the Access token card shows Token saved, and the Auto-deploy on push switch in the Auto-deploy card is turned on, with Auto-deploy settings updated](../../assets/single-server/git-auto-deploy.gif)
 
 ## Troubleshooting
 
