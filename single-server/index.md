@@ -20,6 +20,12 @@ section:
 card:
   title: Single Server Edition
   description: A web hosting panel you install on your own VPS.
+  tag: One server
+  start:
+    - getting-started/install.md
+    - getting-started/first-login.md
+    - projects/create-a-project.md
+    - looking-after-a-project/domains-and-ssl.md
   order: 1
 ---
 

@@ -65,12 +65,38 @@ card:                          # card of this section on the documentation home 
   subtitle: Open source        # optional
   description: Deploy and manage PanelAlpha on one server.
   order: 1                     # position among the cards
+  tag: One server              # optional: small label at the top of the card
+  start:                       # optional: pages under "Start here" on the card
+    - getting-started/install.md
+    - getting-started/first-login.md
 ```
+
+The paths in `start` are relative to the section folder. The link text is the sidebar label of
+the page. A page that does not exist fails the build.
 
 The root `index.md` holds the rest of the documentation home page: `title`, `lead`,
 `description`, `seoDescription`, `community` (title, description, items with title, description,
 href and label) and `cards` for cards that are not a section (external links), each with
-`title`, `description`, `href` and `order`. Its text body is not published.
+`title`, `description`, `href` and `order`. A card can have an `id` so that `resources` can use it.
+Its text body is not published.
+
+The root `index.md` also lists the pages the home page highlights. Every page is a path in
+this repo, for example `single-server/getting-started/install.md`, and a page that does not
+exist fails the build.
+
+```yaml
+popular:                       # chips under the search box
+  - title: Backups             # text of the chip
+    page: single-server/looking-after-a-project/backups.md
+guides:                        # cards under "Popular Guides", in this order
+  - single-server/projects/create-a-project.md   # title and description come from the page
+resources:                     # cards under "More Resources", in this order
+  - card: troubleshooting-center   # a section card (folder name) or a root card with this id
+  - card: api
+  - title: PanelAlpha Engine 1.x   # or any page, with its own title and description
+    description: The guide for the Engine 1.x used by Single Server and Multi Server panels.
+    page: panelalpha-engine/v1/index.md
+```
 
 A new product is a new folder with its own `index.md`. It appears in the sidebar, the product
 switcher, search and on the documentation home page.

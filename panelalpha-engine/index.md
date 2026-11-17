@@ -29,6 +29,12 @@ card:
   title: PanelAlpha Engine 2.0
   subtitle: Open source, Apache 2.0
   description: Host any project on your own server and control it through your AI agent.
+  tag: Open source
+  start:
+    - getting-started/install.md
+    - connecting-your-ai/your-assistant.md
+    - getting-started/how-a-deploy-works.md
+    - capabilities/backups.md
   order: 5
 ---
 

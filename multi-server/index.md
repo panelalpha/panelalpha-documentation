@@ -43,6 +43,12 @@ section:
 card:
   title: Multi Server Edition
   description: Run PanelAlpha in a scalable multi-server environment with advanced integrations and hosting scenarios.
+  tag: Many servers
+  start:
+    - getting-started/installation.md
+    - system-configuration/general-configuration.md
+    - hosting-servers/hosting-scenarios.md
+    - billing-systems-integrations/whmcs.md
   order: 2
 ---
 

@@ -15,8 +15,33 @@ community:
       description: Enjoy real-time chats, exchange ideas, and engage with WordPress users of all skill levels in a welcoming space.
       href: https://discord.gg/9twHWR7xGX
       label: Join Discord
+popular:
+  - title: Installing the panel
+    page: single-server/getting-started/install.md
+  - title: Backups
+    page: single-server/looking-after-a-project/backups.md
+  - title: Domains and SSL
+    page: single-server/looking-after-a-project/domains-and-ssl.md
+  - title: WHMCS
+    page: multi-server/billing-systems-integrations/whmcs.md
+  - title: Connect your AI
+    page: panelalpha-engine/connecting-your-ai/your-assistant.md
+guides:
+  - single-server/projects/create-a-project.md
+  - panelalpha-engine/getting-started/how-a-deploy-works.md
+  - multi-server/migrations/index.md
+  - single-server/looking-after-a-project/backups.md
+  - multi-server/hosting-servers/hosting-scenarios.md
+  - single-server/the-panel/connect-ai.md
+resources:
+  - card: troubleshooting-center
+  - card: api
+  - title: PanelAlpha Engine 1.x
+    description: The guide for the Engine 1.x used by Single Server and Multi Server panels.
+    page: panelalpha-engine/v1/index.md
 cards:
-  - href: https://www.panelalpha.com/api-documentation/
+  - id: api
+    href: https://www.panelalpha.com/api-documentation/
     title: API Docs
     description: Integrate PanelAlpha with external systems using documented endpoints, authentication, and examples.
     order: 4
