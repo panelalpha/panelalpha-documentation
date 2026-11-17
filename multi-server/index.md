@@ -2,14 +2,14 @@
 title: Multi Server Edition
 description: Centralized WordPress management across multiple hosting servers with client and admin workflows.
 nav:
-  group: Multi Server
+  group: Multi Server Edition
   order: 1
   title: Introduction
 section:
-  title: Multi Server
+  title: Multi Server Edition
   order: 2
   groups:
-    - title: Multi Server
+    - title: Multi Server Edition
       path: index.md
       collapsable: false
     - title: Getting Started

@@ -26,7 +26,7 @@ section:
     - title: Server Management
     - title: Troubleshooting
 card:
-  title: PanelAlpha Engine 2.0
+  title: PanelAlpha Engine
   subtitle: Open source, Apache 2.0
   description: Host any project on your own server and control it through your AI agent.
   tag: Open source

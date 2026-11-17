@@ -35,11 +35,7 @@ guides:
   - multi-server/hosting-servers/hosting-scenarios.md
   - single-server/the-panel/connect-ai.md
 resources:
-  - card: troubleshooting-center
   - card: api
-  - title: PanelAlpha Engine 1.x
-    description: The guide for the Engine 1.x used by Single Server and Multi Server panels.
-    page: panelalpha-engine/v1/index.md
 cards:
   - id: api
     href: https://www.panelalpha.com/api-documentation/
