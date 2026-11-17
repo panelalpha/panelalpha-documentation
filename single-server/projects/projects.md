@@ -1,6 +1,6 @@
 ---
 title: "Projects"
-description: "A project is one site or app in PanelAlpha Single Server Edition. The panel runs on a PanelAlpha Engine, and every project lives on that one server. Single..."
+description: "A project is one site or app on your server. There are two kinds: PHP hosting projects (WordPress and other PHP sites) and container projects (Git or files)..."
 nav:
   group: Projects
   order: 1
@@ -8,15 +8,18 @@ nav:
 
 # Projects
 
-A project is one site or app in PanelAlpha Single Server Edition. The panel runs on a PanelAlpha Engine, and every project lives on that one server. The Community Edition has no project limit.
+A project is one site or app on your server. Every project lives on the one server that runs the panel (a PanelAlpha Engine). The Community Edition has no project limit.
 
 ## The two kinds of project
 
 The panel shows no label for the kind. You see it in what the project offers.
 
-A **PHP hosting project** runs on the server's shared PHP. WordPress sites and other PHP sites are PHP hosting projects. A WordPress site is one: its project page has the WordPress screens, its card has a **Manage Site** button and a **WP Admin** button, and **WP Admin** also sits in the project's top bar. A PHP hosting project that is not WordPress has none of the WordPress screens and no **WP Admin**: its card has **Manage** and **Open Project**, and its project page has only **Project Details**, **Monitoring**, **Backups** and **Advanced**.
+A **PHP hosting project** runs on the server's shared PHP. WordPress sites and other PHP sites are PHP hosting projects.
 
-A **container project** runs in its own containers. A site created from Git or from files is a container project. Its card has a **Manage** button, and its project page has a **Containers** page. **Show Logs** opens the deploy log from its card in **My Projects** while it deploys or after a failed deploy, or from the row's **Actions** menu in the table view; **Advanced > Logs**, on the **Deploy Logs** tab, keeps the earlier deploys.
+- **A WordPress site** has the WordPress screens on its project page. Its card has a **Manage Site** button and a **WP Admin** button. **WP Admin** also sits in the project's top bar.
+- **A PHP site that is not WordPress** has no WordPress screens and no **WP Admin**. Its card has **Manage** and **Open Project**. Its project page has only **Project Details**, **Monitoring**, **Backups** and **Advanced**.
+
+A **container project** runs in its own containers. A site created from Git or from files is a container project. Its card has a **Manage** button, and its project page has a **Containers** page.
 
 | You want to run | Create it from | Kind |
 |---|---|---|
@@ -28,11 +31,20 @@ Create one: [Create a project](create-a-project.md).
 
 ## The project list
 
-**My Projects** lists your projects as cards. Every card has a manage button (**Manage Site** on a WordPress card, **Manage** on others) and either a **WP Admin** button (WordPress) or an **Open Project** button. **Open Project** opens the site in a new tab when the project is on the panel's free `panelalpha.online` address; on a project with a domain of your own it opens the **Preview Site** window instead, whether or not that domain points to this server yet: [Staging and preview](staging-and-preview.md). In the table view each row ends with an **Actions** menu instead. What the menu offers depends on the kind of project: **Manage**, **WP Admin** (WordPress) or **Admin Area** (another app with its own admin login), **Show Logs**, **Push To Live**, **Staging**, **Update**, **Clear Cache** and **Delete Project**.
+**My Projects** lists your projects as cards. Every card has a manage button (**Manage Site** on a WordPress card, **Manage** on others). It also has either a **WP Admin** button (WordPress) or an **Open Project** button.
 
 ![My Projects with the Northwind Journal, memos and ntfy cards and their Manage Site, WP Admin, Manage and Open Project buttons, then the table view with the Actions menu of the Northwind Journal row open: Manage, WP Admin, Staging, Update, Clear Cache and Delete Project](../../assets/single-server/projects-list.gif)
 
+**Open Project** works in two ways:
+
+- On a project with the panel's free `panelalpha.online` address, it opens the site in a new tab.
+- On a project with a domain of your own, it opens the **Preview Site** window, whether or not that domain points to this server yet: [Staging and preview](staging-and-preview.md).
+
 **WP Admin** signs you in to the WordPress dashboard without a password: [Managing WordPress](wordpress.md).
+
+In the table view, each row ends with an **Actions** menu instead. What the menu offers depends on the kind of project: **Manage**, **WP Admin** (WordPress) or **Admin Area** (another app with its own admin login), **Show Logs**, **Push To Live**, **Staging**, **Update**, **Clear Cache** and **Delete Project**.
+
+**Show Logs** opens the deploy log of a container project. You find it on the card in **My Projects** while the project deploys or after a failed deploy, or in the row's **Actions** menu in the table view. **Advanced > Logs**, on the **Deploy Logs** tab, keeps the earlier deploys.
 
 ### Finding projects
 
@@ -50,22 +62,48 @@ To delete several projects at once, tick the box on each card or row. In the tab
 
 Select **Manage** to open a project. The tabs are **Project Details**, **Monitoring**, **Backups**, **Plugins** and **Advanced**. Some are shown only for a WordPress project or only when your account may use them.
 
-**Project Details** shows the source of the project. A WordPress project has an **Installation** card. A Git project has a **Source** card with the repository. A files project has a **Source** card with its archive. Three more cards sit beside it:
+The project name is at the top of the page. The title also opens a search field (`Search project...`) to jump to another project. On a WordPress project, you can rename the project:
+
+1. Select the pencil next to the name.
+2. Type a new name.
+3. Confirm with the check mark or Enter.
+
+The name also becomes the WordPress site title.
+
+![Manage Site on the Northwind Journal card opens the project page with the Installation card, then the tabs Monitoring, Backups, Plugins and Advanced one after another](../../assets/single-server/projects-project-page.gif)
+
+### Project Details
+
+**Project Details** shows the source of the project:
+
+- A WordPress project has an **Installation** card.
+- A Git project has a **Source** card with the repository.
+- A files project has a **Source** card with its archive.
+
+Three more cards sit beside it:
 
 - A thumbnail of the site, in the card beside **Installation** or **Source**. Hover over it for **Open Project** and **Refresh Thumbnail**. **Refresh Thumbnail** takes a new screenshot. Before the first one the card says `Preview not available.` and its **Why?** link explains why.
 - **Loading Speed**: **Desktop** and **Mobile** scores, and a **Full Report** link to Google PageSpeed. This panel does not store the scores, so the card shows `Data Unavailable.`
 - **Security**: **Automatic Backups**, **SSL** with **Manage**, and **Create Backup**.
 
-The project name is at the top of the project page. On a WordPress project, select the pencil next to it, type a new name and confirm with the check mark or Enter. The name also becomes the WordPress site title. The title also opens a search field (`Search project...`) to jump to another project.
+### Advanced
 
-![Manage Site on the Northwind Journal card opens the project page with the Installation card, then the tabs Monitoring, Backups, Plugins and Advanced one after another](../../assets/single-server/projects-project-page.gif)
+**Advanced** holds the rest, in a side list.
 
-**Advanced** holds the rest, in a side list. It includes **Project Details**, which lists the plan, domain, URL, project name and creation date, and the pages for domains, databases, cron, files and logs. A WordPress project also shows its version there and its **Installation Details** on the same page: the directory and the database name, user, host and password. The **Git** page appears on every kind of project. The pages that belong to one kind appear only for that kind:
+![The Advanced tab of the Northwind Journal WordPress project with its side list, opening Domains, MySQL Databases, Cron Jobs, File Manager and Logs](../../assets/single-server/projects-advanced-pages.gif)
+
+Every kind of project has these pages:
+
+- **Project Details**, which lists the plan, domain, URL, project name and creation date.
+- Pages for domains, databases, cron, files and logs.
+- **Git**.
+
+A WordPress project also shows its version on **Project Details**, with its **Installation Details** on the same page: the directory and the database name, user, host and password.
+
+Some pages belong to one kind only:
 
 - **Environment variables** for projects that are not WordPress. A WordPress project keeps its variables in **System Configuration**.
 - **Installed Themes**, **Users** and **Auto Updates** for WordPress.
-
-![The Advanced tab of the Northwind Journal WordPress project with its side list, opening Domains, MySQL Databases, Cron Jobs, File Manager and Logs](../../assets/single-server/projects-advanced-pages.gif)
 
 Where each page is described:
 
@@ -82,10 +120,10 @@ Where each page is described:
 
 You start, stop and restart **container projects** from **Advanced > Containers**. A PHP hosting project has no start or stop. It is always on while the server runs.
 
+**Stop All and Restart make the site unavailable.** Stop All keeps it down until you select **Start All**. Restart takes it down until the containers run again.
+
 1. Open the project and go to **Advanced > Containers**.
 2. Open the **Actions** menu at the top and choose **Start All**, **Stop All**, **Restart** or **Pull & Redeploy**. **Start All** starts the containers at once. The other three ask you to confirm first.
-
-**Stop All and Restart make the site unavailable.** Stop All keeps it down until you select **Start All**. Restart takes it down until the containers run again.
 
 Each container also has its own actions: [Statistics and logs](../looking-after-a-project/statistics-and-logs.md).
 
@@ -97,7 +135,7 @@ Each container also has its own actions: [Statistics and logs](../looking-after-
 2. Tick **I understand that the project's files will be deleted**, **I understand that the project's databases will be deleted** and **Yes, I understand and want to proceed with the removal of the project.**
 3. Select **Delete Project**.
 
-The **Delete Project** button stays disabled until every box is ticked. The boxes are acknowledgements only: the panel always deletes the project with its files and databases, and the server has no option to keep them. For a WP Cloud site the dialog also warns that its manual backups must be deleted first.
+The **Delete Project** button stays disabled until every box is ticked. The boxes are acknowledgements only. The panel always deletes the project with its files and databases, and the server has no option to keep them. For a WP Cloud site the dialog also warns that its manual backups must be deleted first.
 
 A project that has a staging copy cannot be deleted. Delete the staging copy first: [Staging and preview](staging-and-preview.md).
 

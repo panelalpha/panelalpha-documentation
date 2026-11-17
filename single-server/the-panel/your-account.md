@@ -8,7 +8,9 @@ nav:
 
 # Your account
 
-Your account is your sign-in on the panel: your name, email address, password, two-factor authentication and the devices you are signed in on. Open the user menu and select **Account Details**. The page is called **My Account** and has two tabs, **Personal Information** and **Active Devices**.
+Your account is your sign-in on the panel: your name, email address, password, two-factor authentication and the devices you are signed in on.
+
+Open the user menu and select **Account Details**. The page is called **My Account** and has two tabs, **Personal Information** and **Active Devices**.
 
 ## Changing your details
 
@@ -20,7 +22,7 @@ Your account is your sign-in on the panel: your name, email address, password, t
 
 **New Device Detection Notification** lets you choose what counts as a new device (new IP address, device, browser or a combination). The panel stores the choice, but it does not send an email about a new device.
 
-The dates you see follow the panel default, not a setting of your own: [Settings](settings.md). The user menu also has a **Dark Mode** switch that turns Dark Mode on and off: [Around the panel](around-the-panel.md).
+The dates you see follow the panel default, not a setting of your own: [Settings](settings.md). The user menu also has a **Dark Mode** switch: [Around the panel](around-the-panel.md).
 
 ## Changing your email address
 
@@ -39,7 +41,7 @@ A password needs at least 8 characters with letters in upper and lower case, num
 
 ## Two-factor authentication
 
-Two-factor authentication asks for a code from an app on your phone each time you sign in.
+Two-factor authentication asks for a code from an app on your phone each time you sign in, as well as your password.
 
 1. In **Security Settings**, select **Two-Factor Authentication**.
 2. Scan the QR code with Google Authenticator or another authenticator app. You can also copy the code and enter it by hand.
@@ -48,9 +50,11 @@ Two-factor authentication asks for a code from an app on your phone each time yo
 
    ![My Account, Security Settings: the Two-Factor Authentication switch opens the dialog with the QR code, the code to type by hand and the Code field (QR code and code hidden here)](../../assets/single-server/account-two-factor-setup.gif)
 
-You see `Two-Factor Authentication has been enabled.` **Each backup code works once.** Keep them somewhere other than your phone. To turn it off, open the same dialog and confirm. You see `Two-Factor Authentication has been disabled.`
+You see `Two-Factor Authentication has been enabled.`
 
-**A backup code signs you in when you cannot use the app.** The panel then gives you a new set of backup codes and the old ones stop working, so save the new set the same way.
+**Each backup code works once.** Keep them somewhere other than your phone. A backup code signs you in when you cannot use the app. The panel then gives you a new set of backup codes and the old ones stop working, so save the new set the same way.
+
+To turn two-factor authentication off, open the same dialog and confirm. You see `Two-Factor Authentication has been disabled.`
 
 ## Devices
 
@@ -60,13 +64,18 @@ You see `Two-Factor Authentication has been enabled.` **Each backup code works o
 
 ## Forgotten password
 
-On the sign-in screen, choose the forgotten password link and enter your email address. The panel answers every address with the same message, `If an account exists for that e-mail address, we have sent it a link to reset the password.`, whether or not that address has an account. If it has one, an email arrives with the subject `Reset your password` and a **Reset Password** button. The link goes to the panel's Application URL and works for 60 minutes. You can ask for a new link once every 60 seconds: a second ask inside that minute gets the same message and sends nothing. The page takes at most 6 asks a minute from one IP address: the seventh sends nothing and shows `Too Many Attempts.`, so wait a minute and ask again. The email is the only message the panel sends in Single Server Free.
+1. On the sign-in screen, choose the forgotten password link and enter your email address.
+2. The panel always shows `If an account exists for that e-mail address, we have sent it a link to reset the password.`, whether or not that address has an account.
+3. If the address has an account, an email arrives with the subject `Reset your password` and a **Reset Password** button. The link works for 60 minutes.
+4. On the reset page, enter the new password twice. It follows the same rule as a password change: at least 8 characters with letters in upper and lower case, numbers and symbols.
 
-The reset page asks for the new password twice. It follows the same rule as a password change: at least 8 characters with letters in upper and lower case, numbers and symbols.
+This email is the only message the panel sends in Single Server Free.
 
-**A new install sends its mail through the server's relay.** The Engine hands the panel the address of the mail server on its host, and the panel sends each message there. The message comes from `no-reply@` at the panel's own address, with the server name from [Settings](settings.md) as the sender name. When the Engine hands no address, the panel writes each message to its log and sends nothing.
+If you ask for a link twice within 60 seconds, the second ask gets the same message and sends nothing. One IP address can ask at most 6 times a minute. The seventh ask sends nothing and shows `Too Many Attempts.` Wait a minute and ask again.
 
-What happens after the panel hands the message over is the Engine's: its outgoing mail settings decide the server the mail goes through, and the sender and DNS records that receiving servers check. A relay that is not set up, or a domain without those records, means the message is refused on the way, and the panel never learns that it did not arrive.
+### If no email arrives
+
+The panel only hands the message over. The Engine's outgoing mail settings decide what happens next: the server the mail goes through, and the sender and DNS records that receiving servers check. A relay that is not set up, or a domain without those records, means the message is refused on the way. The panel never learns that it did not arrive.
 
 Without mail, set a new password on the server. Run this as `root`, with your panel project name, your email and a new password that follows the rules above:
 
@@ -76,9 +85,19 @@ docker exec -i panel docker exec -i -u www-data panelalpha-v1-panel php /app/bac
 
 It prints `User updated: you@example.com (password=***)`. The same command with `--email=` changes the address.
 
+### More detail
+
+- **The link.** It goes to the panel's Application URL.
+- **How the panel sends mail.** A new install sends its mail through the server's relay. The Engine hands the panel the address of the mail server on its host, and the panel sends each message there. The message comes from `no-reply@` at the panel's own address, with the server name from [Settings](settings.md) as the sender name.
+- **No relay address.** When the Engine hands no address, the panel writes each message to its log and sends nothing.
+
 ## Sign-in limits
 
-The panel allows 5 sign-in attempts a minute for each email address and IP address together, and 5 two-factor code attempts a minute for each sign-in. An attempt is one email address and password submitted together; the screen that only asks for your email address is counted apart, with 20 a minute from one IP address. Wait a minute after that.
+Sign-in has these limits. After you reach one, wait a minute.
+
+- **Sign-in:** 5 attempts a minute for each email address and IP address together. An attempt is one email address and password submitted together.
+- **Two-factor code:** 5 attempts a minute for each sign-in.
+- **Email screen:** the screen that only asks for your email address is counted apart, with 20 a minute from one IP address.
 
 ## Troubleshooting
 

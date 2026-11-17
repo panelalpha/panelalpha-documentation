@@ -8,21 +8,25 @@ nav:
 
 # The panel address
 
-The panel address is the web address you open the panel on, for example `https://panel.example.com`. You set it at install and you can move it later in **Settings**. The panel is served over HTTPS only.
+The panel address is the web address you open the panel on, for example `https://panel.example.com`. You set it at install and you can move it later in **Settings**. The panel is served over HTTPS only, so it needs a certificate.
 
 ## Where the panel answers
 
 At install you give the panel a domain with `--domain`. If you also allow the server's own name (`--host-domain` in [Installing the panel](install.md)) and the Engine has one, the panel moves to that name on the first deploy. Otherwise it stays on your domain.
 
-The server's own name uses the Engine's certificate. The Engine obtains that certificate from Let's Encrypt at install, so the panel answers there without a warning when the server has a public address and port 80 is open. An Engine without a public address keeps a self-signed one.
+What the browser shows depends on the name:
 
-Any other name gets its own certificate from Let's Encrypt through the Engine. That needs two things: the domain's A record points at the server (`203.0.113.10`), and port 80 is open.
+- **The server's own name** uses the Engine's certificate. The Engine obtains it from Let's Encrypt at install, so the panel answers without a warning when the server has a public address and port 80 is open. An Engine without a public address keeps a self-signed certificate.
+- **A domain of your own** gets its own certificate from Let's Encrypt through the Engine. That needs two things: the domain's A record points at the server (`203.0.113.10`), and port 80 is open.
+- **A name under `panelalpha.direct` that is not the server's own name**, such as `panel.203-0-113-10.panelalpha.direct`, keeps a self-signed certificate. Your browser warns about it. Use a domain of your own for a trusted certificate.
 
-One kind of name is the exception: a name under `panelalpha.direct` that is not the server's own name, such as `panel.203-0-113-10.panelalpha.direct`. The Engine refuses to request a certificate for such a name, because every server shares that zone's weekly limit at Let's Encrypt. A panel installed on such a name keeps a self-signed certificate and your browser warns about it. Moving the panel to one of those later does not work: the move asks the Engine for a certificate for the new name, the Engine refuses it and the panel keeps its address ([Troubleshooting](#troubleshooting)). Use a domain of your own for a trusted certificate.
+The Engine refuses to request a certificate for a `panelalpha.direct` name, because every server shares that zone's weekly limit at Let's Encrypt. For the same reason, moving the panel to one of those names later does not work: the Engine refuses the certificate and the panel keeps its address ([Troubleshooting](#troubleshooting)).
 
 ## Moving the panel to another address
 
-**Saving a new address moves the panel there, and the address it has now stops answering.** You sign in again at the new address. The new address must be the server's own name or a name you own: a name under `panelalpha.direct` that is not the server's own name is refused and the panel keeps its address ([Troubleshooting](#troubleshooting)).
+**Saving a new address moves the panel there, and the address it has now stops answering.** You sign in again at the new address.
+
+The new address must be the server's own name or a name you own. A name under `panelalpha.direct` that is not the server's own name is refused and the panel keeps its address ([Troubleshooting](#troubleshooting)).
 
 1. Point the new domain's A record at the server.
 2. Open **Settings**. On the **General** tab, find **Application URL**.
@@ -36,11 +40,14 @@ The panel adds the new domain, gets a certificate for it and makes it the main d
 
 <!-- TODO screenshot: assets/panel-address-moved-page.png. Show the page that reads "The panel has moved" with the Open the new address button. Use an example address such as https://panel.example.com. -->
 
-If you use social login, a dialog titled `Update your login providers` lists new callback URLs. Add them to each provider's settings, or social login stops working.
+After the move:
+
+- If you use social login, a dialog titled `Update your login providers` lists new callback URLs. **Add them to each provider's settings, or social login stops working.**
+- Domains you added by hand to the panel project stay.
 
 A port other than 443 needs the server's operator to allow it once with `pae system:public-routing:allow panel --ports`. Without it the panel keeps port 443: [Installing the panel](install.md).
 
-Domains you added by hand to the panel project stay.
+### More detail: a protected panel project
 
 Moving the address works when the panel's project is protected. The Engine's protection refuses only deleting the main domain with a token. The move adds the new domain, makes it the main domain and only then deletes the old one, which is no longer the main domain by then.
 

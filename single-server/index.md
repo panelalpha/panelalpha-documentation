@@ -1,6 +1,6 @@
 ---
 title: "PanelAlpha Single Server Edition"
-description: "PanelAlpha Single Server Edition is a web hosting panel you install on your own VPS. You open it in a browser and look after your sites there. The Engine..."
+description: "PanelAlpha Single Server Edition is a web hosting panel you install on your own VPS. You open it in a browser and look after your sites there. Setup..."
 nav:
   group: Single Server
   order: 1
@@ -16,6 +16,7 @@ section:
     - title: Projects
     - title: Looking After a Project
     - title: The Panel
+    - title: Troubleshooting
 card:
   title: Single Server Edition
   description: A web hosting panel you install on your own VPS.
@@ -32,7 +33,7 @@ card:
 
 ## What is PanelAlpha Single Server Edition?
 
-PanelAlpha Single Server Edition is a web hosting panel you install on your own VPS. You open it in a browser and look after your sites there. The Engine does the hosting underneath, and the panel gives you a screen for it.
+PanelAlpha Single Server Edition is a web hosting panel you install on your own VPS (a server you rent). You open it in a browser and look after your sites there. Underneath, the **Engine** does the hosting. The panel is the screen you use to control it.
 
 This guide covers the Community Edition. It is free and open source, it is for one person and it has no project limit. In the panel you can:
 
@@ -52,7 +53,7 @@ Setting it up takes three steps: [Getting started](#getting-started).
 
 ![How the panel fits on your server: you and your AI assistant reach the panel through nginx-proxy; the panel asks the Engine API, which runs every site in its own container; you reach the engine over SSH with pae; visitors reach the sites through nginx-proxy; the panel checks the licence server, the engine gets certificates from Let's Encrypt and writes backups to a store](../assets/single-server/architecture.gif)
 
-The panel is one project on the Engine, in its own container. When you create a site, the panel asks the Engine API to do it, and the Engine gives that site a project of its own. One panel manages the Engine it runs on.
+The panel is one project on the Engine, in its own container. When you create a site, the panel asks the Engine to do it, and the Engine gives that site a project of its own. One panel manages the Engine it runs on.
 
 Removing the panel deletes only the panel's project. Your sites keep running: [Removing the panel](getting-started/removing.md).
 
@@ -60,7 +61,13 @@ Removing the panel deletes only the panel's project. Your sites keep running: [R
 
 ### 1. Install the panel on your VPS
 
-You need a fresh Debian 12/13 or Ubuntu 22.04/24.04/26.04 server with 2 GB of RAM, `root` access over SSH and a domain pointed at it. **Port 80 must be open to everyone**, because Let's Encrypt uses it.
+You need:
+
+- A fresh Debian 12/13 or Ubuntu 22.04/24.04/26.04 server with 2 GB of RAM.
+- `root` access over SSH.
+- A domain pointed at the server.
+
+**Port 80 must be open to everyone**, because Let's Encrypt uses it. Then run:
 
 ```bash
 curl -fsSL get.panelalpha.com/single-server | sh

@@ -1,6 +1,6 @@
 ---
 title: "Create a project"
-description: "You create a project from WordPress, from a Git repository or from files. WordPress makes a PHP hosting project. Git and files make a container project:..."
+description: "You create a project from WordPress, from a Git repository or from files. This page gives the steps for each and the fixes for the errors you may see..."
 nav:
   group: Projects
   order: 2
@@ -17,9 +17,9 @@ You create a project from WordPress, from a Git repository or from files. WordPr
 
    ![Add New on My Projects opens Choose how to create your project with WordPress, Git and Files](../../assets/single-server/create-project-choose-source.gif)
 
-You can also drop one archive on the project list. The panel shows `Drop an archive with your application and launch!` and starts the files path. A folder or another kind of file is refused before the project is created.
-
 If your account allows only one source, the panel skips this choice.
+
+You can also drop one archive on the project list. The panel shows `Drop an archive with your application and launch!` and starts the files path. A folder or another kind of file is refused before the project is created.
 
 ## Creating a WordPress site
 
@@ -31,15 +31,24 @@ If your account allows only one source, the panel skips this choice.
 
 The panel starts the install and shows `Your site is now being created for you!`. It can take a few minutes. You can leave the page, and a notification tells you when it is done: [Around the panel](../the-panel/around-the-panel.md#notifications).
 
-Some servers open a full install form instead of the domain screen, with a **Basic Configuration** and an **Advanced Configuration** tab. The **Basic Configuration** tab takes the domain, a **Subdirectory** for the site and the **WordPress version** (locked to the newest when the plan offers no other). The **Advanced Configuration** tab takes the **Language**, the **Database Name** and **Database Prefix**, and the **Administrator Username** and **Administrator Email**. Without that form the panel installs the newest WordPress in the document root of the domain.
+When it finishes, the screen reads `Congratulations!` and `Your site has been installed!`. Select **Start Creating** to open the project, or **Back To Dashboard** to return to the project list.
 
-When it finishes, the screen reads `Congratulations!` and `Your site has been installed!`. Select **Start Creating** to open the project, or **Back To Dashboard** to return to the project list. On a server that opens the full install form, that screen offers **Log in to WordPress**, which opens the dashboard, and **Project Details** instead.
-
-Unless the install form says otherwise, the panel sets the WordPress administrator name to `admin`, uses your account email as the administrator email, and generates a random password. You do not need that password: **WP Admin** in the project's top bar opens the dashboard signed in for you: [Managing WordPress](wordpress.md).
+Unless the install form says otherwise, the panel sets the WordPress administrator name to `admin`, uses your account email as the administrator email, and generates a random password. You do not need that password. **WP Admin** in the project's top bar opens the dashboard signed in for you: [Managing WordPress](wordpress.md).
 
 If the domain still needs DNS records, the panel lists them after the install. Set them at your DNS provider: [Domains and SSL](../looking-after-a-project/domains-and-ssl.md).
 
 To move an existing site here instead: [Importing a WordPress site](importing-wordpress.md).
+
+### The full install form
+
+Some servers open a full install form instead of the domain screen. Without that form, the panel installs the newest WordPress in the document root of the domain.
+
+The form has two tabs:
+
+- **Basic Configuration**: the domain, a **Subdirectory** for the site and the **WordPress version** (locked to the newest when the plan offers no other).
+- **Advanced Configuration**: the **Language**, the **Database Name** and **Database Prefix**, and the **Administrator Username** and **Administrator Email**.
+
+When the install ends on a server with this form, the last screen offers **Log in to WordPress**, which opens the dashboard, and **Project Details**.
 
 ## Creating a project from Git
 
@@ -50,7 +59,14 @@ To move an existing site here instead: [Importing a WordPress site](importing-wo
 
 ![Creating a project from Git: the Repository URL https://github.com/mdn/beginner-html-site.git, the Private repository switch, Continue, the branch step, then the deploy log until Deploy finished successfully](../../assets/single-server/create-project-git-form.gif)
 
-The panel checks the repository (`Connecting to the repository…`, `Detecting git branches…`, `Detecting environment variables…`). If the repository has several branches or an `.env.example` file, the **Environment variables** step opens. Choose the branch and adjust the values, or select **Skip** to keep the defaults. A repository without an `.env.example` file has no values to adjust: the step is titled **Choose a branch**. The deploy starts and the panel shows its live log.
+The panel checks the repository (`Connecting to the repository…`, `Detecting git branches…`, `Detecting environment variables…`). Then one of two things happens:
+
+- The repository has several branches or an `.env.example` file: the **Environment variables** step opens. Choose the branch and adjust the values, or select **Skip** to keep the defaults.
+- The repository has no `.env.example` file: there are no values to adjust, and the step is titled **Choose a branch**.
+
+The deploy then starts and the panel shows its live log.
+
+### An SSH address
 
 An SSH address (for example `git@github.com:example/app.git`) works differently. The panel creates a **deploy key** for you to add to the repository:
 
@@ -61,7 +77,9 @@ An SSH address (for example `git@github.com:example/app.git`) works differently.
 
 Details on keys, tokens and branches: [Git](git.md).
 
-The wizard does not ask for a project name. For a Git or files project the panel makes the name from the repository or archive name: it keeps only lowercase letters and digits and cuts the result to 15 characters.
+### The project name
+
+The wizard does not ask for a project name. For a Git or files project the panel makes the name from the repository or archive name. It keeps only lowercase letters and digits and cuts the result to 15 characters.
 
 ## Creating a project from files
 
@@ -71,11 +89,13 @@ The wizard does not ask for a project name. For a Git or files project the panel
 
 ![Creating a project from files: Files, the drop area with click to browse, the archive landing.zip added, then the deploy until it finishes](../../assets/single-server/create-project-files-upload.gif)
 
-The upload dialog says `Drop your project archive here` and takes exactly one `.zip` or `.tar.gz` archive, up to 256 MB. A folder, a loose `.sql` file, a second file or a bigger archive is refused before the project is created. Pack your project, and its database dump if it has one, into one archive first.
+The upload dialog says `Drop your project archive here`. It takes exactly one `.zip` or `.tar.gz` archive, up to 256 MB. A folder, a loose `.sql` file, a second file or a bigger archive is refused before the project is created. Pack your project, and its database dump if it has one, into one archive first.
 
-To replace the files later, use **Upload new version** on the **Source** card of **Project Details**. It takes a `.zip` or `.tar.gz` archive, up to 256 MB, the panel's upload limit: the drop area names it, and a bigger file is refused before it is uploaded.
+### Replacing the files later
 
-If the upload does not finish, because you select **Cancel Deploy** while it runs or you close the window, the project waits for its files. **Project Details** then says `Waiting for your files`, and **Upload new version** on the **Source** card uploads the archive afterwards.
+Use **Upload new version** on the **Source** card of **Project Details**. It takes a `.zip` or `.tar.gz` archive, up to 256 MB, the panel's upload limit. The drop area names the limit, and a bigger file is refused before it is uploaded.
+
+If the upload does not finish, the project waits for its files. This happens when you select **Cancel Deploy** while it runs or you close the window. **Project Details** then says `Waiting for your files`. Upload the archive afterwards with **Upload new version** on the **Source** card.
 
 ## Troubleshooting
 
@@ -97,6 +117,25 @@ If the upload does not finish, because you select **Cancel Deploy** while it run
 
 **"Domain is already in use."** A project on this server already has that domain. Choose another one.
 
-**"Installation failed."** The install did not finish. A WordPress project's card in **My Projects** and its **Installation** card on **Project Details** read `Installation failed. Try Again`, and its progress window reads `Error!` and `Installation was unsuccessful. Please try again.`. A Git or files project has no **Installation** card: its card reads `Deploy failed`, and its progress window reads `Error!` and `Something went wrong, please try again.`, with the deploy log, which holds the reason, below them. On **Project Details** a files project's **Source** card reads `Last deploy failed`, and a Git project's **Source** card shows the repository, not the failure: **Show Logs** on its card in **My Projects**, or in the row's **Actions** menu in the table view, opens the deploy log. Select **Try Again**. **Cancel Installation** deletes the project with its files and databases instead: the card's **Cancel Installation** button, the same button behind the card's installation indicator (point at it) and **Cancel Installation** in the table view's **Actions** menu all open one confirmation, and the delete runs only after you tick **Yes, I understand and want to cancel the installation.** there. If it fails again, see the task in [Tasks](../the-panel/tasks.md). A project created from an archive cannot repeat that deploy, because the archive is deleted when its deploy ends: the panel asks for the archive again (the next entry).
+**"Installation failed."** The install did not finish. Select **Try Again**. What you see depends on the kind of project:
+
+- **WordPress project.** Its card in **My Projects** and its **Installation** card on **Project Details** read `Installation failed. Try Again`. Its progress window reads `Error!` and `Installation was unsuccessful. Please try again.`
+- **Git or files project.** It has no **Installation** card. Its card reads `Deploy failed`. Its progress window reads `Error!` and `Something went wrong, please try again.`, with the deploy log below them. The deploy log holds the reason.
+
+To read the deploy log, select **Show Logs** on the project's card in **My Projects**, or in the row's **Actions** menu in the table view.
+
+On **Project Details**, a files project's **Source** card reads `Last deploy failed`. A Git project's **Source** card shows the repository, not the failure.
+
+If the install fails again, see the task in [Tasks](../the-panel/tasks.md).
+
+A project created from an archive cannot repeat that deploy, because the archive is deleted when its deploy ends. The panel asks for the archive again (see the next entry).
+
+**Cancel Installation** deletes the project with its files and databases instead of trying again. These all open the same confirmation:
+
+- the card's **Cancel Installation** button
+- the button behind the card's installation indicator (point at it)
+- **Cancel Installation** in the table view's **Actions** menu
+
+The delete runs only after you tick **Yes, I understand and want to cancel the installation.** there.
 
 **"This project deploys from an uploaded archive, and that archive is deleted when its deploy ends. Upload the archive again to retry."** **Try Again** has no archive left to deploy. Upload the archive again with **Upload new version** on the **Source** card of **Project Details**.

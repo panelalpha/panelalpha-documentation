@@ -1,6 +1,6 @@
 ---
 title: "First login"
-description: "The first login is either a sign-in with the account you passed at install or the setup wizard, which creates the account. You get the sign-in when you..."
+description: "At your first login you either sign in with the account you passed at install or use the setup wizard to create one. Open the panel over HTTPS..."
 nav:
   group: Getting Started
   order: 3
@@ -8,7 +8,10 @@ nav:
 
 # First login
 
-The first login is either a sign-in with the account you passed at install or the setup wizard, which creates the account. You get the sign-in when you passed `PANELALPHA_USER_EMAIL` and `PANELALPHA_USER_PASSWORD`: [Installing the panel](install.md).
+At your first login you either sign in with the account you passed at install or use the setup wizard to create one.
+
+- You get the sign-in when you passed `PANELALPHA_USER_EMAIL` and `PANELALPHA_USER_PASSWORD`: [Installing the panel](install.md).
+- You get the wizard when you passed neither.
 
 The panel works over HTTPS only. Open `https://panel.example.com`, not `http://`.
 
@@ -16,20 +19,26 @@ The panel works over HTTPS only. Open `https://panel.example.com`, not `http://`
 
 1. Open the panel address.
 2. Enter the email address you passed at install and select **Log In**.
-3. On the next screen, enter the password you passed at install and select **Log In**. **Remember Me** keeps you signed in, and **Forgot password?** sends you a reset link. The screen shows the address you entered. If you mistyped it, select **Back**, correct the address and select **Log In** again.
+3. On the next screen, enter the password you passed at install and select **Log In**.
 
 The wizard does not show. You land on the project list.
 
+On the password screen:
+
+- **Remember Me** keeps you signed in.
+- **Forgot password?** sends you a reset link.
+- The screen shows the address you entered. If you mistyped it, select **Back**, correct the address and select **Log In** again.
+
 ## Using the setup wizard
 
-The wizard shows when the panel has no account yet. Every address on the panel leads to it until you finish.
+The wizard shows when the panel has no account yet. Every address on the panel leads to it until you finish. It creates your account.
 
 1. On the first screen, `A few steps to your first deploy.`, select **Start Now**.
 
    <!-- TODO screenshot: assets/first-login-wizard-start.png. Show the first wizard screen with the text "A few steps to your first deploy." and the Start Now button. Crop to the wizard card. -->
 
 2. On the **Sign in** step, choose how you sign in:
-   - **Connect with Hub** uses your PanelAlpha Hub account. The account is kept in the Hub, not on this server, and it can sign in with GitHub or Google. Follow [Connecting with PanelAlpha Hub](#connecting-with-panelalpha-hub) below.
+   - **Connect with Hub** uses your PanelAlpha Hub account. The account is kept in the Hub, not on this server, and you can sign in to it with GitHub or Google. Follow [Connecting with PanelAlpha Hub](#connecting-with-panelalpha-hub) below.
    - **Create a local account instead** makes an account that works on this server only. Go on with step 3.
 3. On the **Server name** step, fill in the form:
    - **Server name** is a label for this server. It starts as `My server`.
@@ -57,7 +66,7 @@ If you finish the wizard with a local account, you can connect later in **Settin
 
 ## What you see first
 
-The project list shows the projects the panel finds on the Engine. On a new Engine it is empty. The panel's own project is not in the list, and neither is another panel's, whether or not you set `PANELALPHA_SELF_PROJECT`.
+The project list shows the projects the panel finds on the Engine. On a new Engine it is empty. The panel's own project is not in the list, and neither is another panel's.
 
 <!-- TODO screenshot: assets/first-login-empty-project-list.png. Show the project list of a new Engine with no projects and the Create First Project button. Include the user menu so the reader sees where Tasks and Settings are. -->
 
@@ -73,4 +82,10 @@ Open the user menu to reach **Tasks** and **Settings**: [Settings](../the-panel/
 
 **The sign-in page says the account could not be created.** The install refused the values, and the panel keeps the setup wizard closed. The deploy log names the rule that failed: [Installing the panel](install.md#when-the-account-cannot-be-created).
 
-**The browser warns about the certificate.** The panel address has a self-signed certificate. That is a name under `panelalpha.direct` other than the server's own name, an Engine without a public address, or a domain of your own whose DNS record does not point at the server yet. Use a domain of your own that points here: [The panel address](panel-address.md).
+**The browser warns about the certificate.** The panel address has a self-signed certificate. This happens in three cases:
+
+- The address is a name under `panelalpha.direct` other than the server's own name.
+- The Engine has no public address.
+- The address is a domain of your own whose DNS record does not point at the server yet.
+
+Use a domain of your own that points here: [The panel address](panel-address.md).

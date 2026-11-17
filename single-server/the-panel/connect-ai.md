@@ -1,6 +1,6 @@
 ---
 title: "Connect AI"
-description: "Connect AI lets an AI assistant manage your projects by chat. The assistant talks to the panel over MCP (the Model Context Protocol) with a token you..."
+description: "Connect AI lets an AI assistant such as Claude Code, ChatGPT or Cursor manage your projects by chat. You connect it with a token that you create in the..."
 nav:
   group: The Panel
   order: 4
@@ -8,7 +8,9 @@ nav:
 
 # Connect AI
 
-Connect AI lets an AI assistant manage your projects by chat. The assistant talks to the panel over MCP (the Model Context Protocol) with a token you create. Open **Connect AI** in the top menu.
+Connect AI lets an AI assistant manage your projects by chat. Open **Connect AI** in the top menu.
+
+The assistant talks to the panel over **MCP** (the Model Context Protocol), a standard way for AI tools to use other programs. It signs in with a **token**, a long secret text that you create in the panel and paste into your tool.
 
 The assistant can reach all your live and staging projects. It cannot reach the project the panel itself runs in, nor any other project that runs a panel.
 
@@ -51,16 +53,27 @@ Your tool connects to the panel address with `/mcp` added, for example `https://
 
 ## What the assistant can do
 
-The assistant gets the Engine's MCP tools, limited to your projects. The panel passes its requests on and has no tool list of its own. Tools about the whole server are not offered to it, and it cannot change a project's limits or suspend a project. The Engine refuses suspend for the panel's tokens. The panel's own project is out of reach, and so is any other project that runs a panel: a panel's account, its files, its settings and its certificate are never handed to the assistant.
+The assistant can use the Engine's tools on your projects. The panel passes its requests on and has no tool list of its own.
 
-An assistant loads only a short list of tools at first: listing projects, reading a project, deploying an archive or files, rebuilding a project, reading deploy logs and container logs, health checks, deleting and restarting a project, and listing and adding domains and certificates. It cannot create a new project or read the server load, because its token reaches only your existing projects. For anything else it uses `search_tools` to find a tool and `execute_tools` to run it.
+It cannot do these things:
 
-The page **What You Can Do with AI** shows examples of what to ask. It has six groups that open one at a time: **Daily Management**, **Backups**, **Domains & SSL**, **Developer Workflow**, **Monitoring & Troubleshooting** and **Bulk Operations**. Each example is a card with a sentence, such as `Which of my sites are currently down?` or `Create a staging copy of my production WordPress`, and a copy button. Paste the sentence into your assistant's chat.
+- Use tools about the whole server.
+- Create a new project or read the server load, because its token reaches only your existing projects.
+- Change a project's limits or suspend a project. The Engine refuses suspend for the panel's tokens.
+- Touch the panel's own project, or any other project that runs a panel. A panel's account, its files, its settings and its certificate are never handed to the assistant.
 
 Some requests have no single tool. "Update all my sites" and "list all sites without automatic backups" make the assistant go through your projects one by one. The Engine's server settings can also narrow what it offers.
+
+### What to ask
+
+The page **What You Can Do with AI** shows examples. It has six groups that open one at a time: **Daily Management**, **Backups**, **Domains & SSL**, **Developer Workflow**, **Monitoring & Troubleshooting** and **Bulk Operations**. Each example is a card with a sentence, such as `Which of my sites are currently down?` or `Create a staging copy of my production WordPress`, and a copy button. Paste the sentence into your assistant's chat.
+
+### More detail
+
+An assistant loads only a short list of tools at first: listing projects, reading a project, deploying an archive or files, rebuilding a project, reading deploy logs and container logs, health checks, deleting and restarting a project, and listing and adding domains and certificates. For anything else it uses `search_tools` to find a tool and `execute_tools` to run it.
 
 ## Activity
 
 **Activity Log** lists each tool the assistant runs: **Time**, **Token**, **Tool** and **Status** (`Success` or `Error`). A request that runs no tool, such as loading the tool list, leaves no row. Filter by token with **Filter by token**. With nothing yet it says `No activity yet. Start using your AI tool to see logs here.`
 
-<!-- TODO screenshot: assets/connect-ai-activity-log.png. Show the Activity Log with Time, Token, Tool and Status columns and the Filter by token field. Use sample rows. -->
+![Connect AI, Activity Log: each tool the assistant ran with its Time, Token, Tool and Status (Success or Error), and the Filter by token list](../../assets/single-server/connect-ai-activity-log.gif)
