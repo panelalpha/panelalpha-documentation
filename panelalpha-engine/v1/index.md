@@ -1,0 +1,84 @@
+---
+title: Overview
+description: Overview of PanelAlpha Engine, a Docker-based WordPress hosting solution. Learn features, architecture, requirements, and FAQ.
+nav:
+  group: Engine v1.x
+  order: 1
+  title: Introduction
+---
+
+# Overview
+
+> [!NOTE]
+> **This documentation covers PanelAlpha Engine v1.x**, the version used by the PanelAlpha Single Server and Multi Server control panels. Documentation for Engine 2.0+ is at [PanelAlpha Engine](../index.md).
+
+PanelAlpha Engine is the hosting server for PanelAlpha. You install it on its own server, and PanelAlpha creates and manages hosting accounts and WordPress instances on it through the Engine API. Each hosting account runs PHP in its own Docker container with its own limits for disk, memory, CPU and other resources.
+
+## Documentation Sections
+
+- [Installation & Updates](installation-updates/index.md): install the Engine and keep it up to date.
+- [Command Reference](command-reference.md): Artisan commands for tokens, repairs and rebuilds.
+- [Server Management](server-management/index.md): the server tabs in PanelAlpha (details, IP addresses, CSF firewall, ModSecurity, outgoing mail, alerts) and the files, logs and services on the server.
+- [Troubleshooting](troubleshooting.md): common problems and how to fix them.
+
+## What the Engine Includes
+
+- A choice of web server: OpenLiteSpeed, LiteSpeed, Apache, Nginx, or Nginx + Apache. You can switch later from the panel.
+- PHP 7.4 and 8.0 to 8.4, chosen per instance in the hosting plan.
+- MariaDB for customer databases, with phpMyAdmin single sign-on from PanelAlpha.
+- FTP and SFTP access for hosting accounts.
+- The CSF firewall and the ModSecurity web application firewall with the OWASP Core Rule Set.
+- Outgoing mail through Exim, directly or through a relay such as SendGrid, MailChannels or Amazon SES.
+- Server metrics for the graphs and the disk, CPU and RAM alerts in PanelAlpha.
+- WP-CLI for WordPress management.
+
+The Engine itself does not make backups. Back up the server with your hosting provider's snapshots or your own tools.
+
+## Architecture
+
+The diagram shows the Engine containers and how they connect.
+
+![PanelAlpha Engine — Hosting Server Connections — a Engine architecture diagram](../../assets/img/hosting-server-connections/PanelAlpha-Engine/PAE_0.png)
+
+The Engine is a Docker Compose project in `/opt/panelalpha/shared-hosting`. See [Files, Logs and Services](server-management/files-and-logs.md) for the list of containers.
+
+## System Requirements
+
+- **RAM:** 4 GB minimum. More is better for production, depending on the number of sites.
+- **Operating system** (fresh install):
+  - Debian 12 "bookworm"
+  - Debian 13 "trixie"
+  - Ubuntu 22.04 LTS
+  - Ubuntu 24.04 LTS
+- **Access:** SSH as `root`.
+- **Open ports:**
+  - 22: SSH
+  - 80 and 443: websites
+  - 2011: Engine API, used by PanelAlpha
+  - 21 and 30000–30009: FTP
+  - 2222: SFTP
+
+> [!IMPORTANT]
+> **Important:** Install PanelAlpha Engine on its own server. If you install PanelAlpha and PanelAlpha Engine on the same server, both stop working.
+
+## Frequently Asked Questions
+
+### Can I use PanelAlpha Engine 1.x without PanelAlpha?
+
+No. Engine 1.x is managed only through PanelAlpha Single Server or Multi Server. [Engine 2.0+](../index.md) can run on its own, but PanelAlpha Single Server and Multi Server do not support it yet.
+
+### Can I change the web server after installation?
+
+Yes, from the server's Details tab in PanelAlpha. Site files and databases stay as they are, but all sites are briefly offline while the Engine rebuilds their configuration. See [Changing Web Server](server-management/details.md#changing-web-server).
+
+### Does PanelAlpha Engine host email?
+
+No. It sends mail from websites, but it does not host mailboxes, IMAP or POP3. Use a separate mail service for mailboxes. See [Outgoing Mail](server-management/outgoing-mail.md).
+
+### Are sites offline during an Engine update?
+
+Briefly. The update restarts the Engine containers and rebuilds the configuration of every account. The update does not roll back on its own, so make a backup first. See [Update](installation-updates/update.md).
+
+## Support
+
+For help, contact the [Support Center](https://manage.panelalpha.com/contact), ask on the [Community Forum](https://community.panelalpha.com/), or join our [Discord server](https://discord.gg/9twHWR7xGX).
