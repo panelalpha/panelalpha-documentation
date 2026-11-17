@@ -107,12 +107,13 @@ switcher, search and on the documentation home page.
 
 1. Clone panelalpha-homepage and run `git submodule update --init --remote` in it. This puts this
    repo in its `documentation/` folder.
-2. Run `pnpm install` and `pnpm dev`. Open `http://localhost:3000/documentation`.
+2. Run `bun install` and `bun run dev`. Open `http://localhost:3000/documentation`. You need
+   Bun 1.4 and Node.js 26.13.1 or newer.
 3. Edit the files in `documentation/`. That folder is a normal clone of this repo, so you can
    branch and commit there. The dev server rebuilds the pages when a file changes. Errors from
    the checks (missing title, broken link or image, unknown group) are printed in the terminal.
 
-To run the checks only, run `pnpm exec nuxt prepare` in panelalpha-homepage.
+To run the checks only, run `bunx nuxt prepare` in panelalpha-homepage.
 
 ## Repository settings
 
