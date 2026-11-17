@@ -3,73 +3,46 @@
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset=".github/assets/panelalpha-documentation.svg"><img src=".github/assets/panelalpha-documentation-light.svg" alt="PanelAlpha Documentation" width="380"></picture></p>
 
 <h3>
-The source of the PanelAlpha documentation.<br>
-Markdown pages and their images, published at panelalpha.com/documentation.
+Guides for installing and using PanelAlpha.
 </h3>
 
 <p>
-<a href="#products"><b>Products</b></a> ·
-<a href="#how-a-change-reaches-the-site"><b>Publishing</b></a> ·
-<a href="CONTRIBUTING.md"><b>Writing pages</b></a>
-</p>
-
-<p>
-<a href="https://github.com/panelalpha/panelalpha-documentation/actions/workflows/update-site.yml"><img src="https://github.com/panelalpha/panelalpha-documentation/actions/workflows/update-site.yml/badge.svg?branch=development" alt="Update the site"></a>
-<img src="https://img.shields.io/badge/format-GitHub_Markdown-07C07E" alt="Format: GitHub Markdown">
-<img src="https://img.shields.io/badge/site-panelalpha--homepage-302F38" alt="Site: panelalpha-homepage">
+<a href="https://www.panelalpha.com/documentation"><b>Read the documentation</b></a> ·
+<a href="https://community.panelalpha.com/"><b>Community Forum</b></a> ·
+<a href="https://discord.gg/9twHWR7xGX"><b>Discord</b></a>
 </p>
 
 </div>
 
-This repo holds only the pages and their images. The site itself is built by
-[panelalpha-homepage](https://github.com/panelalpha/panelalpha-homepage), which reads this repo on
-every build. The sidebar, search and the documentation home page come from the files here, so a
-merged page needs no other change.
+This is the PanelAlpha documentation, the same pages you read at
+[panelalpha.com/documentation](https://www.panelalpha.com/documentation). Each page is a Markdown
+file, so you can also read it here on GitHub.
 
-## Products
+## What is inside
 
-One folder per product. A new product is a new folder.
+**[Single Server Edition](single-server/index.md)**
+A web hosting panel you install on your own VPS. Installing it, creating projects, domains,
+backups, staging and the panel's settings.
 
-| Product | Folder | What it covers |
-|---|---|---|
-| Single Server Edition | [`single-server/`](single-server/index.md) | The web hosting panel you install on your own VPS |
-| Multi Server Edition | [`multi-server/`](multi-server/index.md) | PanelAlpha across many servers, with billing systems and integrations |
-| Troubleshooting Center | [`troubleshooting-center/`](troubleshooting-center/index.md) | Known problems and fixes, shown under Multi Server on the site |
-| PanelAlpha Engine | [`panelalpha-engine/`](panelalpha-engine/index.md) | Engine 2.x, with Engine 1.x in [`v1/`](panelalpha-engine/v1/index.md) |
+**[Multi Server Edition](multi-server/index.md)**
+PanelAlpha for hosting providers who run WordPress hosting on many servers. Servers, billing
+systems, migrations, the Admin Area and the Client Area.
 
-```
-index.md          documentation home page: texts, external cards, community links
-assets/           images used by the pages
-<product>/        pages; index.md is the product start page and holds its sidebar settings
-```
+**[Troubleshooting Center](troubleshooting-center/index.md)**
+Known problems and how to fix them: installation, configuration, servers, backups and integrations.
 
-A page at `multi-server/billing/stripe.md` is published at
-`/documentation/multi-server/billing/stripe`.
+**[PanelAlpha Engine](panelalpha-engine/index.md)**
+The open source engine that hosts your projects on your own server, controlled by your AI
+assistant. The guide for Engine 1.x is in [`v1/`](panelalpha-engine/v1/index.md).
 
-## How a change reaches the site
+Images used by the pages are in `assets/`.
 
-```mermaid
-flowchart LR
-  pr["Pull request"] --> dev["development"]
-  dev --> trigger["update-site.yml"]
-  trigger --> build["panelalpha-homepage:<br>checks and build"]
-  build --> site["Test site"]
-```
+## Found a mistake?
 
-1. A merge or push to `development` runs `.github/workflows/update-site.yml`.
-2. That workflow starts the deploy of panelalpha-homepage on its own `development` branch.
-3. panelalpha-homepage checks every page, builds the site and deploys it. This takes about
-   5 minutes. The result is in the Actions tab of panelalpha-homepage.
+Open an issue with the page and what is wrong, or send a pull request with the fix. How pages are
+written: [Writing pages](CONTRIBUTING.md).
 
-**A broken link, a missing image or a page without a title stops the build**, and the site keeps
-the last good version.
+## Get help
 
-| Branch | Site |
-|---|---|
-| `development` | test site |
-| `main` | panelalpha.com (not connected yet) |
-
-## Contributing
-
-Work in your own branch and open a pull request to `development`. The page format, the sidebar
-settings and how to preview a page on your computer: [Writing pages](CONTRIBUTING.md).
+Ask on the [Community Forum](https://community.panelalpha.com/) or on
+[Discord](https://discord.gg/9twHWR7xGX).
