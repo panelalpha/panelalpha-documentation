@@ -70,24 +70,4 @@ PHP keeps the settings it reads for a folder in a cache for a few seconds. A req
 
 ![Advanced > Developer Settings of the Northwind Journal project: the PHP Version card with Current PHP version, then Manage on PHP Settings, memory_limit set to 256M and Save Changes](../../assets/single-server/php-settings-dialog.gif)
 
-## Troubleshooting
-
-**A cron job seems not to run.** The panel does not show what the job printed, so make the job leave a trace:
-
-1. Make the command write a file next to the document root, for example `date >> /home/<name>/example.com/cron-test.log`.
-2. Wait for the schedule.
-3. Open that file in **Advanced > File Manager**, in the folder of the domain.
-
-If the file is missing, check these:
-
-- The command writes the whole path into the site's folder. The home directory is not writable and a relative path starts there.
-- The schedule is right.
-- On a container project, the chosen **Service** is running.
-
-**"Invalid PHP directive: <name>."** The setting does not exist. Check the spelling.
-
-**"Invalid directive value."** The value has a line break. Write it on one line.
-
-**"The PHP version applies only to PHP hosting projects. A dind project runs PHP from its own image; set it there."** The project is a container project. Change PHP in the project's own image.
-
-**"Custom PHP INI settings apply only to PHP hosting projects. A dind project runs PHP from its own image; set php.ini there."** Same cause. Set `php.ini` in the project's own image.
+Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: Looking after a project](../troubleshooting/looking-after-a-project.md#cron-jobs-and-php).

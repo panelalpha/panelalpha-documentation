@@ -139,18 +139,4 @@ This works only when the domain has a certificate.
 
 Other projects can share the same domain. If so, the panel lists them first: `This project is installed on example.com along with other projects. Changing this option, it will also affect the following projects:`.
 
-## Troubleshooting
-
-**"Domain cannot start with 'www.'"** You entered the address with `www.`. Enter `example.com`. The panel adds `www` for you.
-
-**"Domain already exists."** (in **Change Domain** the answer names the domain: `example.com is already on this engine.`) Another project on this server already has that domain. Remove it there first or use another name.
-
-**"Domain Name must be valid"** (in **Add Domain**: `Domain must be valid`; a name the server refuses: `Invalid domain name.`) The text is not a domain name. Enter it as `example.com`, without a path and without `www.`.
-
-**"Cannot delete main domain"** The main domain has no delete icon. To remove it, make another domain the main one first, then remove this one.
-
-**"Cannot delete domain with existing subdomains"** Remove the subdomains first, then remove the domain.
-
-**"Invalid certificate/key"** The certificate and the private key do not belong together. Check that you pasted the key of this certificate.
-
-**"Could not obtain a certificate for <name>: ... is not a public hostname a certificate authority will issue for"** The name is not a public domain name. Use a domain you own.
+Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: Domains and SSL](../troubleshooting/domains-and-ssl.md).

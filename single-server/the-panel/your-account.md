@@ -99,12 +99,4 @@ Sign-in has these limits. After you reach one, wait a minute.
 - **Two-factor code:** 5 attempts a minute for each sign-in.
 - **Email screen:** the screen that only asks for your email address is counted apart, with 20 a minute from one IP address.
 
-## Troubleshooting
-
-**"These credentials do not match our records."** The email or the password is wrong. Check both and try again.
-
-**"The entered code is invalid."** The two-factor code is wrong or expired. Enter the current code from the app, or use an unused backup code.
-
-**"The entered backup code is invalid."** The backup code is wrong or was already used. Each backup code works once; use one you have not used, or enter the current code from the app.
-
-**"Two-Factor Authentication is on, but your backup codes could not be loaded. Try again; if it keeps failing, turn Two-Factor Authentication off and on again to get a new set."** The panel could not read your backup codes. Follow the message to get a new set.
+Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: The panel and your account](../troubleshooting/panel-and-account.md#your-account).

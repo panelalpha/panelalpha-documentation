@@ -101,16 +101,4 @@ One download holds one part, so download the other parts the same way.
 
 **To delete**, select the delete action and tick the confirmation. You can also select several rows and delete them together.
 
-## Troubleshooting
-
-**"Choose files or databases to back up."** Both parts are switched off. The dialog shows the warning and **Create** stays off until you switch at least one part on.
-
-**"Select Restore Directory or Restore Database to continue."** No part was chosen. The dialog shows the warning and **Restore** stays off until you tick at least one part.
-
-**"Select Restore data or Restore code to continue."** The same on a container project, where both parts start unticked. Tick at least one.
-
-**"Cannot delete a backup that is being created."** Wait until the backup has finished.
-
-**"Backups are not available until the Engine has a backup container."** No store is working yet. Set one up in **Settings > Backups**.
-
-**"This backup has no files to download."** The backup holds no file at all. Download another backup.
+Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: Looking after a project](../troubleshooting/looking-after-a-project.md#backups).

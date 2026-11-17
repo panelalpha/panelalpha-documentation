@@ -129,16 +129,4 @@ For taking and restoring a backup of one project: [Backups](../looking-after-a-p
 - **A server without a store.** If the Engine never created that store (it predates it and has not been updated since), every schedule field is off and the page says `Set up a backup store above to schedule backups for new projects.` Set one up as above.
 - **A kept store comes back.** A store the panel created that was kept because a backup or schedule still used it is not forgotten. Choose the same directory again once that backup or schedule is gone. The panel shows it as its own store again, so **Remove store** then deletes it from the server.
 
-## Troubleshooting
-
-**"Enter a number from 1 to 365"**. **Backups to keep** is outside that range. Enter a whole number in it.
-
-**"Choose a directory inside /home/<name>, /opt/panelalpha or /var/www/html/storage. Backups stored anywhere else are lost when the Engine is updated."** The local directory is outside the three allowed places. Pick a folder inside one of them.
-
-**"Enter the secret itself, not a vault reference."** A secret field starts with `vault:`. Paste the real secret.
-
-**"... Backup storage is not writable: ..."** The panel wrote a test file to the store and the store refused it. The text after the colon is the answer of the store, for example a wrong key, a wrong bucket or no permission. Fix the details and save again.
-
-**"The Engine did not create the backup store."** The Engine refused the store. Check the details you entered and save again.
-
-**"The panel is being deployed or backed up. Save again once that has finished."** You saved a new Application URL while the panel project was busy. Wait and save again.
+Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: The panel and your account](../troubleshooting/panel-and-account.md#settings).

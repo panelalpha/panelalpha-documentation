@@ -111,20 +111,4 @@ The domain warning on a project also has **Not live yet? Preview the site on the
 - On the panel's free `panelalpha.online` address, **Open Project** opens the site itself in a new tab, so there is nothing to preview.
 - In **My Projects**, the button is on the card of a project that is not WordPress. A WordPress card has no **Open Project**. Open the project and select **Open Project** in its top bar. Every project has it there.
 
-## Troubleshooting
-
-**"This project already has staging environment."** The project has a staging copy. Use it, or delete it and create a new one.
-
-**"Cannot create staging project from staging project."** You cannot copy a staging copy. Create the copy from the live project.
-
-**"A staging copy cannot use a panelalpha.online address: the PanelAlpha proxy assigns those names. Create the copy without a domain to get a free one."** The panel assigns the addresses in the free `panelalpha.online` zone itself, so the copy cannot be given one. Create the copy without a domain, or with an address on a domain of your own.
-
-**"Subdomain must be a single name, without dots"** The panel adds the project's domain after the name, so enter only the name: `staging`, not `staging.example.com` (that would give `staging.example.com.example.com`).
-
-**"The project is still being prepared. Please try again in a moment."** The project is not ready yet. Wait and try again.
-
-**"The project has no live parent to push to."** The project is not a staging copy. **Push To Live** works only from a staging copy.
-
-**"Could not compare database changes. You can still push files and database, but selective table changes are unavailable."** The panel could not read the tables. Push the full database or only files.
-
-**"A preview tunnel is already being created for this project. Try again in a moment."** Another preview is being made. Wait a moment and select the button again.
+Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: Projects](../troubleshooting/projects.md#staging-and-preview).

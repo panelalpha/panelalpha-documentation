@@ -79,8 +79,4 @@ If you have no databases, you see `No databases available.`
 
 The **Databases** tab has no import button. Import a SQL file through phpMyAdmin.
 
-## Troubleshooting
-
-**"The project kind is not known yet, so its database cannot be renamed."** The panel has not learned what the project runs. Open the project page, wait a moment and try again.
-
-**"The Engine could not rename the database."** The rename failed on the server. Check the tasks list and try again: [Tasks](../the-panel/tasks.md).
+Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: Looking after a project](../troubleshooting/looking-after-a-project.md#databases).

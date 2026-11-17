@@ -68,14 +68,4 @@ A key can be `ssh-ed25519`, `ecdsa-sha2-nistp256`, `ecdsa-sha2-nistp384`, `ecdsa
 
 The panel has no feature to protect a site with a password.
 
-## Troubleshooting
-
-**"The username field must not be greater than 32 characters."** On **SFTP Accounts**, the name you type may not pass 32 characters. Use a shorter name.
-
-**"The username is too long for this project."** On **SFTP Accounts**, the prefix the panel puts before the name counts too. A name that fits 32 characters alone is refused when its prefix makes it longer. Use a shorter name.
-
-**"The user field must not be greater than 32 characters."** On **FTP Accounts**, the name may not pass 32 characters. Use a shorter name.
-
-**"Username can only contain letters and numbers."** On **FTP Accounts**, an underscore, hyphen, dot or space in the name is refused. Use only the letters a to z, A to Z and the digits 0 to 9.
-
-**"Invalid file name."** The name has characters the file manager does not accept. Use a plainer name.
+Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: Looking after a project](../troubleshooting/looking-after-a-project.md#files-and-access).

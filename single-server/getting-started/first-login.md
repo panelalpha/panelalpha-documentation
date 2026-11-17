@@ -65,18 +65,4 @@ The project list shows the projects the panel finds on the Engine. On a new Engi
 
 Open the user menu to reach **Tasks** and **Settings**: [Settings](../the-panel/settings.md). To create your first site: [Create a project](../projects/create-a-project.md).
 
-## Troubleshooting
-
-**"The panel must be opened at its configured address (APP_URL) to finish the setup."** You opened the panel at another address, such as its IP. Open it at the address the installer printed, over `https://`.
-
-**The wizard does not accept the password.** It is missing one of the rules in step 3. Add what is missing.
-
-**The wizard is gone and you see a sign-in page.** Someone finished the setup first. Sign in with that account.
-
-**The browser warns about the certificate.** The panel address has a self-signed certificate. This happens in three cases:
-
-- The address is a name under `panelalpha.direct` other than the server's own name.
-- The Engine has no public address.
-- The address is a domain of your own whose DNS record does not point at the server yet.
-
-Use a domain of your own that points here: [The panel address](panel-address.md).
+Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: The panel and your account](../troubleshooting/panel-and-account.md#first-login).

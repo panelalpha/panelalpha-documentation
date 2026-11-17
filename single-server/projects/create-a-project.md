@@ -97,45 +97,4 @@ Use **Upload new version** on the **Source** card of **Project Details**. It tak
 
 If the upload does not finish, the project waits for its files. This happens when you select **Cancel Deploy** while it runs or you close the window. **Project Details** then says `Waiting for your files`. Upload the archive afterwards with **Upload new version** on the **Source** card.
 
-## Troubleshooting
-
-**"Invalid repository URL."** The address is not an HTTPS or SSH repository address. Copy it from your Git provider.
-
-**"The repository was not found. Check the repository address and that the token can read it if the repository is private."** The address is wrong, or the repository is private and the token cannot read it.
-
-**"The repository refused this token. Check the token and that it can read this repository."** The token is wrong or has no read access.
-
-**"The host cannot be reached from the panel."** The panel cannot connect to that host. It refuses private addresses and the address of this server, so a repository that runs on the same server cannot be used. Check the host name, or host the repository somewhere else.
-
-**"Could not read the repository."** The panel could not open the repository and got no clear reason from the server. The host may be down or slow. Check the address and the token and try again.
-
-**"The repository did not accept the key. Check that you added it to this repository."** The deploy key is not in the repository yet. Add it in the repository's deploy key settings and select **Continue** again.
-
-**"Add only one archive."** You added a folder or more than one file. Upload a single `.zip` or `.tar.gz`.
-
-**"Allowed file types: .zip, .tar.gz"** The file has another type. Pack it as `.zip` or `.tar.gz`.
-
-**"Domain is already in use."** A project on this server already has that domain. Choose another one.
-
-**"Installation failed."** The install did not finish. Select **Try Again**. What you see depends on the kind of project:
-
-- **WordPress project.** Its card in **My Projects** and its **Installation** card on **Project Details** read `Installation failed. Try Again`. Its progress window reads `Error!` and `Installation was unsuccessful. Please try again.`
-- **Git or files project.** It has no **Installation** card. Its card reads `Deploy failed`. Its progress window reads `Error!` and `Something went wrong, please try again.`, with the deploy log below them. The deploy log holds the reason.
-
-To read the deploy log, select **Show Logs** on the project's card in **My Projects**, or in the row's **Actions** menu in the table view.
-
-On **Project Details**, a files project's **Source** card reads `Last deploy failed`. A Git project's **Source** card shows the repository, not the failure.
-
-If the install fails again, see the task in [Tasks](../the-panel/tasks.md).
-
-A project created from an archive cannot repeat that deploy, because the archive is deleted when its deploy ends. The panel asks for the archive again (see the next entry).
-
-**Cancel Installation** deletes the project with its files and databases instead of trying again. These all open the same confirmation:
-
-- the card's **Cancel Installation** button
-- the button behind the card's installation indicator (point at it)
-- **Cancel Installation** in the table view's **Actions** menu
-
-The delete runs only after you tick **Yes, I understand and want to cancel the installation.** there.
-
-**"This project deploys from an uploaded archive, and that archive is deleted when its deploy ends. Upload the archive again to retry."** **Try Again** has no archive left to deploy. Upload the archive again with **Upload new version** on the **Source** card of **Project Details**.
+Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: Projects](../troubleshooting/projects.md#create-a-project).

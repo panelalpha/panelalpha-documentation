@@ -84,25 +84,7 @@ To clear the cache, choose **Clear Cache** in the row's **Actions** menu in the 
 PHP version and limits: [Cron jobs and PHP](../looking-after-a-project/cron-and-php.md).
 Domains and the certificate: [Domains and SSL](../looking-after-a-project/domains-and-ssl.md).
 
-## Troubleshooting
-
-**"This project is not a WordPress installation."** The project is a container project. WordPress screens work only on a WordPress site.
-
-**"Error: No matching entries found in 'wp-config.php'."** A setting holds a value too long to read back. **Advanced > System Configuration** says so where the list would be. Use **Remove by name**, next to **Create Configuration**, to delete it, then **Retry** on the page or load it again.
-
-**"WordPress is already installed or being installed on this project."** An install is already running. Wait for it to finish.
-
-**Maintenance Mode reads off, and Installation Details keeps the database values `wp-config.php` holds.** The panel cannot read the mode while WordPress cannot reach its database. So **Advanced > Developer Settings** shows Maintenance Mode off, and the **Installation** card keeps the installed version. A WordPress-typed project with no `wp-config.php` yet lists no database values there at all. Everything reads again once the database answers and `wp-config.php` exists.
-
-**The Plugins tab, Installed Themes and both catalogues are empty.** The panel cannot read WordPress in the two states above. Listing plugins and themes, and searching wordpress.org for new ones, needs the database and `wp-config.php`. The pages show no error message, only these texts:
-
-- **Plugins** shows `No Installed Plugins Found`.
-- **Advanced > Installed Themes** shows `No Installed Themes Found`.
-- The catalogue of **New Plugins** and **Available Themes** shows `Start Searching For New Plugins` and `Start Searching For New Themes` instead of results.
-
-Everything comes back once the database answers and `wp-config.php` exists.
-
-**Advanced > System Configuration** is the exception. Its list is the `wp-config.php` itself. When that file cannot be read, the page says why it lists nothing and keeps **Remove by name** and **Retry**. For a value too long to read back, the text is `Error: No matching entries found in 'wp-config.php'.`
+Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: Projects](../troubleshooting/projects.md#managing-wordpress).
 
 ## More detail
 

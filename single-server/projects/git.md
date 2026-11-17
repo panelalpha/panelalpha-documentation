@@ -102,7 +102,7 @@ Connecting links a project to a Git repository (GitHub, GitLab or Bitbucket). **
 - Files the repository does not have stay where they are.
 - A site that already has a Git checkout keeps its files. Its message says they are unchanged.
 
-If the panel cannot download the branch, it refuses the connect and nothing is connected: see [Troubleshooting](#troubleshooting).
+If the panel cannot download the branch, it refuses the connect and nothing is connected: see [Troubleshooting](../troubleshooting/git.md).
 
 An SSH address asks for the branch and shows a deploy key instead: [Deploy key](#deploy-key).
 
@@ -163,61 +163,10 @@ An SSH repository uses a **deploy key**. **Advanced > Git** shows it in the **De
 
 The switch stays on only after the panel has registered the webhook. The panel adds it at GitHub, GitLab or Bitbucket with your saved token, so the token must be allowed to manage webhooks.
 
-If there is no token, or the provider refuses it, the switch goes back off and the panel shows the reason in a message: see [Troubleshooting](#troubleshooting).
+If there is no token, or the provider refuses it, the switch goes back off and the panel shows the reason in a message: see [Troubleshooting](../troubleshooting/git.md).
 
 Turning **Auto-deploy on push** off removes the webhook at your Git provider.
 
 ![Advanced > Git of a project from a private repository: the Access token card shows Token saved, and the Auto-deploy on push switch in the Auto-deploy card is turned on, with Auto-deploy settings updated](../../assets/single-server/git-auto-deploy.gif)
 
-## Troubleshooting
-
-Each message belongs to the card it starts from.
-
-**Advanced > Git > Connect repository**
-
-A refused **Connect repository** over HTTPS shows its message under **Repository URL** or **Access token**. The message stays there until you change that field or select **Connect repository** again.
-
-**"The repository refused this token. Check the token and that it can read this repository."** The token is wrong or has no read access to the repository. Make a token that can read it and try again.
-
-**"The repository was not found. Check the repository address and that the token can read it if the repository is private."** The address is wrong, or the token cannot see the repository. Nothing was connected. Check the address and the token.
-
-**"The host cannot be reached from the panel."** The address does not resolve, or it points into the server's own network. Use the address from your Git provider.
-
-**"Could not reach <host>, so the repository cannot be read and nothing was connected. Check the address, and that this server can reach it."** The Git provider did not answer. Nothing was connected. Check the address, and that this server can reach it.
-
-**"The repository has no branch to connect yet. Push a commit to it first, then connect again."** The repository is empty, so there is nothing to deploy. Nothing was connected. Push a commit, then connect again.
-
-**"The repository could not be read: <git's reason>"** This is git's own reason, shown when none of the messages above fits. Nothing was connected. Read the reason and fix what it names.
-
-**"Could not connect the repository. Check the URL and token."** The panel could not read the answer. Try again.
-
-An SSH address shows its refusal under the deploy key instead:
-
-- **"The repository did not accept the key. Check that you added it to this repository."** The key is not on the repository yet. Add it.
-- **"Could not connect. Check the address and the key."** This is shown for every other reason. Check the address and the key.
-
-**Advanced > Git > Access token > Manage > Save token**
-
-**"The repository refused this token. Check the token and that it can read this repository."** and **"The repository was not found. Check the repository address and that the token can read it if the repository is private."** The causes are the same as above, and the token is not saved. The first message also appears when your provider does not know the token, however public the repository is.
-
-**"The repository could not be reached to check the token. Try again later."** The Git provider did not answer, so the token was not checked and not saved. Try again later.
-
-**"The host cannot be reached from the panel."** and **"The repository address is not allowed. Check the repository address; the token was not tested."** The panel will not contact that address, so the token was not tested and not saved. Use the address from your Git provider.
-
-**"The panel cannot check a token against this project's repository address, so the token was not saved."** The recorded address is not one the panel can read. Check the repository address of the project.
-
-**Advanced > Git > Auto-deploy on push**
-
-**"Could not register a webhook with the Git provider. Check that your token can manage webhooks for this repository."** The token cannot manage webhooks. Make a token with that permission and save it.
-
-**"The repository credentials are missing; update the git credentials first."** The project has no access token, and Auto-deploy needs one to add the webhook. Select **Manage** in the **Access token** card and save a token. Then turn Auto-deploy on again.
-
-**Deploying**
-
-**"A deploy of this project is already running."** or **"The project is busy with another operation. Please try again later."** Another operation is running. Wait for it to end, or cancel the deploy in its Deploy Logs window.
-
-**"Deploys are only available for container projects."** The project is not a container project, so the panel cannot build it from the repository. For a WordPress or classic PHP project it only pulls and pushes files. Create a project from Git to deploy one.
-
-**"This project cannot be deployed from git. Create a new project instead."** This appears in the create-project wizard. The project that step would turn into a Git project cannot become one. Create a new project from Git.
-
-**"Git is not available for this server yet."** The Engine does not support Git for this project.
+Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: Git](../troubleshooting/git.md).

@@ -54,26 +54,4 @@ The project card shows **Migration is in progress**, then **Import completed** o
 
 When the domain points here, the Engine removes the preview address and requests a Let's Encrypt certificate. It checks every 15 minutes.
 
-## Troubleshooting
-
-**"Importing over FTP is not available. Use your WordPress admin login or the migration plugin."** The panel shows the **Advanced Method** (FTP and SFTP) form, but the server refuses it. Go back and choose **Simple Method**.
-
-**"Source WordPress host did not resolve."** The panel could not reach that name. Check it and that the old site is online, or fill the old server's IPv4 address in **Advanced** (step 3).
-
-**"No WordPress REST API at <address>"** WordPress did not answer at that address. Check the address of the old site and that its REST API is not blocked.
-
-**"Source WordPress URL must lead to a public address: loopback, link-local, private, reserved, Docker network and this Engine's own addresses are refused."** The URL points at this server or at an address that is not public. Import over the old host's public domain or IP address. A site on this server cannot be imported into itself.
-
-**"Cannot connect to WordPress. Please verify the URL or admin credentials. Alternatively, please install the plugin manually."** The URL or login is wrong, or the site cannot be reached. Check them, or use the plugin.
-
-**"Using your WordPress admin credentials will not work (probably due to Cloudflare/firewall/WAF restrictions). Please install the plugin manually."** A firewall on the old site blocks the login. Install the plugin manually.
-
-**"Migration plugin not found in your WordPress."** The plugin is not installed or not active on the old site. Install and activate it, then try again.
-
-**"The migration plugin on your WordPress comes from another download. Download the plugin again, install and activate it, then try again."** Remove the old copy of the plugin and use the one from **Download Plugin**.
-
-**"This site's domain is already used by a project on this server."** Another project already has that domain. Remove or rename that project first.
-
-**"Cannot generate subdomain for imported project"** The source address is an IP address. Use the site's domain name as the URL.
-
-**"Import preparation failed. Please try again."** The import did not start. Try again.
+Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: Projects](../troubleshooting/projects.md#importing-a-wordpress-site).

@@ -139,10 +139,4 @@ The **Delete Project** button stays disabled until every box is ticked. The boxe
 
 A project that has a staging copy cannot be deleted. Delete the staging copy first: [Staging and preview](staging-and-preview.md).
 
-## Troubleshooting
-
-**"Cannot remove project with existing staging project."** The project has a staging copy. Delete the staging copy, then delete the project.
-
-**"The server operator has protected this project, so it cannot be deleted, stopped or redeployed from the panel."** The person who runs the server marked the project as protected. Ask them to lift the protection.
-
-**"The project is busy with another operation. Please try again later."** A deploy, backup or other task is running on the project. Wait for it to finish and try again: [Tasks](../the-panel/tasks.md).
+Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: Projects](../troubleshooting/projects.md#projects).
