@@ -57,7 +57,7 @@ Connect then shows "Engine connected". A code works once. If it has expired or b
 Pass the code to the installer and the new engine connects as soon as it is up:
 
 ```bash
-curl --proto '=https' -fsSL https://get.panelalpha.com/engine | sh -s -- --hub-code WDJB-MJHT
+curl -fsSL https://get.panelalpha.com/engine | sh -s -- --hub-code WDJB-MJHT
 ```
 
 On a server that already runs an engine, the same command only connects it; add `--update-engine` to update the engine first. It works together with `--repo`. An engine that is already connected is left as it is: connect it elsewhere with `pae hub:connect CODE --replace`.

@@ -38,7 +38,7 @@ The installer checks the operating system and refuses anything else. It does not
 ## 1. Run the installer
 
 ```bash
-curl --proto '=https' -fsSL https://get.panelalpha.com/engine | sh
+curl -fsSL https://get.panelalpha.com/engine | sh
 ```
 
 A few minutes later the engine is running. It prints its addresses and a command to connect your assistant. For a name of your own, or a VPS the internet cannot reach by IP, read [Troubleshooting](#troubleshooting) before you install.
@@ -50,7 +50,7 @@ You can install the engine and put an application from a git repository online i
 Pass flags after `sh -s --` so they reach the installer:
 
 ```bash
-curl --proto '=https' -fsSL https://get.panelalpha.com/engine | sh -s -- \
+curl -fsSL https://get.panelalpha.com/engine | sh -s -- \
   --repo https://github.com/n8n-io/n8n
 ```
 
@@ -211,14 +211,14 @@ On a VPS with a public IPv4 address, the engine gets a trusted certificate by it
 Install with it and you skip the self-signed step entirely. Set the DNS record up before you install, or the certificate request will fail.
 
 ```bash
-curl --proto '=https' -fsSL https://get.panelalpha.com/engine | sh -s -- --domain panel.example.com
+curl -fsSL https://get.panelalpha.com/engine | sh -s -- --domain panel.example.com
 ```
 
 **My VPS has no public IPv4 address.**
 This covers offices, home connections, some cloud providers and a VPS with only an IPv6 address. Point a name at the VPS, then tell the installer that the address on its network card is not how the world reaches it. The `--domain` part is what gets you a real certificate.
 
 ```bash
-curl --proto '=https' -fsSL https://get.panelalpha.com/engine | sh -s -- --domain panel.example.com --no-local-ip --enable-nat
+curl -fsSL https://get.panelalpha.com/engine | sh -s -- --domain panel.example.com --no-local-ip --enable-nat
 ```
 
 **I want a real certificate on an engine that is already self-signed.**
@@ -240,7 +240,7 @@ The engine itself is up. Read the message at the end of the install, or run `pae
 The installer turns on disk quota for the disk that holds `/home`, so a project's disk and file-count limits actually stop it writing. It does this with its own service, `panelalpha-quota`, which turns quota back on at every boot before Docker starts the projects and keeps the limits already set; `/etc/fstab` is not changed, and a quota option an older version added there is left as it is. It only does this itself on ext4. On XFS the warning tells you the one setting to add and asks for a restart. On anything else, or inside a container, limits are recorded but not enforced. To leave quota off on purpose, install with `--no-quota`.
 
 **The project homes are mounted `nosuid,nodev`.**
-The installer mounts `/home` with those two options, so a file a project leaves in its home can never run as a privileged program or act as a device on the server. Applications in projects are not affected. It does this with its own service, `panelalpha-home-mounts`, which runs at every boot before Docker starts the projects; `/etc/fstab` is not changed. When `/home` is a folder on the system disk, the service mounts it onto itself with the two options; when it is a disk of its own, the service remounts that disk with them. `systemctl status panelalpha-home-mounts` shows whether it worked. To leave `/home` as it is, run the installer with `PANELALPHA_HOME_HARDENING=0` set, for example `curl --proto '=https' -fsSL https://get.panelalpha.com/engine | PANELALPHA_HOME_HARDENING=0 sh`. The uninstaller removes the service.
+The installer mounts `/home` with those two options, so a file a project leaves in its home can never run as a privileged program or act as a device on the server. Applications in projects are not affected. It does this with its own service, `panelalpha-home-mounts`, which runs at every boot before Docker starts the projects; `/etc/fstab` is not changed. When `/home` is a folder on the system disk, the service mounts it onto itself with the two options; when it is a disk of its own, the service remounts that disk with them. `systemctl status panelalpha-home-mounts` shows whether it worked. To leave `/home` as it is, run the installer with `PANELALPHA_HOME_HARDENING=0` set, for example `curl -fsSL https://get.panelalpha.com/engine | PANELALPHA_HOME_HARDENING=0 sh`. The uninstaller removes the service.
 
 **A container project's disk limit and its own Docker storage.**
 Disk quota counts the files a project writes as its own user. The images and build layers of a container project are written by its own Docker, which quota does not count. The engine covers that during a deploy instead: it measures every 15 seconds, and stops the deploy when the project passes its disk limit or the server falls below `DEPLOY_HOST_MIN_FREE` (3G by default). It then clears the project's unused Docker storage. A running application that grows its own data after the deploy is still bounded only by quota.

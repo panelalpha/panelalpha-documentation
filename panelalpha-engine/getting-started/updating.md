@@ -104,7 +104,7 @@ It prints the running version and the newest release, each with its commit, and 
 ### 2. Run the update
 
 ```bash
-curl --proto '=https' -fsSL https://get.panelalpha.com/engine | sh
+curl -fsSL https://get.panelalpha.com/engine | sh
 ```
 
 It runs on its own for a few minutes and finishes with:
@@ -129,7 +129,7 @@ The number should be higher than the one you noted in step 1. Then open one of y
 Name it after `sh -s --`. Check your spelling before pressing Enter: a typo in the version flag quietly installs something other than the version you meant.
 
 ```bash
-curl --proto '=https' -fsSL https://get.panelalpha.com/engine | sh -s -- --version 2.0.1
+curl -fsSL https://get.panelalpha.com/engine | sh -s -- --version 2.0.1
 ```
 
 **"Update script is already running."**
