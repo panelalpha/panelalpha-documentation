@@ -58,7 +58,7 @@ When the assistant creates or shows the hook, it also says whether a git host ca
 
 If the engine's certificate is one a git host trusts, nothing else is needed.
 
-If it is not (the engine signed it itself, it has expired, it is for a different name, or there is no certificate to show), the assistant says what to change for each host:
+If it is not (the engine signed it itself, it has expired, it is for a different name or there is no certificate to show), the assistant says what to change for each host:
 
 - **GitHub**: on that webhook, set "SSL verification" to Disable. This applies to this one webhook only.
 - **GitLab**: when adding or editing the webhook, clear "Enable SSL verification" before saving.
@@ -79,7 +79,7 @@ Show me the last few deliveries on this project's push-to-deploy hook. Did the l
 
 The assistant keeps the last 20 pushes, and separately the last 5 calls it refused, so a run of bad calls cannot push real pushes out of the list. For each one it says what it did with the call, and how a deploy that started then ended.
 
-A call was started, skipped, refused because the signature did not match, or left waiting because a deploy was already running. A started deploy then ends as deployed, started but not answering or answering with an error, failed, refused on a site folder (nothing on the server changed), or dropped because a later push took its place. Ask the assistant for the build log when you need the full deploy, not only this summary.
+A call was started, skipped, refused because the signature did not match or left waiting because a deploy was already running. A started deploy then ends as deployed, started but not answering or answering with an error, failed, refused on a site folder (nothing on the server changed), or dropped because a later push took its place. Ask the assistant for the build log when you need the full deploy, not only this summary.
 
 If the engine's address has changed since you saved the webhook, the assistant gives you the address to register now. Your git host is still calling the old one until you do.
 

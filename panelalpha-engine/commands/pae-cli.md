@@ -26,7 +26,7 @@ Throughout this page, `{project}` means the project's name, the value shown as `
 
 | Command | What it does |
 |---|---|
-| `pae configure` | Opens the menu: address and certificate, assistant tokens, API tokens, the queue, the Docker Hub login, prewarmed images, the site database caches, telemetry, and the projects allowed to call the engine's API. Pick one, do it, come back for the next. |
+| `pae configure` | Opens the menu: address and certificate, assistant tokens, API tokens, the queue, the Docker Hub login, prewarmed images, the site database caches, telemetry and the projects allowed to call the engine's API. Pick one, do it, come back for the next. |
 | `pae configure address` | The address clients connect to, the certificate on that name, and whether a new project without a tunnel is published under a free PanelAlpha name or under the engine's own name. |
 | `pae configure api-access` | Let a project call the engine's API, rotate its token, or take that access away. Same as [Engine API for projects](#engine-api-for-projects). |
 | `pae configure mcp-tokens` | Connect an assistant, or change what assistants may use. |
@@ -296,7 +296,7 @@ An application that manages the engine itself, such as a dashboard or an agent r
 
 | Command | What it does |
 |---|---|
-| `pae system:api-access:allow {project} --scope=self` | Allows a project. `--scope` is `self` (only that project, the default), `all` (every project), or a comma-separated list of project names. `--mcp` lets the token call assistant tools as well. Run again with the same scope, nothing changes. A different scope makes a new token. |
+| `pae system:api-access:allow {project} --scope=self` | Allows a project. `--scope` is `self` (only that project, the default), `all` (every project) or a comma-separated list of project names. `--mcp` lets the token call assistant tools as well. Run again with the same scope, nothing changes. A different scope makes a new token. |
 | `pae system:api-access:list` | Lists the allowed projects, their scope, whether they have assistant tools, and the token ids. Never the token itself. |
 | `pae system:api-access:rotate {project}` | Replaces the project's token and keeps its scope, less any project deleted since. The old token stops working, and leaves the token list, once the application runs on the new one. If that fails, both stay valid and the task says why. |
 | `pae system:api-access:deny {project}` | Takes the access away: every token the project was given is revoked and removed, and the way to the API is closed. |
@@ -324,7 +324,7 @@ A paste link for a Git or Cloudflare token. The value is never printed back.
 | Command | What it does |
 |---|---|
 | `pae vault:secret:create {type} --purpose=` | Prints a paste link and the reference (`vault:<key>`). `{type}` is `git_token` or `cloudflare_api_token`. By default the secret belongs to the first project given it; `--project=NAME` makes it that project's from the start (the project need not exist yet); `--scope=global` lets any project use it. `--expires-in=SECONDS` makes the secret expire and be deleted automatically; without it the secret is kept until deleted. The link expires in an hour. |
-| `pae vault:secret:list` | Lists entries: reference, type, purpose, scope, the project that owns it, and whether it is filled. Never the secret. `--scope=` or `--type=` narrows the list. |
+| `pae vault:secret:list` | Lists entries: reference, type, purpose, scope, the project that owns it and whether it is filled. Never the secret. `--scope=` or `--type=` narrows the list. |
 | `pae vault:secret:delete {ref}` | Deletes one entry and its secret. `{ref}` is the `vault:<key>` from the list. Projects that already used it keep their copy. Asks you to confirm. `--force` skips that. |
 | `pae vault:config` | Lists the global secrets. A project uses one only when it is given that secret's `vault:<key>`. |
 

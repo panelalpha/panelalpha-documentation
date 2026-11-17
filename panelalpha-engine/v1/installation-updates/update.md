@@ -1,6 +1,6 @@
 ---
 title: Update
-description: Guide to updating PanelAlpha Engine safely. Back up your server, download the updater, verify the update, and troubleshoot issues.
+description: Guide to updating PanelAlpha Engine safely. Back up your server, download the updater, verify the update and troubleshoot issues.
 nav:
   group: Installation & Updates
   order: 2
@@ -15,7 +15,7 @@ You can update the Engine in two ways:
 - From PanelAlpha: on the server's [Details](../server-management/details.md#updating-panelalpha-engine) tab, click **Update Now**.
 - From the command line on the Engine server, as described below. Use this if the panel shows "This server is outdated", if the update from the panel fails, or if you want to watch the output.
 
-## What Happens During an Update
+## What happens during an update
 
 The updater downloads the new version, stops all Engine containers, replaces the Engine files, builds and starts the containers again, and then rebuilds the web server configuration and file permissions for every account. Websites are unavailable for a short time while the containers restart, so update outside peak hours.
 
@@ -23,13 +23,13 @@ The updater keeps files you may have changed in `webserver-config` and the ModSe
 
 The updater does not roll back on its own. If it fails, the server can be left between two versions.
 
-## Before You Update
+## Before you update
 
 1. Back up the server. A snapshot from your hosting provider is the simplest option.
 2. Read the [changelog](https://panelalpha.com/changelog).
 3. Make sure the server has a few GB of free disk space for the new Docker images.
 
-## Update Steps
+## Update steps
 
 1. Log in to the Engine server as root:
    ```bash
@@ -46,21 +46,21 @@ The updater does not roll back on its own. If it fails, the server can be left b
    bash /opt/panelalpha/engine-updater.sh
    ```
 
-   The updater uses the license key saved on the server. To use a different key, add `--key 'YOUR_LICENSE_KEY'`.
+   The updater uses the licence key saved on the server. To use a different key, add `--key 'YOUR_LICENSE_KEY'`.
 
 4. The updater shows whether a newer version is available and asks for confirmation. Type `y`.
 
-### Updater Options
+### Updater options
 
 | Option | What it does |
 | --- | --- |
-| `--key <key>` | Uses this license key and saves it on the server. |
+| `--key <key>` | Uses this licence key and saves it on the server. |
 | `--version <version>` | Installs a given Engine version instead of the latest. |
 | `--background` | Runs without questions and in the background. The panel uses this option. |
 | `--force` | Runs even if the updater cannot detect the installed version. |
 | `--debug` | Prints more output. |
 
-## Post-Update Verification
+## Post-update verification
 
 1. In PanelAlpha, open **Configuration → Servers → Hosting Servers** and click **Manage** on the server. Check the version on the Details tab.
 2. Open a few sites on the server.
@@ -71,7 +71,7 @@ The updater does not roll back on its own. If it fails, the server can be left b
    docker compose -f /opt/panelalpha/shared-hosting/docker-compose.yml ps
    ```
 
-## Recovering from a Failed Update
+## Recovering from a failed update
 
 1. Read the logs of the last run:
    - `/opt/panelalpha/log/engine-updates/latest/` holds `stdout`, `stderr` and `exit_code`, plus `from_version` and `to_version`. Older runs are in folders named by Unix time.

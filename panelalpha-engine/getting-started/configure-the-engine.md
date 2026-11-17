@@ -8,7 +8,7 @@ nav:
 
 # Configure the engine
 
-`pae configure` on your VPS walks through the engine's own settings: the address assistants use, which projects may call the engine's own API, what those assistants are allowed to do, tokens for your own software, how many jobs run at once, the Docker Hub login image downloads go out under, which base images are kept ready, the memory the site database keeps for caches, the firewall's web interface, and what the engine reports about itself. You pick one area, change it and come back for the next.
+`pae configure` on your VPS walks through the engine's own settings: the address assistants use, which projects may call the engine's own API, what those assistants are allowed to do, tokens for your own software, how many jobs run at once, the Docker Hub login image downloads go out under, which base images are kept ready, the memory the site database keeps for caches, the firewall's web interface and what the engine reports about itself. You pick one area, change it and come back for the next.
 
 ```bash
 pae configure

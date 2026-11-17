@@ -1,6 +1,6 @@
 ---
 title: Server Details
-description: "Explore PanelAlpha Engine server details: resource usage, performance graphs, version management, webserver config, and custom error pages."
+description: "Explore PanelAlpha Engine server details: resource usage, performance graphs, version management, webserver config and custom error pages."
 nav:
   group: Server Management
   order: 1
@@ -13,9 +13,9 @@ To open the server page, go to **Configuration → Servers → Hosting Servers**
 
 While an Engine update or a web server change is running, all tabs except **Details** are greyed out with the message "Not available during an upgrade of PanelAlpha Engine". If the server runs an Engine version older than 1.0.9-beta, the page shows only "This server is outdated" and no tabs. Update the Engine from the command line in that case (see [Update](../installation-updates/update.md)).
 
-![PanelAlpha Engine — Server Details - Overview](../../../assets/img/panelalpha-engine/server-management/details-overview.png)
+![PanelAlpha Engine: Server Details: Overview](../../../assets/img/panelalpha-engine/server-management/details-overview.png)
 
-## Server Information
+## Server information
 
 The card at the top shows the server ID and name, followed by:
 
@@ -24,29 +24,29 @@ The card at the top shows the server ID and name, followed by:
 - **Dedicated**: shown only for dedicated servers. Use **Assign** or **Unassign** to link the server to one user.
 - **Instances** and **Hosting Accounts**: the number of each on this server. **Show list** opens the instance or service list in a new tab.
 
-![PanelAlpha Engine — Server Information Section](../../../assets/img/panelalpha-engine/server-management/server-info.png)
+![PanelAlpha Engine: Server Information Section](../../../assets/img/panelalpha-engine/server-management/server-info.png)
 
-## Resource Usage
+## Resource usage
 
 The **Usage** card shows current use of RAM, CPU and disk space as a percentage. RAM and disk space also show used and total GB.
 
-![PanelAlpha Engine — Resource Usage Metrics](../../../assets/img/panelalpha-engine/server-management/resource-usage.png)
+![PanelAlpha Engine: Resource Usage Metrics](../../../assets/img/panelalpha-engine/server-management/resource-usage.png)
 
-## Performance Graphs
+## Performance graphs
 
 The **Graphs** card has five graphs: CPU usage, disk throughput (read and write), disk IOPS, network traffic (in and out) and network packets per second.
 
-![PanelAlpha Engine — Performance Graphs](../../../assets/img/panelalpha-engine/server-management/performance-graphs.png)
+![PanelAlpha Engine: Performance Graphs](../../../assets/img/panelalpha-engine/server-management/performance-graphs.png)
 
 Use the dropdown to pick **Live**, **1 hour** or **12 hours**. **Live** shows the last 5 minutes and refreshes on its own; a small circle counts down to the next refresh.
 
 The Engine records a sample every 5 seconds and keeps samples for 90 days or up to 1,000,000 rows, whichever limit is reached first. A daily job removes older samples.
 
-## PanelAlpha Engine Management
+## PanelAlpha Engine management
 
-![PanelAlpha Engine — Version Management](../../../assets/img/panelalpha-engine/server-management/engine-version.png)
+![PanelAlpha Engine: Version Management](../../../assets/img/panelalpha-engine/server-management/engine-version.png)
 
-### Version Information
+### Version information
 
 The **PanelAlpha Engine** card shows:
 
@@ -66,7 +66,7 @@ The update runs on the server in the background, so you can close the dialog and
 
 If the update fails, hover over **Failed** in **Update status** to read the error. Log files and recovery steps are in [Update](../installation-updates/update.md#recovering-from-a-failed-update). You can also run the update from the command line as described on that page.
 
-### Supported PHP Versions & ionCube
+### Supported PHP versions & ionCube
 
 PanelAlpha Engine includes PHP 7.4, 8.0, 8.1, 8.2, 8.3 and 8.4. You choose the PHP version for an instance in the hosting plan.
 
@@ -80,28 +80,28 @@ The ionCube Loader is available for:
 
 There is no ionCube Loader for PHP 8.0 on any web server. If a site uses ionCube-encoded files, pick a PHP version from the list above.
 
-### 404 Handling
+### 404 handling
 
 If you open the Engine server by its IP address (for example, `https://1.2.3.4`) or request a path that no site serves, you get a generic 404 page. Sites are reached only through their own domains.
 
-## Web Server Configuration
+## Web server configuration
 
-![PanelAlpha Engine — Webserver Configuration](../../../assets/img/panelalpha-engine/server-management/webserver-config.png)
+![PanelAlpha Engine: Webserver Configuration](../../../assets/img/panelalpha-engine/server-management/webserver-config.png)
 
-### Current Web Server
+### Current web server
 
 The web server card shows:
 
 - **Current Webserver**: the active web server, with a **Change** link.
 - **Change status**: the result of the last web server change. If it failed, hover over it to see the log under "Status Error Details".
 - **Version**: the web server version.
-- **Serial**: the LiteSpeed license serial number, or "Not Set". Shown only when LiteSpeed is active. Click **Change** next to it to enter a new serial.
+- **Serial**: the LiteSpeed licence serial number, or "Not Set". Shown only when LiteSpeed is active. Click **Change** next to it to enter a new serial.
 
-### Changing Web Server
+### Changing web server
 
 Click **Change** next to the current web server and pick one of:
 
-![PanelAlpha Engine — Change Webserver Dialog](../../../assets/img/panelalpha-engine/server-management/change-webserver.png)
+![PanelAlpha Engine: Change Webserver Dialog](../../../assets/img/panelalpha-engine/server-management/change-webserver.png)
 
 - **LiteSpeed**
 - **OpenLiteSpeed**
@@ -109,7 +109,7 @@ Click **Change** next to the current web server and pick one of:
 - **Nginx**
 - **Nginx + Apache**: Nginx handles ports 80 and 443 and passes requests to a separate Apache container for each hosting account.
 
-For LiteSpeed, you can enter your license in **LiteSpeed Serial Number (optional)**. Without a serial, the Engine tries to use a LiteSpeed trial license.
+For LiteSpeed, you can enter your licence in **LiteSpeed Serial Number (optional)**. Without a serial, the Engine tries to use a LiteSpeed trial licence.
 
 During the change the Engine stops the current web server, starts the new one and rebuilds the web server configuration for every account. All sites are unavailable until that finishes, so make the change outside peak hours. Site files and databases are not touched. The other tabs are greyed out until the change is done.
 
@@ -124,7 +124,7 @@ When LiteSpeed or OpenLiteSpeed is active, click **Manage LiteSpeed** (or **Mana
 
 If you log in for the first time or do not know the password, click **Reset Password**.
 
-## Custom Error Pages
+## Custom error pages
 
 The Engine has static HTML pages for HTTP errors 403, 404, 500, 502 and 503. The web server shows them when it cannot serve a site. The files are on the Engine server in:
 

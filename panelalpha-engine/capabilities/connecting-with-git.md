@@ -8,13 +8,13 @@ nav:
 
 # Connecting with Git
 
-Most projects on the engine start from a git repository. You give the assistant a link. It creates the project, clones the code, works out the stack, and puts it on HTTPS. You do not need to pick a domain, create a database, or name the framework first.
+Most projects on the engine start from a git repository. You give the assistant a link. It creates the project, clones the code, works out the stack and puts it on HTTPS. You do not need to pick a domain, create a database, or name the framework first.
 
 ```text
 Deploy my application https://github.com/org/app on this PanelAlpha Engine.
 ```
 
-What this does: the assistant creates a **project** (one application or website on this VPS), downloads the code, works out the framework, builds it, and starts it on HTTPS.
+What this does: the assistant creates a **project** (one application or website on this VPS), downloads the code, works out the framework, builds it and starts it on HTTPS.
 
 What you should see: a web address. **Open the address it gives you**, not the one you expected, because the engine may assign a different one.
 

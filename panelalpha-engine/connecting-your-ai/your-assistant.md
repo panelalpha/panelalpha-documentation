@@ -48,7 +48,7 @@ pae configure mcp-tokens
 
 What this does: opens the assistant part of [Configure the engine](../getting-started/configure-the-engine.md). Choose **Global scope** for checkboxes, whole groups or one group's commands at a time, and one setting for how far a ticked command may go. Tick what every assistant may use, untick what it may not. Nothing is written until you pick **Review and save** and say yes, and what it replaces is printed so you can put it back. Add `--dry-run` to see what it would write and write nothing.
 
-`pae configure` on its own starts one level up, with the address, tokens, the queue, and telemetry.
+`pae configure` on its own starts one level up, with the address, tokens, the queue and telemetry.
 
 Use it instead of editing the file by hand. The rest of this section is the reference for the settings it writes, and how to set the same things yourself.
 
@@ -153,7 +153,7 @@ After a restart:
 pae mcp:tool:list
 ```
 
-What you should see: a table of tool names, their group, the HTTP verb, and whether each is a read or a write. The summary line is how many are exposed and how many are withheld.
+What you should see: a table of tool names, their group, the HTTP verb and whether each is a read or a write. The summary line is how many are exposed and how many are withheld.
 
 To see what this configuration removes:
 
@@ -214,7 +214,7 @@ Deploy https://github.com/org/private-app on this PanelAlpha Engine.
 The repository is private.
 ```
 
-Do not paste the git token into the chat. The assistant sends a link on the engine; open it, paste the token, save, and tell the assistant you are done. Full steps: [A private repository](../capabilities/connecting-with-git.md#a-private-repository).
+Do not paste the git token into the chat. The assistant sends a link on the engine; open it, paste the token, save and tell the assistant you are done. Full steps: [A private repository](../capabilities/connecting-with-git.md#a-private-repository).
 
 **Check what a repository is before deploying it**
 
@@ -404,7 +404,7 @@ pae mcp:tool:list
 | `env_var_list` | List the environment variables a container project holds, with the values hidden unless asked for |
 | `env_var_set` | Set or remove environment variables of a container project, and apply them without a rebuild if asked |
 | `project_clone` | Clone a project |
-| `project_create` | Create a project from a source: an empty one, a git repository (HTTPS, or SSH with a deploy key), an archive, a copy of another project, or a new WordPress; deployed in the background |
+| `project_create` | Create a project from a source: an empty one, a git repository (HTTPS, or SSH with a deploy key), an archive, a copy of another project or a new WordPress; deployed in the background |
 | `project_create_sync` | Create a project and wait for the deploy in the same call. Takes the flat body (`git_repo`, `template`) |
 | `project_delete` | Delete a project and everything in it |
 | `project_deploy_archive` | Deploy an uploaded zip/tar into ~/project |
@@ -905,7 +905,7 @@ Used when a private repository or a Cloudflare tunnel needs a token. You paste t
 
 ### What you can see, and what you cannot
 
-A secret is never readable again. Not by your assistant, not by you, not by any command. An environment variable set from a `vault:<key>` stays masked in the project's variable list, even when the list is asked to show the values. What you can always see is the **inventory**: each entry's reference (`vault:<key>`), what kind of secret it is, what it is for, which project owns it, whether it has been filled in yet, and the dates.
+A secret is never readable again. Not by your assistant, not by you, not by any command. An environment variable set from a `vault:<key>` stays masked in the project's variable list, even when the list is asked to show the values. What you can always see is the **inventory**: each entry's reference (`vault:<key>`), what kind of secret it is, what it is for, which project owns it, whether it has been filled in yet and the dates.
 
 Give a **purpose** when you ask for a link ("deploy key for the shop repo"). It is shown on the paste page, so whoever hands over a credential can see why it is wanted, and it appears in the listing afterwards. Since the value itself can never be read back, the purpose is usually the only thing that tells two entries of the same kind apart when you come to tidy up.
 

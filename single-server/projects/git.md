@@ -8,7 +8,7 @@ nav:
 
 # Git
 
-A project made from a Git repository is a container project that the panel builds from your repository. This page covers what you do with it after the first deploy. Create one first: [Create a project](create-a-project.md).
+A project made from a Git repository is a container project that the panel builds from your repository. Create one first: [Create a project](create-a-project.md).
 
 **The panel cannot roll a project back to an earlier commit.** It deploys the latest commit of a branch.
 

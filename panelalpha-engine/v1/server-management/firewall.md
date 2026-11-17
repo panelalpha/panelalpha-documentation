@@ -1,6 +1,6 @@
 ---
 title: Firewall (CSF)
-description: Manage ConfigServer Security & Firewall (CSF) in PanelAlpha Engine. Configure rules, allow/deny IPs, and secure your hosting server.
+description: Manage ConfigServer Security & Firewall (CSF) in PanelAlpha Engine. Configure rules, allow/deny IPs and secure your hosting server.
 nav:
   group: Server Management
   order: 3
@@ -10,9 +10,9 @@ nav:
 
 PanelAlpha Engine uses ConfigServer Security & Firewall (CSF) and its login failure daemon (lfd). The installer sets CSF up, and the **Firewall (CSF)** tab lets you manage it from the panel. For CSF itself, see the [ConfigServer Security & Firewall](https://configserver.com/csf) site.
 
-![PanelAlpha Engine — Panelalpha Engine — Firewall (CSF) Overview](../../../assets/img/panelalpha-engine/server-management/firewall-overview.png)
+![PanelAlpha Engine: Firewall (CSF) Overview](../../../assets/img/panelalpha-engine/server-management/firewall-overview.png)
 
-## CSF Status
+## CSF status
 
 The top of the tab shows:
 
@@ -25,12 +25,12 @@ While CSF is disabled, the rest of the tab is greyed out.
 > [!WARNING]
 > **Warning:** Disabling the firewall leaves every port on the server open. Enable it again as soon as you can.
 
-## Default Open Ports
+## Default open ports
 
 The installer opens these ports in CSF:
 
-- TCP in and out: 22, 80, 443, 2011, 21, 2222, 30000–30009, 8000, 3306, 5432
-- UDP in and out: 53, 67, 68, 30000–30009
+- TCP in and out: 22, 80, 443, 2011, 21, 2222, 30000-30009, 8000, 3306, 5432
+- UDP in and out: 53, 67, 68, 30000-30009
 
 The Docker network is on the allow list so the containers can talk to each other. Outgoing connections are allowed.
 
@@ -40,7 +40,7 @@ If you run SSH on a port other than 22, add that port before you restart CSF, or
 
 The **CSF Web UI** card shows the CSF web interface inside the panel. Use **Enlarge** to make it full width and taller, and **Shrink** to go back.
 
-![PanelAlpha Engine — Panelalpha Engine — CSF Web UI Interface](../../../assets/img/panelalpha-engine/server-management/csf-webui.png)
+![PanelAlpha Engine: CSF Web UI Interface](../../../assets/img/panelalpha-engine/server-management/csf-webui.png)
 
 The CSF web interface gives you all CSF options, logs and lfd settings, including those the panel tables do not cover. Pay attention to warnings it shows, for example:
 
@@ -50,13 +50,13 @@ WARNING: RESTRICT_SYSLOG is disabled. See SECURITY WARNING in Firewall Configura
 
 On the server, the interface listens on port 2012 as user `panelalpha`. The password is `CSF_UI_PASSWORD` in `/opt/panelalpha/shared-hosting/.env`. The panel reaches it through the Engine API port 2011, so port 2012 does not need to be open to the internet.
 
-## Firewall Rules
+## Firewall rules
 
 The tab has two tables, **Allow rules** and **Deny Rules**. Each has a search box and these columns:
 
-![PanelAlpha Engine — Panelalpha Engine — Firewall Rules - Allow and Deny](../../../assets/img/panelalpha-engine/server-management/firewall-rules.png)
+![PanelAlpha Engine: Firewall Rules: Allow and Deny](../../../assets/img/panelalpha-engine/server-management/firewall-rules.png)
 
-- **Target**: the IP address, range or CIDR block. Targets with a prefix (`s=`, `d=`, `u=`) are shown as colored labels.
+- **Target**: the IP address, range or CIDR block. Targets with a prefix (`s=`, `d=`, `u=`) are shown as coloured labels.
 - **Comment**: your note about the rule.
 - **Protocol**: TCP or UDP.
 - **Direction**: incoming or outgoing.
@@ -65,7 +65,7 @@ The tab has two tables, **Allow rules** and **Deny Rules**. Each has a search bo
 
 Each table has its own search, so a search in **Allow rules** does not filter **Deny Rules**.
 
-### Rule Format
+### Rule format
 
 The rules are stored in `csf.allow` and `csf.deny` in the standard CSF format:
 
@@ -78,23 +78,23 @@ The meaning of `s=` and `d=` depends on the field:
 
 `u=` (user or UID) is allowed only in the target field and only for outgoing rules. For the full syntax, see the [CSF documentation](https://configserver.com/csf/).
 
-### Example Rules
+### Example rules
 
 Block one IP from the whole server: add a deny rule with only the **Target** `198.51.100.25` and a comment. Without advanced settings the rule covers all ports and protocols.
 
 Allow SSH only from one office IP: add an allow rule, turn on **Advanced Settings** and set:
 
 - Protocol: TCP
-- Direction: IN - Incoming
+- Direction: IN (incoming)
 - Port: `D` `22`
 - Target: `S` `203.0.113.10`
 - Comment: `Office SSH`
 
 CSF stores this as `tcp|in|d=22|s=203.0.113.10`.
 
-## Managing Rules
+## Managing rules
 
-### Adding New Rules
+### Adding new rules
 
 1. Click **New Allow Rule** or **New Deny Rule**.
 2. Enter the **Target**: an IP address, range or CIDR block.
@@ -103,10 +103,10 @@ CSF stores this as `tcp|in|d=22|s=203.0.113.10`.
    - **Protocol**: TCP or UDP.
    - **Direction**: IN or OUT.
    - **Port**: one or more ports or ranges, separated by commas, with the `S` (source) or `D` (destination) prefix.
-   - The target prefix: `S`, `D`, or `U` for a user or UID on outgoing rules.
+   - The target prefix: `S`, `D` or `U` for a user or UID on outgoing rules.
 5. Click **Add Rule**.
 
-### Editing and Deleting Rules
+### Editing and deleting rules
 
 Click the pencil icon in **Actions** to edit a rule, or the trash icon to delete it. To delete several rules, tick them first.
 

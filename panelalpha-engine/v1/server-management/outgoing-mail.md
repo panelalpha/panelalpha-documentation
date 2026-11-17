@@ -1,6 +1,6 @@
 ---
 title: Outgoing Mail
-description: Configure outgoing SMTP mail in PanelAlpha Engine. Set up SendGrid, MailChannels, Amazon SES, or custom relays for reliable delivery.
+description: Configure outgoing SMTP mail in PanelAlpha Engine. Set up SendGrid, MailChannels, Amazon SES or custom relays for reliable delivery.
 nav:
   group: Server Management
   order: 5
@@ -12,13 +12,13 @@ Sites on PanelAlpha Engine send mail through Exim, which runs in its own contain
 
 The Engine handles outgoing mail only. It does not host mailboxes, IMAP or POP3.
 
-![PanelAlpha Engine — Panelalpha Engine — Outgoing Mail Configuration](../../../assets/img/panelalpha-engine/server-management/outgoing-mail-overview.png)
+![PanelAlpha Engine: Outgoing Mail Configuration](../../../assets/img/panelalpha-engine/server-management/outgoing-mail-overview.png)
 
-## Configuration Options
+## Configuration options
 
-![PanelAlpha Engine — Panelalpha Engine — Smarthost Provider Selection](../../../assets/img/panelalpha-engine/server-management/smarthost-provider.png)
+![PanelAlpha Engine: Smarthost Provider Selection](../../../assets/img/panelalpha-engine/server-management/smarthost-provider.png)
 
-### Smarthost Provider
+### Smarthost provider
 
 Pick one option in **Smarthost Provider**:
 
@@ -30,16 +30,16 @@ Pick one option in **Smarthost Provider**:
 
 For production, use a relay.
 
-### Sender Domain
+### Sender domain
 
 Relays accept mail only from domains you have verified with them. On a hosting server, sites send mail from many different domains, and you usually cannot verify all of them. **Sender Domain** solves this.
 
 - When you set a sender domain, Exim rewrites the sender of every message to that domain. For example, with the sender domain `mail.example.net`, a message from `info@customer.com` leaves the server as `info_at_customer.com@mail.example.net`. You verify only `mail.example.net` with the relay.
 - When you leave it empty, every message keeps its own sender address. The relay must then accept every domain your sites send from.
 
-Set up SPF and DKIM for the sender domain as your relay describes. See [DNS Configuration](#dns-configuration).
+Set up SPF and DKIM for the sender domain as your relay describes. See [DNS configuration](#dns-configuration).
 
-## Saving Configuration
+## Saving configuration
 
 1. Pick the **Smarthost Provider** and fill in its fields (see below).
 2. Enter the **Sender Domain** if you use one.
@@ -50,7 +50,7 @@ The Engine rebuilds the Exim configuration. New messages use the new settings at
 > [!WARNING]
 > **Security note:** Relay passwords and API keys are stored in the Engine's database and in the Exim configuration on the server. Keep root access to the server limited.
 
-## Testing Email Delivery
+## Testing email delivery
 
 1. Click **Send Test Email** below the form.
 2. In **Send test email to address**, enter a mailbox you can check.
@@ -63,7 +63,7 @@ If the message does not arrive:
 - Look at the relay's own activity log. It usually shows the reason for a rejected message.
 - Check that the account at the relay is active and has sending quota left.
 
-## SMTP Provider Setup
+## SMTP provider setup
 
 ### SendGrid
 
@@ -100,7 +100,7 @@ If the message does not arrive:
 4. Set the **Sender Domain** if the relay accepts only verified domains.
 5. Save and send a test email.
 
-## DNS Configuration
+## DNS configuration
 
 Add these records in the DNS zone of the sender domain, or of each site's domain if you do not use a sender domain. Your relay tells you the exact values.
 
@@ -111,9 +111,9 @@ Add these records in the DNS zone of the sender domain, or of each site's domain
 
 DNS changes can take up to 48 hours to reach all resolvers.
 
-## Common Issues
+## Common issues
 
-### Emails Not Sending
+### Emails not sending
 
 - The relay credentials are wrong, or the relay account is suspended or out of quota.
 - The sender domain is not verified with the relay.
@@ -125,13 +125,13 @@ Send a test email from this tab, then check the relay's activity log. To see wha
 docker compose -f /opt/panelalpha/shared-hosting/docker-compose.yml exec exim tail -n 100 /var/log/exim4/mainlog
 ```
 
-### Emails Going to Spam
+### Emails going to spam
 
 - SPF, DKIM or DMARC records are missing or wrong for the domain the mail is sent from.
 - With **None**, the server IP has no mail reputation or is on a block list. Use a relay.
 - The content of the message itself triggers spam filters.
 
-### Authentication Failures
+### Authentication failures
 
 - Check the username, password or API key.
 - For SendGrid, the API key needs permission to send mail.

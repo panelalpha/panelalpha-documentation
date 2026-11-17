@@ -52,7 +52,7 @@ These are projects with a `package.json` at the top of the repository. Commit th
 
 ### Apps that stay running
 
-Next.js, Nuxt, SvelteKit, Remix, Astro (when it runs on the server), NestJS, TanStack Start, Express, Fastify and a plain Node app. A plain Node app also needs a `start` script in `package.json`, or a file such as `index.js`, `server.js`, or `app.js`.
+Next.js, Nuxt, SvelteKit, Remix, Astro (when it runs on the server), NestJS, TanStack Start, Express, Fastify and a plain Node app. A plain Node app also needs a `start` script in `package.json`, or a file such as `index.js`, `server.js` or `app.js`.
 
 They start from the `start` script when there is one.
 

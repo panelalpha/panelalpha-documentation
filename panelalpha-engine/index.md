@@ -28,14 +28,14 @@ section:
 card:
   title: PanelAlpha Engine 2.0
   subtitle: Open source, Apache 2.0
-  description: Host any project on your own server and control it easily through your AI agent.
+  description: Host any project on your own server and control it through your AI agent.
   order: 5
 ---
 
 # PanelAlpha Engine
 
 > [!NOTE]
-> **This documentation covers PanelAlpha Engine version 2.0+.** This version of Engine is not yet supported by the PanelAlpha Single Server and Multi Server control panels. They still use PanelAlpha Engine v1.x, and you can find its documentation [here](v1/index.md).
+> **This documentation covers PanelAlpha Engine version 2.0+.** This version of Engine is not yet supported by the PanelAlpha Single Server and Multi Server control panels. They still use PanelAlpha Engine v1.x, [PanelAlpha Engine 1.x documentation](v1/index.md).
 
 ## What is PanelAlpha Engine?
 

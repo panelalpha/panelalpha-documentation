@@ -48,7 +48,7 @@ To disconnect, select **Disconnect** and confirm. **Disconnecting removes this s
 
 The **Application URL** is the address the panel uses in the links it sends, such as password-reset emails. Saving a new address also moves the panel to it.
 
-**The address the panel has now stops answering when you save.** Point the new domain's DNS at this server first. The full steps are on [The panel address](../getting-started/panel-address.md).
+**The address the panel has now stops answering when you save.** Point the new domain's DNS at this server first. The full steps: [The panel address](../getting-started/panel-address.md).
 
 ## New projects
 
@@ -65,9 +65,9 @@ The **Backups** tab holds the backup store and the schedule that new projects st
 
 **A server with no store gets one, so nothing has to be set up.** The Engine's install creates a local store named `local` in `/opt/panelalpha/backups/local` when the host has none, and the panel backs up into it straight away: **Create Backup** works and the schedule below applies to new projects. Select **Change store** only to put your backups somewhere else, and the panel then uses your store.
 
-**A server that already had a store keeps it.** A store made with `pae backup:container:create` or by an earlier panel - a local one such as `panel-local-…` in `/opt/panelalpha/backups` - is kept when the Engine is installed or updated, and the panel uses it with nothing to set up: no second store is added, no `local` folder is created and no backup moves. The tab shows the store in use as its type and directory: the row beside **Change store** reads `Local · /opt/panelalpha/backups` for such a store, and `Local · /opt/panelalpha/backups/local` for the `local` store above.
+**A server that already had a store keeps it.** A store made with `pae backup:container:create` or by an earlier panel (a local one such as `panel-local-…` in `/opt/panelalpha/backups`) is kept when the Engine is installed or updated, and the panel uses it with nothing to set up: no second store is added, no `local` folder is created and no backup moves. The tab shows the store in use as its type and directory: the row beside **Change store** reads `Local · /opt/panelalpha/backups` for such a store, and `Local · /opt/panelalpha/backups/local` for the `local` store above.
 
-A server whose Engine never created that store - the Engine predates it and has not been updated since - has none: every schedule field is off and the page says `Set up a backup store above to schedule backups for new projects.` Set one up as below.
+A server whose Engine never created that store (the Engine predates it and has not been updated since) has none: every schedule field is off and the page says `Set up a backup store above to schedule backups for new projects.` Set one up as below.
 
 ### Setting up a store
 
@@ -92,7 +92,7 @@ A server whose Engine never created that store - the Engine predates it and has 
 Select **Remove store** next to the store to stop choosing one: the schedule below and every backup taken from then on use the server's own store again, the one the tab showed before you chose yours. Projects keep the schedule they have. The dialog asks you to tick what happens to this store before **Remove store** becomes available.
 
 - **A store the panel created is deleted from the server** when nothing uses it. If a backup or a project's schedule still points at it, the Engine keeps it and the panel tells you.
-- **A store the panel did not create** - one made with `pae backup:container:create` or by another panel - is never deleted: the panel only stops using it.
+- **A store the panel did not create** (one made with `pae backup:container:create` or by another panel) is never deleted: the panel only stops using it.
 
 A store the panel created that was kept this way is not forgotten: choose the same directory again once the backup or schedule that used it is gone, and the panel shows it as its own store again, so **Remove store** deletes it from the server then.
 

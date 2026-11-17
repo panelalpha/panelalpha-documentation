@@ -29,7 +29,7 @@ Covered on [Reading errors](../getting-started/reading-errors.md). Open the addr
 
 **This is the one people do not know exists, and it is the most valuable.**
 
-A deploy log describes one moment in the past. It tells you nothing about the site a month later, after a database filled up, a certificate lapsed, or someone deleted the index page over FTP. Nothing in any deploy log will ever mention those, because the deploy succeeded.
+A deploy log describes one moment in the past. It tells you nothing about the site a month later, after a database filled up, a certificate lapsed or someone deleted the index page over FTP. Nothing in any deploy log will ever mention those, because the deploy succeeded.
 
 Every six hours the engine opens every deployed application and checks whether it is still serving itself. You get a list of the ones that are not, with what each is serving instead:
 
@@ -170,7 +170,7 @@ Minute readings are kept 48 hours and hourly averages 30 days. The server operat
 How close is this project to its limits?
 ```
 
-Covers storage, the disk its container logs take, domains, subdomains, FTP and SFTP accounts, and databases. This month's transfer is also on every project in the project list (`bandwidth`, updated every hour), with its limit: `-1` is unlimited and `null` means no limit was set. Storage counts the project's files and also its own Docker data (images, build cache and database data), which is often the larger part. Disk use is measured in the background every 15 minutes, so a file you just added can take up to that long to show. Before the first measurement it is measured when you ask. To change a limit: [Limits](projects.md#limits).
+Covers storage, the disk its container logs take, domains, subdomains, FTP and SFTP accounts and databases. This month's transfer is also on every project in the project list (`bandwidth`, updated every hour), with its limit: `-1` is unlimited and `null` means no limit was set. Storage counts the project's files and also its own Docker data (images, build cache and database data), which is often the larger part. Disk use is measured in the background every 15 minutes, so a file you just added can take up to that long to show. Before the first measurement it is measured when you ask. To change a limit: [Limits](projects.md#limits).
 
 **From inside a project.** If you run a monitoring app or agent in a project (Zabbix, Netdata, node_exporter and the like), two files in it describe the whole server, not the project:
 

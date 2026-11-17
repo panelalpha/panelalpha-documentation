@@ -136,7 +136,7 @@ Projects named under one parent name are also kept from sharing cookies: [Cookie
 
 ## The firewall
 
-The installer sets up ufw as the server's firewall. Incoming connections are refused, except on the ports the engine serves: SSH, 80 and 443 for the sites, 2011 for the engine itself, 21 and 30000-30009 for FTP, and 2222 for SFTP. Those rules are marked as the engine's, and your assistant cannot change or remove them. Outgoing connections are allowed.
+The installer sets up ufw as the server's firewall. Incoming connections are refused, except on the ports the engine serves: SSH, 80 and 443 for the sites, 2011 for the engine itself, 21 and 30000-30009 for FTP and 2222 for SFTP. Those rules are marked as the engine's, and your assistant cannot change or remove them. Outgoing connections are allowed.
 
 ```text
 Show the firewall status and its rules.
@@ -217,7 +217,7 @@ The webserver checks the rules before they are saved. A rule it cannot parse is 
 
 An update brings a shipped rule file up to date when the server's copy is exactly a version an earlier release shipped, so a fixed rule reaches servers installed before the fix. It never changes ruleset files you edited on the server: those, and files the engine does not ship, are listed under "ModSecurity ruleset files on this host that differ from the shipped ones" and left as they are. A shipped rule file you switched off by renaming it to `.conf.disabled` stays off and as it is. The `custom` ruleset is not compared.
 
-You can read the mode, switch rulesets on and off, write your own rules, and read the audit log. If the assistant cannot, those tools have been turned off: [Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do).
+You can read the mode, switch rulesets on and off, write your own rules and read the audit log. If the assistant cannot, those tools have been turned off: [Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do).
 
 **When a legitimate request gets blocked**, that is a false positive and it is a tuning problem, not a broken deploy. The audit log names the specific rule that fired. Turn off that rule, not the whole firewall. Ask the assistant to find it:
 

@@ -19,14 +19,11 @@ section:
     - title: Editions
 card:
   title: Single Server Edition
-  description: A web hosting panel you install on your own VPS. It runs on PanelAlpha Engine 2.3.0 or later.
+  description: A web hosting panel you install on your own VPS.
   order: 1
 ---
 
 # PanelAlpha Single Server Edition
-
-> [!NOTE]
-> **This documentation covers PanelAlpha Single Server Edition, which runs on PanelAlpha Engine 2.3.0 or later.** An older Engine is not supported.
 
 ## What is PanelAlpha Single Server Edition?
 

@@ -18,9 +18,7 @@ You connect your tool from the panel. Every step below is on the **Connect AI** 
 
 1. Open **Connect AI** in the top menu and pick your tool under **Your tool**: Claude Code, ChatGPT, Codex, Claude, Cursor, Windsurf, VS Code or Other tool. The page for that tool lists the steps in order. A **One-click connect** banner on each page is marked `Coming soon`. It does nothing yet, so follow the steps on the page.
 2. Under **Generate an MCP token**, select **Create Token**. Enter a **Token Name**, such as `Claude on my laptop`, and create it. If you already have a token, select **use one you already have** instead.
-3. Copy the token.
-
-   **The token is shown once.** You cannot see it again after you close the dialog. Confirm with `I have saved my token in a safe place`.
+3. **The token is shown once.** You cannot see it again after you close the dialog. Copy the token, then confirm with `I have saved my token in a safe place`.
 
    <!-- TODO screenshot: assets/connect-ai-token-created.png. Show the dialog after Create Token, with the Token Name (Claude on my laptop), the new token shown once (a fake value such as pa_xxxxxxxx) and the "I have saved my token in a safe place" confirmation. No real tokens. -->
 

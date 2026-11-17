@@ -10,7 +10,7 @@ nav:
 
 WordPress is a main way to use the engine, not an extra. Many hosting accounts on it are WordPress sites. You can ask the engine to set up a new one without bringing your own code, deploy one you already keep in git, or look after a WordPress site that is already running here.
 
-This page covers all three, how to move a WordPress site here from another host, then day-to-day work: logging in, users, WP-CLI, and the other known apps the engine treats specially.
+This page covers all three, how to move a WordPress site here from another host, then day-to-day work: logging in, users, WP-CLI and the other known apps the engine treats specially.
 
 ## If WordPress is already on this engine
 
@@ -157,7 +157,7 @@ List the plugins of the WordPress in the shop service.
 For common jobs the assistant does not have to write a WP-CLI command. Each of these is its own tool (`wp_*`), its own API route under `/projects/{project}/wp/`, and its own `pae` command ([CLI commands](../commands/pae-cli.md#wordpress)):
 
 - **Plugins and themes**: search wordpress.org, list, read one, check whether one is installed, install, activate, update and delete. Plugins can also be deactivated; a theme is switched off by activating another one. Deleting a plugin is WordPress's own Delete: the plugin is deactivated and its uninstall runs before its files are deleted, so a page-cache plugin takes its dropin and its `WP_CACHE` with it, and the settings its uninstall removes are gone while whatever it leaves stays. A plugin whose uninstall fails, such as one that breaks the site when loaded, still has its files deleted, without loading any plugin, and the answer says its uninstall did not run.
-- **Users**: list (by `role`, with chosen `fields`), create (with `send_email` to send the welcome mail), update, set a password, delete, application passwords, and a one-time login link.
+- **Users**: list (by `role`, with chosen `fields`), create (with `send_email` to send the welcome mail), update, set a password, delete, application passwords and a one-time login link.
 - **Core**: status, available updates, download, install (with `skip_email`) and update, where `latest` means the newest release and a beta or release candidate is named as WordPress names it, such as `6.8-RC1`. An update to a version WordPress does not publish is refused with a 422 naming that version, and nothing is installed; an update to a release older than the installed one is refused with a 422 naming both, because WordPress does not migrate its database down. The installed version itself answers "up to date" and changes nothing.
 - **Site settings**: maintenance mode, cache flush, `wp-config.php` (list, create from database details, read, set and delete constants or variables), options, auto-updates, site language. Reading one constant gives the value as `wp-config.php` defines it: a string stays a string, `true` and `false` are booleans, a number is a number, and an array is a list. A `wp-config.php` value longer than 16384 bytes is refused with a 422 naming that limit, and nothing is written: WP-CLI cannot reliably write or read back a longer entry.
 - **Search and replace** in the database, for example after a domain change.
@@ -195,7 +195,7 @@ A start is refused with 422 `domain_taken` when a project here already has the d
 
 **While the domain still points to the old host.** With [PanelAlpha Connect](../getting-started/connect-to-panelalpha-connect.md), the import opens a preview of the site on a `panelalpha.online` address (`preview_url`). The import status shows the DNS record to set. Every 15 minutes the engine checks the domain; once it points here, the engine requests the certificate and removes the preview. Without Connect there is no preview: the site answers on its domain once DNS points here.
 
-**Following, resuming and cancelling.** The status shows how far the whole run is, the step it is on, and the file or table it is sending. A failed import, or one that has not moved for 15 minutes, can be resumed. Cancelling removes the project, files and database the import made here, and on a `wp_admin` source the migrator plugin. A finished, failed or cancelled import can be deleted from the list.
+**Following, resuming and cancelling.** The status shows how far the whole run is, the step it is on and the file or table it is sending. A failed import, or one that has not moved for 15 minutes, can be resumed. Cancelling removes the project, files and database the import made here, and on a `wp_admin` source the migrator plugin. A finished, failed or cancelled import can be deleted from the list.
 
 **What an import leaves alone.** A migrator plugin the source site already had before the import stays on it, also when the import is cancelled or fails. Only a plugin the engine installed is removed. An import never sends the wp-admin password or the plugin token to another site. A redirect from https to plain http ends the test or the import with the reason, and so does a redirect that would carry the password to a different address. A redirect to the `www.` form of the same address is followed. The download link for the plugin package uses the engine's own address (`APP_URL`), so it opens from your computer.
 
@@ -215,7 +215,7 @@ Two different things, and the difference explains some confusing results.
 
 **Detected frameworks** are Next.js, Laravel, Django and the rest. The engine works these out from the files in your repository: [How detection works](../supported-projects/how-detection-works.md).
 
-**Known apps** are WordPress, Matomo, phpBB, Magento, Passbolt, OpenCart, osTicket, Flarum, SuiteCRM, Chamilo, MantisBT, Easy!Appointments, Roundcube, Adminer, and phpMyAdmin. These get extra handling because the general-purpose approach would get something wrong, such as serving the wrong folder or missing a database.
+**Known apps** are WordPress, Matomo, phpBB, Magento, Passbolt, OpenCart, osTicket, Flarum, SuiteCRM, Chamilo, MantisBT, Easy!Appointments, Roundcube, Adminer and phpMyAdmin. These get extra handling because the general-purpose approach would get something wrong, such as serving the wrong folder or missing a database.
 
 To see what the engine will pick for a given repository, and whether another type could also run it:
 
@@ -230,7 +230,7 @@ A few other known apps worth knowing:
 - **Magento** from its official repository gets a search engine and a first-run install. Ask your assistant for the admin address when it finishes. It does not offer the one-click login that WordPress does.
 - **Matomo** and **phpBB** are set up so their own browser installer can finish; the engine prepares the database and writable folders, and you complete the install in the browser.
 - **Passbolt** gets a database and the keys it needs to start. The first user is created on Passbolt's own registration page, not by the engine.
-- **Flarum, SuiteCRM, and Chamilo** get a database, and you finish their own installer in the browser.
+- **Flarum, SuiteCRM and Chamilo** get a database, and you finish their own installer in the browser.
 - **MantisBT and Easy!Appointments** get a database and a configuration file written from it, so you are not asked for credentials the engine already has.
 - **OpenCart** is supported on its 4.1 release line, branch `4.1.x.x`. Its default branch is an unreleased rewrite that does not render, and a deploy of it is refused with that explanation.
 - **Roundcube** (version 1.7 or newer) gets a database, its tables, and a configuration file written from it, so the first page is its login. It is a mail client only: set `ROUNDCUBE_IMAP_HOST` and `ROUNDCUBE_SMTP_HOST` in the project's environment variables to the mail servers it logs in to and sends through.

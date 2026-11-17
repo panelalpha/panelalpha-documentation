@@ -1,6 +1,6 @@
 ---
 title: Artisan Commands
-description: Reference for PanelAlpha Engine Artisan commands. Run Docker-based maintenance, user rebuilds, and system tasks via CLI.
+description: Reference for PanelAlpha Engine Artisan commands. Run Docker-based maintenance, user rebuilds and system tasks via CLI.
 nav:
   group: Command Reference
   order: 1
@@ -10,7 +10,7 @@ nav:
 
 PanelAlpha Engine 1.x runs on Laravel. Its maintenance commands are Artisan commands in the `core` container. Use them for tasks the panel does not offer and for repairs.
 
-## Running Artisan Commands
+## Running Artisan commands
 
 Run the commands as root on the Engine server, not inside a customer container:
 
@@ -25,7 +25,7 @@ docker compose -f /opt/panelalpha/shared-hosting/docker-compose.yml exec -T core
 
 The `core` container must be running. Check it with `docker compose -f /opt/panelalpha/shared-hosting/docker-compose.yml ps`.
 
-## Command Reference
+## Command reference
 
 | Command | What it does | Changes the server |
 | --- | --- | --- |
@@ -55,7 +55,7 @@ The `core` container must be running. Check it with `docker compose -f /opt/pane
 | `system:lscache --enable\|--disable` | Turns LiteSpeed Cache on or off. | Yes |
 | `apache:enable-mod <mod>` / `apache:disable-mod <mod>` | Turns an Apache module on or off for accounts. | Yes |
 
-## API Tokens
+## API tokens
 
 PanelAlpha connects to the Engine with an API token. The installer creates the first one.
 
@@ -76,13 +76,13 @@ After you create a new token, enter it in PanelAlpha in the server settings. Del
 
 ## System
 
-### Check Engine Version
+### Check Engine version
 
 ```bash
 system:version
 ```
 
-### Sync IPs to Network Interface
+### Sync IPs to network interface
 
 Adds the IP addresses from [IP Management](server-management/ip-management.md) to the server's network interface. Add `--skip-errors` to continue when one address fails, and `--restart-networking` to restart networking afterwards.
 
@@ -93,7 +93,7 @@ Adds the IP addresses from [IP Management](server-management/ip-management.md) t
 system:sync-ips-to-interface [--skip-errors] [--restart-networking]
 ```
 
-### Servers Behind NAT
+### Servers behind NAT
 
 On servers that have only private addresses and get public IPs through 1:1 NAT, this command looks up the public IPv4 address for each local address and saves the mapping. `--replace-default-ipv4` also replaces the server's default IPv4 with the public address.
 
@@ -101,7 +101,7 @@ On servers that have only private addresses and get public IPs through 1:1 NAT, 
 system:build-ipv4-nat-map [--replace-default-ipv4]
 ```
 
-### Rebuild Configuration
+### Rebuild configuration
 
 These commands write a part of the configuration again from the Engine database. Use them when a file was changed by hand or a change from the panel did not apply.
 
@@ -112,9 +112,9 @@ system:rebuild-sftp-accounts
 system:rebuild-domains
 ```
 
-## Hosting Accounts and Domains
+## Hosting accounts and domains
 
-### Rebuild Accounts
+### Rebuild accounts
 
 Rebuilds the containers and the web server and PHP-FPM configuration of hosting accounts. Sites of the rebuilt accounts restart.
 
@@ -126,7 +126,7 @@ users:rebuild --all --wipe-vhosts-dir -v
 > [!WARNING]
 > **Warning:** `--wipe-vhosts-dir` deletes all generated virtual host files before the rebuild. Changes you made to those files by hand are lost, and sites are down until the rebuild ends.
 
-### Add Missing www Aliases
+### Add missing www aliases
 
 Use this when `example.com` works but `www.example.com` does not.
 
@@ -135,7 +135,7 @@ users:add-missing-www-domain-aliases --all
 users:add-missing-www-domain-aliases --username=<username>
 ```
 
-### Fix File Permissions
+### Fix file permissions
 
 Resets the owner and permissions of files in account home folders. Use it after you copied files in as root or a migration left wrong owners.
 
@@ -144,7 +144,7 @@ users:fix-file-permissions --all
 users:fix-file-permissions --username=<username>
 ```
 
-### Resource Limits
+### Resource limits
 
 Show the limits of one account or all accounts:
 
@@ -162,7 +162,7 @@ Runs WP-CLI as the account's user in the site's document root:
 domains:wp-cli example.com plugin list
 ```
 
-### Clean Up Removed Domains
+### Clean up removed domains
 
 Removes web server configuration left behind for domains that are no longer in the Engine database:
 
@@ -170,7 +170,7 @@ Removes web server configuration left behind for domains that are no longer in t
 system:cleanup-disconnected-domains
 ```
 
-### Delete an Account
+### Delete an account
 
 Deletes the account from the Engine database, with its configuration and home folder. Use this only for accounts PanelAlpha no longer knows about. Normally you terminate the service in PanelAlpha.
 

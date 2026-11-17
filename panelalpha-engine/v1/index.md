@@ -1,6 +1,6 @@
 ---
 title: Overview
-description: Overview of PanelAlpha Engine, a Docker-based WordPress hosting solution. Learn features, architecture, requirements, and FAQ.
+description: Overview of PanelAlpha Engine, a Docker-based WordPress hosting solution. Learn features, architecture, requirements and FAQ.
 nav:
   group: Engine v1.x
   order: 1
@@ -14,16 +14,16 @@ nav:
 
 PanelAlpha Engine is the hosting server for PanelAlpha. You install it on its own server, and PanelAlpha creates and manages hosting accounts and WordPress instances on it through the Engine API. Each hosting account runs PHP in its own Docker container with its own limits for disk, memory, CPU and other resources.
 
-## Documentation Sections
+## Documentation sections
 
 - [Installation & Updates](installation-updates/index.md): install the Engine and keep it up to date.
 - [Command Reference](command-reference.md): Artisan commands for tokens, repairs and rebuilds.
 - [Server Management](server-management/index.md): the server tabs in PanelAlpha (details, IP addresses, CSF firewall, ModSecurity, outgoing mail, alerts) and the files, logs and services on the server.
 - [Troubleshooting](troubleshooting.md): common problems and how to fix them.
 
-## What the Engine Includes
+## What the Engine includes
 
-- A choice of web server: OpenLiteSpeed, LiteSpeed, Apache, Nginx, or Nginx + Apache. You can switch later from the panel.
+- A choice of web server: OpenLiteSpeed, LiteSpeed, Apache, Nginx or Nginx + Apache. You can switch later from the panel.
 - PHP 7.4 and 8.0 to 8.4, chosen per instance in the hosting plan.
 - MariaDB for customer databases, with phpMyAdmin single sign-on from PanelAlpha.
 - FTP and SFTP access for hosting accounts.
@@ -38,11 +38,11 @@ The Engine itself does not make backups. Back up the server with your hosting pr
 
 The diagram shows the Engine containers and how they connect.
 
-![PanelAlpha Engine — Hosting Server Connections — a Engine architecture diagram](../../assets/img/hosting-server-connections/PanelAlpha-Engine/PAE_0.png)
+![PanelAlpha Engine: Hosting Server Connections: an Engine architecture diagram](../../assets/img/hosting-server-connections/PanelAlpha-Engine/PAE_0.png)
 
 The Engine is a Docker Compose project in `/opt/panelalpha/shared-hosting`. See [Files, Logs and Services](server-management/files-and-logs.md) for the list of containers.
 
-## System Requirements
+## System requirements
 
 - **RAM:** 4 GB minimum. More is better for production, depending on the number of sites.
 - **Operating system** (fresh install):
@@ -55,13 +55,13 @@ The Engine is a Docker Compose project in `/opt/panelalpha/shared-hosting`. See 
   - 22: SSH
   - 80 and 443: websites
   - 2011: Engine API, used by PanelAlpha
-  - 21 and 30000–30009: FTP
+  - 21 and 30000-30009: FTP
   - 2222: SFTP
 
 > [!IMPORTANT]
 > **Important:** Install PanelAlpha Engine on its own server. If you install PanelAlpha and PanelAlpha Engine on the same server, both stop working.
 
-## Frequently Asked Questions
+## Frequently asked questions
 
 ### Can I use PanelAlpha Engine 1.x without PanelAlpha?
 
@@ -69,7 +69,7 @@ No. Engine 1.x is managed only through PanelAlpha Single Server or Multi Server.
 
 ### Can I change the web server after installation?
 
-Yes, from the server's Details tab in PanelAlpha. Site files and databases stay as they are, but all sites are briefly offline while the Engine rebuilds their configuration. See [Changing Web Server](server-management/details.md#changing-web-server).
+Yes, from the server's Details tab in PanelAlpha. Site files and databases stay as they are, but all sites are briefly offline while the Engine rebuilds their configuration. See [Changing web server](server-management/details.md#changing-web-server).
 
 ### Does PanelAlpha Engine host email?
 
@@ -81,4 +81,4 @@ Briefly. The update restarts the Engine containers and rebuilds the configuratio
 
 ## Support
 
-For help, contact the [Support Center](https://manage.panelalpha.com/contact), ask on the [Community Forum](https://community.panelalpha.com/), or join our [Discord server](https://discord.gg/9twHWR7xGX).
+For help, contact the [Support Center](https://manage.panelalpha.com/contact), ask on the [Community Forum](https://community.panelalpha.com/) or join our [Discord server](https://discord.gg/9twHWR7xGX).

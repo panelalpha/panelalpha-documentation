@@ -87,10 +87,12 @@ A name under `panelalpha.direct`, `panelalpha.online`, `sslip.io` or `nip.io` ca
 
 ### Removing an installed certificate
 
+**The certificate you replace is not kept, and neither is its private key.** Save the CRT and the KEY first if you want them again.
+
 1. Go to **Advanced > Domains** and select the padlock icon on the row (its tip reads **Edit SSL**), or use **Advanced > Security**, card **SSL Certificate Applied**, button **Manage**.
 2. Select **Remove Certificate**, then confirm with **Remove**.
 
-The certificate you replace is **not kept, and neither is its private key**: save the CRT and the KEY first if you want them again. The domain goes back to the certificate the server gives a new domain: its own one where that covers the name, otherwise the one its operator configured, which is self-signed by default. A self-signed certificate brings the browser warning back, and the **SSL Status** column reads `Self Signed`.
+The domain goes back to the certificate the server gives a new domain: its own one where that covers the name, otherwise the one its operator configured, which is self-signed by default. A self-signed certificate brings the browser warning back, and the **SSL Status** column reads `Self Signed`.
 
 The dialog shows the certificate the domain carries now as soon as the server confirms the removal, and every page that is open for the project updates. On a server whose Engine cannot do this yet, the dialog answers `This server's Engine cannot remove a certificate yet.`
 

@@ -99,7 +99,7 @@ The lasting fix is giving the engine a real certificate: [Install](../getting-st
 Move the `panelalpha-engine` entry to the user file and delete it from the project file. If that project file was committed, revoke the token: see **I pasted the link or the token into a chat, or committed it to a repository** below.
 
 **The plugin with create and debug skills did not install.**
-Open **Customize**, then **Plugins**, import `https://github.com/panelalpha/agent-skills`, and install `engine`. Reload the window.
+Open **Customize**, then **Plugins**, import `https://github.com/panelalpha/agent-skills` and install `engine`. Reload the window.
 
 **`panelalpha-engine` does not appear at all after editing the file.**
 The file has a syntax error, most often a missing or extra comma when adding to an existing config. Paste it into any JSON checker. Cursor tends to skip a broken file silently rather than complain.

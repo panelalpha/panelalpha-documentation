@@ -1,6 +1,6 @@
 ---
 title: WAF/ModSecurity
-description: Configure ModSecurity WAF in PanelAlpha Engine. Set detection or blocking modes, manage OWASP rule sets, and review audit logs.
+description: Configure ModSecurity WAF in PanelAlpha Engine. Set detection or blocking modes, manage OWASP rule sets and review audit logs.
 nav:
   group: Server Management
   order: 4
@@ -10,23 +10,23 @@ nav:
 
 PanelAlpha Engine includes ModSecurity, a web application firewall (WAF) that checks HTTP requests to all sites on the server against a set of rules. It works with every supported web server: LiteSpeed, OpenLiteSpeed, Apache, Nginx and Nginx + Apache. The **WAF/ModSecurity** tab controls it for the whole server.
 
-![PanelAlpha Engine — Panelalpha Engine — WAF/ModSecurity Overview](../../../assets/img/panelalpha-engine/server-management/waf-modsecurity-overview.png)
+![PanelAlpha Engine: WAF/ModSecurity Overview](../../../assets/img/panelalpha-engine/server-management/waf-modsecurity-overview.png)
 
-## ModSecurity Mode
+## ModSecurity mode
 
 Pick the mode in the **ModSecurity Mode** dropdown. The change is applied as soon as you pick it.
 
-![PanelAlpha Engine — Panelalpha Engine — ModSecurity Mode Selection](../../../assets/img/panelalpha-engine/server-management/modsecurity-modes.png)
+![PanelAlpha Engine: ModSecurity Mode Selection](../../../assets/img/panelalpha-engine/server-management/modsecurity-modes.png)
 
 - **Off**: ModSecurity does not check requests.
 - **Detection Only**: ModSecurity checks requests and writes matches to the audit log, but does not block anything. Use this to see which rules would fire before you start blocking.
 - **Blocking**: ModSecurity blocks requests that match the rules, usually with a 403 response.
 
-## Rule Sets
+## Rule sets
 
 The **Rule Sets** table lists the rule sets on the server:
 
-![PanelAlpha Engine — Panelalpha Engine — ModSecurity Rule Sets](../../../assets/img/panelalpha-engine/server-management/modsecurity-rulesets.png)
+![PanelAlpha Engine: ModSecurity Rule Sets](../../../assets/img/panelalpha-engine/server-management/modsecurity-rulesets.png)
 
 - **Rule Set**: the name, for example "OWASP Core Rule Set".
 - **Loaded Config Files**: how many of the rule set's files are loaded, for example `26 / 26`.
@@ -38,7 +38,7 @@ The main rule set is the [OWASP Core Rule Set](https://coreruleset.org/) (CRS) v
 
 The Engine adds its own exclusions on top of CRS for known false positives in WooCommerce checkout and AJAX requests, and in phpMyAdmin.
 
-### Adjusting Loaded Config Files
+### Adjusting loaded config files
 
 Click the number in **Loaded Config Files** to open a list of all files in the rule set. Loaded files are ticked.
 
@@ -50,7 +50,7 @@ This is the way to switch off one part of a rule set, for example one attack cat
 
 When you save the list, or switch a rule set on or off, the Engine writes the new ModSecurity configuration and then reloads Nginx and Nginx + Apache, or restarts Apache, LiteSpeed and OpenLiteSpeed. A restart briefly interrupts all sites.
 
-## Custom Rules
+## Custom rules
 
 Below **Rule Sets**, the **Custom Rules** panel lets you write your own ModSecurity rules for this server.
 
@@ -62,11 +62,11 @@ The rules work only when the custom rule set is enabled in **Rule Sets**. The pa
 
 If the server runs an older PanelAlpha Engine version, the panel shows "Custom rules require a newer PanelAlpha Engine version on this server." Update the Engine on the server to use this feature.
 
-## Audit Log Files
+## Audit log files
 
 The **Audit Log Files** table lists the ModSecurity audit logs:
 
-![PanelAlpha Engine — Panelalpha Engine — ModSecurity Audit Log Files](../../../assets/img/panelalpha-engine/server-management/modsecurity-audit-logs.png)
+![PanelAlpha Engine: ModSecurity Audit Log Files](../../../assets/img/panelalpha-engine/server-management/modsecurity-audit-logs.png)
 
 - **File name**, **Last Modified** and **Size** of each log.
 - **[download]** saves the whole file.
@@ -76,7 +76,7 @@ ModSecurity logs only requests that matched a rule. Each entry is one line of JS
 
 On the server, the log is `/opt/panelalpha/shared-hosting/logs/modsecurity/audit.log`. It is rotated every day or when it reaches 100 MB, and 30 compressed old files are kept.
 
-## Configuration Best Practices
+## Configuration best practices
 
 1. Start in **Detection Only** for a week or two while sites get normal traffic.
 2. Look through the audit log for requests from real users or plugins that matched a rule.

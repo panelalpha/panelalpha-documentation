@@ -1,6 +1,6 @@
 ---
 title: Notifications
-description: Configure server alerts for disk, CPU, and RAM usage in PanelAlpha Engine. Set thresholds, recipients, and monitoring best practices.
+description: Configure server alerts for disk, CPU and RAM usage in PanelAlpha Engine. Set thresholds, recipients and monitoring best practices.
 nav:
   group: Server Management
   order: 6
@@ -10,9 +10,9 @@ nav:
 
 The **Notifications** tab turns on alerts for high disk, CPU and RAM usage on this Engine server. PanelAlpha checks the server once an hour and sends an alert to admins when a limit is reached.
 
-![PanelAlpha Engine — Panelalpha Engine — Notifications Configuration](../../../assets/img/panelalpha-engine/server-management/notifications-overview.png)
+![PanelAlpha Engine: Notifications Configuration](../../../assets/img/panelalpha-engine/server-management/notifications-overview.png)
 
-## Alerts and Thresholds
+## Alerts and thresholds
 
 | Alert | Sent when |
 | --- | --- |
@@ -24,30 +24,30 @@ The thresholds are fixed and cannot be changed in the panel.
 
 PanelAlpha sends the same alert for the same server at most once every 24 hours, even if the usage stays high. There is no message when usage goes back to normal.
 
-## Saving Notification Settings
+## Saving notification settings
 
 1. Turn on the alerts you want.
 2. Click **Save Changes**.
 
 To silence alerts from a server for a while, turn them off and save. Remember to turn them on again later.
 
-## Notification Recipients
+## Notification recipients
 
 The alert is the admin notification **Server Alert**. PanelAlpha sends it to active admins whose admin group has full access, and to admins whose group has **Server Alert** among its notifications.
 
 The alert arrives as an email and as a notification in the admin area. You can turn either one on or off and edit the email template in **Configuration → Notifications** under admin notifications. See [Notifications](../../../multi-server/system-configuration/notifications.md).
 
-## Responding to Alerts
+## Responding to alerts
 
-### High Disk Usage
+### High disk usage
 
 1. Find what uses the space. Check `df -h` on the server and the disk usage of hosting accounts in the panel.
 2. Look at logs in `/opt/panelalpha/shared-hosting/logs/` and `/opt/panelalpha/shared-hosting/webserver-logs/`, and at old Docker images (`docker system df`).
-3. Remove what you no longer need, move accounts to another server, or add disk space.
+3. Remove what you no longer need, move accounts to another server or add disk space.
 
 A full disk stops containers and can break running sites, so act before usage reaches 100%.
 
-### High CPU or RAM Usage
+### High CPU or RAM usage
 
 1. Run `docker stats` on the server to see which containers use the most CPU or memory.
 2. Check the sites in those accounts for heavy plugins, cron jobs, bot traffic or malware.
@@ -55,7 +55,7 @@ A full disk stops containers and can break running sites, so act before usage re
 
 Use the graphs on the [Details](details.md#performance-graphs) tab to see when the load started.
 
-## Troubleshooting Notifications
+## Troubleshooting notifications
 
 If alerts do not arrive:
 

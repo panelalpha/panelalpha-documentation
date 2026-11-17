@@ -317,7 +317,7 @@ the chain are the files in /project/certs of tshop.
 
 Mode: modify. Tools: `file_download`, `ssl_cert_install` with `cert`, `key`, `ca`, `ssl_cert_get`. Check: the key is not echoed back in the answer, and `ssl_cert_get` shows the new certificate.
 
-To keep the private key out of the chat, ask for a paste link for it first (`vault_secret_create` with type `key`), paste the key on that page, and install the certificate with the `vault:<key>` reference in place of the key.
+To keep the private key out of the chat, ask for a paste link for it first (`vault_secret_create` with type `key`), paste the key on that page and install the certificate with the `vault:<key>` reference in place of the key.
 
 **Name under panelalpha.online, with sibling names**
 

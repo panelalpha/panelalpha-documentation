@@ -95,7 +95,7 @@ claude mcp list
 `panelalpha-engine` should now show as connected.
 
 > [!WARNING]
-> **Do not use `NODE_TLS_REJECT_UNAUTHORIZED=0`.** It switches off certificate checking for every Node program in that terminal, not just for your engine.
+> **Do not use `NODE_TLS_REJECT_UNAUTHORIZED=0`.** It switches off certificate checking for every Node program in that terminal, not only for your engine.
 
 A real certificate removes all of the above, for every computer you ever connect:
 

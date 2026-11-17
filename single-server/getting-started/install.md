@@ -56,15 +56,13 @@ On a fresh server, one command as `root` installs the Engine and the panel: `cur
 
 6. Open the panel address in a browser and sign in: [First login](first-login.md).
 
-7. When you can sign in and see the project list, protect the panel's own project:
+7. When you can sign in and see the project list, protect the panel's own project. **Once the project is protected, no API token can delete, stop or redeploy it, the panel's own included.** From then on you update and remove it only with `pae` on the server: [Updating the panel](updating.md).
 
    ```bash
    pae project:settings:set protected on --project panel
    ```
 
    `pae` prints what it is about to change and asks `Continue? (yes/no)`. Type `yes`. Add `--force` to the command to apply it without the question.
-
-   **Once the project is protected, no API token can delete, stop or redeploy it, the panel's own included.** From then on you update and remove it only with `pae` on the server: [Updating the panel](updating.md).
 
 ## The values you pass
 

@@ -8,7 +8,7 @@ nav:
 
 # Backups
 
-A backup is a copy of one project that you can restore later. Backups are written to a **store**, which is set up once for the whole panel. A server with no store at all needs no setup: the Engine's install creates a default local store named `local` in `/opt/panelalpha/backups/local` and the panel uses it. A server that already had a store - one made with `pae backup:container:create` or by an earlier panel, such as `panel-local-…` in `/opt/panelalpha/backups` - keeps it, and the panel uses that one instead: nothing is created and nothing has to be set up. **Settings > Backups** shows the store in use, as its type and directory. Choose another store there if you want your backups somewhere else, and select **Remove store** to go back to the store the server came with.
+A backup is a copy of one project that you can restore later. Backups are written to a **store**, which is set up once for the whole panel. A server with no store at all needs no setup: the Engine's install creates a default local store named `local` in `/opt/panelalpha/backups/local` and the panel uses it. A server that already had a store (one made with `pae backup:container:create` or by an earlier panel, such as `panel-local-…` in `/opt/panelalpha/backups`) keeps it, and the panel uses that one instead: nothing is created and nothing has to be set up. **Settings > Backups** shows the store in use, as its type and directory. Choose another store there if you want your backups somewhere else, and select **Remove store** to go back to the store the server came with.
 
 ## Setting up a store
 

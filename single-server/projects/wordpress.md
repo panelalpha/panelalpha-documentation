@@ -8,7 +8,7 @@ nav:
 
 # Managing WordPress
 
-A WordPress site in the panel is a PHP hosting project. This page covers what you do with it after it is installed. Create one first: [Create a project](create-a-project.md).
+A WordPress site in the panel is a PHP hosting project. Create one first: [Create a project](create-a-project.md).
 
 ## Logging in to WordPress
 

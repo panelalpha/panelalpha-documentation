@@ -10,7 +10,7 @@ nav:
 
 This page is for work on the Engine server over SSH: where things are, which containers run, and how to restart them. Run all commands as root.
 
-## Files on the Server
+## Files on the server
 
 The Engine is a Docker Compose project in `/opt/panelalpha/shared-hosting`.
 
@@ -48,7 +48,7 @@ docker compose -f /opt/panelalpha/shared-hosting/docker-compose.yml ps
 | `database-users` | MariaDB for customer databases. |
 | `phpmyadmin-users` | phpMyAdmin for customer databases, opened from PanelAlpha. |
 | `exim` | Sends outgoing mail. |
-| `pure-ftpd` | FTP on port 21 and passive ports 30000–30009. |
+| `pure-ftpd` | FTP on port 21 and passive ports 30000-30009. |
 | `sftp` | SFTP on port 2222. |
 | `cron` | Scheduled jobs and log rotation. |
 | `metrics` | Collects server metrics for the graphs and alerts. |
@@ -57,7 +57,7 @@ docker compose -f /opt/panelalpha/shared-hosting/docker-compose.yml ps
 
 Each hosting account also has its own containers for PHP. They are separate Compose projects that the Engine creates and rebuilds.
 
-## Restarting Services
+## Restarting services
 
 Restart one service:
 
@@ -93,7 +93,7 @@ docker compose -f /opt/panelalpha/shared-hosting/docker-compose.yml logs --tail 
 
 The outgoing mail log is inside the `exim` container. See [Outgoing Mail](outgoing-mail.md#emails-not-sending).
 
-## Memory Protection (monit)
+## Memory protection (monit)
 
 The installer sets up monit on the server. When memory usage goes above 91%, monit saves a list of processes to `/opt/panelalpha/log/monit_psdump_<date>.log` and restarts the two containers that use the most memory. This keeps the server running, but it also restarts whatever those containers serve.
 
