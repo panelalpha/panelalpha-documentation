@@ -1,0 +1,40 @@
+# Push to development: start the deploy workflow of panelalpha-homepage on its development
+# branch, which builds the site and puts it on the test site. main (panelalpha.com) is not
+# connected yet. Settings: README.md, "Settings in GitHub".
+name: Update the site
+
+on:
+  push:
+    branches: [development, main]
+  workflow_dispatch:
+
+concurrency:
+  group: update-site-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  trigger:
+    name: Start the site build
+    # main starts nothing until production is connected; then drop this line.
+    if: github.ref_name == 'development'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ secrets.HOMEPAGE_DEPLOY_TOKEN }}
+      HOMEPAGE_REPO: ${{ vars.HOMEPAGE_REPO }}
+    steps:
+      - name: Check the settings
+        run: |
+          missing=""
+          [ -n "$GH_TOKEN" ] || missing="$missing secret:HOMEPAGE_DEPLOY_TOKEN"
+          [ -n "$HOMEPAGE_REPO" ] || missing="$missing variable:HOMEPAGE_REPO"
+          if [ -n "$missing" ]; then
+            echo "::error::Not set in Settings > Secrets and variables > Actions:$missing"
+            exit 1
+          fi
+
+      - name: Start the homepage deploy on the same branch
+        run: |
+          gh workflow run deploy.yml --repo "$HOMEPAGE_REPO" --ref "$GITHUB_REF_NAME"
+          echo "Started deploy.yml in $HOMEPAGE_REPO on branch $GITHUB_REF_NAME." >> "$GITHUB_STEP_SUMMARY"
+          echo "Follow it in $GITHUB_SERVER_URL/$HOMEPAGE_REPO/actions" >> "$GITHUB_STEP_SUMMARY"
