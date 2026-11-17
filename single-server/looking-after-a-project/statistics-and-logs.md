@@ -24,7 +24,7 @@ The **Project Details** tab also shows **Unique Visitors**, **Average Session Ti
 
 Select **My Server** at the top and then **Usage**. The page shows RAM, CPU and **Disk Space** (**Used** and **Available**, in GB) for the whole server, and graphs for **CPU Usage**, **Disk Throughput**, **Disk IOPS**, **Network Traffic** and **Network PPS**. Choose **1 hour**, **12 hours** or **Live**. **Live** is the last 5 minutes and is the default.
 
-<!-- TODO screenshot: assets/statistics-server-usage.png. Show My Server, Usage with the RAM, CPU and Disk Space values and the CPU Usage graph. -->
+![My Server, Usage: RAM, CPU and Disk Space for the whole server, then the graphs Disk Throughput, Network Traffic and CPU Usage one after another](../../assets/single-server/statistics-server-usage.gif)
 
 ## Logs
 
@@ -40,7 +40,7 @@ The PHP, web server and deploy logs show 15 rows a page, or 50 or 100. A file lo
 
 Every tab except **Project Logs** has a **Download** button next to the heading. It saves the log you are looking at, and is off while the log loads or is empty. A web server file the panel cannot show as text gets `You Cannot Preview the Contents of This File.` and the same button.
 
-<!-- TODO screenshot: assets/statistics-logs-tabs.png. Show Advanced, Logs with the tabs (Project Logs, Webserver Logs and the others), the Download button and some log rows. Remove real IP addresses and use 203.0.113.10. -->
+![Advanced > Logs of the Northwind Journal WordPress project: Project Logs, then PHP Logs with No PHP Logs Were Found, then Webserver Logs with the access log rows and the Download button](../../assets/single-server/statistics-logs-tabs.gif)
 
 A tab with nothing to show says `No PHP Logs Were Found...` or similar. The web server log often holds more detail.
 
@@ -48,7 +48,7 @@ A tab with nothing to show says `No PHP Logs Were Found...` or similar. The web 
 
 A container project has the page **Advanced > Containers**. The table has the columns **Service**, **Image**, **State**, **Uptime**, **Ports** and **Actions**: each service with its image, its state, how long it has been running, the ports it publishes, and its own actions. The list refreshes every 15 seconds.
 
-<!-- TODO screenshot: assets/statistics-containers-page.png. Show Advanced, Containers of a container project with the columns Service, Image, State, Uptime, Ports and Actions, and the per service actions Start, Stop, Restart, Logs and Public URLs. Include the Actions menu at the top. -->
+![Advanced > Containers of the ntfy project: the app service with its image, the state running, its uptime and port, the actions of the row, and the Actions menu at the top](../../assets/single-server/statistics-containers-page.gif)
 
 - **Start All**, **Stop All**, **Restart** and **Pull & Redeploy** act on the whole project: [Projects](../projects/projects.md).
 - Each service has its own **Start**, **Stop**, **Restart**, **Logs** and **Public URLs** actions. **Logs** shows the output of one service. An empty service shows `(no output)`.

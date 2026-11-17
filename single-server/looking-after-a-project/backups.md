@@ -24,7 +24,7 @@ A PHP hosting project backup holds its files (**Directory**) and its databases (
 
 A container project backup holds its code (**Code**) and its data (**Data**). Code is the project's files. Data is the volumes and the databases of the containers. The table in the project's **Backups** tab shows the two as separate columns, and the tooltip lists the volumes and databases inside.
 
-<!-- TODO screenshot: assets/backups-container-code-data-rows.png. Show the Backups tab of a container project with a backup that has separate Code and Data entries in the table. -->
+![The Backups tab of the ntfy container project: each backup has its own Code and Data columns, and pointing at an entry shows what it holds](../../assets/single-server/backups-container-code-data-rows.gif)
 
 The two kinds of project: [Projects](../projects/projects.md).
 
@@ -35,13 +35,11 @@ The two kinds of project: [Projects](../projects/projects.md).
 3. In **Create Backup**, write a **Backup Note** if you want one. On a PHP hosting project, keep **Backup Directory** and **Backup Database** ticked for the parts you want.
 4. Select **Create**.
 
-   <!-- TODO screenshot: assets/backups-create-dialog.png. Show the Create Backup dialog for a PHP hosting project with the Backup Note field, Backup Directory and Backup Database ticked, and the Create button. -->
+   ![Making a backup of the Northwind Journal WordPress project: Add New, the note Before installing WooCommerce, Backup Directory and Backup Database ticked, Create, then the row shows Creating Backup and finally its size and the type Manual](../../assets/single-server/backups-create-dialog.gif)
 
 **A container project is stopped while its code and data are copied.** It starts again right after. The dialog says: `This backup includes the project code and its data (volumes and databases). The project is stopped while its code and data are copied and starts again right after.`
 
 The list shows `Creating Backup` while it runs, in place of the row's actions. A finished backup has a size and a **Type**: **Manual** or **Automatic**. A backup taken with only one part ticked is an ordinary backup of that part: the **Database** and **Directory** columns show which parts it holds, and it downloads, restores and deletes like any other.
-
-<!-- TODO screenshot: assets/backups-history-list.png. Show Backup History with one backup being made ("Creating Backup") and one finished backup with its size and Type Manual. -->
 
 ## Automatic backups
 
@@ -53,7 +51,7 @@ Each project can have a schedule.
 2. Choose **How Often**: Daily, Weekly or Monthly. Then choose the time and, for weekly or monthly, the day. **Choose Time** offers the quarter hours, and the minute the project already uses when it is not one of them.
 3. Select **Enable Automatic Backups**.
 
-   <!-- TODO screenshot: assets/backups-automatic-dialog.png. Show the Automatic Backups dialog with How Often set to Daily, the time 3:42 AM and the Enable Automatic Backups button. -->
+   ![Changing the automatic backups of the Northwind Journal project: Change opens Automatic Backups with How Often set to Daily, a new time is picked in Choose Time and Edit Automatic Backups saves it](../../assets/single-server/backups-automatic-dialog.gif)
 
 **For a project that has a schedule**, the tab shows it with **Change** beside it. **Change**, or the time itself, opens the same dialog, where the button reads **Edit Automatic Backups**: choose another **How Often** or time and select it.
 

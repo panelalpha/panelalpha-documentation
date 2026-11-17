@@ -18,7 +18,7 @@ A cron job runs a command on a schedule. PHP settings choose the PHP version and
 4. On a container project, choose the **Service** the command runs in. **A run is skipped while that service is not running.**
 5. Save. The panel shows `Cron job has been added.`
 
-   <!-- TODO screenshot: assets/cron-add-form.png. Show the Add Cron Job form with Common Settings set to Once a day, a one line Command (for example /usr/bin/php /var/www/html/cron.php) and the Save button. -->
+   ![Adding a cron job to the Northwind Journal project: Add Cron Job, Common Settings set to Once a day, the command wp cron event run --due-now, and the new job in the list](../../assets/single-server/cron-add-form.gif)
 
 You can edit or delete a job from its row. While you write a **Cron Expression**, the **Frequency** line of the form reads back what the expression means, and says `Invalid Expression` while it cannot be read. A schedule the server refuses is not saved: the panel shows the reason, for example `Value 99 out of bounds (0-59)` or `Range values out of bounds in '10-70' (allowed 0-59)`.
 
@@ -58,7 +58,7 @@ A saved setting reaches the site within a few seconds: PHP keeps the settings it
 
 An empty value means this project does not set that setting, so the server's PHP configuration applies. To remove a setting the project sets, clear its value and save: the panel removes the setting and, within the same few seconds, the server's PHP configuration applies again. The dialog does not show the values the server uses.
 
-<!-- TODO screenshot: assets/php-settings-dialog.png. Show the PHP Settings dialog with the four settings listed and 256M typed for memory_limit. Also show the PHP Version card with "Current PHP version" next to it. -->
+![Advanced > Developer Settings of the Northwind Journal project: the PHP Version card with Current PHP version, then Manage on PHP Settings, memory_limit set to 256M and Save Changes](../../assets/single-server/php-settings-dialog.gif)
 
 ## Troubleshooting
 

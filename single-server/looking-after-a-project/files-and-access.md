@@ -14,7 +14,7 @@ You can work on a project's files in the file manager in the panel, or with an F
 
 Open the project and go to **Advanced > File Manager**. Right-click a file or folder. The menu offers only the actions that fit: **Open** (folders), **View** (files the panel can preview, such as images), **Edit** (text files), **Download**, **Copy**, **Cut**, **Rename**, **Zip**, **Unzip** (archives), **Delete** and **Properties**. **Paste** shows after you copy or cut something. You can also upload files and create new folders and files.
 
-<!-- TODO screenshot: assets/files-file-manager-menu.png. Show Advanced, File Manager with a file list and the right-click menu open on a file (Open, Edit, Download, Rename, Zip, Delete). -->
+![Advanced > File Manager of the Northwind Journal project: the site folder and public_html opened, and the right-click menu of wp-config.php](../../assets/single-server/files-file-manager-menu.gif)
 
 ## FTP accounts
 
@@ -31,7 +31,7 @@ To change the password of an account, select **Edit FTP Account** on its row, en
 
 To see the details to connect, open the login details of the account: **FTP Username**, **FTP Host** and **FTP Port**. The host is the main domain of the project, and the port is 21. On a project on the panel's free `panelalpha.online` address the host is the server's own IP address instead, because the PanelAlpha proxy that serves that address carries the website only, not port 21.
 
-<!-- TODO screenshot: assets/files-ftp-login-details.png. Show the FTP login details with FTP Username, FTP Host (example.com) and FTP Port 21. No real passwords. -->
+![Adding an FTP account named editor with a generated password, then its login details with FTP Username, FTP Host and FTP Port](../../assets/single-server/files-ftp-login-details.gif)
 
 ## SFTP accounts
 
@@ -46,7 +46,7 @@ Keys can be `ssh-ed25519`, `ecdsa-sha2-nistp256`, `ecdsa-sha2-nistp384`, `ecdsa-
 
 The login details show **SFTP Username**, **SFTP Host** and **SFTP Port**. The host is the main domain of the project, or the server's own IP address on a project on the panel's free `panelalpha.online` address, which the PanelAlpha proxy serves on the web ports only. The port is 2222.
 
-<!-- TODO screenshot: assets/files-sftp-login-details.png. Show the SFTP login details with SFTP Username, SFTP Host (example.com) and SFTP Port 2222, and the Actions menu with Disconnect All. No real passwords. -->
+![Adding an SFTP account named deploy with a generated password, its login details with SFTP Username, SFTP Host and SFTP Port, and the Actions menu of the page](../../assets/single-server/files-sftp-login-details.gif)
 
 To cut off everyone at once, open **Actions** and select **Disconnect All**.
 

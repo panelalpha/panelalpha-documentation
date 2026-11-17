@@ -8,7 +8,7 @@ nav:
 
 # Tasks
 
-Tasks lists the work the Engine does for your projects, such as deploys, backups and staging copies, with its status and how long it took. It is in **Single Server Free**. Open it from the user menu with **Tasks**. The menu item shows a dot while a task runs.
+Tasks lists the work the Engine does for your projects, such as deploys, backups and staging copies, with its status and how long it took. Open it from the user menu with **Tasks**. The menu item shows a dot while a task runs.
 
 ## Reading the list
 
@@ -24,7 +24,7 @@ The last four task names are the server's own housekeeping: a base image is an i
 
 Hover over a failed task to see why it failed, when the Engine gave a reason.
 
-<!-- TODO screenshot: assets/tasks-list.png. Show Tasks with the Status and Task type filters and rows in the states Completed, Running and Failed. Columns Task, Project, Started, Duration and Status must be visible. Use example project names (example.com). -->
+![Tasks opened from the user menu: deploys, backups and variable changes with their project, start time, duration and status, and the Status filter](../../assets/single-server/tasks-list.gif)
 
 ## Finding a task
 

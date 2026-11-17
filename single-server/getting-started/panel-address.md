@@ -28,7 +28,7 @@ One kind of name is the exception: a name under `panelalpha.direct` that is not 
 2. Open **Settings**. On the **General** tab, find **Application URL**.
 3. Replace the address. Use `https://` and a host, with no path, for example `https://panel.example.com` or `https://panel.example.com:8443`.
 
-   <!-- TODO screenshot: assets/panel-address-application-url-field.png. Show Settings, General tab, with the Application URL field holding https://panel.example.com and the Save Changes button. Crop to the field and the button. -->
+   ![Settings opened from the user menu, General tab: Server name, Default language, Default date format, Application URL, Default domain and Save Changes](../../assets/single-server/settings-general-tab.gif)
 
 4. Select **Save Changes**.
 
@@ -43,8 +43,6 @@ A port other than 443 needs the server's operator to allow it once with `pae sys
 Domains you added by hand to the panel project stay.
 
 Moving the address works when the panel's project is protected. The Engine's protection refuses only deleting the main domain with a token. The move adds the new domain, makes it the main domain and only then deletes the old one, which is no longer the main domain by then.
-
-**Settings** is a Single Server Free page. In Plus and Pro, saving the address under **Configuration > General** in the Admin Area only stores the new address. It does not add a domain on the Engine, get a certificate or change the address the panel answers on.
 
 ## Troubleshooting
 

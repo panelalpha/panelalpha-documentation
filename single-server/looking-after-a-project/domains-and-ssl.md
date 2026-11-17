@@ -14,18 +14,18 @@ A project answers on one main domain. You can point your own domain at it, add m
 
 New projects get an address from the default domain set in the panel: [Settings](../the-panel/settings.md). To use your own domain as the project's main domain:
 
-1. Open the project and select **Change Domain** next to the project address at the top of the page.
+1. Open the project and select **Change Domain** next to the project address at the top of the page. While the project's domain does not point at this server, the button reads **DNS propagation is in progress** instead and opens the same dialog.
 2. In **Set Your Domain**, choose **Map your own domain** and enter the domain, for example `example.com`.
 3. Select **Use This Domain**. The panel changes the project's address at once, and the dialog then shows **Set DNS Records** with the records to set at your domain provider:
 
    - Name `example.com` (or `@`), type `A`, address the IPv4 address of your server. The dialog shows the address.
    - Name `www.example.com`, type `CNAME`, address `example.com`.
 
-   <!-- TODO screenshot: assets/domains-set-your-domain-dns.png. Show the Set Your Domain dialog after Use This Domain: Your domain example.com on the config step, and the open Set DNS Records section with the A record (203.0.113.10) and the CNAME record for www.example.com. Crop to the dialog. -->
+   ![The DNS propagation is in progress badge of the Northwind Store project opens Set Your Domain: the domain shop.example.com with Change, and Set DNS Records with the A record and the CNAME record for www](../../assets/single-server/domains-set-your-domain-dns.gif)
 
 4. Set these records. Wait for them to spread. This takes from 2 minutes to a few hours.
 
-The same records show when you open **Change Domain** again on a project that already has a domain.
+The same records show when you open **Change Domain** (or **DNS propagation is in progress**) again on a project that already has a domain. **Change** next to `Your domain` in that dialog takes you back to step 2.
 
 **Making another domain the main one changes the project's address, not the project.** The project keeps its name in My Projects and on the server: its account, its home directory and its files stay as they are, and only its main domain and the address it answers on change. The new main domain serves the same folder the old one served, and a WordPress site's addresses are updated, so its pages and **WP Admin** go on working. The project's custom proxy rules move to the new main domain, but its tunnel and its visitor statistics do not: a tunnel serves one domain name, and the statistics the panel shows are the main domain's, so they start again from zero.
 
@@ -37,9 +37,16 @@ The panel checks the name before it changes anything: `Domain Name must be valid
 
 ### When the domain does not point at the server
 
-The panel warns: `The A record may be missing, pointing elsewhere, or routed through a proxy such as Cloudflare.` Select **Fix it now** and set the records above. If DNS cannot point at the server yet, the dialog can make a temporary address so you can look at the site first: [Staging and preview](../projects/staging-and-preview.md).
+The panel checks the project's domain against the server. When it does not point here, the top bar of the project shows **DNS propagation is in progress** in place of **Change Domain**, and **My Projects** shows a warning icon next to the project's address.
 
-<!-- TODO screenshot: assets/domains-dns-warning.png. Show the warning about the A record with the Fix it now button. -->
+Point at the icon. It reads `The A record may be missing, pointing elsewhere, or routed through a proxy such as Cloudflare.`
+
+- **Fix it now** opens **Set Your Domain** with the records to set: the ones in step 3 above.
+- **Ignore** turns the warning off for this project. The tip then reads `DNS alerts are ignored for this instance.`, and **Restore Alerts** turns it back on.
+
+If DNS cannot point at the server yet, **Set Your Domain** also offers **Generate URL** under `Not live yet? Preview the site on the server`, a temporary address so you can look at the site first: [Staging and preview](../projects/staging-and-preview.md).
+
+<!-- TODO screenshot: assets/domains-dns-warning.png. Show the warning icon next to the address in My Projects with its tip open: the text about the A record, Fix it now and Ignore. -->
 
 ## Adding a domain
 
@@ -48,7 +55,7 @@ The panel warns: `The A record may be missing, pointing elsewhere, or routed thr
 3. For an addon domain, enter the domain without `www.`. The panel adds `www` itself. For a subdomain, enter the name and choose the parent domain, for example `shop` under `example.com`.
 4. Select **Add Domain**.
 
-<!-- TODO screenshot: assets/domains-list.png. Show Advanced, Domains with the main domain example.com, an addon domain and shop.example.com. Make visible the SSL column, the star, the edit action and the Add Domain button. -->
+![Advanced > Domains of the Northwind Store project: Add Domain with the type Addon Domain and the domain example.com, then the list with the SSL Status column and the row actions](../../assets/single-server/domains-list.gif)
 
 Set the DNS records for the new domain at your domain provider, as in the section above.
 
@@ -79,7 +86,7 @@ Each domain has a certificate: from Let's Encrypt, one you provide or a self-sig
 3. For **Let's Encrypt**, select **Generate**. The panel shows `The SSL certificate is being generated.` The domain must already point at the server, or the certificate waits for DNS.
 4. For a certificate of your own, fill in **Certificate (CRT)** and **Private Key (KEY)**. **Certificate Authority Bundle (CABUNDLE)** is optional. Select **Install**. The panel shows `The SSL certificate has been installed.`
 
-<!-- TODO screenshot: assets/domains-ssl-dialog.png. Show the Set SSL Certificate dialog with the SSL provider list, Let's Encrypt chosen and the Generate button. Include the Certificate (CRT) and Private Key (KEY) fields if they show for a custom certificate. -->
+![The padlock of a domain opens Set SSL Certificate: Custom Certificate shows Certificate (CRT) and Private Key (KEY), and Let's Encrypt shows Generate](../../assets/single-server/domains-ssl-dialog.gif)
 
 If installation fails the status reads `The SSL certificate installation for example.com has failed. Please contact support.` Check that the DNS records are right and try again.
 

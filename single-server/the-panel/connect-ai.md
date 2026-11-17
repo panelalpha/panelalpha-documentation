@@ -8,7 +8,7 @@ nav:
 
 # Connect AI
 
-Connect AI lets an AI assistant manage your projects by chat. The assistant talks to the panel over MCP (the Model Context Protocol) with a token you create. It is in the single server editions only. Open **Connect AI** in the top menu.
+Connect AI lets an AI assistant manage your projects by chat. The assistant talks to the panel over MCP (the Model Context Protocol) with a token you create. Open **Connect AI** in the top menu.
 
 The assistant can reach all your live and staging projects. It cannot reach the project the panel itself runs in, nor any other project that runs a panel.
 
@@ -20,7 +20,7 @@ You connect your tool from the panel. Every step below is on the **Connect AI** 
 2. Under **Generate an MCP token**, select **Create Token**. Enter a **Token Name**, such as `Claude on my laptop`, and create it. If you already have a token, select **use one you already have** instead.
 3. **The token is shown once.** You cannot see it again after you close the dialog. Copy the token, then confirm with `I have saved my token in a safe place`.
 
-   <!-- TODO screenshot: assets/connect-ai-token-created.png. Show the dialog after Create Token, with the Token Name (Claude on my laptop), the new token shown once (a fake value such as pa_xxxxxxxx) and the "I have saved my token in a safe place" confirmation. No real tokens. -->
+   ![Connect AI: Create Token, the Token Name Claude on my laptop, the new token shown once (hidden here) with the warning to save it, the confirmation I have saved my token in a safe place and Continue](../../assets/single-server/connect-ai-token-created.gif)
 
 4. The next step shows what to put into your tool, with your panel address already filled in. Select **Copy**, paste it into your tool and replace `YOUR_TOKEN` with your token. For Claude Code it is a command for your terminal:
 
@@ -45,7 +45,7 @@ Your tool connects to the panel address with `/mcp` added, for example `https://
 1. Open **MCP URL & tokens**. The table shows **Name**, **Token**, **Last Used**, **Created**, **Status** and **Actions**.
 2. In the token's row, point at the rotate arrow in **Actions** to read **Revoke**, then select it and confirm.
 
-<!-- TODO screenshot: assets/connect-ai-tokens-table.png. Show MCP URL & tokens with the MCP Server URL (https://panel.example.com/mcp) and the table with Name, Token, Last Used, Created, Status and Actions, including the Revoke and Delete icons of a row, one with its Revoke tooltip open. -->
+![Connect AI, MCP URL & tokens: the MCP Server URL and the API Tokens table with Name, Token, Last Used, Created, Status and the Revoke and Delete actions](../../assets/single-server/connect-ai-tokens-table.gif)
 
 **A revoked token stops working at once.** Every request that uses it is refused. It stays in the list with the status `Revoked`. Select **Delete**, the bin in **Actions**, to remove it from the list for good. A delete cannot be undone.
 

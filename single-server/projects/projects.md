@@ -8,7 +8,7 @@ nav:
 
 # Projects
 
-A project is one site or app in PanelAlpha Single Server Edition. The panel runs on a PanelAlpha Engine, and every project lives on that one server. **Single Server Free** has no project limit. In **Single Server Plus** and **Single Server Pro** the plan and the licence set it: [Editions and licence](../editions/editions-and-licence.md).
+A project is one site or app in PanelAlpha Single Server Edition. The panel runs on a PanelAlpha Engine, and every project lives on that one server. The Community Edition has no project limit.
 
 ## The two kinds of project
 
@@ -28,13 +28,11 @@ Create one: [Create a project](create-a-project.md).
 
 ## The project list
 
-**My Projects** lists your projects as cards. Every card has a manage button (**Manage Site** on a WordPress card, **Manage** on others) and either a **WP Admin** button (WordPress) or an **Open Project** button. **Open Project** opens the site in a new tab when the project is on the panel's free `panelalpha.online` address; on a project with a domain of your own it opens the **Preview Site** window instead, whether or not that domain points to this server yet: [Staging and preview](staging-and-preview.md). In the table view each row ends with an **Actions** menu instead. What the menu offers depends on the kind of project and your edition: **Manage**, **WP Admin** (WordPress) or **Admin Area** (another app with its own admin login), **Show Logs**, **Push To Live**, **Staging**, **Update**, **Clear Cache**, **Share** and **Delete Project**.
+**My Projects** lists your projects as cards. Every card has a manage button (**Manage Site** on a WordPress card, **Manage** on others) and either a **WP Admin** button (WordPress) or an **Open Project** button. **Open Project** opens the site in a new tab when the project is on the panel's free `panelalpha.online` address; on a project with a domain of your own it opens the **Preview Site** window instead, whether or not that domain points to this server yet: [Staging and preview](staging-and-preview.md). In the table view each row ends with an **Actions** menu instead. What the menu offers depends on the kind of project: **Manage**, **WP Admin** (WordPress) or **Admin Area** (another app with its own admin login), **Show Logs**, **Push To Live**, **Staging**, **Update**, **Clear Cache** and **Delete Project**.
 
 ![My Projects with the Northwind Journal, memos and ntfy cards and their Manage Site, WP Admin, Manage and Open Project buttons, then the table view with the Actions menu of the Northwind Journal row open: Manage, WP Admin, Staging, Update, Clear Cache and Delete Project](../../assets/single-server/projects-list.gif)
 
 **WP Admin** signs you in to the WordPress dashboard without a password: [Managing WordPress](wordpress.md).
-
-**Share** is not shown in Single Server Free. Sharing a project with other people is a Single Server Pro feature: [Sharing projects](../editions/sharing-projects.md).
 
 ### Finding projects
 

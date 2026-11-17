@@ -8,7 +8,7 @@ nav:
 
 # Settings
 
-Settings holds the panel's own options: its name, language, date format, address, the default domain for new projects and the default backup schedule. The page exists in **Single Server Free** only. In Plus and Pro the general options are under **Configuration > General** in the Admin Area: [Admin Area](../editions/admin-area.md). The backup schedule for new projects is on the **Backups** tab of **Configuration > Default Plan**. The Admin Area has no backup store page in Plus and Pro: its menu has no **Remote Backups** entry for a single server, and it sends `/remote-backups` back to its home page. Create the store on the server with `pae backup:container:create`, as the Engine documents.
+Settings holds the panel's own options: its name, language, date format, address, the default domain for new projects and the default backup schedule.
 
 Open it from the user menu with **Settings**. It has two tabs, **General** and **Backups**. Save a change with **Save Changes**. The button stays off until something changed, and you see `Settings saved.` afterwards.
 
@@ -42,7 +42,7 @@ To disconnect, select **Disconnect** and confirm. **Disconnecting removes this s
 - **Default language**: the language people see before they choose their own. The default is English.
 - **Default date format**: how the panel writes dates. Choose `YYYY-MM-DD` (default), `DD.MM.YYYY`, `DD/MM/YYYY` or `MM/DD/YYYY`. There is no date format per account, so this one applies to everyone.
 
-<!-- TODO screenshot: assets/settings-general-tab.png. Show Settings, General tab with Server name, Default language, Default date format, Application URL, Default domain and the Save Changes button. Scroll or crop so all of them are visible. Use example values such as panel.example.com and example.com. -->
+![Settings opened from the user menu, General tab: Server name, Default language, Default date format, Application URL, Default domain and Save Changes](../../assets/single-server/settings-general-tab.gif)
 
 ## Application URL
 
@@ -76,7 +76,7 @@ A server whose Engine never created that store (the Engine predates it and has n
 3. Choose a **Store type**: Local, S3, SFTP, FTP or FTPS.
 4. Fill in the fields for that type and save. You see `Backup store saved.`
 
-   <!-- TODO screenshot: assets/settings-backup-store-form.png. Show Settings, Backups tab with the Configure store form: Store type chosen and its fields filled with example values (for Local, the Directory /opt/panelalpha/backups/local). No real keys or passwords. -->
+   ![Settings, Backups tab: Change store opens the store form with the Store type list (Local, S3, SFTP, FTP and FTPS) and the Directory of the Local store](../../assets/single-server/settings-backup-store-form.gif)
 
 | Type | Fields |
 |---|---|
@@ -109,7 +109,7 @@ These defaults apply to projects you create from now on, in this panel. Existing
 - **Frequency**: Daily (default), Weekly or Monthly. Weekly adds **Day of the week**. Monthly adds **Day of the month**, 1 to 28.
 - **Time**: the hour, 0 to 23, in which the projects' backups start. The default hour is 03:00 UTC. You see the time in your local time. Each new project gets its own minute inside that hour, so the projects of a server do not all back up at the same moment; the project's **Backups** tab shows its exact schedule. A project without a schedule starts its **Automatic Backups** dialog at this hour and its own minute too.
 
-<!-- TODO screenshot: assets/settings-backup-schedule.png. Show the schedule for new projects: Automatic backups, Backups to keep, Frequency and Time, with Daily and 03:00 selected. -->
+![Settings, Backups tab: the defaults for new projects, Automatic backups, Backups to keep, Frequency and Time](../../assets/single-server/settings-backup-schedule.gif)
 
 For taking and restoring a backup of one project: [Backups](../looking-after-a-project/backups.md).
 

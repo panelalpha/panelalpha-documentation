@@ -18,7 +18,7 @@ A project can have one staging copy, and a staging copy cannot have its own.
 2. Enter a **Subdomain** for the copy. The panel adds the project's own domain after it, so on `example.com` the name `staging` gives `staging.example.com`; enter only that name, without dots. A site on the panel's free `panelalpha.online` address does not ask for a name: the copy gets its own free address there when it is created, and you cannot enter an address in that zone. For a WordPress site you can tick **Skip Uploads Directory** to leave out `wp-content/uploads`, which saves space and time.
 3. Select **Create Staging**.
 
-<!-- TODO screenshot: assets/staging-create-form.png. Show the Staging form with the Subdomain field (`staging`), the line under it with the address it builds (`staging.example.com`), the Skip Uploads Directory box and the Create Staging button. -->
+![Staging in the top bar of the Northwind Store project: the Subdomain staging, the address staging.shop.example.com it builds, Create Staging, and the staging tab of the copy](../../assets/single-server/staging-create-form.gif)
 
 The panel shows `Staging Installation In Progress` and notifies you when the copy is ready. The copy appears under its live project, not as a separate project: in **My Projects** its `staging` tag sits on the live project's card (and in the table view it is a row under the live project), and the project's top bar has a `staging` tab for it. Select that tab to open the copy; its address is in its own top bar once the copy is ready.
 
@@ -35,7 +35,7 @@ The project page of a staging copy has no WordPress screens such as **Plugins** 
    - **Push structure changes in tables** and **Push tables with changed data**: the two lists hold the tables that differ between the copy and the live project. Tick **Push full database** and pick tables in either list to replace only those tables. Both lists are empty when nothing differs, and stay empty on a project without a database.
 3. Confirm. The panel shows `Push To Live In Progress`.
 
-<!-- TODO screenshot: assets/staging-push-to-live-dialog.png. Show the Push To Live dialog of a PHP hosting staging copy with Overwrite files, Push full database and the two table lists. -->
+![Push To Live on the staging copy: Overwrite files, Push full database and the table lists](../../assets/single-server/staging-push-to-live-dialog.gif)
 
 When the panel cannot compare the two databases, the window says `Could not compare database changes. You can still push files and database, but selective table changes are unavailable.` and the two lists are not shown: a push then copies the whole database.
 
@@ -67,7 +67,7 @@ A preview link opens the site on a temporary address on this server, so you can 
 
 The window shows `Your Site Temporary URL:`. While the first link is still valid, the panel shows it again.
 
-<!-- TODO screenshot: assets/staging-preview-link-window.png. Show the Preview Site window with "Your Site Temporary URL:", an example address, and the Copy URL and Visit Site buttons. -->
+![Open Project on a domain that does not point here yet opens Preview Site: Get Temporary URL, Your Site Temporary URL, Copy URL and Visit Site](../../assets/single-server/staging-preview-link-window.gif)
 
 The domain warning on a project also has **Not live yet? Preview the site on the server** with a **Generate URL** button.
 

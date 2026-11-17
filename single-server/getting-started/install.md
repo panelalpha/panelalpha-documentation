@@ -107,10 +107,6 @@ docker exec -it panel docker exec -it -u www-data panelalpha-v1-panel php /app/b
 
 Enter a password that follows the rules above when the command asks for it, then sign in with that email address. The message stays until a panel account exists. Remove `PANELALPHA_USER_EMAIL` and `PANELALPHA_USER_PASSWORD` and the panel opens the setup wizard again, as described above.
 
-## Licence key
-
-Single Server Free needs no licence key. The paid editions do. You enter it with a command on the server: [Editions and licence](../editions/editions-and-licence.md).
-
 ## Memory limit
 
 The panel runs in a small account. To give it more memory, for example 2048 MB, run this. The change applies at the next rebuild:

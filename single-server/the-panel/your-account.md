@@ -16,9 +16,9 @@ Your account is your sign-in on the panel: your name, email address, password, t
 2. Change **First Name**, **Last Name**, **Company Name** or **Language**. First and last name are required, up to 20 characters each.
 3. Save. You see `Personal information details have been updated.`
 
-   <!-- TODO screenshot: assets/account-personal-information.png. Show My Account, Personal Information with First Name, Last Name, Company Name and Language (example values) and the Change Email Address button. -->
+   ![My Account opened with Account Details in the user menu: First Name, Last Name, Company Name, Language and Change Email Address](../../assets/single-server/account-personal-information.gif)
 
-**New Device Detection Notification** lets you choose what counts as a new device (new IP address, device, browser or a combination). The panel stores the choice, but in Single Server Free it does not send an email about a new device.
+**New Device Detection Notification** lets you choose what counts as a new device (new IP address, device, browser or a combination). The panel stores the choice, but it does not send an email about a new device.
 
 The dates you see follow the panel default, not a setting of your own: [Settings](settings.md). The user menu also has a **Dark Mode** switch that turns Dark Mode on and off: [Around the panel](around-the-panel.md).
 
@@ -46,7 +46,7 @@ Two-factor authentication asks for a code from an app on your phone each time yo
 3. Enter the code the app shows.
 4. Save your backup codes and confirm that you did.
 
-   <!-- TODO screenshot: assets/account-two-factor-setup.png. Show the Two-Factor Authentication dialog with the QR code and the code field. Blur the QR code and the secret so no real secret shows. -->
+   ![My Account, Security Settings: the Two-Factor Authentication switch opens the dialog with the QR code, the code to type by hand and the Code field (QR code and code hidden here)](../../assets/single-server/account-two-factor-setup.gif)
 
 You see `Two-Factor Authentication has been enabled.` **Each backup code works once.** Keep them somewhere other than your phone. To turn it off, open the same dialog and confirm. You see `Two-Factor Authentication has been disabled.`
 
@@ -56,7 +56,7 @@ You see `Two-Factor Authentication has been enabled.` **Each backup code works o
 
 **Active Devices** lists where you are signed in, with **IP Address**, **Browser**, **Device** and **Last Login**. Your current one is marked `Current Device`. Select the logout icon (tip **Log Out Device**) on a row to end that session. The bin icon (tip **Forget Device**) removes a device you no longer use. With nothing to show the page says `No Active Devices Found`.
 
-<!-- TODO screenshot: assets/account-active-devices.png. Show Active Devices with the columns Device, Browser, IP Address and Last Login, one row marked Current Device and the Log Out Device button. Use 203.0.113.10 as the address. -->
+![My Account, Active Devices: each session with its IP address, browser, device and last login, and the row marked Current Device](../../assets/single-server/account-active-devices.gif)
 
 ## Forgotten password
 

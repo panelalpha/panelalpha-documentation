@@ -19,7 +19,7 @@ A project can have MySQL databases and database users. You manage them in the pr
 
 The whole name, the prefix included, is at most 64 characters long, MySQL's limit. A name starts with a letter, an underscore or a hyphen and uses only letters, numbers, underscores and hyphens.
 
-   <!-- TODO screenshot: assets/databases-list-tab.png. Show Advanced, MySQL Databases, Databases tab with one database in the list and the Add Database button. Show the tabs Databases, Users and PHPMyAdmin. -->
+   ![Advanced > MySQL Databases of the Northwind Journal project with the tabs Databases, Users and PHPMyAdmin: Add Database with the name newsletter, and the new database in the list](../../assets/single-server/databases-list-tab.gif)
 
 ## Creating a database user
 
@@ -43,7 +43,7 @@ On the **Users** tab, select the eye action of the user (its tooltip reads **Sho
 
 **Database User and Database Password are masked.** Select **Show** to read one. The panel asks for your password first when you have not entered it for a while, and each request is recorded in the project's **Logs**, so you can see when the login or the password was read.
 
-<!-- TODO screenshot: assets/databases-access-details.png. Show the MySQL Access Details window with MySQL User, a real MySQL Host and MySQL Port. No real passwords. -->
+![The Users tab of MySQL Databases: the eye action of the WordPress database user opens MySQL Access Details with MySQL User, MySQL Host and MySQL Port](../../assets/single-server/databases-access-details.gif)
 
 ## Renaming and deleting
 
@@ -58,7 +58,7 @@ phpMyAdmin lets you work on the records directly. The panel logs you in for you.
 1. Go to **Advanced > MySQL Databases** and select the **PHPMyAdmin** tab.
 2. Select **Log In to PHPMyAdmin**. The panel warns: `This feature should be used by advanced users only.`
 
-<!-- TODO screenshot: assets/databases-phpmyadmin-tab.png. Show the PHPMyAdmin tab with the warning "This feature should be used by advanced users only." and the Log In to PHPMyAdmin button. -->
+![The PHPMyAdmin tab of MySQL Databases with the warning This feature should be used by advanced users only and the Log In to PHPMyAdmin button](../../assets/single-server/databases-phpmyadmin-tab.gif)
 
 If the project's domain does not point at the server yet, the panel warns that phpMyAdmin may not open and offers a temporary address until DNS is set. If you have no databases you see `No databases available.`
 

@@ -16,7 +16,6 @@ section:
     - title: Projects
     - title: Looking After a Project
     - title: The Panel
-    - title: Editions
 card:
   title: Single Server Edition
   description: A web hosting panel you install on your own VPS.
@@ -35,7 +34,7 @@ card:
 
 PanelAlpha Single Server Edition is a web hosting panel you install on your own VPS. You open it in a browser and look after your sites there. The Engine does the hosting underneath, and the panel gives you a screen for it.
 
-The free edition is for one person and has no project limit. In the panel you can:
+This guide covers the Community Edition. It is free and open source, it is for one person and it has no project limit. In the panel you can:
 
 - Create a WordPress site, or deploy an app from Git or from files
 - Import a WordPress site from another host
@@ -83,14 +82,4 @@ Go to **My Projects**, select **Create First Project** and choose **WordPress**,
 - **[Projects](projects/projects.md)**: [Creating a project](projects/create-a-project.md), [managing WordPress](projects/wordpress.md), [importing a WordPress site](projects/importing-wordpress.md), [Git](projects/git.md) and [staging and preview links](projects/staging-and-preview.md).
 - **[Looking after a project](looking-after-a-project/domains-and-ssl.md)**: [Domains and SSL](looking-after-a-project/domains-and-ssl.md), [databases](looking-after-a-project/databases.md), [backups](looking-after-a-project/backups.md), [files, FTP and SFTP](looking-after-a-project/files-and-access.md), [cron jobs and PHP](looking-after-a-project/cron-and-php.md) and [statistics and logs](looking-after-a-project/statistics-and-logs.md).
 - **[The panel](the-panel/settings.md)**: [Settings](the-panel/settings.md), [tasks](the-panel/tasks.md), [your account](the-panel/your-account.md), [Connect AI](the-panel/connect-ai.md) and [around the panel](the-panel/around-the-panel.md).
-- **[Editions](editions/editions-and-licence.md)**: [Editions and licence](editions/editions-and-licence.md), [the Admin Area](editions/admin-area.md) and [sharing projects](editions/sharing-projects.md).
 
-## Editions
-
-| Edition | People | Admin Area | Licence key |
-|---|---|---|---|
-| Single Server Free | one | no | not needed |
-| Single Server Plus | one default user | yes | yes |
-| Single Server Pro | many, with shared access to projects | yes | yes |
-
-What each one allows and what the limits are: [Editions and licence](editions/editions-and-licence.md).
