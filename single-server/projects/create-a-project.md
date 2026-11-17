@@ -1,6 +1,6 @@
 ---
 title: "Create a project"
-description: "You create a project from WordPress, from a Git repository or from files. This page gives the steps for each and the fixes for the errors you may see..."
+description: "You create a project from WordPress, from a Git repository or from files. This page gives the steps for each."
 nav:
   group: Projects
   order: 2

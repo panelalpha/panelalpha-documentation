@@ -1,6 +1,6 @@
 ---
 title: Connecting Hermes
-description: Hermes registers the engine through its own command-line tool. --auth header is required. Hermes cannot take the token on that command, so your VPS also...
+description: "Hermes registers the engine through its own command-line tool. This page shows the command and the required --auth header."
 nav:
   group: Connecting Your AI
   order: 14

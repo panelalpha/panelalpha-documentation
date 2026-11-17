@@ -1,6 +1,6 @@
 ---
 title: "The panel address"
-description: "The panel address is the web address you open the panel on, for example https://panel.example.com. The installer sets it, and you can move it later in..."
+description: "The panel address is the web address you open the panel on, for example https://panel.example.com. You can move it later in Settings."
 nav:
   group: Getting Started
   order: 4

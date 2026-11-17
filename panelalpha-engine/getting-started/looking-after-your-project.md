@@ -1,6 +1,6 @@
 ---
 title: Looking after your project
-description: "Once a project is online, you keep using the same chat. Add a domain, take a backup, make a test copy or ask why a page looks wrong. You do not switch to a..."
+description: "Once a project is online, you keep using the same chat. Add a domain, take a backup, make a test copy or ask why a page looks wrong."
 nav:
   group: Getting Started
   order: 5

@@ -1,6 +1,6 @@
 ---
 title: Connecting other assistants
-description: Use this page when your assistant is not in the pae connect list. On your VPS, pae connect still creates a token. You then put four values into whatever...
+description: "Use this page when your assistant is not in the pae connect list. On your VPS, pae connect still creates a token for it."
 nav:
   group: Connecting Your AI
   order: 16

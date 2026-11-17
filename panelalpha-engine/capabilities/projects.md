@@ -1,6 +1,6 @@
 ---
 title: Projects
-description: "A project is one hosting account: one website or application. Everything else on the engine belongs to a project: its domains, its databases, its files, its..."
+description: "A project is one hosting account: one website or application. This page covers creating, inspecting, rebuilding, cloning, suspending and protecting one."
 nav:
   group: Capabilities
   order: 2

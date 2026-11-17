@@ -1,6 +1,6 @@
 ---
 title: "Git"
-description: "A Git project is a container project that the panel builds from your repository. This page covers what you do with it after the first deploy: redeploy, change..."
+description: "A Git project is a container project that the panel builds from your repository. This page covers redeploys, branches, variables and keys."
 nav:
   group: Projects
   order: 5

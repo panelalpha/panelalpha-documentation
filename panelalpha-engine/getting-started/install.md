@@ -1,6 +1,6 @@
 ---
 title: Install
-description: "This is the one-time setup. Check your VPS against the list below, log in as root over SSH, run one command and wait for it to print your engine's addresses..."
+description: "The one-time setup: check your VPS, log in as root over SSH, run one command and wait for the engine's addresses and the command to connect your assistant."
 nav:
   group: Getting Started
   order: 1

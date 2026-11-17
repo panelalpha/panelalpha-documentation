@@ -1,6 +1,6 @@
 ---
 title: "Backups"
-description: "A backup is a copy of one project that you can restore later. Backups are written to a store that is set up once for the whole panel. Most servers need..."
+description: "A backup is a copy of one project that you can restore later. This page shows how to make, schedule, restore and download backups."
 nav:
   group: Looking After a Project
   order: 3

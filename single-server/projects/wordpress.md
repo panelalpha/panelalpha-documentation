@@ -1,6 +1,6 @@
 ---
 title: "Managing WordPress"
-description: "This page shows how to log in to a WordPress site, update it, manage plugins and themes, and change its settings in the panel. Create the site first..."
+description: "This page shows how to log in to a WordPress site, update it, manage plugins and themes, and change its settings in the panel."
 nav:
   group: Projects
   order: 3

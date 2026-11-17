@@ -1,6 +1,6 @@
 ---
 title: Security
-description: The engine host is a privileged machine by design. The engine controls every container on it, and the installer replaces the firewall and the domain-name...
+description: "The engine host is a privileged machine by design. This page covers password protection, how projects are kept apart and the firewall."
 nav:
   group: Capabilities
   order: 9

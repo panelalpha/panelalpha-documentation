@@ -1,6 +1,6 @@
 ---
 title: Visitor statistics
-description: The engine counts visits and transfer from the webserver's access logs for each hostname. Ask in chat. You do not download a log file to answer how much...
+description: "The engine counts visits and transfer from the webserver's access logs for each hostname. Ask in chat to see them."
 nav:
   group: Capabilities
   order: 12

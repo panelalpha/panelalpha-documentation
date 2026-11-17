@@ -1,6 +1,6 @@
 ---
 title: "Your account"
-description: "Your account is your sign-in on the panel: your name, email address, password, two-factor authentication and the devices you are signed in on. Open the user..."
+description: "Your account is your sign-in on the panel: your name, email address, password, two-factor authentication and the devices you are signed in on."
 nav:
   group: The Panel
   order: 3

@@ -1,6 +1,6 @@
 ---
 title: "panelalpha.yaml"
-description: "panelalpha.yaml tells the engine what it cannot work out from your files: which known app this is, extra commands, environment values, a compose file of its..."
+description: "panelalpha.yaml tells the engine what it cannot work out from your files, such as which known app this is and extra commands to run."
 nav:
   group: Supported Projects
   order: 4

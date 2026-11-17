@@ -1,6 +1,6 @@
 ---
 title: WordPress and known apps
-description: WordPress is a main way to use the engine, not an extra. Many hosting accounts on it are WordPress sites. You can ask the engine to set up a new one without...
+description: "WordPress is a main way to use the engine, not an extra. Many hosting accounts on it are WordPress sites."
 nav:
   group: Capabilities
   order: 7

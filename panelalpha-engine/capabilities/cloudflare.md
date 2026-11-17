@@ -1,6 +1,6 @@
 ---
 title: Cloudflare
-description: Cloudflare lets visitors reach a site through Cloudflare's network instead of pointing a DNS record straight at your VPS. The engine opens an outbound...
+description: "Cloudflare lets visitors reach a site through Cloudflare's network instead of pointing a DNS record straight at your VPS."
 nav:
   group: Capabilities
   order: 10

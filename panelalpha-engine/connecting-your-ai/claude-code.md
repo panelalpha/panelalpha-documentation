@@ -1,6 +1,6 @@
 ---
 title: Connecting Claude Code
-description: Claude Code is the one assistant the engine sets up for you. At the end of install it prints the exact commands, with your address and a token already...
+description: "Claude Code is the one assistant the engine sets up for you. This page shows how to connect it and check the connection."
 nav:
   group: Connecting Your AI
   order: 3

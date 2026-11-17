@@ -1,6 +1,6 @@
 ---
 title: "First login"
-description: "At your first visit the setup wizard creates your account. Open the panel address over HTTPS and follow the steps..."
+description: "At your first visit the setup wizard creates your account. This page shows the wizard and how to sign in later."
 nav:
   group: Getting Started
   order: 3

@@ -1,6 +1,6 @@
 ---
 title: How a deploy works
-description: When you ask your assistant to put a project online, the engine runs one process from start to finish. That process is a deploy. You stay in the chat. You...
+description: "When you ask your assistant to put a project online, the engine runs one process from start to finish. That process is a deploy."
 nav:
   group: Getting Started
   order: 4

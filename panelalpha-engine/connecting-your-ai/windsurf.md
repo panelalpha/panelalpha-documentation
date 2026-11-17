@@ -1,6 +1,6 @@
 ---
 title: Connecting Windsurf
-description: Windsurf's current agent (Devin Local) registers the engine through the Devin command-line tool. Older Cascade tabs read a JSON file instead; that path is...
+description: "Windsurf's current agent (Devin Local) registers the engine through the Devin command-line tool."
 nav:
   group: Connecting Your AI
   order: 12

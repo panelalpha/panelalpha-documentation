@@ -1,6 +1,6 @@
 ---
 title: "Projects"
-description: "A project is one site or app on your server. There are two kinds: PHP hosting projects (WordPress and other PHP sites) and container projects (Git or files)..."
+description: "A project is one site or app on your server. This page explains the two kinds of project, the project list and the project page."
 nav:
   group: Projects
   order: 1

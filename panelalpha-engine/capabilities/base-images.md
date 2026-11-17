@@ -1,6 +1,6 @@
 ---
 title: "Your own base images"
-description: "Every container project has its own Docker, so nothing one project builds is reused by the next. When many projects start from the same heavy Dockerfile,..."
+description: "Every container project has its own Docker, so nothing one project builds is reused by the next. Build the common part once as your own base image."
 nav:
   group: Capabilities
   order: 13

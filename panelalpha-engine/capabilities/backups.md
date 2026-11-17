@@ -1,6 +1,6 @@
 ---
 title: Backups
-description: A backup is a complete snapshot of one project. For a traditional PHP project that is its home folder and one dump of each of its databases. For a container...
+description: "A backup is a complete snapshot of one project. For a traditional PHP project that is its home folder and one dump of each of its databases."
 nav:
   group: Capabilities
   order: 3

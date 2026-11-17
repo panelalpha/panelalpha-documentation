@@ -1,6 +1,6 @@
 ---
 title: What your repository needs
-description: The engine identifies your application from its files. If the identifying file is not at the top level of the repository, you get an unexpected result and a...
+description: "The engine identifies your application from its files. This page lists what each kind of project needs in its repository."
 nav:
   group: Supported Projects
   order: 3

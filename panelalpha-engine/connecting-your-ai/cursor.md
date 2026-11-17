@@ -1,6 +1,6 @@
 ---
 title: Connecting Cursor
-description: pae connect cursor prints an install link for the MCP connection and a separate prompt for the engine plugin. Open the link on your computer to add the...
+description: "pae connect cursor prints an install link for the MCP connection and a separate prompt for the engine plugin."
 nav:
   group: Connecting Your AI
   order: 5

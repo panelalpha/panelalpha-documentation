@@ -1,6 +1,6 @@
 ---
 title: Push to deploy
-description: "Instead of asking the assistant to pull every time, you can have your git host call the engine itself: push to the tracked branch, and the project redeploys..."
+description: "Instead of asking the assistant to pull every time, your git host can call the engine itself: push to the tracked branch and the project deploys."
 nav:
   group: Capabilities
   order: 11

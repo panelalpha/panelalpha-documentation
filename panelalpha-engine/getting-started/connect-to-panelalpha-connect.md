@@ -1,6 +1,6 @@
 ---
 title: "Connect to PanelAlpha Connect"
-description: "PanelAlpha Connect is the customer portal; the engine reaches it at https://hub.panelalpha.com. Once your engine is connected to your Connect account,..."
+description: "PanelAlpha Connect is the customer portal at https://hub.panelalpha.com. This page shows how to connect your engine to it."
 nav:
   group: Getting Started
   order: 11

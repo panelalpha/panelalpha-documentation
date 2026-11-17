@@ -1,6 +1,6 @@
 ---
 title: Connecting with Git
-description: Most projects on the engine start from a git repository. You give the assistant a link. It creates the project, clones the code, works out the stack, and...
+description: "Most projects on the engine start from a git repository. You give the assistant a link. This page covers private repositories, tokens and deploy keys."
 nav:
   group: Capabilities
   order: 1

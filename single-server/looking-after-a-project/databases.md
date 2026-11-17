@@ -1,6 +1,6 @@
 ---
 title: "Databases"
-description: "A project can have MySQL databases and database users. You manage them under Advanced > MySQL Databases, which has the tabs Databases, Users and PHPMyAdmin..."
+description: "A project can have MySQL databases and database users. This page shows how to create them, give access and open phpMyAdmin."
 nav:
   group: Looking After a Project
   order: 2

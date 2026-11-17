@@ -1,6 +1,6 @@
 ---
 title: "Settings"
-description: "Settings holds the panel's own options: its name, language, date format, address, the default domain for new projects and the default backup schedule. The..."
+description: "Settings holds the panel's own options: its name, language, date format, address, default domain for new projects and default backup schedule."
 nav:
   group: The Panel
   order: 1

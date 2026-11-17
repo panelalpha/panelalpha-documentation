@@ -1,6 +1,6 @@
 ---
 title: Connecting your AI
-description: Once your assistant is connected, you run your hosting by describing what you want in a chat window. You say "list my projects", "set up WordPress", "deploy...
+description: "Once your assistant is connected, you run your hosting by describing what you want in a chat window."
 nav:
   group: Connecting Your AI
   order: 1

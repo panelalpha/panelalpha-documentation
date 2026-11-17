@@ -1,6 +1,6 @@
 ---
 title: Telemetry
-description: Telemetry is reports your engine sends to PanelAlpha about deploys and about projects that later stopped serving themselves. It exists so a failure that...
+description: "Telemetry is reports your engine sends to PanelAlpha about deploys and about projects that later stopped serving themselves."
 nav:
   group: Getting Started
   order: 6

@@ -1,6 +1,6 @@
 ---
 title: Configure the engine
-description: "pae configure on your VPS walks through the engine's own settings: the address assistants use, which projects may call the engine's own API, what those..."
+description: "pae configure on your VPS walks through the engine's own settings, such as the address assistants use and which projects may call the engine."
 nav:
   group: Getting Started
   order: 10
