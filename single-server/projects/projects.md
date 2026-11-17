@@ -30,7 +30,7 @@ Create one: [Create a project](create-a-project.md).
 
 **My Projects** lists your projects as cards. Every card has a manage button (**Manage Site** on a WordPress card, **Manage** on others) and either a **WP Admin** button (WordPress) or an **Open Project** button. **Open Project** opens the site in a new tab when the project is on the panel's free `panelalpha.online` address; on a project with a domain of your own it opens the **Preview Site** window instead, whether or not that domain points to this server yet: [Staging and preview](staging-and-preview.md). In the table view each row ends with an **Actions** menu instead. What the menu offers depends on the kind of project and your edition: **Manage**, **WP Admin** (WordPress) or **Admin Area** (another app with its own admin login), **Show Logs**, **Push To Live**, **Staging**, **Update**, **Clear Cache**, **Share** and **Delete Project**.
 
-<!-- TODO screenshot: assets/projects-list-actions-menu.png. Show My Projects in the table view with two rows (example.com and shop.example.com) and the Actions menu open on one of them. -->
+![My Projects with the Northwind Journal, memos and ntfy cards and their Manage Site, WP Admin, Manage and Open Project buttons, then the table view with the Actions menu of the Northwind Journal row open: Manage, WP Admin, Staging, Update, Clear Cache and Delete Project](../../assets/single-server/projects-list.gif)
 
 **WP Admin** signs you in to the WordPress dashboard without a password: [Managing WordPress](wordpress.md).
 
@@ -60,14 +60,14 @@ Select **Manage** to open a project. The tabs are **Project Details**, **Monitor
 
 The project name is at the top of the project page. On a WordPress project, select the pencil next to it, type a new name and confirm with the check mark or Enter. The name also becomes the WordPress site title. The title also opens a search field (`Search project...`) to jump to another project.
 
-<!-- TODO screenshot: assets/projects-project-page-tabs.png. Show a project page with the tabs Project Details, Monitoring, Backups, Plugins and Advanced, and the Source or Installation card. -->
+![Manage Site on the Northwind Journal card opens the project page with the Installation card, then the tabs Monitoring, Backups, Plugins and Advanced one after another](../../assets/single-server/projects-project-page.gif)
 
 **Advanced** holds the rest, in a side list. It includes **Project Details**, which lists the plan, domain, URL, project name and creation date, and the pages for domains, databases, cron, files and logs. A WordPress project also shows its version there and its **Installation Details** on the same page: the directory and the database name, user, host and password. The **Git** page appears on every kind of project. The pages that belong to one kind appear only for that kind:
 
 - **Environment variables** for projects that are not WordPress. A WordPress project keeps its variables in **System Configuration**.
 - **Installed Themes**, **Users** and **Auto Updates** for WordPress.
 
-<!-- TODO screenshot: assets/projects-advanced-menu.png. Show the Advanced tab with its side list (Domains, MySQL Databases, Cron Jobs, File Manager, Logs and the others) so the reader sees the page names. Use a WordPress project. -->
+![The Advanced tab of the Northwind Journal WordPress project with its side list, opening Domains, MySQL Databases, Cron Jobs, File Manager and Logs](../../assets/single-server/projects-advanced-pages.gif)
 
 Where each page is described:
 

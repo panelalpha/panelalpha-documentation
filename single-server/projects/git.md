@@ -16,7 +16,7 @@ A project made from a Git repository is a container project that the panel build
 
 **Project Details** has a **Source** card with the repository and the deployed commit. It shows `Up to date` or how many commits behind the project is.
 
-![Redeploying a project: the Source card on Project Details shows the deployed commit and Up to date, Redeploy opens a window with the Branch list and the new commits, and the deploy runs with its steps and log until Deploy finished successfully](../../assets/single-server/git-redeploy.gif)
+![Redeploying the ntfy project: the Source card on Project Details shows Up to date, Redeploy opens a window with the Branch list and the new commits, and the deploy runs its steps and log until Deploy finished successfully](../../assets/single-server/git-redeploy.gif)
 
 1. Select **Redeploy** on the **Source** card.
 2. Pick the **Branch**. Choosing a branch other than the deployed one shows the warning `This resets the target to origin of the selected branch.`
@@ -33,7 +33,7 @@ The **Deploy Logs** window lists the steps **Preparing environment**, **Cloning 
 
 The earlier deploys are in **Advanced > Logs**, on the **Deploy Logs** tab: select a run in the list at the top to read it. A run that is still going shows the **Live** badge there as well.
 
-![Opening the deploy log: in My Projects in the table view, the Actions menu of a project has Show Logs, which opens the Deploy Logs window with the steps Preparing environment, Cloning repository and Running stack, the log, Download Logs and Close](../../assets/single-server/git-deploy-logs.gif)
+![Opening the deploy log: My Projects switched to the table view, the Actions menu of the ntfy row, Show Logs, and the Deploy Logs window with the steps Preparing environment, Cloning repository and Running stack, the log, Download Logs and Close](../../assets/single-server/git-deploy-logs.gif)
 
 ## Changing the branch
 
@@ -66,7 +66,7 @@ The panel keeps the variables with the project, so a redeploy does not lose them
 
 Saving applies them: the panel restarts the app container and the new values are in it when it comes back, a few seconds later. If you turn off **Restart the app container after saving**, the panel only stores them, and the next **Redeploy** applies them. **Restart** in **Advanced > Containers** does not apply stored variables.
 
-![Adding environment variables: Add variable with the key APP_ENV and the value production, then Import with the line APP_DEBUG=false, and the table with both variables and their edit and delete buttons](../../assets/single-server/git-environment-variables.gif)
+![Adding environment variables to the ntfy project in Advanced > Environment variables: Add variable with NTFY_BASE_URL set to https://ntfy.example.com, then Import with the line NTFY_BEHIND_PROXY=true, and the table with both variables and their edit and delete buttons](../../assets/single-server/git-environment-variables.gif)
 
 **Advanced > Environment variables** is on every project that is not WordPress; a Git project is one of them. A WordPress project has no such page: it keeps its configuration in **Advanced > System Configuration**.
 
@@ -99,13 +99,13 @@ An HTTPS repository uses an **access token**. Open **Advanced > Git**, find the 
 
 The card shows `Token saved` or `No token saved`. The panel tests the token before it saves it: it reads the repository with it, and it asks your Git provider's API (GitHub, GitLab, Bitbucket) for the repository with it. A token the provider does not know is not saved, however public the repository is, and the reason appears in a message. When the provider's API cannot be asked, or answers something other than a refusal, the panel keeps the token if it could read the repository. If the repository stops answering, the page shows `Cannot access the repository. Update your access token.`
 
-![The Access token card in Advanced > Git with No token saved, and the Access token window that Manage opens, with the token field and Save token](../../assets/single-server/git-access-token.gif)
+![The Access token card in Advanced > Git of the ntfy project shows No token saved, and Manage opens the Access token window with the token field and Save token](../../assets/single-server/git-access-token.gif)
 
 ## Deploy key
 
 An SSH repository uses a **deploy key**. **Advanced > Git** shows its **Public key** and **Fingerprint**. Add the key in the **Deploy keys** settings of your repository. Read-only access is enough.
 
-![Getting a deploy key in Advanced > Git: an SSH address (git@github.com:example/app.git) and a branch in the Connect repository card, then Generate deploy key shows the public key to add to the repository, with Connect and deploy](../../assets/single-server/git-deploy-key.gif)
+![Getting a deploy key in Advanced > Git of a WordPress project: an SSH address (git@github.com:example/northwind-theme.git) and a branch in the Connect repository card, then Generate deploy key shows the public key to add to the repository, with Connect and deploy](../../assets/single-server/git-deploy-key.gif)
 
 <!-- TODO screenshot: assets/single-server/git-deploy-key-card.png. Show the deploy key card of a project connected over SSH: the Public key (an example key, shortened), the Fingerprint and the Delete button. Needs a repository that has the key added. -->
 
