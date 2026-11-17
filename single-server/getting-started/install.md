@@ -58,7 +58,7 @@ The steps below are for an Engine you already have. You create a project for the
 
    If another task of the project is still running, for example the Engine still applying the access of step 3, the command refuses with a message that names that task, starting `Project 'panel' is busy:`. Wait a few seconds and run the same command again.
 
-   <!-- TODO screenshot: assets/install-deploy-terminal-output.png. Show the terminal after the pae project:deploy-archive command: the command with the example values (you@example.com, password hidden) and the end of the deploy log when the build has finished. Crop to the last screen of output. No real passwords. -->
+   ![The terminal after pae project:deploy-archive with the example values: the deploy log from Deploy started to Deploy finished successfully and Deployed /opt/panelalpha/panel.tar.gz to panel](../../assets/single-server/install-deploy-terminal-output.png)
 
 6. Open the panel address in a browser and sign in: [First login](first-login.md).
 

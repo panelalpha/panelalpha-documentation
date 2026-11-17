@@ -35,7 +35,7 @@ The wizard shows when the panel has no account yet. Every address on the panel l
 
 1. On the first screen, `A few steps to your first deploy.`, select **Start Now**.
 
-   <!-- TODO screenshot: assets/first-login-wizard-start.png. Show the first wizard screen with the text "A few steps to your first deploy." and the Start Now button. Crop to the wizard card. -->
+   ![The setup wizard of a new panel: A few steps to your first deploy and Start Now, the Sign in step with Connect with PanelAlpha Hub and Create a local account instead, the Server name step filled with Northwind Server, Jane Doe, you@example.com and a hidden password, then You're all set and Open PanelAlpha](../../assets/single-server/first-login-wizard.gif)
 
 2. On the **Sign in** step, choose how you sign in:
    - **Connect with Hub** uses your PanelAlpha Hub account. The account is kept in the Hub, not on this server, and you can sign in to it with GitHub or Google. Follow [Connecting with PanelAlpha Hub](#connecting-with-panelalpha-hub) below.
@@ -45,8 +45,6 @@ The wizard shows when the panel has no account yet. Every address on the panel l
    - **Your Name** is optional.
    - **Email** is your login.
    - **Password** and **Confirm password** must match. The password needs at least 8 characters, with 1 lowercase character, 1 uppercase character, 1 number and 1 symbol.
-
-   <!-- TODO screenshot: assets/first-login-wizard-account-form.png. Show the Server name step with Server name, Your Name, Email, Password and Confirm password filled with example values (you@example.com). Hide the password characters. No real customer data, tokens or passwords. -->
 
 4. Select **Continue**.
 5. On the **Done** step, which reads `You're all set.`, select **Open PanelAlpha**.
@@ -68,7 +66,7 @@ If you finish the wizard with a local account, you can connect later in **Settin
 
 The project list shows the projects the panel finds on the Engine. On a new Engine it is empty. The panel's own project is not in the list, and neither is another panel's.
 
-<!-- TODO screenshot: assets/first-login-empty-project-list.png. Show the project list of a new Engine with no projects and the Create First Project button. Include the user menu so the reader sees where Tasks and Settings are. -->
+![The top bar after the first login: the user menu opens with Light Mode, Account Details, Tasks, Settings, Join Our Community and Log Out](../../assets/single-server/first-login-landing.gif)
 
 Open the user menu to reach **Tasks** and **Settings**: [Settings](../the-panel/settings.md). To create your first site: [Create a project](../projects/create-a-project.md).
 
