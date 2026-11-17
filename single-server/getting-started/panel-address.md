@@ -1,6 +1,6 @@
 ---
 title: "The panel address"
-description: "The panel address is the web address you open the panel on, for example https://panel.example.com. You set it at install and you can move it later in..."
+description: "The panel address is the web address you open the panel on, for example https://panel.example.com. The installer sets it, and you can move it later in..."
 nav:
   group: Getting Started
   order: 4
@@ -8,11 +8,11 @@ nav:
 
 # The panel address
 
-The panel address is the web address you open the panel on, for example `https://panel.example.com`. You set it at install and you can move it later in **Settings**. The panel is served over HTTPS only, so it needs a certificate.
+The panel address is the web address you open the panel on, for example `https://panel.example.com`. The installer sets it, and you can move it later in **Settings**. The panel is served over HTTPS only, so it needs a certificate.
 
 ## Where the panel answers
 
-At install you give the panel a domain with `--domain`. If you also allow the server's own name (`--host-domain` in [Installing the panel](install.md)) and the Engine has one, the panel moves to that name on the first deploy. Otherwise it stays on your domain.
+The installer gives the panel its first address and prints it when it finishes. You can move the panel to a domain of your own later: [Moving the panel to another address](#moving-the-panel-to-another-address).
 
 What the browser shows depends on the name:
 
@@ -45,7 +45,7 @@ After the move:
 - If you use social login, a dialog titled `Update your login providers` lists new callback URLs. **Add them to each provider's settings, or social login stops working.**
 - Domains you added by hand to the panel project stay.
 
-A port other than 443 needs the server's operator to allow it once with `pae system:public-routing:allow panel --ports`. Without it the panel keeps port 443: [Installing the panel](install.md).
+A port other than 443 needs the server's operator to allow it once with `pae system:public-routing:allow panel --ports`. Without it the panel keeps port 443.
 
 ### More detail: a protected panel project
 
@@ -69,7 +69,17 @@ Moving the address works when the panel's project is protected. The Engine's pro
 
 **"The Engine could not register the domain. Try again later."** The Engine refused the new domain. Wait a little and save again.
 
-**"The panel does not know its own Engine project, so the domain cannot be registered."** The panel was deployed without `PANELALPHA_SELF_PROJECT`. A panel deployed from an archive: deploy it again with that value ([Installing the panel](install.md)). A panel from the one-line installer: [A panel from the one-line installer](install.md#a-panel-from-the-one-line-installer).
+**"The panel does not know its own Engine project, so the domain cannot be registered."** The panel was installed without the value that names its own project on the Engine. Set it on the server as `root`, with the panel's project name in place of `panel` (`pae domain:list` shows the name next to the panel's address), then save the address again:
+
+```bash
+TOKEN=$(pae api:token:create self-project -s --expires=1h)
+curl -k -X PUT https://127.0.0.1:2011/api/projects/panel/env-vars \
+  -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -H 'Accept: application/json' \
+  -d '{"env_vars":{"PANELALPHA_SELF_PROJECT":"panel"},"apply":"none"}'
+pae project:rebuild --project=panel
+```
+
+When the rebuild has finished, delete the token: `pae api:token:list` shows its id, and `pae api:token:delete <id>` removes it.
 
 **"<host> is the server's own name, which only the server's operator can give to an app. Allow it once on the server with `pae system:public-routing:allow <project> --host-domain`."** Run that command on the server with your panel project name, then save again.
 

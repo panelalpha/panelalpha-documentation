@@ -1,6 +1,6 @@
 ---
 title: "First login"
-description: "At your first login you either sign in with the account you passed at install or use the setup wizard to create one. Open the panel over HTTPS..."
+description: "At your first visit the setup wizard creates your account. Open the panel address over HTTPS and follow the steps..."
 nav:
   group: Getting Started
   order: 3
@@ -8,26 +8,9 @@ nav:
 
 # First login
 
-At your first login you either sign in with the account you passed at install or use the setup wizard to create one.
-
-- You get the sign-in when you passed `PANELALPHA_USER_EMAIL` and `PANELALPHA_USER_PASSWORD`: [Installing the panel](install.md).
-- You get the wizard when you passed neither.
+At your first visit the setup wizard creates your account.
 
 The panel works over HTTPS only. Open `https://panel.example.com`, not `http://`.
-
-## Signing in with the account from the install
-
-1. Open the panel address.
-2. Enter the email address you passed at install and select **Log In**.
-3. On the next screen, enter the password you passed at install and select **Log In**.
-
-The wizard does not show. You land on the project list.
-
-On the password screen:
-
-- **Remember Me** keeps you signed in.
-- **Forgot password?** sends you a reset link.
-- The screen shows the address you entered. If you mistyped it, select **Back**, correct the address and select **Log In** again.
 
 ## Using the setup wizard
 
@@ -62,6 +45,18 @@ Your Hub account is now the panel's account. You sign in later with **Sign in wi
 
 If you finish the wizard with a local account, you can connect later in **Settings**.
 
+## Signing in later
+
+1. Open the panel address.
+2. Enter your email address and select **Log In**.
+3. On the next screen, enter your password and select **Log In**.
+
+On the password screen:
+
+- **Remember Me** keeps you signed in.
+- **Forgot password?** sends you a reset link.
+- The screen shows the address you entered. If you mistyped it, select **Back**, correct the address and select **Log In** again.
+
 ## What you see first
 
 The project list shows the projects the panel finds on the Engine. On a new Engine it is empty. The panel's own project is not in the list, and neither is another panel's.
@@ -72,13 +67,11 @@ Open the user menu to reach **Tasks** and **Settings**: [Settings](../the-panel/
 
 ## Troubleshooting
 
-**"The panel must be opened at its configured address (APP_URL) to finish the setup."** You opened the panel at another address, such as its IP. Open it at the domain you gave to `pae project:create`, over `https://`.
+**"The panel must be opened at its configured address (APP_URL) to finish the setup."** You opened the panel at another address, such as its IP. Open it at the address the installer printed, over `https://`.
 
 **The wizard does not accept the password.** It is missing one of the rules in step 3. Add what is missing.
 
-**The wizard is gone and you see a sign-in page.** Someone finished the setup first, or the install created the account. Sign in with that account.
-
-**The sign-in page says the account could not be created.** The install refused the values, and the panel keeps the setup wizard closed. The deploy log names the rule that failed: [Installing the panel](install.md#when-the-account-cannot-be-created).
+**The wizard is gone and you see a sign-in page.** Someone finished the setup first. Sign in with that account.
 
 **The browser warns about the certificate.** The panel address has a self-signed certificate. This happens in three cases:
 

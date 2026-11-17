@@ -70,10 +70,10 @@ You need:
 **Port 80 must be open to everyone**, because Let's Encrypt uses it. Then run:
 
 ```bash
-curl -fsSL get.panelalpha.com/single-server | sh
+curl -fsSL https://get.panelalpha.com/single-server | sh
 ```
 
-Every option and the Engine version the panel needs: [Installing the panel](getting-started/install.md).
+More: [Installing the panel](getting-started/install.md).
 
 ### 2. Sign in
 

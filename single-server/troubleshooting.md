@@ -22,11 +22,9 @@ This page lists the problems you are most likely to meet in PanelAlpha Single Se
 
 ## First login
 
-**"The panel must be opened at its configured address (APP_URL) to finish the setup."** You opened the panel at another address, such as its IP address. Open it at the domain you gave at install, over `https://`. More: [First login](getting-started/first-login.md).
+**"The panel must be opened at its configured address (APP_URL) to finish the setup."** You opened the panel at another address, such as its IP address. Open it at the address the installer printed, over `https://`. More: [First login](getting-started/first-login.md).
 
 **The setup wizard does not accept the password.** It is missing one of the rules. The password needs at least 8 characters, with 1 lowercase character, 1 uppercase character, 1 number and 1 symbol. More: [First login](getting-started/first-login.md).
-
-**The sign-in page says the account could not be created.** The install refused the values, and the panel keeps the setup wizard closed. The deploy log names the rule that failed. More: [Installing the panel](getting-started/install.md#when-the-account-cannot-be-created).
 
 **The browser warns about the certificate.** The panel address has a certificate the browser does not trust. This happens on a name under `panelalpha.direct` other than the server's own name, and on a domain of your own whose DNS record does not point at the server yet. Use a domain of your own that points at the server. More: [The panel address](getting-started/panel-address.md).
 
