@@ -2,14 +2,14 @@
 title: "PanelAlpha Single Server Edition"
 description: "PanelAlpha Single Server Edition is a web hosting panel you install on your own VPS. You open it in a browser and look after your sites there. Setup..."
 nav:
-  group: Single Server
+  group: Single Server Edition
   order: 1
   title: Introduction
 section:
-  title: Single Server
+  title: Single Server Edition
   order: 1
   groups:
-    - title: Single Server
+    - title: Single Server Edition
       path: index.md
       collapsable: false
     - title: Getting Started

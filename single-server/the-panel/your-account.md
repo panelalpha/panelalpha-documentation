@@ -69,7 +69,7 @@ To turn two-factor authentication off, open the same dialog and confirm. You see
 3. If the address has an account, an email arrives with the subject `Reset your password` and a **Reset Password** button. The link works for 60 minutes.
 4. On the reset page, enter the new password twice. It follows the same rule as a password change: at least 8 characters with letters in upper and lower case, numbers and symbols.
 
-This email is the only message the panel sends in Single Server Free.
+This email is the only message the panel sends.
 
 If you ask for a link twice within 60 seconds, the second ask gets the same message and sends nothing. One IP address can ask at most 6 times a minute. The seventh ask sends nothing and shows `Too Many Attempts.` Wait a minute and ask again.
 
