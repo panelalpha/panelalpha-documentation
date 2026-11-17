@@ -36,7 +36,8 @@ that is not in the sidebar.
 ```yaml
 ---
 title: "Stripe"                # page title (H1, browser title)
-description: "Connect Stripe"  # short text for search engines
+description: "Connect Stripe"  # shown under the page title and used by search engines:
+                               # one or two full sentences, up to about 160 characters, never cut with "..."
 nav:
   group: Direct Billing        # group title, declared in the section index
   order: 3                     # position in that group, starting at 1, unique per group
