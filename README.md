@@ -50,11 +50,13 @@ Settings > Secrets and variables > Actions:
 The token: GitHub > Settings > Developer settings > Fine-grained tokens > Generate new token.
 
 - Resource owner: `panelalpha`
-- Repository access: only `panelalpha-homepage`
-- Permissions: Actions: Read and write (Metadata: Read is added by GitHub)
+- Repository access: `panelalpha-homepage` and `panelalpha-documentation`
+- Permissions: Actions: Read and write (starts the site deploy), Contents: Read (lets the site
+  build read this repo). Metadata: Read is added by GitHub.
 
-The token expires on the date chosen when it was made. After that the site stops updating
-until someone makes a new one and saves it in `HOMEPAGE_DEPLOY_TOKEN`.
+The same token is saved in panelalpha-homepage as `DOCS_READ_TOKEN`. It expires on the date
+chosen when it was made. After that the site stops updating until someone makes a new one and
+saves it in both places.
 
 ## Writing pages
 
