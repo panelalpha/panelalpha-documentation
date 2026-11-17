@@ -74,7 +74,8 @@ card:                          # card of this section on the documentation home 
 The paths in `start` are relative to the section folder. The link text is the sidebar label of
 the page. A page that does not exist fails the build.
 
-The root `index.md` holds the rest of the documentation home page: `title`, `lead`,
+The root `index.md` holds the rest of the documentation home page: `title` (the heading),
+`seoTitle` (optional, the browser tab and search results; without it `title` is used), `lead`,
 `description`, `seoDescription`, `community` (title, description, items with title, description,
 href and label) and `cards` for cards that are not a section (external links), each with
 `title`, `description`, `href` and `order`. A card can have an `id` so that `resources` can use it.

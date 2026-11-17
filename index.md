@@ -1,5 +1,6 @@
 ---
-title: PanelAlpha Documentation
+title: Documentation
+seoTitle: PanelAlpha Documentation
 lead: Complete know-how for managing WordPress hosting with PanelAlpha.
 description: Welcome to the PanelAlpha Documentation! This guide provides general instructions on how to install and use PanelAlpha. Whether you're just getting started or looking for detailed usage tips, you'll find everything you need to manage and operate our product efficiently. Please explore the sections below for step-by-step guidance and support.
 seoDescription: PanelAlpha documentation hub with guides for Single Server, Multi Server, Troubleshooting, API, and Engine.
