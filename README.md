@@ -42,7 +42,15 @@ Images used by the pages are in `assets/`.
 Open an issue with the page and what is wrong, or send a pull request with the fix. How pages are
 written: [Writing pages](CONTRIBUTING.md).
 
-## Get help
+## Talk to us on Discord
 
-Ask on the [Community Forum](https://community.panelalpha.com/) or on
-[Discord](https://discord.gg/9twHWR7xGX).
+**Discord is the main place to reach the PanelAlpha team.** Ask a question, share an idea or tell
+us what is missing from a page.
+
+<br><div align="center">
+<a href="https://discord.gg/9twHWR7xGX">
+<img src=".github/assets/discord-banner.png" alt="Talk to us on Discord, the main place to reach the PanelAlpha team" width="760">
+</a>
+</div><br>
+
+Not into Discord? The [Community Forum](https://community.panelalpha.com/) is open too.
