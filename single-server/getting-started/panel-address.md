@@ -38,7 +38,7 @@ The new address must be the server's own name or a name you own. A name under `p
 
 The panel adds the new domain, gets a certificate for it and makes it the main domain. This takes a few minutes. When it is done the page shows `The panel has moved` and `It now answers at <address> only. Sign in again there; it restarts at the new address within a few minutes.` Select **Open the new address**.
 
-<!-- TODO screenshot: assets/panel-address-moved-page.png. Show the page that reads "The panel has moved" with the Open the new address button. Use an example address such as https://panel.example.com. -->
+![Moving the panel: Settings from the user menu, Application URL changed to https://panel.example.com, Save Changes, then The panel has moved with the new address and Open the new address](../../assets/single-server/panel-address-moved-page.gif)
 
 After the move:
 
