@@ -57,7 +57,7 @@ Push To Staging copies the live project to its staging copy, so you can try chan
 **Push To Staging replaces what you tick on the staging copy with the live project's.** Changes you made only on the copy are lost.
 
 1. Open the live project and select **Push To Staging** in its top bar. The button shows only when the project has a staging copy.
-2. Tick what to overwrite. The options are the same as for Push To Live: [Pushing staging to live](#pushing-staging-to-live).
+2. Tick what to overwrite. A container project (from Git or from files) offers **Overwrite files** and **Overwrite volumes (including databases)**. A PHP hosting project offers **Overwrite files** and **Push full database**, with the table lists described in [Pushing staging to live](#pushing-staging-to-live).
 3. Confirm. The panel shows `Push To Staging In Progress`.
 
 ::docs-video{src="../../assets/single-server/staging-and-preview-push-to-staging.webm" title="On the live Immich project with a staging tab, Push To Staging in the top bar opens the Push To Staging window with Overwrite files and Overwrite volumes (including databases), and Push To Staging shows Push To Staging In Progress"}
