@@ -56,7 +56,7 @@ On a WordPress project, you can rename the project: select the pencil next to th
 
 ### Project Details
 
-**Project Details** shows where the project comes from: an **Installation** card for WordPress, or a **Source** card with the repository (Git) or the archive (files). Beside it are a thumbnail of the site, **Loading Speed** scores with a **Full Report** link to Google PageSpeed, and a **Security** card with **Automatic Backups**, **SSL** and **Create Backup**.
+**Project Details** shows where the project comes from: an **Installation** card for WordPress, or a **Source** card with the repository (Git) or the archive (files). Beside it are a thumbnail of the site, **Loading Speed** scores with a **Full Report** link to Google PageSpeed, and a **Security** card with **Automatic Backups**, **SSL** and **Create Backup**. On a server with no backup store, **Automatic Backups** shows `Unavailable` and `No backup store is set up.` with a **Set up store** link to **Settings > Backups**.
 
 ### Advanced
 

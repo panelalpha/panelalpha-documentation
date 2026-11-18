@@ -14,24 +14,31 @@ Open it from the user menu with **Tasks**. The menu item shows a dot while a tas
 
 ## Reading the list
 
-Each row has five columns.
+Tabs under the title filter the list by status: **All**, **Active**, **Failed**, **Completed** and **Cancelled**. **Active** shows the pending and running tasks together.
 
-- **Task**: what was done. A push from your Git host shows as `Git auto-deploy`.
+Tasks are grouped by day: `Today`, `Yesterday`, then the date. Each row has five columns.
+
+- **Task**: what was done. A push from your Git host shows as `Git auto-deploy`. A failed task shows the first line of its error under the name.
 - **Project**: a link to the project. Housekeeping tasks of the server have no project and show a dash.
-- **Started**: how long ago the task began. A task that has not begun shows `Waiting`. Hover to see the date and time.
+- **Started**: the time the task began and how long ago. A task that has not begun shows `Waiting`.
 - **Duration**: how long the task ran, or has been running so far.
 - **Status**: `Pending` (waiting to start), `Running`, `Completed`, `Failed` or `Cancelled`.
 
-Hover over a failed task to see why it failed, when the engine gave a reason.
+On a phone each task is a compact card.
 
-![Tasks opened from the user menu: deploys, backups and variable changes with their project, start time, duration and status, and the Status filter](../../assets/single-server/tasks-list.gif)
+<!-- TODO screenshot: tasks-list.gif is outdated. Show the new Tasks page: the status tabs (All, Active, Failed, Completed, Cancelled), the Task type dropdown, tasks grouped under Today and Yesterday, a failed task with its error line, and a row opened to show Queued, Started, Finished and Task ID. -->
+![Tasks opened from the user menu: deploys, backups and variable changes with their project, start time, duration and status](../../assets/single-server/tasks-list.gif)
+
+## Task details
+
+Select a row to open its details: **Queued**, **Started**, **Finished** and **Task ID**. For a failed task the details also show the full **Error**, with a button to copy it.
 
 ## Finding a task
 
 1. Open **Tasks**.
-2. Set **Status** to a single state, or to `Active` to see the pending and running tasks together.
+2. Select a status tab. Use **Active** to see the pending and running tasks together.
 3. Set **Task type** to narrow the list to one kind of work.
 
-If nothing matches, you see `No tasks`.
+If nothing matches, you see `No tasks` and `There are no tasks matching the filters.`
 
 For a failed deploy, the deploy log of the project has the detail: [Git](../projects/git.md).

@@ -16,7 +16,7 @@ Backups are written to a **store**, a place that is set up once for the whole pa
 
 Choose the store in **Settings > Backups**: [Settings](../the-panel/settings.md). You can use S3, SFTP, FTP or FTPS to keep backups away from the server. Select **Remove store** there to go back to the store the server came with.
 
-A server installed long ago and never updated may have no store. A project on it shows `No backup store is set up, so backups cannot be created.` and a link **Configure a backup store**.
+A server installed long ago and never updated may have no store. The **Backups** tab of a project on it shows `No backup store is set up, so backups cannot be created.` and a button **Set up backup store**. The button opens **Settings > Backups**. **Create Backup** is greyed out until a store is set up.
 
 ## What a backup holds
 

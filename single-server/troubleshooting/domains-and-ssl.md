@@ -22,7 +22,7 @@ Problems when you add a domain, change the main domain or get an SSL certificate
 
 **"Cannot delete domain with existing subdomains"** Remove the subdomains first, then remove the domain.
 
-**The SSL Status column says `Wrong DNS`.** The domain's A record (the DNS entry that points a name at a server) points at another server. Point it at this server. A domain behind a service such as Cloudflare can show this too: [Domains and SSL](../looking-after-a-project/domains-and-ssl.md#ssl-certificates).
+**The SSL Status column says `Wrong DNS`.** The domain's A record (the DNS entry that points a name at a server) points at another server. Point it at this server. A domain behind the Cloudflare proxy without a tunnel can show this too. A `panelalpha.online` address or a domain served through its own tunnel does not: [Domains and SSL](../looking-after-a-project/domains-and-ssl.md#ssl-certificates).
 
 **"Invalid certificate/key"** The certificate and the private key do not belong together. Paste the key that was made for this certificate.
 

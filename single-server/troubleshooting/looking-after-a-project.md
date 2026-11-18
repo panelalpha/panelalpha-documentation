@@ -20,6 +20,8 @@ Problems with backups, databases, files, FTP, SFTP, cron jobs and PHP settings, 
 
 **"Backups are not available until the Engine has a backup container."** No backup store is working yet. Set one up in **Settings > Backups**.
 
+**Automatic Backups shows `Unavailable` and "No backup store is set up."** This happens on a server that never got a backup store. Select **Set up store**, or open **Settings > Backups**, and choose one: [Backups](../looking-after-a-project/backups.md#setting-up-a-store).
+
 **"This backup has no files to download."** The backup holds no file at all. Download another backup.
 
 More about this: [Backups](../looking-after-a-project/backups.md).
