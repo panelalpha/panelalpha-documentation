@@ -1,6 +1,6 @@
 ---
 title: Firewall (CSF)
-description: Manage the CSF firewall of a PanelAlpha Engine server from PanelAlpha: check its status, open the web interface and add allow and deny rules.
+description: "Manage the CSF firewall of a PanelAlpha Engine server from PanelAlpha: check its status, open the web interface and add allow and deny rules."
 nav:
   group: Server Management
   order: 3
