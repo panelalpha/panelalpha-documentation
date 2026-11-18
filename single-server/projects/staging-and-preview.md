@@ -19,20 +19,13 @@ A project can have one staging copy. A staging copy cannot have its own.
 3. For a WordPress site, you can tick **Skip Uploads Directory** to leave out `wp-content/uploads`. This saves space and time.
 4. Select **Create Staging**.
 
-A site on the panel's free `panelalpha.online` address does not ask for a name. The copy gets its own free address there when it is created, and you cannot enter an address in that zone.
+A site on the panel's free `panelalpha.online` address does not ask for a name. The copy gets its own free address there.
 
-![Staging in the top bar of the Northwind Store project: the Subdomain staging, the address staging.shop.example.com it builds, Create Staging, and the staging tab of the copy](../../assets/single-server/staging-create-form.gif)
+![Creating a staging copy in the top bar of the Northwind Store project: the Subdomain, the address it builds and Create Staging](../../assets/single-server/staging-create-form.gif)
 
-The panel shows `Staging Installation In Progress` and notifies you when the copy is ready.
+The panel shows `Staging Installation In Progress` and notifies you when the copy is ready. The copy appears under its live project, not as a separate project: as a `staging` tag on the live project's card, and as a `staging` tab in the project's top bar. Select either to open the copy.
 
-The copy appears under its live project, not as a separate project:
-
-- In **My Projects**, a `staging` tag sits on the live project's card. In the table view, the copy is a row under the live project.
-- The project's top bar has a `staging` tab. Select it to open the copy. Its address is in its own top bar once the copy is ready.
-
-The project page of a staging copy has no WordPress screens such as **Plugins** or **Users**. To change the copy's files, use **Advanced > File Manager**, or **WP Admin** from the copy's **Actions** menu.
-
-A copy under `panelalpha.direct` has a self-signed certificate, which browsers do not trust, so your browser warns when you open it.
+The copy has no WordPress screens such as **Plugins** or **Users**. To change its files, use **Advanced > File Manager**, or **WP Admin** from the copy's **Actions** menu.
 
 ## Pushing staging to live
 
@@ -40,24 +33,22 @@ Push To Live copies the staging copy to the live project.
 
 **Push To Live replaces what you tick on the live project with the staging copy's.** Check the staging copy first.
 
-1. Open the live project in **My Projects**. Select its `staging` tag (or the `staging` tab in the top bar) and choose **Push To Live** in the copy's top bar. The same action is in the copy's **Actions** menu.
+1. Open the copy and select **Push To Live** in its top bar.
 2. Tick what to overwrite (see the options below).
-3. Confirm. The panel shows `Push To Live In Progress`.
-
-A notification tells you when the push finishes.
+3. Confirm. The panel shows `Push To Live In Progress` and notifies you when the push finishes.
 
 ![Push To Live on the staging copy: Overwrite files, Push full database and the table lists](../../assets/single-server/staging-push-to-live-dialog.gif)
 
 What you can tick depends on the project.
 
 - **A PHP hosting project** (a WordPress site or another PHP site) offers **Overwrite files**, **Push full database**, **Push structure changes in tables** and **Push tables with changed data**.
-- **A container project** (a site from Git or from files) offers **Overwrite files** and **Overwrite volumes (including databases)**. It has no table lists, because the panel compares database tables only for PHP hosting projects.
+- **A container project** (a site from Git or from files) offers **Overwrite files** and **Overwrite volumes (including databases)**. It has no table lists.
 
 ### Pushing only some tables
 
-For a PHP hosting project, **Push structure changes in tables** and **Push tables with changed data** each hold a list of the tables that differ between the copy and the live project. Tick **Push full database** and pick tables in either list to replace only those tables. Both lists are empty when nothing differs, and stay empty on a project without a database.
+On a PHP hosting project, you can push only some database tables. **Push structure changes in tables** lists the tables whose columns changed, and tables that exist only on the copy. **Push tables with changed data** lists the tables whose rows changed. Tick **Push full database**, then pick tables in either list to replace only those tables. A list is empty when nothing differs.
 
-If the panel cannot compare the two databases, the window says `Could not compare database changes. You can still push files and database, but selective table changes are unavailable.` The two lists are not shown, and a push then copies the whole database.
+If the panel cannot compare the two databases, the window says `Could not compare database changes. You can still push files and database, but selective table changes are unavailable.` A push then copies the whole database.
 
 ## Pushing live to staging
 
@@ -67,7 +58,7 @@ Push To Staging copies the live project to its staging copy, so you can try chan
 
 1. Open the live project and select **Push To Staging** in its top bar. The button shows only when the project has a staging copy.
 2. Tick what to overwrite. The options are the same as for Push To Live: [Pushing staging to live](#pushing-staging-to-live).
-3. Select **Push To Staging**. The panel shows `Push To Staging In Progress`.
+3. Confirm. The panel shows `Push To Staging In Progress`.
 
 <!-- TODO screenshot: assets/single-server/staging-push-to-staging-dialog.gif. Show Push To Staging in the top bar of a live project with a staging copy, the dialog with Overwrite files and Push full database, then Push To Staging In Progress. -->
 
@@ -81,23 +72,15 @@ You can deploy a branch of a Git project to its staging copy and leave productio
 
 The chosen branch goes to the copy: [Git](git.md).
 
-A Git project without a staging copy shows no tick. The copy's own **Redeploy** window has no tick either.
-
 ## Deleting a staging copy
 
 Deleting a staging copy removes its files and databases. The live site stays as it is.
 
-1. Open the copy (its `staging` tag on the live project's card, or its `staging` tab).
-2. Select **Delete Staging** in its top bar.
-3. In the **Delete Staging** dialog, which names the copy and its domain, tick all three acknowledgements:
-   - **I understand that the project's files will be deleted.**
-   - **I understand that the project's databases will be deleted.**
-   - **Yes, I understand and want to proceed with the removal of the staging site.**
-4. Select **Delete Staging**. The button stays disabled until every box is ticked.
+1. Open the copy and select **Delete Staging** in its top bar.
+2. In the dialog, tick all three acknowledgements about files, databases and the removal.
+3. Select **Delete Staging**. The button stays disabled until every box is ticked.
 
-The panel shows `The staging site has been deleted.`
-
-The live project cannot be deleted while a staging copy exists: [Projects](projects.md).
+The panel shows `The staging site has been deleted.` The live project cannot be deleted while a staging copy exists: [Projects](projects.md).
 
 ## Preview link
 
@@ -109,18 +92,8 @@ A preview link opens the site on a temporary address on this server, so you can 
 2. In **Preview Site**, select **Get Temporary URL**.
 3. Select **Copy URL** to share it, or **Visit Site** to open it.
 
-The window shows `Your Site Temporary URL:`. While the first link is still valid, the panel shows it again.
+The domain warning on a project also has **Not live yet? Preview the site on the server** with a **Generate URL** button. On a project with a domain of your own, **Open Project** opens the same **Preview Site** window: [Projects](projects.md).
 
-![Open Project on a domain that does not point here yet opens Preview Site: Get Temporary URL, Your Site Temporary URL, Copy URL and Visit Site](../../assets/single-server/staging-preview-link-window.gif)
-
-The domain warning on a project also has **Not live yet? Preview the site on the server** with a **Generate URL** button.
-
-### More detail about Open Project
-
-**Open Project** is another way to reach **Preview Site**.
-
-- On a project with a domain of your own, **Open Project** opens **Preview Site**, whether or not that domain points to this server yet.
-- On the panel's free `panelalpha.online` address, **Open Project** opens the site itself in a new tab, so there is nothing to preview.
-- In **My Projects**, the button is on the card of a project that is not WordPress. A WordPress card has no **Open Project**. Open the project and select **Open Project** in its top bar. Every project has it there.
+![Open Project on a domain that does not point here yet opens Preview Site with Get Temporary URL, Copy URL and Visit Site](../../assets/single-server/staging-preview-link-window.gif)
 
 Something not working? Messages and fixes: [Troubleshooting: Projects](../troubleshooting/projects.md#staging-and-preview).

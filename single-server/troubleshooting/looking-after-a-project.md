@@ -12,15 +12,13 @@ Problems with backups, databases, files, FTP, SFTP, cron jobs and PHP settings, 
 
 ## Backups
 
-**"Choose files or databases to back up."** Both parts are switched off. The dialog shows the warning and **Create** stays off until you switch at least one part on.
+**"Choose files or databases to back up."** Both parts are switched off. Switch at least one on to enable **Create**.
 
-**"Select Restore Directory or Restore Database to continue."** No part was chosen. The dialog shows the warning and **Restore** stays off until you tick at least one part.
-
-**"Select Restore data or Restore code to continue."** The same on a container project, where both parts start unticked. Tick at least one.
+**"Select Restore Directory or Restore Database to continue."** or **"Select Restore data or Restore code to continue."** No part was chosen. Tick at least one to enable **Restore**.
 
 **"Cannot delete a backup that is being created."** Wait until the backup has finished.
 
-**"Backups are not available until the Engine has a backup container."** No store is working yet. Set one up in **Settings > Backups**.
+**"Backups are not available until the Engine has a backup container."** No backup store is working yet. Set one up in **Settings > Backups**.
 
 **"This backup has no files to download."** The backup holds no file at all. Download another backup.
 
@@ -36,13 +34,11 @@ More about this: [Databases](../looking-after-a-project/databases.md).
 
 ## Files and access
 
-**"The username field must not be greater than 32 characters."** On **SFTP Accounts**, the name you type may not be longer than 32 characters. Use a shorter name.
+**"The username field must not be greater than 32 characters."** or **"The user field must not be greater than 32 characters."** The SFTP or FTP account name is longer than 32 characters. Use a shorter name.
 
-**"The username is too long for this project."** On **SFTP Accounts**, the panel puts a prefix before the name, and the prefix counts too. A name of 32 characters or fewer is still refused when the prefix makes it longer. Use a shorter name.
+**"The username is too long for this project."** On **SFTP Accounts**, the panel puts a prefix before the name, and the prefix counts too. Use a shorter name.
 
-**"The user field must not be greater than 32 characters."** On **FTP Accounts**, the name may not be longer than 32 characters. Use a shorter name.
-
-**"Username can only contain letters and numbers."** On **FTP Accounts**, a name with an underscore, hyphen, dot or space is refused. Use only the letters a to z, A to Z and the digits 0 to 9.
+**"Username can only contain letters and numbers."** On **FTP Accounts**, use only the letters a to z, A to Z and the digits 0 to 9. Underscores, hyphens, dots and spaces are refused.
 
 **"Invalid file name."** The name has characters the file manager does not accept. Use a plainer name.
 
@@ -50,24 +46,18 @@ More about this: [Files and access](../looking-after-a-project/files-and-access.
 
 ## Cron jobs and PHP
 
-**A cron job seems not to run.** The panel does not show what the job printed, so make the job write a file you can check:
+**A cron job seems not to run.** The panel does not show what a cron job (a command that runs on a schedule) printed, so make it write a file you can check:
 
 1. Make the command write a file in the site's folder, for example `date >> /home/<name>/example.com/cron-test.log`.
 2. Wait for the schedule.
 3. Open that file in **Advanced > File Manager**, in the folder of the domain.
 
-If the file is missing, check these:
-
-- The command uses the whole path into the site's folder. The home directory is not writable, and a relative path starts there.
-- The schedule is right.
-- On a container project, the chosen **Service** is running.
+If the file is missing, check that the command uses the whole path into the site's folder (the home folder is not writable), that the schedule is right, and, on a container project, that the chosen **Service** is running.
 
 **"Invalid PHP directive: <name>."** The setting does not exist. Check the spelling.
 
 **"Invalid directive value."** The value has a line break. Write it on one line.
 
-**"The PHP version applies only to PHP hosting projects. A dind project runs PHP from its own image; set it there."** The project is a container project. Change PHP in the project's own image.
-
-**"Custom PHP INI settings apply only to PHP hosting projects. A dind project runs PHP from its own image; set php.ini there."** Same cause. Set `php.ini` in the project's own image.
+**"The PHP version applies only to PHP hosting projects. A dind project runs PHP from its own image; set it there."** or **"Custom PHP INI settings apply only to PHP hosting projects. A dind project runs PHP from its own image; set php.ini there."** A dind project is a container project, and it brings its own PHP. Change the PHP version or `php.ini` in the project's own setup.
 
 More about this: [Cron jobs and PHP](../looking-after-a-project/cron-and-php.md).

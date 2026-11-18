@@ -1,6 +1,6 @@
 ---
 title: "Installing the panel"
-description: "One command as root on a fresh VPS installs the PanelAlpha Engine and the panel. Check the requirements first, then run it and open the panel address."
+description: "One command as root on a fresh VPS installs PanelAlpha Engine and the panel. Check the requirements first, then run it and open the panel address."
 nav:
   group: Getting Started
   order: 2
@@ -8,11 +8,11 @@ nav:
 
 # Installing the panel
 
-One command as `root` on a fresh VPS installs the PanelAlpha Engine and the panel. Check your VPS first: [Requirements](requirements.md).
+One command as `root` on a fresh VPS installs PanelAlpha Engine and the panel. Check your VPS first: [Requirements](requirements.md).
 
 ## Installing
 
-1. Log in to your VPS as `root` over SSH.
+1. Log in to your VPS as `root` over SSH. SSH means logging in to your VPS from a terminal, with the root password or key your provider gave you.
 2. Run:
 
    ```bash
