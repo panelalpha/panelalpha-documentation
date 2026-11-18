@@ -20,7 +20,7 @@ A **cron job** is a command that the server runs again and again on a schedule, 
 4. On a container project, choose the **Service** the command runs in. **A run is skipped while that service is not running.**
 5. Save.
 
-   ![Adding a cron job to the Northwind Journal project: Add Cron Job, Common Settings set to Once a day, the command wp cron event run --due-now, and the new job in the list](../../assets/single-server/cron-add-form.gif)
+   :docs-video{src="../../assets/single-server/cron-add-form.webm" title="Adding a cron job to the Northwind Journal project: Add Cron Job, Common Settings set to Once a day, the command wp cron event run --due-now, and the new job in the list"}
 
 You can edit or delete a job from its row. If the schedule is not valid, the panel does not save it and shows the reason.
 
@@ -59,6 +59,6 @@ The dialog always lists four settings:
 
 An empty value means this project does not set that setting, so the server's own value applies. To go back to it, clear the value and save.
 
-![Advanced > Developer Settings of the Northwind Journal project: the PHP Version card with Current PHP version, then Manage on PHP Settings, memory_limit set to 256M and Save Changes](../../assets/single-server/php-settings-dialog.gif)
+:docs-video{src="../../assets/single-server/php-settings-dialog.webm" title="Advanced > Developer Settings of the Northwind Journal project: the PHP Version card with Current PHP version, then Manage on PHP Settings, memory_limit set to 256M and Save Changes"}
 
 Something not working? Messages and fixes: [Troubleshooting: Looking after a project](../troubleshooting/looking-after-a-project.md#cron-jobs-and-php).

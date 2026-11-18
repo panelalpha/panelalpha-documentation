@@ -16,7 +16,7 @@ Open the project and go to the **Monitoring** tab. **Visitors Chart** shows visi
 
 The panel updates the statistics once a day. A new project shows `There is no data to display yet`. Check again the next day.
 
-![The Monitoring tab of the Northwind Journal project: the Visitors Chart for Last Week, then Last Month, and the cards Visits By Country, Visits By Continent, Visits By Referrer, Visits By Device Operating System and Visits By Device Browser](../../assets/single-server/statistics-monitoring-tab.gif)
+:docs-video{src="../../assets/single-server/statistics-monitoring-tab.webm" title="The Monitoring tab of the Northwind Journal project: the Visitors Chart for Last Week, then Last Month, and the cards Visits By Country, Visits By Continent, Visits By Referrer, Visits By Device Operating System and Visits By Device Browser"}
 
 The **Project Details** tab also shows **Unique Visitors**, **Average Session Time** and **Bandwidth**. The session time is an estimate.
 
@@ -66,7 +66,7 @@ Open the user menu and select **My Server**. The page shows how much **RAM**, **
 
 Choose **1 hour**, **12 hours** or **Live** in **Period**. **Live** is the last 5 minutes.
 
-![My Server, Usage: RAM, CPU and Disk Space for the whole server, then the graphs Disk Throughput, Network Traffic and CPU Usage one after another](../../assets/single-server/statistics-server-usage.gif)
+:docs-video{src="../../assets/single-server/statistics-server-usage.webm" title="My Server, Usage: RAM, CPU and Disk Space for the whole server, then the graphs Disk Throughput, Network Traffic and CPU Usage one after another"}
 
 ## Logs
 
@@ -80,7 +80,7 @@ Open the project and go to **Advanced > Logs**. Which tabs you see depends on th
 
 Every tab except **Project Logs** has a **Download** button that saves the log you are looking at.
 
-![Advanced > Logs of the Northwind Journal WordPress project: Project Logs, then PHP Logs with No PHP Logs Were Found, then Webserver Logs with the access log rows and the Download button](../../assets/single-server/statistics-logs-tabs.gif)
+:docs-video{src="../../assets/single-server/statistics-logs-tabs.webm" title="Advanced > Logs of the Northwind Journal WordPress project: Project Logs, then PHP Logs with No PHP Logs Were Found, then Webserver Logs with the access log rows and the Download button"}
 
 A tab with nothing to show says `No PHP Logs Were Found...` or similar. The web server log often holds more detail.
 
@@ -88,7 +88,7 @@ A tab with nothing to show says `No PHP Logs Were Found...` or similar. The web 
 
 A container project has the page **Advanced > Containers**. It lists each service of the project with its image, state, uptime and ports.
 
-![Advanced > Containers of the ntfy project: the app service with its image, the state running, its uptime and port, the actions of the row, and the Actions menu at the top](../../assets/single-server/statistics-containers-page.gif)
+:docs-video{src="../../assets/single-server/statistics-containers-page.webm" title="Advanced > Containers of the ntfy project: the app service with its image, the state running, its uptime and port, the actions of the row, and the Actions menu at the top"}
 
 - **Start All**, **Stop All**, **Restart** and **Pull & Redeploy** act on the whole project: [Projects](../projects/projects.md).
 - Each service has its own **Start**, **Stop**, **Restart** and **Logs** actions. **Logs** shows the output of one service.

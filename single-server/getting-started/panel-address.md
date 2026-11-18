@@ -28,13 +28,13 @@ You cannot move the panel to a `panelalpha.direct` name later. The engine does n
 2. Open **Settings**. On the **General** tab, find **Application URL**.
 3. Replace the address. Use `https://` and a host, with no path, for example `https://panel.example.com` or `https://panel.example.com:8443`.
 
-   ![Settings, General tab: Server name, Default language, Default date format, Application URL, Default domain and Save Changes](../../assets/single-server/settings-general-tab.gif)
+   :docs-video{src="../../assets/single-server/settings-general-tab.webm" title="Settings, General tab: Server name, Default language, Default date format, Application URL, Default domain and Save Changes"}
 
 4. Select **Save Changes**.
 
 The panel gets a certificate for the new domain and moves there. This takes a few minutes. When it is done, the page shows `The panel has moved`. Select **Open the new address**.
 
-![Moving the panel: Application URL changed to https://panel.example.com, Save Changes, then The panel has moved with the new address and Open the new address](../../assets/single-server/panel-address-moved-page.gif)
+:docs-video{src="../../assets/single-server/panel-address-moved-page.webm" title="Moving the panel: Application URL changed to https://panel.example.com, Save Changes, then The panel has moved with the new address and Open the new address"}
 
 If you use social login, a dialog titled `Update your login providers` lists new callback URLs. **Add them to each provider's settings, or social login stops working.**
 

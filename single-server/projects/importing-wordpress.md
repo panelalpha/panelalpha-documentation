@@ -29,7 +29,7 @@ Before you start:
    - **Install the plugin manually**: select **Download Plugin**, install and activate it in the WordPress admin of the old site, then select **Continue**.
 6. Select **Continue** to start.
 
-![Importing a WordPress site: Add New, WordPress, Import Existing WordPress Project, the URL https://old-site.example.com, Simple Method, then Use WordPress admin login credentials with the URL, Username and Password (hidden) and Continue, until The import process has been started!](../../assets/single-server/importing-wordpress-connect.gif)
+:docs-video{src="../../assets/single-server/importing-wordpress-connect.webm" title="Importing a WordPress site: Add New, WordPress, Import Existing WordPress Project, the URL https://old-site.example.com, Simple Method, then Use WordPress admin login credentials with the URL, Username and Password (hidden) and Continue, until The import process has been started!"}
 
 The admin login method may not work, depending on the security settings and the host of your old site. If it fails, use the plugin.
 
@@ -44,7 +44,7 @@ The project card shows **Migration is in progress**, then **Import completed** o
 - **Cancel Migration** stops it and removes what was entered.
 - **Try Again** retries a failed import.
 
-![The oldsite card in My Projects shows Migration is in progress with Show Logs and Cancel Migration, and Show Logs opens Migration Logs with the progress of the current step and the status of each step](../../assets/single-server/importing-wordpress-progress.gif)
+:docs-video{src="../../assets/single-server/importing-wordpress-progress.webm" title="The oldsite card in My Projects shows Migration is in progress with Show Logs and Cancel Migration, and Show Logs opens Migration Logs with the progress of the current step and the status of each step"}
 
 ## After the import
 

@@ -65,7 +65,7 @@ It does not send the files, databases or passwords of your projects.
 - **Default language**: the language people see before they choose their own. The default is English.
 - **Default date format**: how the panel writes dates. Choose `YYYY-MM-DD` (default), `DD.MM.YYYY`, `DD/MM/YYYY` or `MM/DD/YYYY`. Accounts have no date format of their own.
 
-![Settings opened from the user menu, General tab: Server name, Default language, Default date format, Application URL, Default domain and Save Changes](../../assets/single-server/settings-general-tab.gif)
+:docs-video{src="../../assets/single-server/settings-general-tab.webm" title="Settings opened from the user menu, General tab: Server name, Default language, Default date format, Application URL, Default domain and Save Changes"}
 
 ## Application URL
 
@@ -99,7 +99,7 @@ The tab shows the store in use as its type and directory, for example `Local · 
 3. Choose a **Store type**: Local, S3, SFTP, FTP or FTPS.
 4. Fill in the fields for that type and save. You see `Backup store saved.`
 
-   ![Settings, Backups tab: Change store opens the store form with the Store type list (Local, S3, SFTP, FTP and FTPS) and the Directory of the Local store](../../assets/single-server/settings-backup-store-form.gif)
+   :docs-video{src="../../assets/single-server/settings-backup-store-form.webm" title="Settings, Backups tab: Change store opens the store form with the Store type list (Local, S3, SFTP, FTP and FTPS) and the Directory of the Local store"}
 
 | Type | Fields |
 |---|---|
@@ -127,7 +127,7 @@ These defaults apply to projects you create from now on. Existing projects keep 
 
 Each new project gets its own minute inside that hour, so backups do not all start at once. The project's **Backups** tab shows its exact schedule.
 
-![Settings, Backups tab: the defaults for new projects, Automatic backups, Backups to keep, Frequency and Time](../../assets/single-server/settings-backup-schedule.gif)
+:docs-video{src="../../assets/single-server/settings-backup-schedule.webm" title="Settings, Backups tab: the defaults for new projects, Automatic backups, Backups to keep, Frequency and Time"}
 
 For taking and restoring a backup of one project: [Backups](../looking-after-a-project/backups.md).
 

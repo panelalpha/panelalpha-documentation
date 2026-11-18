@@ -31,7 +31,7 @@ Create one: [Create a project](create-a-project.md).
 
 **My Projects** lists your projects as cards. Each card has a **Manage** button (**Manage Site** on a WordPress card) and either **WP Admin** or **Open Project**.
 
-![My Projects with the Northwind Journal, memos and ntfy cards and their Manage Site, WP Admin, Manage and Open Project buttons, then the table view with the Actions menu of the Northwind Journal row open: Manage, WP Admin, Staging, Update, Clear Cache and Delete Project](../../assets/single-server/projects-list.gif)
+:docs-video{src="../../assets/single-server/projects-list.webm" title="My Projects with the Northwind Journal, memos and ntfy cards and their Manage Site, WP Admin, Manage and Open Project buttons, then the table view with the Actions menu of the Northwind Journal row open: Manage, WP Admin, Staging, Update, Clear Cache and Delete Project"}
 
 **Open Project** works in two ways:
 
@@ -52,7 +52,7 @@ Select **Manage** to open a project. The tabs are **Project Details**, **Monitor
 
 On a WordPress project, you can rename the project: select the pencil next to the name, type a new name and confirm. The name also becomes the WordPress site title.
 
-![Manage Site on the Northwind Journal card opens the project page with the Installation card, then the tabs Monitoring, Backups, Plugins and Advanced one after another](../../assets/single-server/projects-project-page.gif)
+:docs-video{src="../../assets/single-server/projects-project-page.webm" title="Manage Site on the Northwind Journal card opens the project page with the Installation card, then the tabs Monitoring, Backups, Plugins and Advanced one after another"}
 
 ### Project Details
 
@@ -65,7 +65,7 @@ On a WordPress project, you can rename the project: select the pencil next to th
 
 **Advanced** holds the rest, in a side list.
 
-![The Advanced tab of the Northwind Journal WordPress project with its side list, opening Domains, MySQL Databases, Cron Jobs, File Manager and Logs](../../assets/single-server/projects-advanced-pages.gif)
+:docs-video{src="../../assets/single-server/projects-advanced-pages.webm" title="The Advanced tab of the Northwind Journal WordPress project with its side list, opening Domains, MySQL Databases, Cron Jobs, File Manager and Logs"}
 
 Every kind of project has pages for its details (which also show its usage and limits: [Usage and limits of a project](../looking-after-a-project/statistics-and-logs.md#usage-and-limits-of-a-project)), domains, databases, cron, files, logs and Git. A WordPress project also shows its version and **Installation Details** (the directory and the database name, user, host and password). Other projects have **Environment variables**. A WordPress project keeps its variables in **System Configuration**.
 

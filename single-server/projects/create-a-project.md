@@ -15,7 +15,7 @@ You create a project from WordPress, from an app in the PanelAlpha GO! catalog, 
 1. Go to **My Projects** and select **Create First Project**. Later, use the create button on the same page.
 2. Choose **WordPress**, **Git**, **Files** or **PanelAlpha GO!**.
 
-   ![Add New on My Projects opens Choose how to create your project with WordPress, Git and Files](../../assets/single-server/create-project-choose-source.gif)
+   :docs-video{src="../../assets/single-server/create-project-choose-source.webm" title="Add New on My Projects opens Choose how to create your project with WordPress, Git and Files"}
 
 You can also drop one archive on the project list. The panel starts the files path. A folder or another kind of file is refused before the project is created.
 
@@ -25,7 +25,7 @@ You can also drop one archive on the project list. The panel starts the files pa
 2. Enter the domain. Either map your own domain in **Map your own domain**, or pick a name under **Use a free subdomain**.
 3. Select **Create Project**.
 
-   ![Creating a WordPress site: WordPress, Create New WordPress Project, the domain shop.example.com under Map your own domain, Create Project, then Your site is now being created for you and Congratulations! Your site has been installed!](../../assets/single-server/create-project-wordpress-form.gif)
+   :docs-video{src="../../assets/single-server/create-project-wordpress-form.webm" title="Creating a WordPress site: WordPress, Create New WordPress Project, the domain shop.example.com under Map your own domain, Create Project, then Your site is now being created for you and Congratulations! Your site has been installed!"}
 
 The panel installs the newest WordPress in the **document root** of the domain (the folder the domain serves) and shows `Your site is now being created for you!`. It can take a few minutes. You can leave the page, and a notification tells you when it is done: [Around the panel](../the-panel/around-the-panel.md#notifications).
 
@@ -64,7 +64,7 @@ If PanelAlpha GO! cannot be reached, the catalog says `The catalog is unavailabl
 3. For a private repository over HTTPS, turn on **Private repository** and paste the **Access token**.
 4. Select **Continue**.
 
-![Creating a project from Git: the Repository URL https://github.com/mdn/beginner-html-site.git, the Private repository switch, Continue, the branch step, then the deploy log until Deploy finished successfully](../../assets/single-server/create-project-git-form.gif)
+:docs-video{src="../../assets/single-server/create-project-git-form.webm" title="Creating a project from Git: the Repository URL https://github.com/mdn/beginner-html-site.git, the Private repository switch, Continue, the branch step, then the deploy log until Deploy finished successfully"}
 
 The panel checks the repository. If it has several branches or an `.env.example` file, the **Environment variables** step opens. Choose the branch and adjust the values, or select **Skip** to keep the defaults. Then the deploy starts and the panel shows its live log.
 
@@ -85,7 +85,7 @@ Details on keys, tokens and branches: [Git](git.md).
 2. Drop one `.zip` or `.tar.gz` archive of your app, or select it with **click to browse**.
 3. Review the **Environment variables** step if it opens, then deploy.
 
-![Creating a project from files: Files, the drop area with click to browse, the archive landing.zip added, then the deploy until it finishes](../../assets/single-server/create-project-files-upload.gif)
+:docs-video{src="../../assets/single-server/create-project-files-upload.webm" title="Creating a project from files: Files, the drop area with click to browse, the archive landing.zip added, then the deploy until it finishes"}
 
 The archive can be up to 256 MB. A folder, a loose `.sql` file, a second file or a bigger archive is refused before the project is created. Pack your project, and its database dump if it has one, into one archive first.
 

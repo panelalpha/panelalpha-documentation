@@ -21,7 +21,7 @@ You manage both in the project under **Advanced > MySQL Databases**, which has t
 
 A name starts with a letter, an underscore or a hyphen. It uses only letters, numbers, underscores and hyphens. The panel tells you if it is too long.
 
-   ![Advanced > MySQL Databases of the Northwind Journal project with the tabs Databases, Users and PHPMyAdmin: Add Database with the name newsletter, and the new database in the list](../../assets/single-server/databases-list-tab.gif)
+   :docs-video{src="../../assets/single-server/databases-list-tab.webm" title="Advanced > MySQL Databases of the Northwind Journal project with the tabs Databases, Users and PHPMyAdmin: Add Database with the name newsletter, and the new database in the list"}
 
 ## Creating a database user
 
@@ -48,7 +48,7 @@ On the **Users** tab, select the eye action of the user (its tooltip reads **Sho
 
 A WordPress project also lists its database name, user, password and host under **Advanced > Project Details**, in the **Installation Details** card. The user and password are masked. Select **Show** to read one.
 
-![The Users tab of MySQL Databases: the eye action of the WordPress database user opens MySQL Access Details with MySQL User, MySQL Host and MySQL Port](../../assets/single-server/databases-access-details.gif)
+:docs-video{src="../../assets/single-server/databases-access-details.webm" title="The Users tab of MySQL Databases: the eye action of the WordPress database user opens MySQL Access Details with MySQL User, MySQL Host and MySQL Port"}
 
 ## Renaming and deleting
 
@@ -63,7 +63,7 @@ phpMyAdmin is a web tool that lets you work on the records of a database directl
 1. Go to **Advanced > MySQL Databases** and select the **PHPMyAdmin** tab.
 2. Select **Log In to PHPMyAdmin**. The panel warns: `This feature should be used by advanced users only.`
 
-![The PHPMyAdmin tab of MySQL Databases with the warning This feature should be used by advanced users only and the Log In to PHPMyAdmin button](../../assets/single-server/databases-phpmyadmin-tab.gif)
+:docs-video{src="../../assets/single-server/databases-phpmyadmin-tab.webm" title="The PHPMyAdmin tab of MySQL Databases with the warning This feature should be used by advanced users only and the Log In to PHPMyAdmin button"}
 
 If the project's domain does not point at the server yet, the panel warns that phpMyAdmin may not open and offers a temporary address until DNS is set.
 

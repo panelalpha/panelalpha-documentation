@@ -23,7 +23,7 @@ New projects get an address from the default domain set in the panel: [Settings]
    - Name `example.com` (or `@`), type `A`, address the IPv4 address of your server. An **A record** points a name at a server address. The dialog shows the address.
    - Name `www.example.com`, type `CNAME`, address `example.com`. A **CNAME record** makes one name follow another.
 
-   ![The DNS propagation is in progress badge of the Northwind Store project opens Set Your Domain: the domain shop.example.com with Change, and Set DNS Records with the A record and the CNAME record for www](../../assets/single-server/domains-set-your-domain-dns.gif)
+   :docs-video{src="../../assets/single-server/domains-set-your-domain-dns.webm" title="The DNS propagation is in progress badge of the Northwind Store project opens Set Your Domain: the domain shop.example.com with Change, and Set DNS Records with the A record and the CNAME record for www"}
 
 4. Set these records at your domain provider and wait for them to spread. This takes from 2 minutes to a few hours.
 
@@ -46,7 +46,7 @@ If the domain does not point at this server, the top bar of the project shows **
 
 If DNS cannot point at the server yet, **Set Your Domain** also offers **Generate URL** under `Not live yet? Preview the site on the server`. It gives a temporary address so you can look at the site first: [Staging and preview](../projects/staging-and-preview.md).
 
-![My Projects: pointing at the warning icon next to the address of the Northwind Store project shows The A record may be missing, pointing elsewhere, or routed through a proxy such as Cloudflare with Fix it now and Ignore, and Fix it now opens Set Your Domain with the DNS records](../../assets/single-server/domains-dns-warning.gif)
+:docs-video{src="../../assets/single-server/domains-dns-warning.webm" title="My Projects: pointing at the warning icon next to the address of the Northwind Store project shows The A record may be missing, pointing elsewhere, or routed through a proxy such as Cloudflare with Fix it now and Ignore, and Fix it now opens Set Your Domain with the DNS records"}
 
 ## Adding a domain
 
@@ -57,7 +57,7 @@ An **addon domain** is a second, separate domain on the same project, for exampl
 3. For an addon domain, enter the domain without `www.`. For a subdomain, enter the name and choose the parent domain, for example `shop` under `example.com`.
 4. Select **Add Domain**.
 
-![Advanced > Domains of the Northwind Store project: Add Domain with the type Addon Domain and the domain example.com, then the list with the SSL Status column and the row actions](../../assets/single-server/domains-list.gif)
+:docs-video{src="../../assets/single-server/domains-list.webm" title="Advanced > Domains of the Northwind Store project: Add Domain with the type Addon Domain and the domain example.com, then the list with the SSL Status column and the row actions"}
 
 Set the DNS records for the new domain at your domain provider, as above.
 
@@ -92,7 +92,7 @@ Each domain has a certificate. It comes from Let's Encrypt or from you, or it is
 3. For **Let's Encrypt**, select **Generate**. The domain must already point at the server, or the certificate waits for DNS.
 4. For a certificate of your own, fill in **Certificate (CRT)** and **Private Key (KEY)**. **Certificate Authority Bundle (CABUNDLE)** is optional. Select **Install**.
 
-![The padlock of a domain opens Set SSL Certificate: Custom Certificate shows Certificate (CRT) and Private Key (KEY), and Let's Encrypt shows Generate](../../assets/single-server/domains-ssl-dialog.gif)
+:docs-video{src="../../assets/single-server/domains-ssl-dialog.webm" title="The padlock of a domain opens Set SSL Certificate: Custom Certificate shows Certificate (CRT) and Private Key (KEY), and Let's Encrypt shows Generate"}
 
 If installation fails, check that the DNS records are right and try again.
 

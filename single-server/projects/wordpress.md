@@ -27,7 +27,7 @@ A WordPress site in the panel is a PHP hosting project. You log in to it, update
 
 The **Installation** card on **Project Details** shows the WordPress version and whether an update is ready.
 
-![The Installation card on Project Details of the Northwind Journal project: WordPress 7.1.4 with Updated under it and the disabled WordPress is up to date button](../../assets/single-server/wordpress-installation-card.gif)
+:docs-video{src="../../assets/single-server/wordpress-installation-card.webm" title="The Installation card on Project Details of the Northwind Journal project: WordPress 7.1.4 with Updated under it and the disabled WordPress is up to date button"}
 
 When an update is ready, select **Update WordPress** on the card, or **Update** in the top bar or in the row's **Actions** menu. Pick the version, tick **Create Backup** if you want a backup first, and confirm. These buttons update WordPress itself, not plugins or themes. When only WooCommerce has an update, the card button reads **Update WooCommerce**.
 
@@ -35,7 +35,7 @@ When an update is ready, select **Update WordPress** on the card, or **Update** 
 
 The **Plugins** tab lists **Installed Plugins** and **New Plugins**. For each plugin you can choose **Install Plugin**, **Activate**, **Disable**, **Update** or **Remove**. Use **Add New** and the search field to find more.
 
-![The Plugins tab of the Northwind Journal project: Installed Plugins, then Add New and a search for contact form in New Plugins](../../assets/single-server/wordpress-plugins-tab.gif)
+:docs-video{src="../../assets/single-server/wordpress-plugins-tab.webm" title="The Plugins tab of the Northwind Journal project: Installed Plugins, then Add New and a search for contact form in New Plugins"}
 
 **You install a plugin or theme by its wordpress.org name.** Installing from a URL is not available.
 
@@ -49,7 +49,7 @@ Themes are under **Advanced > Installed Themes**. Use **Use This Theme**, **Prev
 - **Developer Settings**: **Debug Mode**, **Maintenance Mode**, **PHPMyAdmin** and **PHP Version**.
 - **Security**: **Force HTTPS Redirect** and **Disable Search Engine Indexing**.
 
-![Advanced > Developer Settings of the Northwind Journal project with the cards Debug Mode, Maintenance Mode, PHPMyAdmin and PHP Version](../../assets/single-server/wordpress-developer-settings.gif)
+:docs-video{src="../../assets/single-server/wordpress-developer-settings.webm" title="Advanced > Developer Settings of the Northwind Journal project with the cards Debug Mode, Maintenance Mode, PHPMyAdmin and PHP Version"}
 
 **Debug Mode and Maintenance Mode should be off on a live site.** Debug Mode shows application errors to visitors. Maintenance Mode shows them the maintenance notice instead of the site. Check both switches in **Advanced > Developer Settings** before the site goes live.
 

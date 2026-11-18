@@ -21,7 +21,7 @@ A project can have one staging copy. A staging copy cannot have its own.
 
 A site on the panel's free `panelalpha.online` address does not ask for a name. The copy gets its own free address there.
 
-![Creating a staging copy in the top bar of the Northwind Store project: the Subdomain, the address it builds and Create Staging](../../assets/single-server/staging-create-form.gif)
+:docs-video{src="../../assets/single-server/staging-create-form.webm" title="Creating a staging copy in the top bar of the Northwind Store project: the Subdomain, the address it builds and Create Staging"}
 
 The panel shows `Staging Installation In Progress` and notifies you when the copy is ready. The copy appears under its live project, not as a separate project: as a `staging` tag on the live project's card, and as a `staging` tab in the project's top bar. Select either to open the copy.
 
@@ -37,7 +37,7 @@ Push To Live copies the staging copy to the live project.
 2. Tick what to overwrite (see the options below).
 3. Confirm. The panel shows `Push To Live In Progress` and notifies you when the push finishes.
 
-![Push To Live on the staging copy: Overwrite files, Push full database and the table lists](../../assets/single-server/staging-push-to-live-dialog.gif)
+:docs-video{src="../../assets/single-server/staging-push-to-live-dialog.webm" title="Push To Live on the staging copy: Overwrite files, Push full database and the table lists"}
 
 What you can tick depends on the project.
 
@@ -95,6 +95,6 @@ A preview link opens the site on a temporary address on this server, so you can 
 
 The domain warning on a project also has **Not live yet? Preview the site on the server** with a **Generate URL** button. On a project with a domain of your own, **Open Project** opens the same **Preview Site** window: [Projects](projects.md).
 
-![Open Project on a domain that does not point here yet opens Preview Site with Get Temporary URL, Copy URL and Visit Site](../../assets/single-server/staging-preview-link-window.gif)
+:docs-video{src="../../assets/single-server/staging-preview-link-window.webm" title="Open Project on a domain that does not point here yet opens Preview Site with Get Temporary URL, Copy URL and Visit Site"}
 
 Something not working? Messages and fixes: [Troubleshooting: Projects](../troubleshooting/projects.md#staging-and-preview).

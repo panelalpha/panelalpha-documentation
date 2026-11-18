@@ -16,7 +16,7 @@ An **FTP account** is a username and password that give a program access to a fo
 
 Open the project and go to **Advanced > File Manager**. You can upload files and create new folders and files. Right-click a file or folder to open its menu, for example to edit, unzip, rename, copy or delete it.
 
-![Advanced > File Manager of the Northwind Journal project: the site folder and public_html opened, and the right-click menu of wp-config.php](../../assets/single-server/files-file-manager-menu.gif)
+:docs-video{src="../../assets/single-server/files-file-manager-menu.webm" title="Advanced > File Manager of the Northwind Journal project: the site folder and public_html opened, and the right-click menu of wp-config.php"}
 
 ## FTP accounts
 
@@ -31,7 +31,7 @@ Open the project and go to **Advanced > File Manager**. You can upload files and
 
 **To see the details to connect**, open the login details of the account: **FTP Username**, **FTP Host** and **FTP Port**. The host is the main domain of the project, and the port is 21. On a project on a `panelalpha.online` address, use the server's IP address as the host.
 
-![Adding an FTP account named editor with a generated password, then its login details with FTP Username, FTP Host and FTP Port](../../assets/single-server/files-ftp-login-details.gif)
+:docs-video{src="../../assets/single-server/files-ftp-login-details.webm" title="Adding an FTP account named editor with a generated password, then its login details with FTP Username, FTP Host and FTP Port"}
 
 ## SFTP accounts
 
@@ -44,7 +44,7 @@ Open the project and go to **Advanced > File Manager**. You can upload files and
 
 The login details show **SFTP Username**, **SFTP Host** and **SFTP Port**. The host is the main domain of the project, and the port is 2222. On a `panelalpha.online` address, use the server's IP address as the host.
 
-![Adding an SFTP account named deploy with a generated password, its login details with SFTP Username, SFTP Host and SFTP Port, and the Actions menu of the page](../../assets/single-server/files-sftp-login-details.gif)
+:docs-video{src="../../assets/single-server/files-sftp-login-details.webm" title="Adding an SFTP account named deploy with a generated password, its login details with SFTP Username, SFTP Host and SFTP Port, and the Actions menu of the page"}
 
 To cut off everyone at once, open **Actions** and select **Disconnect All**.
 

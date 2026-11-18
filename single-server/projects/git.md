@@ -20,7 +20,7 @@ A **deploy** builds and starts the project from the latest commit of a branch. A
 
 A redeploy runs the deploy again with the newest commits. The **Source** card on **Project Details** shows the repository, the deployed commit and whether the project is `Up to date`.
 
-![Redeploying the ntfy project: the Source card, the Redeploy window with the Branch list and new commits, and the deploy log](../../assets/single-server/git-redeploy.gif)
+:docs-video{src="../../assets/single-server/git-redeploy.webm" title="Redeploying the ntfy project: the Source card, the Redeploy window with the Branch list and new commits, and the deploy log"}
 
 1. Select **Redeploy** on the **Source** card.
 2. Pick the **Branch**. If you choose a branch other than the deployed one, the window warns `This resets the target to origin of the selected branch.`
@@ -37,7 +37,7 @@ The **Deploy Logs** window lists the steps with their times and the log below th
 
 Earlier deploys are in **Advanced > Logs**, on the **Deploy Logs** tab.
 
-![Opening the deploy log of the ntfy project from the Actions menu, then the Deploy Logs window](../../assets/single-server/git-deploy-logs.gif)
+:docs-video{src="../../assets/single-server/git-deploy-logs.webm" title="Opening the deploy log of the ntfy project from the Actions menu, then the Deploy Logs window"}
 
 ## Changing the branch
 
@@ -69,7 +69,7 @@ Environment variables are settings that your app reads when it starts, such as a
 
 Saving restarts the app container, and the new values are in place a few seconds later. If you turn off **Restart the app container after saving**, the panel only stores the variables and the next **Redeploy** applies them. **Restart** in **Advanced > Containers** does not apply them. A redeploy does not lose the variables.
 
-![Adding environment variables to the ntfy project with Add variable and Import](../../assets/single-server/git-environment-variables.gif)
+:docs-video{src="../../assets/single-server/git-environment-variables.webm" title="Adding environment variables to the ntfy project with Add variable and Import"}
 
 Every project that is not WordPress has this page. A WordPress project keeps its configuration in **Advanced > System Configuration** instead.
 
@@ -106,7 +106,7 @@ An HTTPS repository uses an **access token**, a password-like text that your Git
 
 The card shows `Token saved` or `No token saved`. If the repository stops answering, the page shows `Cannot access the repository. Update your access token.` The panel does not save a token that your Git provider does not accept.
 
-![The Access token card shows No token saved, and Manage opens the token window](../../assets/single-server/git-access-token.gif)
+:docs-video{src="../../assets/single-server/git-access-token.webm" title="The Access token card shows No token saved, and Manage opens the token window"}
 
 ## Deploy key
 
@@ -114,9 +114,9 @@ An SSH repository uses a **deploy key**, an SSH key you add to the repository so
 
 **Generate a new key replaces the old one, and pull and deploy stop working until you add the new key to the repository.** If you select **Delete key**, pull and deploy over SSH stop working. Remove the key at your Git provider as well.
 
-![Generating a deploy key for an SSH address in the Connect repository card](../../assets/single-server/git-deploy-key.gif)
+:docs-video{src="../../assets/single-server/git-deploy-key.webm" title="Generating a deploy key for an SSH address in the Connect repository card"}
 
-![The Deploy key (SSH) card with the public key, Fingerprint, Generate a new key and Delete key](../../assets/single-server/git-deploy-key-card.gif)
+:docs-video{src="../../assets/single-server/git-deploy-key-card.webm" title="The Deploy key (SSH) card with the public key, Fingerprint, Generate a new key and Delete key"}
 
 ## Auto-deploy
 
@@ -127,6 +127,6 @@ An SSH repository uses a **deploy key**, an SSH key you add to the repository so
 
 The panel adds a webhook at your Git provider with your saved token, so the token must be allowed to manage webhooks. If there is no token, or the provider refuses it, the switch goes back off and the panel shows the reason: [Troubleshooting: Git](../troubleshooting/git.md). Turning the switch off removes the webhook.
 
-![The Auto-deploy on push switch turned on for a project with a saved token](../../assets/single-server/git-auto-deploy.gif)
+:docs-video{src="../../assets/single-server/git-auto-deploy.webm" title="The Auto-deploy on push switch turned on for a project with a saved token"}
 
 Something not working? Messages and fixes: [Troubleshooting: Git](../troubleshooting/git.md).

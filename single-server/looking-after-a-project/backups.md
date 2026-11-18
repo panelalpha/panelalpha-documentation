@@ -24,7 +24,7 @@ A backup of a PHP hosting project holds its files (**Directory**) and its databa
 
 A backup of a container project holds two parts: **Code** and **Data**. Code is the project's files. Data is what the app saved while running, including its databases. The **Backups** tab shows them as separate columns.
 
-![The Backups tab of the ntfy container project: each backup has its own Code and Data columns, and pointing at an entry shows what it holds](../../assets/single-server/backups-container-code-data-rows.gif)
+:docs-video{src="../../assets/single-server/backups-container-code-data-rows.webm" title="The Backups tab of the ntfy container project: each backup has its own Code and Data columns, and pointing at an entry shows what it holds"}
 
 The two kinds of project: [Projects](../projects/projects.md).
 
@@ -35,7 +35,7 @@ The two kinds of project: [Projects](../projects/projects.md).
 3. In **Create Backup**, write a **Backup Note** if you want one. On a PHP hosting project, keep **Backup Directory** and **Backup Database** ticked for the parts you want.
 4. Select **Create**.
 
-   ![Making a backup of the Northwind Journal WordPress project: Add New, the note Before installing WooCommerce, Backup Directory and Backup Database ticked, Create, then the row shows Creating Backup and finally its size and the type Manual](../../assets/single-server/backups-create-dialog.gif)
+   :docs-video{src="../../assets/single-server/backups-create-dialog.webm" title="Making a backup of the Northwind Journal WordPress project: Add New, the note Before installing WooCommerce, Backup Directory and Backup Database ticked, Create, then the row shows Creating Backup and finally its size and the type Manual"}
 
 **A container project is stopped while its code and data are copied.** It starts again right after.
 
@@ -49,7 +49,7 @@ Each project can have a schedule. New projects get one by default: [Settings](..
 2. Choose **How Often**: Daily, Weekly or Monthly. Then choose the time and, for weekly or monthly, the day.
 3. Select **Enable Automatic Backups**.
 
-   ![Changing the automatic backups of the Northwind Journal project: Change opens Automatic Backups with How Often set to Daily, a new time is picked in Choose Time and Edit Automatic Backups saves it](../../assets/single-server/backups-automatic-dialog.gif)
+   :docs-video{src="../../assets/single-server/backups-automatic-dialog.webm" title="Changing the automatic backups of the Northwind Journal project: Change opens Automatic Backups with How Often set to Daily, a new time is picked in Choose Time and Edit Automatic Backups saves it"}
 
 To change a schedule, select **Change** beside it. To stop it, switch **Automatic Backups** off and select **Disable**. The time is shown in your local time.
 

@@ -18,7 +18,7 @@ Open the user menu and select **Account Details**. The page is called **My Accou
 2. Change **First Name**, **Last Name**, **Company Name** or **Language**. First and last name are required.
 3. Save. You see `Personal information details have been updated.`
 
-   ![My Account opened with Account Details in the user menu: First Name, Last Name, Company Name, Language and Change Email Address](../../assets/single-server/account-personal-information.gif)
+   :docs-video{src="../../assets/single-server/account-personal-information.webm" title="My Account opened with Account Details in the user menu: First Name, Last Name, Company Name, Language and Change Email Address"}
 
 Dates follow the panel default. You cannot set your own format: [Settings](settings.md). The user menu also has a **Dark Mode** switch: [Around the panel](around-the-panel.md).
 
@@ -48,7 +48,7 @@ Two-factor authentication asks for a code from an app on your phone each time yo
 3. Enter the code the app shows.
 4. Save your backup codes and confirm that you did.
 
-   ![My Account, Security Settings: the Two-Factor Authentication switch opens the dialog with the QR code, the code to type by hand and the Code field (QR code and code hidden here)](../../assets/single-server/account-two-factor-setup.gif)
+   :docs-video{src="../../assets/single-server/account-two-factor-setup.webm" title="My Account, Security Settings: the Two-Factor Authentication switch opens the dialog with the QR code, the code to type by hand and the Code field (QR code and code hidden here)"}
 
 You see `Two-Factor Authentication has been enabled.`
 
@@ -60,7 +60,7 @@ To turn two-factor authentication off, open the same dialog and confirm. You see
 
 **Active Devices** lists where you are signed in, with **IP Address**, **Browser**, **Device** and **Last Login**. Your current one is marked `Current Device`. Select the logout icon (tip **Log Out Device**) on a row to end that session. The bin icon (tip **Forget Device**) removes a device you no longer use. If there is nothing to show, the page says `No Active Devices Found`.
 
-![My Account, Active Devices: each session with its IP address, browser, device and last login, and the row marked Current Device](../../assets/single-server/account-active-devices.gif)
+:docs-video{src="../../assets/single-server/account-active-devices.webm" title="My Account, Active Devices: each session with its IP address, browser, device and last login, and the row marked Current Device"}
 
 ## Forgotten password
 

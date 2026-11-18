@@ -16,8 +16,7 @@ The wizard shows until the panel has an account. Every address on the panel lead
 
 1. On the first screen, select **Start Now**.
 
-   <!-- TODO screenshot: first-login-wizard.gif is outdated. Show the wizard with the four steps Sign in, Server name, Connect AI and Done: the Connect AI step with Create token and Skip for now, then the last step with Create your first project. -->
-   ![The setup wizard of a new panel: Start Now, the Sign in step with Connect with PanelAlpha Hub and Create a local account instead, the Server name step filled in, then Open PanelAlpha](../../assets/single-server/first-login-wizard.gif)
+   :docs-video{src="../../assets/single-server/first-login-wizard.webm" title="The setup wizard of a new panel: Start Now, the Sign in step with Connect with Hub, the Server name step, the Connect AI step where Create another token makes a token for Claude Code, and the last step You are all set with Create your first project"}
 
 2. On the **Sign in** step, choose how you sign in:
    - **Connect with Hub** uses your PanelAlpha Hub account, which you can sign in to with GitHub or Google. Follow [Connecting with PanelAlpha Hub](#connecting-with-panelalpha-hub) below.
@@ -63,7 +62,7 @@ The **Connect AI** step offers a card, **Connect with MCP**. Select **Create tok
 
 The project list is empty on a new server. The panel's own project is not in the list.
 
-![The user menu after the first login: Light Mode, Account Details, Tasks, Settings, Join Our Community and Log Out](../../assets/single-server/first-login-landing.gif)
+:docs-video{src="../../assets/single-server/first-login-landing.webm" title="The user menu after the first login: Light Mode, Account Details, Tasks, Settings, Join Our Community and Log Out"}
 
 Open the user menu to reach **Tasks** and **Settings**: [Settings](../the-panel/settings.md). To create your first site: [Create a project](../projects/create-a-project.md).
 

@@ -44,7 +44,7 @@ You need a token for every tool except the Claude app.
 2. Under **Generate an MCP token**, select **Create Token**. Enter a **Token Name**, such as `Claude on my laptop`, and create it. If you already have a token, select **use one you already have** instead.
 3. **The token is shown once.** You cannot see it again after you close the dialog. Copy the token, then confirm with `I have saved my token in a safe place`.
 
-   ![Connect AI: Create Token, the Token Name Claude on my laptop, the new token shown once (hidden here) with the warning to save it, the confirmation I have saved my token in a safe place and Continue](../../assets/single-server/connect-ai-token-created.gif)
+   :docs-video{src="../../assets/single-server/connect-ai-token-created.webm" title="Connect AI: Create Token, the Token Name Claude on my laptop, the new token shown once (hidden here) with the warning to save it, the confirmation I have saved my token in a safe place and Continue"}
 
 In every step below, replace `YOUR_TOKEN` with your token.
 
@@ -201,7 +201,7 @@ Your tool connects to the panel address with `/mcp` added, for example `https://
 1. Open **MCP URL & tokens**. The table lists each token.
 2. In the token's row, point at the rotate arrow in **Actions** to read **Revoke**, then select it and confirm.
 
-![Connect AI, MCP URL & tokens: the MCP Server URL and the API Tokens table with Name, Token, Last Used, Created, Status and the Revoke and Delete actions](../../assets/single-server/connect-ai-tokens-table.gif)
+:docs-video{src="../../assets/single-server/connect-ai-tokens-table.webm" title="Connect AI, MCP URL & tokens: the MCP Server URL and the API Tokens table with Name, Token, Last Used, Created, Status and the Revoke and Delete actions"}
 
 **A revoked token stops working at once.** It stays in the list with the status `Revoked`. To remove it from the list, select **Delete**, the bin in **Actions**. A delete cannot be undone.
 
@@ -221,4 +221,4 @@ For a request like "Update all my sites", the assistant goes through your projec
 
 **Activity Log** lists each tool the assistant runs: **Time**, **Token**, **Tool** and **Status** (`Success` or `Error`). Filter by token with **Filter by token**. If there is nothing yet, the page says `No activity yet. Start using your AI tool to see logs here.`
 
-![Connect AI, Activity Log: each tool the assistant ran with its Time, Token, Tool and Status (Success or Error), and the Filter by token list](../../assets/single-server/connect-ai-activity-log.gif)
+:docs-video{src="../../assets/single-server/connect-ai-activity-log.webm" title="Connect AI, Activity Log: each tool the assistant ran with its Time, Token, Tool and Status (Success or Error), and the Filter by token list"}
