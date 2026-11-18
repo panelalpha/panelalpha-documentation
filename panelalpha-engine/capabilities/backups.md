@@ -8,20 +8,24 @@ nav:
 
 # Backups
 
-A backup is a complete snapshot of one project. For a traditional PHP project that is its home folder and one dump of each of its databases. For a container project it is its files, its stored data volumes and its databases.
+A backup is a complete snapshot of one project. For a traditional PHP project it is the home folder and one dump of each database. For a container project it is the files, the stored data volumes and the databases.
 
-Two things to know before you rely on this:
+Know two things before you rely on backups:
 
 1. **Backups run when you ask, or on a schedule you set.** Without a schedule, nothing is backed up by itself: [Scheduled backups](#scheduled-backups).
-2. **A traditional PHP backup does not include the project's PHP settings** (version and limits). Those are set per domain: [PHP version and settings](domains-and-ssl.md#php-version-on-traditional-php-hosting).
+2. **A traditional PHP backup does not include the project's PHP settings** (version and limits). Those belong to each domain: [PHP version and settings](domains-and-ssl.md#php-version-on-traditional-php-hosting).
 
 ## First, somewhere to put them
 
-A backup has to be written somewhere, and that somewhere is called a **store**. You set one up once, and every future backup goes into it.
+A backup has to be written somewhere. That place is called a **store**. You set one up once, and every later backup goes into it.
 
-**The engine sets one up for you.** An install creates a local store named `local` in `/opt/panelalpha/backups/local` and marks it the **default**: the store a panel uses when nobody has configured one. So a fresh install can back a project up without anyone creating a store first. An Engine update does the same on a server that has no store at all, and nothing on a server that has one: your stores are kept as they are, and the oldest is the default.
+**The engine sets one up for you.** An install creates a local store named `local` in `/opt/panelalpha/backups/local` and marks it the **default**. The default is the store a panel uses when nobody has chosen one. A fresh install can therefore back up a project at once.
 
-The default is not fixed. `GET /system/info` reports it as `default_backup_container` and `GET /backup-containers` marks it `"default": true`; ask the assistant, or use `pae backup:container:update <store> --default`, to make another store the default. Deleting the default store works like deleting any other; the oldest store left takes the flag over, and `pae backup:container:ensure-default` (which the installer runs) creates `local` again on a server that has no store.
+An Engine update does the same on a server that has no store at all. On a server that has a store, it changes nothing: your stores stay as they are, and the oldest is the default.
+
+You can change the default. `GET /system/info` reports it as `default_backup_container`, and `GET /backup-containers` marks it `"default": true`. To make another store the default, ask the assistant or use `pae backup:container:update <store> --default`.
+
+Deleting the default store works like deleting any other. The oldest store left becomes the default. On a server with no store, `pae backup:container:ensure-default` (which the installer runs) creates `local` again.
 
 | Kind | Where the files go |
 |---|---|
@@ -33,37 +37,32 @@ The default is not fixed. `GET /system/info` reports it as `default_backup_conta
 
 If the assistant cannot create a store, see [Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do).
 
-A `local` store writes from inside the engine container, so its folder must be
-under one of the three paths the engine persists on the host: `/home`,
-`/opt/panelalpha` or the engine's own storage volume (`/var/www/html/storage`).
-Anywhere else (a plain `/var/backups`, say) lives in the container's writable
-layer and would be lost the next time that container is recreated, while the
-backup rows still point at it, so the engine refuses such a location with a 422
-when you create or change the store. It refuses the engine's own directory,
-`/opt/panelalpha/shared-hosting`, and anything below it, the same way: only the
-engine's own files may be written there, so every backup into it would fail. It
-also refuses `/home`, `/opt/panelalpha` and `/var/www/html/storage` themselves, which the
-engine depends on: use a folder below them. **A store that already sits at one of
-these paths refuses every change, a rename included, until you move it** to a
-folder such as `/opt/panelalpha/backups/`.
+A `local` store writes from inside the engine container. Its folder must be under one of the three paths the engine keeps on the host: `/home`, `/opt/panelalpha` or the engine's own storage volume (`/var/www/html/storage`).
 
-Keep local stores under `/opt/panelalpha/backups/`. Avoid a folder directly in
-`/home`: every project's home is `/home/<project name>`, so `/home/backups`
-would be the home of a project named `backups`.
+The engine refuses a store at any other path, such as a plain `/var/backups`, with a 422 when you create or change the store. A folder there would sit in the container's writable layer and be lost the next time the container is recreated, while the backup rows still point at it.
+
+The engine also refuses these places:
+
+- `/opt/panelalpha/shared-hosting` and anything below it. Only the engine's own files may be written there, so every backup into it would fail.
+- `/home`, `/opt/panelalpha` and `/var/www/html/storage` themselves, because the engine depends on them. Use a folder below them.
+
+**A store that already sits at one of these paths refuses every change, a rename included, until you move it** to a folder such as `/opt/panelalpha/backups/`.
+
+Keep local stores under `/opt/panelalpha/backups/`. Avoid a folder directly in `/home`. Every project's home is `/home/<project name>`, so `/home/backups` would be the home of a project named `backups`.
 
 ```text
 Create a backup store on this host at /opt/panelalpha/backups.
 ```
 
-**A store on the same VPS as the engine does not protect you from losing the VPS.** It is fine for "I am about to do something risky and want to be able to undo it". For real protection against disk failure or the VPS being lost, use a remote store.
+**A store on the same VPS as the engine does not protect you from losing the VPS.** It is fine when you are about to do something risky and want to be able to undo it. To protect against disk failure or a lost VPS, use a remote store.
 
-To check the engine can actually reach a remote store before you depend on it:
+Check that the engine can reach a remote store before you depend on it:
 
 ```text
 Test that backup store.
 ```
 
-When the test fails, the answer says what failed on one line: the kind of store, the host, the folder or bucket and the reason the storage itself gave. Passwords and keys in it are hidden.
+When the test fails, the answer says what failed in one line: the kind of store, the host, the folder or bucket, and the reason the storage gave. Passwords and keys in it are hidden.
 
 ## Taking a backup
 
@@ -71,15 +70,15 @@ When the test fails, the answer says what failed on one line: the kind of store,
 Create a backup of this project.
 ```
 
-You get a backup ID, a status and the ID of the task that takes it (`backup_task_id`; a restore and a delete have `restore_task_id` and `delete_task_id`). Wait for `completed`, because a backup of a large site takes a while.
+You get a backup ID, a status and the ID of the task that takes the backup (`backup_task_id`; a restore and a delete have `restore_task_id` and `delete_task_id`). Wait for `completed`. A backup of a large site takes a while.
 
-A backup that names no store goes to the default one. On a server that has no default store it is refused with `no_default_container`: create a store, or name one.
+A backup that names no store goes to the default one. On a server with no default store it is refused with `no_default_container`. Create a store, or name one.
 
 A backup, a restore, a push and a staging copy never run on the same project at the same time. The second one is refused as busy, and a scheduled backup tries again.
 
-A backup or restore stops the app while it works and always starts it again, also when it fails. A long backup or restore has one time limit for all its steps, so it cannot hang with the app stopped.
+A backup or restore stops the app while it works. It always starts the app again, also when the backup or restore fails. One time limit covers all the steps, so it cannot hang with the app stopped.
 
-You can back up only the files, or only the databases, and add a note to find the backup again later. On a container project, "databases" also covers the stored data volumes.
+You can back up only the files or only the databases, and add a note to find the backup later. On a container project, "databases" also covers the stored data volumes.
 
 ```text
 Back up this project, databases only, with the note "before the plugin update".
@@ -92,38 +91,51 @@ List the backups for this project.
 Restore last backup onto this project.
 ```
 
-**A restore overwrites the live project.** Anything created since that backup was taken is gone. Always list the backups and check the date on the one you are about to restore before you confirm it. Your assistant will ask you to confirm; that confirmation is required and not a formality. A backup that is not `completed` cannot be restored, and neither can a protected project: [Protecting](projects.md#protecting).
+**A restore overwrites the live project.** Anything created since that backup was taken is gone. List the backups and check the date of the one you want before you confirm. Your assistant asks you to confirm, and that confirmation is required. A backup that is not `completed` cannot be restored, and neither can a protected project: [Protecting](projects.md#protecting).
 
-On a traditional PHP project, a restore replaces the home folder with the backed-up one and puts the old one back if the restore fails. To keep the files that are there and only write the backed-up ones over them, say so. You can also restore only the databases or only the files, if the backup has them. Choosing parts by volume is for container projects only. On a traditional PHP project, a restore that fails puts the databases back as they were, and a restore of a classic WordPress site makes its `wp-config.php` private again.
+On a traditional PHP project:
 
-The parts are chosen with `only` or `exclude`, never both. Each is an object with up to three keys: `files` (true or false), `volumes` (a list of volume names) and `databases` (a list of database names). For example, `only` with `databases` set to the one database name restores only that database.
+- A restore replaces the home folder with the backed-up one. It puts the old one back if the restore fails.
+- To keep the files that are there and only write the backed-up ones over them, say so.
+- You can restore only the databases or only the files, if the backup has them.
+- A restore that fails puts the databases back as they were.
+- A restore of a classic WordPress site makes its `wp-config.php` private again.
+
+Choosing parts by volume is for container projects only.
+
+You choose the parts with `only` or `exclude`, never both. Each is an object with up to three keys: `files` (true or false), `volumes` (a list of volume names) and `databases` (a list of database names). For example, `only` with `databases` set to one database name restores only that database.
 
 ## Deleting
 
-**Deleting a backup removes its files, and that copy of the project can never be restored.** Deleting a store that still holds backups is refused unless you ask to delete the backups with it, and then they are gone for good. The assistant says what will be lost and asks you to confirm first.
+**Deleting a backup removes its files, and that copy of the project can never be restored.** Deleting a store that still holds backups is refused unless you ask to delete the backups with it. Then they are gone for good. The assistant says what will be lost and asks you to confirm first.
 
 ## Download one part
 
-A backup is stored as separate items, for example the home folder and one dump per database. To take one item off the server:
+A backup is stored as separate items, for example the home folder and one dump per database. To take one item off the server, ask:
 
 ```text
 Download the database dump from the newest backup of this project.
 ```
 
-The assistant can only read a small piece of a file at a time, so for a large item use the server command: [CLI commands](../commands/pae-cli.md#backups).
+The assistant reads only a small piece of a file at a time. For a large item, use the server command: [CLI commands](../commands/pae-cli.md#backups).
 
 ## Scheduled backups
 
-Each project can have one automatic schedule. You give it a store, a time and how many backups to keep. Without a store a new schedule uses the default one, and a changed schedule keeps the store it has.
+Each project can have one automatic schedule. You give it a store, a time and how many backups to keep. A new schedule without a store uses the default one. A changed schedule keeps the store it has.
 
 ```text
 Back up this project every night at 03:00 into the store local-main, and keep
 the last 14.
 ```
 
-Times are in UTC, not the server's local time. A schedule can run at most once an hour, and the number to keep is from 1 to 365. Only the backups the schedule made are cleaned up when there are more than that. Backups you took yourself are never deleted by it. If the project is busy at the planned time, the engine tries again for up to an hour, then skips that run. On the server, `backups:run-scheduled` prints what it did for each schedule that was due. A store that a project's enabled schedule uses cannot be deleted; the refusal names those projects. Turning a schedule off is enough to release the store: a disabled schedule holds nothing, and deleting the store removes it.
+Times are in UTC, not the server's local time. A schedule can run at most once an hour. The number to keep is from 1 to 365.
 
-To look at the schedule, or turn it off:
+- When there are more backups than that number, the schedule deletes only the backups it made. Backups you took yourself are never deleted by it.
+- If the project is busy at the planned time, the engine tries again for up to an hour, then skips that run.
+- On the server, `backups:run-scheduled` prints what it did for each schedule that was due.
+- A store that a project's enabled schedule uses cannot be deleted. The refusal names those projects. Turning the schedule off releases the store: a disabled schedule holds nothing, and deleting the store removes it.
+
+To look at the schedule or turn it off, ask:
 
 ```text
 Show the backup schedule of this project. Then remove it.
@@ -135,10 +147,10 @@ Show the backup schedule of this project. Then remove it.
 The store name or ID is wrong. Ask to list the stores first and use the exact name.
 
 **The backup fails partway on a large site.**
-Usually disk space on the destination, or a timeout to a remote store. Check free space on the target, and test the store.
+The cause is usually disk space on the destination or a timeout to a remote store. Check the free space on the target, and test the store.
 
 **How do I schedule these?**
-Ask the assistant to set a schedule: [Scheduled backups](#scheduled-backups). Do not use a project's own cron jobs for this: those run inside the project and cannot reach the engine's backup system.
+Ask the assistant to set a schedule: [Scheduled backups](#scheduled-backups). Do not use a project's own cron jobs for this. They run inside the project and cannot reach the engine's backup system.
 
 **"Project is busy: a backup is running" or "a restore is running".**
 A backup, a restore and a deploy do not run on the same project at the same time. Wait for the one that is running, then try again.
@@ -148,7 +160,7 @@ Both were switched off. Leave at least one on.
 
 ## More requests to try
 
-**Mode** is the lowest permission mode that allows it: read, modify or full ([Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do)). Examples assume a repository project named `tshop`. A **store** is what the tools call a backup container.
+**Mode** is the lowest permission mode that allows the request: read, modify or full ([Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do)). The examples assume a repository project named `tshop`. A **store** is what the tools call a backup container.
 
 **A local store**
 
@@ -166,7 +178,7 @@ Create a backup store called s3-test on an S3 bucket, and test it. Do not ask
 me to type the access keys into this chat.
 ```
 
-Mode: modify. Tools: `backup_container_create` with `driver` s3 and `credentials`, `backup_container_test`. Check: the assistant does not ask for the keys in the chat, and the test passes. `ftp`, `ftps` and `sftp` are the other drivers, and each is tested the same way before it is relied on.
+Mode: modify. Tools: `backup_container_create` with `driver` s3 and `credentials`, `backup_container_test`. Check: the assistant does not ask for the keys in the chat, and the test passes. `ftp`, `ftps` and `sftp` are the other drivers. Test each one the same way before you rely on it.
 
 **Change or remove a store**
 
@@ -234,7 +246,7 @@ Mode: modify. Tools: `backup_restore` with `confirm`, then with `only` or `exclu
 List the items of the newest backup of tshop and download the database dump.
 ```
 
-Mode: read. Tools: `backup_get`, `backup_item_download` with `item`, `offset` and `length`. Check: the item is returned in pieces of at most 49152 bytes with a `next_offset`, and a backup that is not completed answers `backup_not_completed`.
+Mode: read. Tools: `backup_get`, `backup_item_download` with `item`, `offset` and `length`. Check: the item comes back in pieces of at most 49152 bytes with a `next_offset`. A backup that is not completed answers `backup_not_completed`.
 
 **A backup schedule**
 

@@ -10,7 +10,7 @@ nav:
 
 A **cron job** runs a command on a schedule that you choose. PHP settings set the PHP version and limits (such as memory) of a PHP hosting project. Both are in the project under **Advanced**.
 
-**PHP version and PHP settings are not available for container projects.** They run PHP from their own image: [Projects](../projects/projects.md).
+**PHP version and PHP settings are not available for container projects.** They run their own PHP, not the server's: [Projects](../projects/projects.md).
 
 ## Adding a cron job
 
@@ -30,7 +30,7 @@ A container project with no containers yet shows `This project has no container 
 
 ### Where the command runs
 
-On a PHP hosting project the command runs inside the project's container as the project's user. It starts in the project's home directory, `/home/<name>`. **The home directory itself is not writable**, so write files in the site's folder instead.
+On a PHP hosting project the command runs as the project's user. It starts in the project's home directory, `/home/<name>`. **The home directory itself is not writable**, so write files in the site's folder instead.
 
 The **Document Root** in **Advanced > Domains** is relative to the home directory, so `/example.com/public_html` is `/home/<name>/example.com/public_html`. Write the job's output in the folder of the domain that holds the document root. That folder belongs to the project's user and is **not served**.
 
@@ -62,7 +62,7 @@ The card shows `Current PHP version: <version>`. The Engine decides which versio
 
 A saved setting reaches the site within a few seconds. The dialog shows the saved value as soon as you save it.
 
-An empty value means this project does not set that setting, so the server's PHP configuration applies. The dialog does not show the values the server uses. To use a setting the project does not set yet, type the value you want. To go back to the server's value, clear the value and save. The panel removes the setting and the server's PHP configuration applies again.
+An empty value means this project does not set that setting, so the server's PHP configuration applies. The dialog does not show the values the server uses. To use a setting the project does not set yet, type the value you want. To go back to the server's value, clear the value and save. The panel then removes the setting.
 
 ### More detail
 
@@ -70,4 +70,4 @@ PHP keeps the settings it reads for a folder in a cache for a few seconds. A req
 
 ![Advanced > Developer Settings of the Northwind Journal project: the PHP Version card with Current PHP version, then Manage on PHP Settings, memory_limit set to 256M and Save Changes](../../assets/single-server/php-settings-dialog.gif)
 
-Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: Looking after a project](../troubleshooting/looking-after-a-project.md#cron-jobs-and-php).
+Something not working? Messages and fixes: [Troubleshooting: Looking after a project](../troubleshooting/looking-after-a-project.md#cron-jobs-and-php).

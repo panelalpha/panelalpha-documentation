@@ -22,7 +22,7 @@ You need a VPS that meets all five:
 | **Memory** | 2 GB of RAM, more as you add projects |
 | **Network** | A public IPv4 address |
 
-The installer checks the operating system and refuses anything else. It does not check the rest, so check them yourself.
+The installer checks the operating system and refuses any other. It does not check the rest, so check them yourself.
 
 > [!NOTE]
 > **Why the VPS has to be brand new.** The installer takes the machine over: it installs Docker, a firewall and a watchdog, and it changes how the machine looks up domain names. That is fine on an empty VPS and destructive on one already doing a job. Do not use a VPS that already runs a website or another control panel.
@@ -43,7 +43,7 @@ The installer opens these ports in the server's own firewall:
 
 ## A domain
 
-Use a domain you own for the panel, for example `panel.example.com`. Before you install, point its A record at the server's IP address (`203.0.113.10`). The panel works over HTTPS only, and the domain gets a trusted Let's Encrypt certificate once it points at the server.
+Use a domain you own for the panel, for example `panel.example.com`. Before you install, point its A record (the DNS entry that links a name to an IP address) at the server's IP address (`203.0.113.10`). The panel works over HTTPS only. The domain gets a trusted Let's Encrypt certificate once it points at the server.
 
 Which names the panel can use, and which of them get a trusted certificate: [The panel address](panel-address.md).
 

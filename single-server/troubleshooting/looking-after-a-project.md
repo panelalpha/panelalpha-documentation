@@ -8,7 +8,7 @@ nav:
 
 # Looking after a project
 
-Problems with backups, databases, files, FTP, SFTP, cron jobs and PHP settings, with what each message means and what to do. Each part names the page it belongs to, with a link to the full page.
+Problems with backups, databases, files, FTP, SFTP, cron jobs and PHP settings, with what each message means and what to do.
 
 ## Backups
 
@@ -28,7 +28,7 @@ More about this: [Backups](../looking-after-a-project/backups.md).
 
 ## Databases
 
-**"The project kind is not known yet, so its database cannot be renamed."** The panel has not learned what the project runs. Open the project page, wait a moment and try again.
+**"The project kind is not known yet, so its database cannot be renamed."** The panel has not yet learned what the project runs. Open the project page, wait a moment and try again.
 
 **"The Engine could not rename the database."** The rename failed on the server. Check the tasks list and try again: [Tasks](../the-panel/tasks.md).
 
@@ -36,13 +36,13 @@ More about this: [Databases](../looking-after-a-project/databases.md).
 
 ## Files and access
 
-**"The username field must not be greater than 32 characters."** On **SFTP Accounts**, the name you type may not pass 32 characters. Use a shorter name.
+**"The username field must not be greater than 32 characters."** On **SFTP Accounts**, the name you type may not be longer than 32 characters. Use a shorter name.
 
-**"The username is too long for this project."** On **SFTP Accounts**, the prefix the panel puts before the name counts too. A name that fits 32 characters alone is refused when its prefix makes it longer. Use a shorter name.
+**"The username is too long for this project."** On **SFTP Accounts**, the panel puts a prefix before the name, and the prefix counts too. A name of 32 characters or fewer is still refused when the prefix makes it longer. Use a shorter name.
 
-**"The user field must not be greater than 32 characters."** On **FTP Accounts**, the name may not pass 32 characters. Use a shorter name.
+**"The user field must not be greater than 32 characters."** On **FTP Accounts**, the name may not be longer than 32 characters. Use a shorter name.
 
-**"Username can only contain letters and numbers."** On **FTP Accounts**, an underscore, hyphen, dot or space in the name is refused. Use only the letters a to z, A to Z and the digits 0 to 9.
+**"Username can only contain letters and numbers."** On **FTP Accounts**, a name with an underscore, hyphen, dot or space is refused. Use only the letters a to z, A to Z and the digits 0 to 9.
 
 **"Invalid file name."** The name has characters the file manager does not accept. Use a plainer name.
 
@@ -50,15 +50,15 @@ More about this: [Files and access](../looking-after-a-project/files-and-access.
 
 ## Cron jobs and PHP
 
-**A cron job seems not to run.** The panel does not show what the job printed, so make the job leave a trace:
+**A cron job seems not to run.** The panel does not show what the job printed, so make the job write a file you can check:
 
-1. Make the command write a file next to the document root, for example `date >> /home/<name>/example.com/cron-test.log`.
+1. Make the command write a file in the site's folder, for example `date >> /home/<name>/example.com/cron-test.log`.
 2. Wait for the schedule.
 3. Open that file in **Advanced > File Manager**, in the folder of the domain.
 
 If the file is missing, check these:
 
-- The command writes the whole path into the site's folder. The home directory is not writable and a relative path starts there.
+- The command uses the whole path into the site's folder. The home directory is not writable, and a relative path starts there.
 - The schedule is right.
 - On a container project, the chosen **Service** is running.
 

@@ -10,7 +10,7 @@ nav:
 
 Settings holds the panel's own options: its name, language, date format, address, the default domain for new projects and the default backup schedule.
 
-Open it from the user menu with **Settings**. It has two tabs, **General** and **Backups**. Save a change with **Save Changes**. The button stays off until something changed. Afterwards you see `Settings saved.`
+Open it from the user menu with **Settings**. It has two tabs, **General** and **Backups**. Save a change with **Save Changes**. The button stays off until something changes. Then you see `Settings saved.`
 
 ## PanelAlpha Hub
 
@@ -36,7 +36,7 @@ If the card shows `PanelAlpha has not confirmed the connection yet.`, select **C
 
 ### What the panel reports to the Hub
 
-While connected, the panel reports to the Hub every five minutes: the name, type and status of each project, the panel's version and its address. It also reports right after pairing and right after you save a new Application URL.
+While connected, the panel reports to the Hub every five minutes. The report has the name, type and status of each project, the panel's version and its address. The panel also reports right after pairing and right after you save a new Application URL.
 
 ## General
 
@@ -48,7 +48,7 @@ While connected, the panel reports to the Hub every five minutes: the name, type
 
 ## Application URL
 
-The **Application URL** is the address the panel uses in the links it sends, such as password-reset emails. Saving a new address also moves the panel to it.
+The **Application URL** is the address the panel uses in the links it sends, such as password-reset emails. Saving a new address also moves the panel to that address.
 
 **The address the panel has now stops answering when you save.** Point the new domain's DNS at this server first: [The panel address](../getting-started/panel-address.md).
 
@@ -61,7 +61,7 @@ The **Application URL** is the address the panel uses in the links it sends, suc
 
 A new project called `shop` then gets `shop.example.com`. Existing projects keep their domain.
 
-Leave the field empty (`Not set`) and the Engine picks a name for each new project. Select the help icon next to the label to see how the Engine names new projects on your server and what it falls back to. The domain can have up to 253 characters.
+If you leave the field empty (`Not set`), the Engine picks a name for each new project. Select the help icon next to the label to see how the Engine names new projects on your server and what it falls back to. The domain can have up to 253 characters.
 
 ## Backups
 
@@ -97,7 +97,7 @@ The panel tests the store before it saves it. A changed remote store becomes a n
 
 ### Going back to the server's store
 
-Select **Remove store** next to the store to stop choosing one. The schedule below and every backup taken from then on use the server's own store again, the one the tab showed before you chose yours. Projects keep the schedule they have. The dialog asks you to tick what happens to this store before **Remove store** becomes available.
+Select **Remove store** next to the store to stop using your own store. The schedule below and every later backup use the server's own store again, the one the tab showed before you chose yours. Projects keep the schedule they have. The dialog asks you to tick what happens to this store before **Remove store** becomes available.
 
 What happens to the store you remove depends on who made it:
 
@@ -106,18 +106,18 @@ What happens to the store you remove depends on who made it:
 
 **Change store** treats the store you leave the same way: one the panel created is deleted when nothing uses it, and kept when a backup or a schedule still does.
 
-On a server with no other store the page goes back to `No backup store configured`. The schedule fields are off until you set one up again.
+On a server with no other store, the page goes back to `No backup store configured`. The schedule fields stay off until you set up a store again.
 
 ### Schedule for new projects
 
-These defaults apply to projects you create from now on, in this panel. Existing projects keep their own schedule, and so does a project another panel or the server's operator created.
+These defaults apply to projects you create from now on in this panel. Existing projects keep their own schedule. So does a project that another panel or the server's operator created.
 
 - **Automatic backups**: Enabled (default) or Disabled.
 - **Backups to keep**: a number from 1 to 365. The default is 7.
 - **Frequency**: Daily (default), Weekly or Monthly. Weekly adds **Day of the week**. Monthly adds **Day of the month**, 1 to 28.
 - **Time**: the hour, 0 to 23, in which the projects' backups start. The default hour is 03:00 UTC. You see the time in your local time.
 
-Each new project gets its own minute inside that hour, so the projects of a server do not all back up at the same moment. The project's **Backups** tab shows its exact schedule. A project without a schedule starts its **Automatic Backups** dialog at this hour and its own minute too.
+Each new project gets its own minute inside that hour, so the projects of a server do not all back up at the same moment. The project's **Backups** tab shows its exact schedule. A project without a schedule also starts its **Automatic Backups** dialog at this hour and its own minute.
 
 ![Settings, Backups tab: the defaults for new projects, Automatic backups, Backups to keep, Frequency and Time](../../assets/single-server/settings-backup-schedule.gif)
 
@@ -129,4 +129,4 @@ For taking and restoring a backup of one project: [Backups](../looking-after-a-p
 - **A server without a store.** If the Engine never created that store (it predates it and has not been updated since), every schedule field is off and the page says `Set up a backup store above to schedule backups for new projects.` Set one up as above.
 - **A kept store comes back.** A store the panel created that was kept because a backup or schedule still used it is not forgotten. Choose the same directory again once that backup or schedule is gone. The panel shows it as its own store again, so **Remove store** then deletes it from the server.
 
-Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: The panel and your account](../troubleshooting/panel-and-account.md#settings).
+If something does not work, see the messages you may meet on this page and what to do about them: [Troubleshooting: The panel and your account](../troubleshooting/panel-and-account.md#settings).

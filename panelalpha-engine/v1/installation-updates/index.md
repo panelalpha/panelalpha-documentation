@@ -1,11 +1,11 @@
 ---
 title: Installation & Updates
-description: Install and update PanelAlpha Engine. Walk through the SSH installer, connect via the wizard, and apply safe updates.
+description: Install PanelAlpha Engine with the SSH installer, connect it through the wizard and keep it up to date.
 ---
 
 # Installation & Updates
 
-This section covers installing PanelAlpha Engine on a dedicated server and keeping it up to date as new versions are released.
+Install PanelAlpha Engine on its own server, then update it when new versions come out.
 
 ## Pages in this section
 

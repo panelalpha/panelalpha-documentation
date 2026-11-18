@@ -9,9 +9,7 @@ nav:
 
 # What your repository needs
 
-The engine identifies your application from its files. If the identifying file is not at the top level of the repository, you get an unexpected result and a confusing deploy.
-
-This page is the minimum for each kind of application.
+The engine identifies your application from its files. If the identifying file is not at the top level of the repository, the result is unexpected and the deploy is confusing.
 
 ## Check first
 
@@ -19,7 +17,7 @@ This page is the minimum for each kind of application.
 Inspect this repository and tell me what stack you detect: https://github.com/org/app
 ```
 
-Seconds, and creates nothing. Do this before a first deploy of anything unusual.
+It takes seconds and creates nothing. Run it before the first deploy of anything unusual.
 
 ## What each kind needs
 
@@ -49,7 +47,13 @@ PHP and Laravel run Apache **inside the project's container**. The VPS still ser
 
 ## Docker Compose projects: editing the compose file
 
-The engine never runs your `docker-compose.yml` as it is. It runs a copy made fit for hosting, with resource limits and a restart policy on every service that publishes a port or that another service needs, and your own file stays unchanged. A service counts as needed when another one names it in `depends_on`, `links`, `volumes_from` or `network_mode: service:…`, or reaches it by name in its environment (`DB_HOST=db`, `REDIS_URL=redis://cache:6379`). Any other service that sets no `restart:` of its own is not restarted when it exits, so a one-off helper runs once, and a background worker nothing depends on needs `restart: unless-stopped` if it must come back after a crash or a server restart. If you edit your compose file on the account, over SSH or with the file tools, start the project again with the `up` or `pull` action. The engine rebuilds that copy from your edited file before it starts the containers. It does not clone the repository again. The same applies to an account with no repository where you created a `docker-compose.yml` yourself.
+The engine never runs your `docker-compose.yml` as it is. It runs a copy made fit for hosting, and your own file stays unchanged. The copy has resource limits and a restart policy on every service that publishes a port or that another service needs.
+
+A service counts as needed when another one names it in `depends_on`, `links`, `volumes_from` or `network_mode: service:…`, or reaches it by name in its environment (`DB_HOST=db`, `REDIS_URL=redis://cache:6379`).
+
+Any other service that sets no `restart:` of its own is not restarted when it exits. A one-off helper runs once. A background worker that nothing depends on needs `restart: unless-stopped` if it must come back after a crash or a server restart.
+
+If you edit your compose file on the account, over SSH or with the file tools, start the project again with the `up` or `pull` action. The engine rebuilds the copy from your edited file before it starts the containers. It does not clone the repository again. The same applies to an account with no repository where you created a `docker-compose.yml` yourself.
 
 **Where a service may mount from.** A service may bind only your project folder (`~/project`, which is where relative paths such as `./data` point) and the account's `~/.panelalpha` folder. **Any other bind is removed from the copy the engine runs**, and the deploy log warns which service and volume it removed. This covers the Docker socket, the account's home folder and every other path on the server. If a service needs more, copy the files into your repository, or keep them in a named Docker volume.
 
@@ -59,7 +63,7 @@ The engine leaves the `.git` folder and its own compose files out of the build, 
 
 The engine also leaves out `.env.panelalpha`, which holds the project's environment variables when your repository tracks its own `.env`. An empty `.env`, which the engine creates when the project has no environment of its own, is left out too, unless your Dockerfile copies `.env` by name. A `.env` with values stays in the build, so a build step such as Vite or Next.js can read it.
 
-The engine keeps `.git` in the build when your build reads git history: the Dockerfile copies `.git` or runs a command such as `git describe`, or the project takes its version from git (for example `setuptools-scm`). Each redeploy then rebuilds from the first `COPY . .`.
+The engine keeps `.git` in the build when your build reads git history. That is the case when the Dockerfile copies `.git` or runs a command such as `git describe`, or when the project takes its version from git (for example `setuptools-scm`). Each redeploy then rebuilds from the first `COPY . .`.
 
 To decide this yourself, put `!.git` in your `.dockerignore` to keep `.git`. You can also commit your own `Dockerfile.dockerignore`. The engine then uses your file as it is.
 
@@ -73,11 +77,13 @@ worker: bundle exec sidekiq
 release: bundle exec rails db:migrate
 ```
 
-`release:` is different: it runs once on every deploy, before your application starts. If it fails, the deploy fails and the application is not started. Every other line, such as `worker:` or `clock:`, keeps running and is restarted if it stops. This applies to every kind of project above except Docker Compose, where your compose file lists the services, and sites served by nginx.
+`release:` runs once on every deploy, before your application starts. If it fails, the deploy fails and the application is not started. Every other line, such as `worker:` or `clock:`, keeps running and restarts if it stops.
+
+Procfile lines work with every kind of project above except Docker Compose (your compose file lists the services) and sites served by nginx.
 
 ## Node projects: the lockfile decides the tool
 
-Whichever lockfile is present is the package manager that gets used:
+The lockfile in the project decides which package manager runs:
 
 | Lockfile | Tool |
 |---|---|
@@ -88,13 +94,23 @@ Whichever lockfile is present is the package manager that gets used:
 
 **Commit your lockfile.** Without one, dependency versions are not pinned, and a build that worked last week can fail this week because something upstream released a new version.
 
-The engine never puts one in your repository. A lockfile its own install generates, because none was committed, is kept out of the project's changes on the server and is never pushed. That holds for a PHP project's `composer.lock` too.
+The engine never adds a lockfile to your repository. If none was committed, the install generates one. The engine keeps it out of the project's changes on the server and never pushes it. The same holds for a PHP project's `composer.lock`.
 
 A `start` script in your `package.json` takes precedence over the default the engine would use.
 
 ## Git submodules
 
-Submodules are fetched with the repository, and again on every pull, branch change and push, at the commit the repository records. A submodule that cannot be fetched fails the first deploy. After that, a submodule the last deployed commit already had keeps whatever copy it had and the deploy log warns, while one the new commit adds fails the deploy. A rebuild clones the repository afresh, so it cannot keep a copy: a submodule the previous deploy had checked out fails the rebuild instead of deploying the app without it. A submodule addressed over SSH (`git@host:...`) is fetched over HTTPS unless the project has a deploy key. If the application needs only some of them, for example because the others are private, name those in `.panelalpha/panelalpha.yaml` at the top of the repository:
+The engine fetches submodules with the repository, and again on every pull, branch change and push, at the commit the repository records. A submodule that cannot be fetched fails the first deploy.
+
+After the first deploy:
+
+- A submodule the last deployed commit already had keeps whatever copy it had, and the deploy log warns.
+- A submodule the new commit adds fails the deploy.
+- A rebuild clones the repository afresh, so it cannot keep a copy. A submodule the previous deploy had checked out fails the rebuild instead of deploying the app without it.
+
+A submodule addressed over SSH (`git@host:...`) is fetched over HTTPS unless the project has a deploy key.
+
+If the application needs only some of them, for example because the others are private, name those in `.panelalpha/panelalpha.yaml` at the top of the repository:
 
 ```yaml
 git:
@@ -128,7 +144,7 @@ The engine found no way to start a website from these files. Often it is a libra
 An inspection reads only inside the repository it inspects. A symbolic link to another file in the repository is followed; one that leads out of the repository is not, and that file's contents are not read. Make it a regular file, or link it to a file inside the repository.
 
 **The build fails with "Cannot change ownership to uid …".**
-Every file in a build or image must be owned by a user and group id between 0 and 65535; an account cannot hold anything owned above that. This happens when a build extracts an archive made on another system, for example `tar` in a Flutter web build. Extract it with `tar --no-same-owner` (or set `TAR_OPTIONS=--no-same-owner` in that `RUN` step), or deploy the project's published image instead.
+Every file in a build or image must be owned by a user and group id between 0 and 65535. An account cannot hold anything owned above that. This happens when a build extracts an archive made on another system, for example `tar` in a Flutter web build. Extract it with `tar --no-same-owner` (or set `TAR_OPTIONS=--no-same-owner` in that `RUN` step), or deploy the project's published image instead.
 
 **Inspect stops with "… is a symbolic link in the repository".**
 A file in your `.panelalpha/files` folder, or one the app's recipe supplies, goes to a path where your repository commits a symbolic link: a folder on the way, or the file itself. The engine writes these files only into real folders and never through a link, so the inspection stops instead. Commit a real folder or file at that path, or put the file in `.panelalpha/files` under the path the link points to.

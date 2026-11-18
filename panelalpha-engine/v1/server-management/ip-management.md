@@ -1,6 +1,6 @@
 ---
 title: IP Management
-description: Manage IP addresses and subnets in PanelAlpha Engine. Assign shared or dedicated IPs, add subnets and control instance networking.
+description: Manage the IP addresses and subnets of a PanelAlpha Engine server. Add subnets and assign shared or dedicated IPs to accounts.
 nav:
   group: Server Management
   order: 2
@@ -43,7 +43,7 @@ In a shared subnet, one IP can be used by several accounts. In a subnet that is 
 
 ### Prerequisites
 
-Your hosting provider must route the subnet to this server before you add it. The panel does not check routing.
+Your hosting provider must route the subnet to this server before you add it. The panel does not check this.
 
 ### Steps
 
@@ -68,4 +68,4 @@ Click the number in **Assignments** to open **IP Address Assignments**. The tabl
 2. Read the warning, tick the confirmation box and confirm.
 
 > [!WARNING]
-> **Warning:** Deleting a subnet removes all its IP addresses, including IPs that are still assigned. Sites and services using those IPs stop being reachable. Move the accounts to other IPs before you delete a subnet that has assignments.
+> **Deleting a subnet removes all its IP addresses, including IPs that are still assigned.** Sites and services using those IPs stop being reachable. Move the accounts to other IPs before you delete a subnet that has assignments.

@@ -29,7 +29,7 @@ Do this on your own computer, where Cursor is installed.
 
 Open the `cursor://anysphere.cursor-deeplink/mcp/install?...` link your VPS printed. If your terminal does not make it clickable, copy the complete link into your browser's address bar and allow it to open Cursor.
 
-Cursor opens its MCP settings and asks you to install `panelalpha-engine`. Review the server address and confirm **Install**. The connection is added to your user configuration, `~/.cursor/mcp.json`, so it is available in every project. Other MCP servers remain in the file. If `panelalpha-engine` already exists, confirming the install replaces that entry with the new address and token.
+Cursor opens its MCP settings and asks you to install `panelalpha-engine`. Review the server address and confirm **Install**. The connection is added to your user configuration, `~/.cursor/mcp.json`, so it is available in every project. Other MCP servers stay in the file. If `panelalpha-engine` already exists, confirming the install replaces that entry with the new address and token.
 
 The link uses Cursor's [MCP install-link format](https://prod.cursor.com/docs/mcp/install-links): a server name and a base64-encoded JSON configuration containing the URL and Authorization header.
 
@@ -56,7 +56,7 @@ It looks like this:
 }
 ```
 
-Use your printed address and token; `203.0.113.10` is a placeholder. Use `~/.cursor/mcp.json` so the engine is available in every project. Putting the file inside a project risks committing your token to a repository.
+Use your printed address and token. `203.0.113.10` is a placeholder. Put the file at `~/.cursor/mcp.json` so the engine is available in every project. A file inside a project risks committing your token to a repository.
 
 If the file already has other servers in it, add `panelalpha-engine` alongside them rather than replacing the whole file.
 
@@ -78,7 +78,7 @@ You can also open **Customize**, then **Plugins**. Import `https://github.com/pa
 
 Open **Settings**, then **Tools & MCP**. `panelalpha-engine` should be listed, and it should show the abilities it picked up rather than an error.
 
-Then ask it something harmless:
+Then ask it something read-only:
 
 ```text
 List the projects on this engine.
@@ -89,7 +89,7 @@ An empty list on a new engine is a success.
 ## Troubleshooting
 
 **It registered, then will not connect.**
-A self-signed certificate on your engine that your computer does not trust. Cursor is built on Node, so the fix is the same as Claude Code: [Trust a self-signed certificate](claude-code.md#trust-a-self-signed-engine-certificate).
+Your engine has a self-signed certificate that your computer does not trust. Cursor is built on Node, so the fix is the same as Claude Code: [Trust a self-signed certificate](claude-code.md#trust-a-self-signed-engine-certificate).
 
 Cursor is normally launched from a desktop icon, so it will not see a certificate setting you added to `~/.bashrc` or `~/.zshrc`. Either start Cursor from a terminal where the setting is active, or set it at the operating-system level.
 
@@ -108,10 +108,10 @@ The file has a syntax error, most often a missing or extra comma when adding to 
 Restart Cursor first. A stale connection from before the edit looks exactly like this. If it persists, run `pae mcp:check` on your VPS.
 
 **401 Unauthorized.**
-The token is truncated, or it is the wrong type. Assistants need a token from `pae connect`, not `pae api:token:create`.
+The token was cut off when you copied it, or it is the wrong type. Assistants need a token from `pae connect`, not `pae api:token:create`.
 
 **It connects but can barely do anything.**
-The permission settings on your VPS are filtering its abilities. See [Decide what the assistant may do](your-assistant.md#decide-what-the-assistant-may-do).
+The permission settings on your VPS are hiding some of its abilities. See [Decide what the assistant may do](your-assistant.md#decide-what-the-assistant-may-do).
 
 **I pasted the link or the token into a chat, or committed it to a repository.**
 Revoke it immediately on your VPS, then create a new one and add it again with `pae connect cursor`:

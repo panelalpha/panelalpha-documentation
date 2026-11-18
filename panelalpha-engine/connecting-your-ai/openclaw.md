@@ -36,7 +36,7 @@ The first line installs create and debug skills from the marketplace. Keep the q
 openclaw mcp doctor panelalpha-engine --probe
 ```
 
-`panelalpha-engine` should connect and list tools. Then ask it something harmless:
+`panelalpha-engine` should connect and list tools. Then ask it something read-only:
 
 ```text
 List the projects on this engine.
@@ -47,7 +47,7 @@ An empty list on a new engine is a success.
 ## Troubleshooting
 
 **It registered, then will not connect.**
-A self-signed certificate on your engine that your computer does not trust. Add the certificate to your operating system's trust store. Copy it first:
+Your engine has a self-signed certificate that your computer does not trust. Add the certificate to your operating system's trust store. Copy it first:
 
 ```bash
 scp root@203.0.113.10:/opt/panelalpha/shared-hosting/crt/server.cert ~/panelalpha-engine.cert
@@ -56,7 +56,7 @@ scp root@203.0.113.10:/opt/panelalpha/shared-hosting/crt/server.cert ~/panelalph
 The lasting fix is giving the engine a real certificate: [Install](../getting-started/install.md#if-connecting-asks-you-to-trust-a-certificate).
 
 **401 Unauthorized.**
-The token was truncated, or it is the wrong type. Assistants need a token from `pae connect`, not `pae api:token:create`.
+The token was cut off when you copied it, or it is the wrong type. Assistants need a token from `pae connect`, not `pae api:token:create`.
 
 **405 Method Not Allowed.**
 `--transport streamable-http` was missing or set to something else.
@@ -65,7 +65,7 @@ The token was truncated, or it is the wrong type. Assistants need a token from `
 Port 2011 is not reachable from your computer. Check any firewall between you and your VPS, then confirm the engine is answering with `pae mcp:check` on your VPS itself.
 
 **It connects but can barely do anything.**
-The permission settings on your VPS are filtering its abilities. See [Decide what the assistant may do](your-assistant.md#decide-what-the-assistant-may-do).
+The permission settings on your VPS are hiding some of its abilities. See [Decide what the assistant may do](your-assistant.md#decide-what-the-assistant-may-do).
 
 **I want to start over.**
 

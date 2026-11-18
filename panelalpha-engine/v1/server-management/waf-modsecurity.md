@@ -1,6 +1,6 @@
 ---
 title: WAF/ModSecurity
-description: Configure ModSecurity WAF in PanelAlpha Engine. Set detection or blocking modes, manage OWASP rule sets and review audit logs.
+description: Set the ModSecurity mode of a PanelAlpha Engine server, manage its rule sets and custom rules and read the audit logs.
 nav:
   group: Server Management
   order: 4
@@ -14,7 +14,7 @@ PanelAlpha Engine includes ModSecurity, a web application firewall (WAF) that ch
 
 ## ModSecurity mode
 
-Pick the mode in the **ModSecurity Mode** dropdown. The change is applied as soon as you pick it.
+Pick the mode in the **ModSecurity Mode** dropdown. The change applies as soon as you pick it.
 
 ![PanelAlpha Engine: ModSecurity Mode Selection](../../../assets/img/panelalpha-engine/server-management/modsecurity-modes.png)
 
@@ -36,7 +36,7 @@ The **Rule Sets** table lists the rule sets on the server:
 
 The main rule set is the [OWASP Core Rule Set](https://coreruleset.org/) (CRS) version 4. It covers common attacks such as SQL injection, cross-site scripting, file inclusion and command injection.
 
-The Engine adds its own exclusions on top of CRS for known false positives in WooCommerce checkout and AJAX requests, and in phpMyAdmin.
+The Engine adds its own exclusions on top of CRS. They cover known false positives (harmless requests that a rule blocks by mistake) in WooCommerce checkout and AJAX requests, and in phpMyAdmin.
 
 ### Adjusting loaded config files
 
@@ -46,13 +46,13 @@ Click the number in **Loaded Config Files** to open a list of all files in the r
 - Tick a file to load it again.
 - Click **Save**.
 
-This is the way to switch off one part of a rule set, for example one attack category that blocks a customer's site.
+Use this to switch off one part of a rule set, for example one attack category that blocks a customer's site.
 
-When you save the list, or switch a rule set on or off, the Engine writes the new ModSecurity configuration and then reloads Nginx and Nginx + Apache, or restarts Apache, LiteSpeed and OpenLiteSpeed. A restart briefly interrupts all sites.
+When you save the list, or switch a rule set on or off, the Engine writes the new ModSecurity configuration. It then reloads Nginx and Nginx + Apache, or restarts Apache, LiteSpeed and OpenLiteSpeed. **A restart briefly interrupts all sites.**
 
 ## Custom rules
 
-Below **Rule Sets**, the **Custom Rules** panel lets you write your own ModSecurity rules for this server.
+The **Custom Rules** panel below **Rule Sets** lets you write your own ModSecurity rules for this server.
 
 - Enter the rules in the text field. Rule IDs must be in the range shown above the field.
 - Click **Save**. The web server checks the rules before they are saved. If a rule is not valid, you see the error and the rules are not saved.
@@ -60,7 +60,7 @@ Below **Rule Sets**, the **Custom Rules** panel lets you write your own ModSecur
 
 The rules work only when the custom rule set is enabled in **Rule Sets**. The panel tells you whether the rules are in effect. If the custom rule set is disabled, enable it in **Rule Sets** after you save.
 
-If the server runs an older PanelAlpha Engine version, the panel shows "Custom rules require a newer PanelAlpha Engine version on this server." Update the Engine on the server to use this feature.
+If the server runs an older PanelAlpha Engine version, the panel shows "Custom rules require a newer PanelAlpha Engine version on this server." To use this feature, update the Engine on the server.
 
 ## Audit log files
 
@@ -72,9 +72,9 @@ The **Audit Log Files** table lists the ModSecurity audit logs:
 - **[download]** saves the whole file.
 - **[preview]** shows the last part of the file in a dialog.
 
-ModSecurity logs only requests that matched a rule. Each entry is one line of JSON with the client IP, the request, the IDs and messages of the rules that matched, and the action taken. Use the rule IDs to decide which file or rule to switch off.
+ModSecurity logs only requests that matched a rule. Each entry is one line of JSON. It holds the client IP, the request, the IDs and messages of the rules that matched and the action taken. Use the rule IDs to decide which file or rule to switch off.
 
-On the server, the log is `/opt/panelalpha/shared-hosting/logs/modsecurity/audit.log`. It is rotated every day or when it reaches 100 MB, and 30 compressed old files are kept.
+On the server, the log is `/opt/panelalpha/shared-hosting/logs/modsecurity/audit.log`. It is rotated every day or when it reaches 100 MB. The Engine keeps 30 compressed old files.
 
 ## Configuration best practices
 

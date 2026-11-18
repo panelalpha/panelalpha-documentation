@@ -1,6 +1,6 @@
 ---
 title: Overview
-description: Overview of PanelAlpha Engine, a Docker-based WordPress hosting solution. Learn features, architecture, requirements and FAQ.
+description: PanelAlpha Engine 1.x is the hosting server that runs under the PanelAlpha panels. This page lists what it includes, its requirements and common questions.
 nav:
   group: Engine v1.x
   order: 1
@@ -12,7 +12,7 @@ nav:
 > [!NOTE]
 > **This documentation covers PanelAlpha Engine v1.x**, the version used by the PanelAlpha Single Server and Multi Server control panels. Documentation for Engine 2.0+ is at [PanelAlpha Engine](../index.md).
 
-PanelAlpha Engine is the hosting server for PanelAlpha. You install it on its own server, and PanelAlpha creates and manages hosting accounts and WordPress instances on it through the Engine API. Each hosting account runs PHP in its own Docker container with its own limits for disk, memory, CPU and other resources.
+PanelAlpha Engine is the hosting server for PanelAlpha. You install it on its own server. PanelAlpha then creates and manages hosting accounts and WordPress instances on it through the Engine API (the way the panel sends orders to the Engine). Each hosting account runs PHP in its own Docker container. Each container has its own limits for disk, memory, CPU and other resources.
 
 ## Documentation sections
 
@@ -36,11 +36,9 @@ The Engine itself does not make backups. Back up the server with your hosting pr
 
 ## Architecture
 
-The diagram shows the Engine containers and how they connect.
-
 ![PanelAlpha Engine: Hosting Server Connections: an Engine architecture diagram](../../assets/img/hosting-server-connections/PanelAlpha-Engine/PAE_0.png)
 
-The Engine is a Docker Compose project in `/opt/panelalpha/shared-hosting`. See [Files, Logs and Services](server-management/files-and-logs.md) for the list of containers.
+The Engine is a Docker Compose project in `/opt/panelalpha/shared-hosting`. The diagram above shows its containers. For the list, see [Files, Logs and Services](server-management/files-and-logs.md).
 
 ## System requirements
 
@@ -59,17 +57,17 @@ The Engine is a Docker Compose project in `/opt/panelalpha/shared-hosting`. See 
   - 2222: SFTP
 
 > [!IMPORTANT]
-> **Important:** Install PanelAlpha Engine on its own server. If you install PanelAlpha and PanelAlpha Engine on the same server, both stop working.
+> **Install PanelAlpha Engine on its own server.** If you install PanelAlpha and PanelAlpha Engine on the same server, both stop working.
 
 ## Frequently asked questions
 
 ### Can I use PanelAlpha Engine 1.x without PanelAlpha?
 
-No. Engine 1.x is managed only through PanelAlpha Single Server or Multi Server. [Engine 2.0+](../index.md) can run on its own, but PanelAlpha Single Server and Multi Server do not support it yet.
+No. You manage Engine 1.x only through PanelAlpha Single Server or Multi Server. [Engine 2.0+](../index.md) can run on its own, but PanelAlpha Single Server and Multi Server do not support it yet.
 
 ### Can I change the web server after installation?
 
-Yes, from the server's Details tab in PanelAlpha. Site files and databases stay as they are, but all sites are briefly offline while the Engine rebuilds their configuration. See [Changing web server](server-management/details.md#changing-web-server).
+Yes, from the server's Details tab in PanelAlpha. Site files and databases stay as they are. All sites are briefly offline while the Engine rebuilds their configuration. See [Changing web server](server-management/details.md#changing-web-server).
 
 ### Does PanelAlpha Engine host email?
 
@@ -77,7 +75,7 @@ No. It sends mail from websites, but it does not host mailboxes, IMAP or POP3. U
 
 ### Are sites offline during an Engine update?
 
-Briefly. The update restarts the Engine containers and rebuilds the configuration of every account. The update does not roll back on its own, so make a backup first. See [Update](installation-updates/update.md).
+Briefly. The update restarts the Engine containers and rebuilds the configuration of every account. **The update does not roll back on its own, so make a backup first.** See [Update](installation-updates/update.md).
 
 ## Support
 

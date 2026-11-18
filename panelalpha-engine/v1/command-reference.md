@@ -1,6 +1,6 @@
 ---
 title: Artisan Commands
-description: Reference for PanelAlpha Engine Artisan commands. Run Docker-based maintenance, user rebuilds and system tasks via CLI.
+description: The Artisan commands of PanelAlpha Engine 1.x for tokens, repairs and rebuilds, with how to run them and examples.
 nav:
   group: Command Reference
   order: 1
@@ -8,7 +8,7 @@ nav:
 
 # Artisan Commands
 
-PanelAlpha Engine 1.x runs on Laravel. Its maintenance commands are Artisan commands in the `core` container. Use them for tasks the panel does not offer and for repairs.
+PanelAlpha Engine 1.x runs on Laravel, and its maintenance commands are **Artisan commands** in the `core` container. Use them for repairs and for tasks the panel does not offer.
 
 ## Running Artisan commands
 
@@ -59,20 +59,20 @@ The `core` container must be running. Check it with `docker compose -f /opt/pane
 
 PanelAlpha connects to the Engine with an API token. The installer creates the first one.
 
-Create a token. With `--short`, the command prints only the token:
+To create a token, run the command below. With `--short`, it prints only the token:
 
 ```bash
 api-tokens:create <name> [--short]
 ```
 
-List tokens and delete one you no longer use:
+To list tokens, or to delete one you no longer use:
 
 ```bash
 api-tokens:list
 api-tokens:delete <id>
 ```
 
-After you create a new token, enter it in PanelAlpha in the server settings. Deleting a token that PanelAlpha still uses cuts the connection.
+After you create a new token, enter it in PanelAlpha in the server settings. **Deleting a token that PanelAlpha still uses cuts the connection.**
 
 ## System
 
@@ -84,10 +84,10 @@ system:version
 
 ### Sync IPs to network interface
 
-Adds the IP addresses from [IP Management](server-management/ip-management.md) to the server's network interface. Add `--skip-errors` to continue when one address fails, and `--restart-networking` to restart networking afterwards.
+This command adds the IP addresses from [IP Management](server-management/ip-management.md) to the server's network interface. Add `--skip-errors` to continue when one address fails. Add `--restart-networking` to restart networking afterwards.
 
 > [!WARNING]
-> **Warning:** This command changes the server's network settings and can cut your SSH session. Have console access from your hosting provider ready.
+> **This command changes the server's network settings and can cut your SSH session.** Have console access from your hosting provider ready.
 
 ```bash
 system:sync-ips-to-interface [--skip-errors] [--restart-networking]
@@ -95,7 +95,7 @@ system:sync-ips-to-interface [--skip-errors] [--restart-networking]
 
 ### Servers behind NAT
 
-On servers that have only private addresses and get public IPs through 1:1 NAT, this command looks up the public IPv4 address for each local address and saves the mapping. `--replace-default-ipv4` also replaces the server's default IPv4 with the public address.
+Use this command on servers that have only private addresses and get public IPs through 1:1 NAT. It looks up the public IPv4 address for each local address and saves the mapping. `--replace-default-ipv4` also replaces the server's default IPv4 with the public address.
 
 ```bash
 system:build-ipv4-nat-map [--replace-default-ipv4]
@@ -103,7 +103,7 @@ system:build-ipv4-nat-map [--replace-default-ipv4]
 
 ### Rebuild configuration
 
-These commands write a part of the configuration again from the Engine database. Use them when a file was changed by hand or a change from the panel did not apply.
+These commands write part of the configuration again from the Engine database. Use them when someone changed a file by hand or a change from the panel did not apply.
 
 ```bash
 system:rebuild-modsecurity-config
@@ -116,7 +116,7 @@ system:rebuild-domains
 
 ### Rebuild accounts
 
-Rebuilds the containers and the web server and PHP-FPM configuration of hosting accounts. Sites of the rebuilt accounts restart.
+This rebuilds the containers and the web server and PHP-FPM configuration of hosting accounts. Sites of the rebuilt accounts restart.
 
 ```bash
 users:rebuild --username=<username>
@@ -124,7 +124,7 @@ users:rebuild --all --wipe-vhosts-dir -v
 ```
 
 > [!WARNING]
-> **Warning:** `--wipe-vhosts-dir` deletes all generated virtual host files before the rebuild. Changes you made to those files by hand are lost, and sites are down until the rebuild ends.
+> **`--wipe-vhosts-dir` deletes all generated virtual host files before the rebuild.** Changes you made to those files by hand are lost, and sites are down until the rebuild ends.
 
 ### Add missing www aliases
 
@@ -137,7 +137,7 @@ users:add-missing-www-domain-aliases --username=<username>
 
 ### Fix file permissions
 
-Resets the owner and permissions of files in account home folders. Use it after you copied files in as root or a migration left wrong owners.
+This resets the owner and permissions of files in account home folders. Use it after you copied files in as root or after a migration left wrong owners.
 
 ```bash
 users:fix-file-permissions --all
@@ -152,11 +152,11 @@ Show the limits of one account or all accounts:
 users:get-limits --username=<username>
 ```
 
-PanelAlpha sets the limits from the hosting plan. Change the plan in PanelAlpha where you can. To change a limit directly, use `users:set-limits` with one of these options: `--disk-space-limit`, `--memory-limit`, `--cpu-limit`, `--device-read-bps`, `--device-write-bps`, `--bandwidth-limit`, `--mysql-databases-limit`, `--ftp-accounts-limit`, `--sftp-accounts-limit`, `--addon-domains-limit`, `--subdomains-limit`, `--inodes-limit`.
+PanelAlpha sets the limits from the hosting plan. Change the plan in PanelAlpha where you can. To change a limit directly, run `users:set-limits` with one of these options: `--disk-space-limit`, `--memory-limit`, `--cpu-limit`, `--device-read-bps`, `--device-write-bps`, `--bandwidth-limit`, `--mysql-databases-limit`, `--ftp-accounts-limit`, `--sftp-accounts-limit`, `--addon-domains-limit`, `--subdomains-limit`, `--inodes-limit`.
 
 ### Run WP-CLI
 
-Runs WP-CLI as the account's user in the site's document root:
+This runs WP-CLI as the account's user in the site's document root:
 
 ```bash
 domains:wp-cli example.com plugin list
@@ -164,7 +164,7 @@ domains:wp-cli example.com plugin list
 
 ### Clean up removed domains
 
-Removes web server configuration left behind for domains that are no longer in the Engine database:
+This removes web server configuration left behind for domains that are no longer in the Engine database:
 
 ```bash
 system:cleanup-disconnected-domains
@@ -172,7 +172,7 @@ system:cleanup-disconnected-domains
 
 ### Delete an account
 
-Deletes the account from the Engine database, with its configuration and home folder. Use this only for accounts PanelAlpha no longer knows about. Normally you terminate the service in PanelAlpha.
+**This deletes the account from the Engine database, with its configuration and home folder. It cannot be undone.** Use it only for accounts PanelAlpha no longer knows about. Normally you terminate the service in PanelAlpha.
 
 ```bash
 users:delete <username>

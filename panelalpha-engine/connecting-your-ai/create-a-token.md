@@ -10,9 +10,9 @@ nav:
 
 A **token** is a long password that lets your AI assistant talk to your engine.
 
-If you have just installed the engine and you use Claude Code, you already have one. The installer printed a command that includes it. Paste that command on your computer and you can skip this page: [Connecting Claude Code](claude-code.md).
+If you have just installed the engine and use Claude Code, you already have one. The installer printed a command that includes it. Paste that command on your computer and skip this page: [Connecting Claude Code](claude-code.md).
 
-Use this page when you need a token for a different assistant, a second computer, or a replacement after you revoked one.
+Use this page when you need a token for a different assistant, a second computer or a replacement after you revoked one.
 
 Do this on your VPS, logged in as `root`.
 
@@ -22,7 +22,7 @@ Do this on your VPS, logged in as `root`.
 pae connect
 ```
 
-It shows the assistants. Use the arrow keys and press Enter. For example, to skip the list and name Claude Code:
+It shows a list of assistants. Use the arrow keys and press Enter. To skip the list, name the assistant, for example Claude Code:
 
 ```bash
 pae connect claude
@@ -38,7 +38,9 @@ You should see a new token, shown once, and the exact command or prompt to use o
 pae mcp:check
 ```
 
-Paste the token step 1 printed when it asks; nothing is shown as you type, so it stays out of your screen and your shell history. From a script, pipe it in instead: `printf %s "$TOKEN" | pae mcp:check --stdin`. It checks that HTTPS on your engine is working, that your token is accepted, and that an assistant can complete the connection.
+It checks three things: HTTPS on your engine works, your token is accepted, and an assistant can complete the connection.
+
+It asks for the token that step 1 printed. Paste it. Nothing shows as you type, so the token stays off your screen and out of your shell history. From a script, pipe it in instead: `printf %s "$TOKEN" | pae mcp:check --stdin`.
 
 ## Managing tokens later
 
@@ -52,20 +54,26 @@ Lists your tokens by name and ID. The token values themselves are not shown.
 pae mcp:token:revoke <id>
 ```
 
-Stops a token working immediately. Use this the moment a token might have leaked. `pae mcp:token:delete <id>` removes it from the list altogether.
+Stops a token working at once. Run it the moment a token might have leaked. `pae mcp:token:delete <id>` removes it from the list altogether.
 
 Software that holds a token can also replace or end it itself, over the engine's API. These are not assistant tools:
 
-- `POST /api/tokens/current/rotate` returns a new token with the same name, permissions and lifetime. The old one keeps working for 10 minutes, so requests already on their way still succeed; a retry in that time returns the same new token.
+- `POST /api/tokens/current/rotate` returns a new token with the same name, permissions and lifetime. The old one keeps working for 10 minutes, so requests already on their way still succeed. A retry in that time returns the same new token.
 - `DELETE /api/tokens/current` revokes the token that makes the call.
 
 ## A token limited to some projects
 
 A token made with `pae connect` or `pae mcp:token:create` reaches every project on the engine. Software such as a control panel can instead ask the engine for a token limited to chosen projects. `pae` has no option for this, and `pae mcp:token:list` does not show it.
 
-An assistant on a limited token sees and changes only those projects. A request that names another project is refused, project lists show only its own, and the tools that are about the whole server are not available to it, except reading general engine information (without the server's own name, system, kernel and uptime, and naming no other project) and inspecting a repository. It also cannot change a project's limits or suspend and unsuspend it, because those belong to you. It can clone a project or make a staging copy only under a new name that is already on its list, and it must give that name (`new_username`); the engine does not pick one for it. Without the name, or with a name outside the list, the request is refused with 403.
+An assistant on a limited token sees and changes only those projects.
 
-The assistant activity log records which project each request named and which token made it. Software can filter it by project, by a list of token ids, and by part of a token name. A request keeps its token id after that token is deleted, so the calls of tokens a user has since removed still show up under their ids.
+- A request that names another project is refused.
+- Project lists show only its own projects.
+- The tools about the whole server are not available to it. There are two exceptions: it can read general engine information (without the server's own name, system, kernel and uptime, and naming no other project), and it can inspect a repository.
+- It cannot change a project's limits or suspend and unsuspend it, because those belong to you.
+- It can clone a project or make a staging copy only under a new name that is already on its list. It must give that name (`new_username`). The engine does not pick one for it. Without the name, or with a name outside the list, the request is refused with 403.
+
+The assistant activity log records which project each request named and which token made it. Software can filter it by project, by a list of token ids and by part of a token name. A request keeps its token id after that token is deleted, so the calls of tokens a user has since removed still show up under their ids.
 
 ## Next
 
@@ -76,7 +84,7 @@ If you would rather work from your VPS with no assistant at all, you do not need
 ## Troubleshooting
 
 **A certificate error from `pae mcp:check`.**
-Your engine is using a self-signed certificate. A pass on your VPS does not promise your own computer will connect. The fix belongs on the machine running the assistant: [Trust a self-signed certificate](claude-code.md#trust-a-self-signed-engine-certificate).
+Your engine is using a self-signed certificate. A pass on your VPS does not mean your own computer will connect. The fix belongs on the machine running the assistant: [Trust a self-signed certificate](claude-code.md#trust-a-self-signed-engine-certificate).
 
 **A 401 error from `pae mcp:check`.**
 The token was not accepted. Check you copied the whole string with no line break in the middle. Assistants need an MCP token from `pae connect` or `pae mcp:token:create`, not an API token from `pae api:token:create`.
@@ -87,7 +95,7 @@ The token was not accepted. Check you copied the whole string with no line break
 pae mcp:token:create laptop
 ```
 
-`laptop` is a label so you can tell your tokens apart. This prints the token, then a registration command for each assistant. `--client=claude` prints only one; a name the engine does not know is refused before any token is made, and the message lists the names it does know. `--short` prints only the token.
+`laptop` is a label so you can tell your tokens apart. This prints the token, then a registration command for each assistant. `--client=claude` prints only one. A name the engine does not know is refused before any token is made, and the message lists the names it does know. `--short` prints only the token.
 
 **I need a token for a script or a control panel, not an assistant.**
-That is a different kind of token. Create it with `pae api:token:create`. See [CLI commands](../commands/pae-cli.md).
+That is a different kind of token. Create it with `pae api:token:create`: [CLI commands](../commands/pae-cli.md).

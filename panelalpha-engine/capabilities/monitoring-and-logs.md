@@ -10,28 +10,26 @@ nav:
 
 You can find out whether a site is working, what it is using, and what it printed, without opening a shell inside a container.
 
-The fastest route is to ask, because the assistant reads all of these sources and gives you one answer:
+The fastest way is to ask. The assistant reads all of these sources and gives you one answer:
 
 ```text
 Is this project up? Read its deploy log and tell me what the site is serving.
 How much CPU and disk is this host using?
 ```
 
-There are five sources behind that answer, and it is worth knowing which one answers which question.
+Five sources sit behind that answer. Each one answers a different question.
 
 ## 1. The deploy log: "why did it fail?"
 
-What happened during the last build and start. This is where a failed deploy explains itself, in a plain sentence when the engine recognises the cause.
+The deploy log records what happened during the last build and start. A failed deploy explains itself here, in a plain sentence when the engine recognises the cause.
 
-Covered on [Reading errors](../getting-started/reading-errors.md). Open the address the assistant gave you. If it ends in `.local`, nobody on the internet can open it: [Domains and HTTPS](domains-and-ssl.md).
+How to read it: [Reading errors](../getting-started/reading-errors.md). Open the address the assistant gave you. If it ends in `.local`, nobody on the internet can open it: [Domains and HTTPS](domains-and-ssl.md).
 
 ## 2. Is it still serving itself?
 
-**This is the one people do not know exists, and it is the most valuable.**
+A deploy log describes one moment in the past. It says nothing about the site a month later, after a database filled up, a certificate lapsed or someone deleted the index page over FTP. No deploy log mentions those, because the deploy succeeded.
 
-A deploy log describes one moment in the past. It tells you nothing about the site a month later, after a database filled up, a certificate lapsed or someone deleted the index page over FTP. Nothing in any deploy log will ever mention those, because the deploy succeeded.
-
-Every six hours the engine opens every deployed application and checks whether it is still serving itself. You get a list of the ones that are not, with what each is serving instead:
+Every six hours the engine opens every deployed application and checks whether it still serves itself. You get a list of the ones that do not, with what each serves instead:
 
 ```text
 Swept 14 project(s): 2 not serving themselves, 2 reported.
@@ -50,11 +48,11 @@ Sweep every project on this engine and tell me which ones are not serving
 themselves properly.
 ```
 
-Suspended projects are skipped, and so is a project you stopped on request, because a site stopped on purpose is not a fault. A project whose container is down without you asking is listed, with `stopped` as what it serves.
+The sweep skips suspended projects and projects you stopped on request, because a site stopped on purpose is not a fault. A project whose container is down without you asking is listed, with `stopped` as what it serves.
 
-An application that keeps restarting is reported only once the engine has confirmed the loop, so a single restart during a deploy is not reported.
+An application that keeps restarting is reported only once the engine has confirmed the loop. A single restart during a deploy is not reported.
 
-The check, the six-hourly sweep and the deploy log cover projects that run in their own container. Traditional PHP hosting is not checked this way: open its address, and read its domain logs and PHP error log (section 3).
+The check, the six-hourly sweep and the deploy log cover projects that run in their own container. Traditional PHP hosting is not checked this way. Open its address, and read its domain logs and PHP error log (section 3).
 
 How to read the result: [What the engine checks](#what-the-engine-checks).
 
@@ -64,17 +62,17 @@ To see whether anything is running on a project right now, such as a deploy, a p
 Is anything running on tshop right now?
 ```
 
-A push counts as a task, so it shows up here too. By default you see the tasks your own token started, plus the ones the engine started itself. A token limited to some projects sees only those projects.
+A push counts as a task, so it shows up here too. By default you see the tasks your own token started and the ones the engine started itself. A token limited to some projects sees only those projects.
 
 ## What the engine checks
 
-Two separate questions, and the difference between them is the useful part.
+The engine asks two separate questions.
 
 **Is it alive?** Did anything at all answer.
 
-**Is it serving your application?** Is what answered actually your site. This is the question a simple up/down check cannot answer: a placeholder page and your real homepage both return "OK" with a page of content. The engine can tell them apart.
+**Is it serving your application?** Is what answered actually your site. A simple up/down check cannot tell, because a placeholder page and your real homepage both return "OK" with a page of content. The engine can tell them apart.
 
-When the answer is no, it names what it found instead. The common ones:
+When the answer is no, the engine names what it found instead. The common ones:
 
 | What the engine reports | What is actually happening |
 |---|---|
@@ -100,7 +98,7 @@ Less often you will also see:
 | `php_source` | The browser is being sent PHP source instead of a rendered page. The document root is wrong. |
 | `unclaimed_install` | The site sends visitors to the application's own installer, and nobody has finished it yet. Whoever opens it first can create the administrator account, so finish it yourself straight after the deploy. The deploy still counts as successful. |
 
-The `no_root_route` case is worth calling out: on a backend API it is not a fault. If your application is only ever called at `/api/...`, an empty `/` is a correct observation about a site that is working perfectly.
+`no_root_route` is not a fault on a backend API. If your application is only ever called at `/api/...`, an empty `/` is a correct observation about a site that works perfectly.
 
 Ask from chat:
 
@@ -111,21 +109,21 @@ actually serving, and tell me what is wrong.
 
 ## 3. Domain logs: "what are visitors doing?"
 
-The webserver's access and error logs for a hostname. Not the deploy log. These are the ongoing record of requests hitting the site.
+Domain logs are the webserver's access and error logs for a hostname. They are not the deploy log. They are the ongoing record of requests that reach the site.
 
 ```text
 Show me the error log for shop.example.com.
 ```
 
-On a project that runs in its own container, what the application itself printed, such as a stack trace or a worker's errors, is in its container output. Ask for a time window when you know roughly when it went wrong:
+On a project that runs in its own container, what the application printed is in its container output, for example a stack trace or a worker's errors. Ask for a time window when you know roughly when it went wrong:
 
 ```text
 Show me what the app container of shop printed between 14:00 and 14:30 today.
 ```
 
-The assistant reads up to 5000 lines at a time, and can limit them to a period such as the last two hours.
+The assistant reads up to 5000 lines at a time. It can limit them to a period such as the last two hours.
 
-The webserver logs, per domain and the project's own Apache logs, are rotated every month, or sooner when a file grows past 100 MB, and the 24 newest older copies are kept, compressed. Copies named by month only (`access-2026-09.log.gz`) are not part of that count and are never removed: delete them when you no longer need them.
+The webserver logs, per domain and the project's own Apache logs, are rotated every month, or sooner when a file grows past 100 MB. The 24 newest older copies are kept, compressed. Copies named by month only (`access-2026-09.log.gz`) are not part of that count and are never removed. Delete them when you no longer need them.
 
 **PHP errors.** On traditional PHP hosting, every project keeps its own PHP error log, one file for all its domains. It holds the last errors your PHP code raised, such as a fatal error behind a blank page.
 
@@ -133,13 +131,17 @@ The webserver logs, per domain and the project's own Apache logs, are rotated ev
 Show me the last 100 lines of the PHP error log of tshop.
 ```
 
-The assistant can read up to 5000 lines and limit them to a period. The file is also in the list of log files for the project's domains. It is rotated at 10 MB, and the last three older copies are kept. On a project in its own container there is no separate file: the assistant gets what the app container printed, as above. A project that existed before the update starts writing the log after the update, once its PHP restarts or you change a PHP setting on it.
+The assistant can read up to 5000 lines and limit them to a period. The file is also in the list of log files for the project's domains. It is rotated at 10 MB, and the last three older copies are kept.
 
-Use the webserver logs for 404s and 500s that only some visitors hit. For how many people came, and how much data they transferred, ask for the counts: [Visitor statistics](visitor-statistics.md). If the assistant cannot read the logs, see [Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do).
+On a project in its own container there is no separate file. The assistant gets what the app container printed, as above.
+
+A project that existed before the update starts writing this log after the update, once its PHP restarts or you change a PHP setting on it.
+
+Use the webserver logs for 404s and 500s that only some visitors hit. To see how many people came and how much data they transferred, ask for the counts: [Visitor statistics](visitor-statistics.md). If the assistant cannot read the logs, see [Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do).
 
 ## 4. Usage: "is it running out of something?"
 
-Two different questions here.
+Usage has two parts: the whole VPS and one project.
 
 **The VPS as a whole:**
 
@@ -147,7 +149,14 @@ Two different questions here.
 How much CPU, memory and disk is this host using?
 ```
 
-Samples are kept over several time windows, from the last few minutes up to the last 30 days, so you can tell a spike from a trend. The history comes as averages: per minute over the last hour, per 10 minutes over 24 hours, per hour over 7 days and per 6 hours over 30 days (`metrics_history`). It includes disk use of `/home`, where the projects live. `system_info` names the host itself: host name, operating system, kernel, uptime, CPU cores, total memory, the data disk's size and the main IPv4 address. A token limited to some projects does not get these.
+Samples are kept over several time windows, from the last few minutes up to the last 30 days, so you can tell a spike from a trend. The history comes as averages (`metrics_history`):
+
+- per minute over the last hour
+- per 10 minutes over 24 hours
+- per hour over 7 days
+- per 6 hours over 30 days
+
+It includes disk use of `/home`, where the projects live. `system_info` names the host itself: host name, operating system, kernel, uptime, CPU cores, total memory, the data disk's size and the main IPv4 address. A token limited to some projects does not get these.
 
 ```text
 How has this server's CPU and memory looked over the last 7 days?
@@ -160,7 +169,9 @@ How much CPU and memory has tshop used over the last 24 hours? Which of its
 containers uses the most?
 ```
 
-Every minute the engine measures each project, its own Docker included, and every container inside it. CPU is a percentage where one core is 100; memory leaves out cache the system can free. The project list carries each project's latest reading as `usage`, so one list shows them all. `project_metrics_history` gives the project over 1 hour, 24 hours, 7 days or 30 days, and `container_metrics` gives each container now, or over one of those ranges.
+Every minute the engine measures each project, its own Docker included, and every container inside it. CPU is a percentage where one core is 100. Memory leaves out cache the system can free.
+
+The project list carries each project's latest reading as `usage`, so one list shows them all. `project_metrics_history` gives the project over 1 hour, 24 hours, 7 days or 30 days. `container_metrics` gives each container now, or over one of those ranges.
 
 Minute readings are kept 48 hours and hourly averages 30 days. The server operator can change that in `/opt/panelalpha/shared-hosting/.env-core` with `PROJECT_METRICS_RAW_HOURS` (at least 2) and `PROJECT_METRICS_LIMIT_DAYS` (at least 1).
 
@@ -170,7 +181,13 @@ Minute readings are kept 48 hours and hourly averages 30 days. The server operat
 How close is this project to its limits?
 ```
 
-Covers storage, the disk its container logs take, domains, subdomains, FTP and SFTP accounts and databases. This month's transfer is also on every project in the project list (`bandwidth`, updated every hour), with its limit: `-1` is unlimited and `null` means no limit was set. Storage counts the project's files and also its own Docker data (images, build cache and database data), which is often the larger part. Disk use is measured in the background every 15 minutes, so a file you just added can take up to that long to show. Before the first measurement it is measured when you ask. To change a limit: [Limits](projects.md#limits).
+The answer covers storage, the disk its container logs take, domains, subdomains, FTP and SFTP accounts and databases.
+
+- This month's transfer is also on every project in the project list (`bandwidth`, updated every hour), with its limit. `-1` is unlimited and `null` means no limit was set.
+- Storage counts the project's files and also its own Docker data (images, build cache and database data), which is often the larger part.
+- Disk use is measured in the background every 15 minutes, so a file you just added can take up to that long to show. Before the first measurement, it is measured when you ask.
+
+To change a limit: [Limits](projects.md#limits).
 
 **From inside a project.** If you run a monitoring app or agent in a project (Zabbix, Netdata, node_exporter and the like), two files in it describe the whole server, not the project:
 
@@ -179,7 +196,7 @@ Covers storage, the disk its container logs take, domains, subdomains, FTP and S
 | `/proc/meminfo` | the server's total memory, not the project's limit |
 | `/proc/loadavg` | the server's load, which includes every other project |
 
-Linux does not scope these two to a container, so an agent that reads them reports the server's numbers as the project's. The project's own figures are in its cgroup files. Point the agent at these:
+Linux does not limit these two files to a container, so an agent that reads them reports the server's numbers as the project's. The project's own figures are in its cgroup files. Point the agent at these:
 
 | File | What it is |
 |---|---|
@@ -187,32 +204,32 @@ Linux does not scope these two to a container, so an agent that reads them repor
 | `/sys/fs/cgroup/memory.current` | the memory in use now, in bytes |
 | `/sys/fs/cgroup/cpu.stat` | CPU time used (`usage_usec`) |
 
-In an app container, `memory.max` is that service's own limit. The container's memory limit in the project's metrics is the lower of the container's own limit and the project's. A limit above the project's is lowered to fit inside it when the project deploys. A service that sets only a reservation reads `max`, and the project's plan limit still applies to it.
+In an app container, `memory.max` is that service's own limit. The container's memory limit in the project's metrics is the lower of the container's own limit and the project's. A limit above the project's is lowered to fit inside it when the project deploys. A service that sets only a reservation reads `max`. The project's plan limit still applies to it.
 
 ## 5. Lighthouse: "is it fast?"
 
-An optional performance and quality report against a site the engine hosts. Only the engine's own domains, their aliases and tunnel hostnames are accepted. Any other address, including an IP address, is refused. If the site redirects somewhere that is not one of those domains, no report comes back.
+Lighthouse is an optional performance and quality report for a site the engine hosts. It accepts only the engine's own domains, their aliases and tunnel hostnames. Any other address, including an IP address, is refused. If the site redirects to a domain that is not one of those, no report comes back.
 
 ```text
 Run a Lighthouse report on this site.
 ```
 
-Entirely separate from deploying. A deploy never waits for one. If the assistant cannot run one, see [Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do).
+A report is separate from deploying. A deploy never waits for one. If the assistant cannot run one, see [Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do).
 
 ## Troubleshooting
 
 **The deploy log is empty.**
-The project is probably still being created. Wait a minute. If it stays empty, ask for an older deploy by its ID.
+The project is probably still being created. Wait a minute. If the log stays empty, ask for an older deploy by its ID.
 
 **The health check reports nothing, but I know sites are broken.**
-It only reports applications it could actually reach. Suspended projects and projects it cannot open are skipped rather than reported. Ask about the specific project directly. The answer for that one will say why it was skipped.
+It reports only applications it could reach. It skips suspended projects and projects it cannot open instead of reporting them. Ask about the specific project directly. The answer says why it was skipped.
 
 **A site is fine in my browser but reported as not serving itself.**
-The engine checks from inside the account, so it is seeing something you are not, often a cached page in your browser, or a difference between what the proxy serves and what the application returns. Trust the engine's answer and ask it what specifically failed.
+The engine checks from inside the account, so it may see something you do not. Often your browser shows a cached page, or the proxy serves something different from what the application returns. Trust the engine's answer and ask what failed.
 
 ## More requests to try
 
-**Mode** is the lowest permission mode that allows it: read, modify or full ([Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do)). Examples assume a project named `tshop`.
+**Mode** is the lowest permission mode that allows the request: read, modify or full ([Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do)). The examples assume a project named `tshop`.
 
 **The server**
 

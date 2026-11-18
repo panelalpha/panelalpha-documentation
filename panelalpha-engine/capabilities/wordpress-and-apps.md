@@ -1,6 +1,6 @@
 ---
 title: WordPress and known apps
-description: "WordPress is a main way to use the engine, not an extra. Many hosting accounts on it are WordPress sites."
+description: "WordPress is a main way to use the engine. Set up a new site, deploy one from git, move one here, or look after one that already runs."
 nav:
   group: Capabilities
   order: 7
@@ -8,9 +8,9 @@ nav:
 
 # WordPress and known apps
 
-WordPress is a main way to use the engine, not an extra. Many hosting accounts on it are WordPress sites. You can ask the engine to set up a new one without bringing your own code, deploy one you already keep in git, or look after a WordPress site that is already running here.
+WordPress is a main way to use the engine. Many hosting accounts on it are WordPress sites. You can ask the engine to set up a new one without your own code, deploy one you keep in git, or look after one that already runs here.
 
-This page covers all three, how to move a WordPress site here from another host, then day-to-day work: logging in, users, WP-CLI and the other known apps the engine treats specially.
+This page also covers moving a WordPress site here from another host, and day-to-day work: logging in, users, WP-CLI and the other known apps the engine treats specially.
 
 ## If WordPress is already on this engine
 
@@ -28,7 +28,7 @@ From there you can add a domain, take a backup, change PHP, run WP-CLI, or manag
 
 There are two kinds of WordPress on this engine, and they are not the same:
 
-- **Traditional PHP hosting.** Files live in the domain's folder, `/<domain>/public_html`. Uploads show up on the site without a rebuild. You can change that domain's PHP version, set PHP memory, use FTP, backups, domains and WP-CLI, which also covers WordPress users and plugins. The App users tools, with the install wizard, are not available on this kind; the WP-CLI operations below cover users and a one-time login link instead. Cloudflare is not available either: a tunnel, a cache purge or the security level.
+- **Traditional PHP hosting.** Files live in the domain's folder, `/<domain>/public_html`. Uploads show up on the site without a rebuild. You can change that domain's PHP version, set PHP memory, and use FTP, backups, domains and WP-CLI. WP-CLI also covers WordPress users and plugins. The App users tools, with the install wizard, are not available on this kind. The WP-CLI operations below cover users and a one-time login link instead. Cloudflare is not available either: a tunnel, a cache purge or the security level.
 - **Its own container.** Files live in `project/`. This is what you get when you deploy WordPress from git, for example its official repository. WordPress users, one-click login and the install wizard work here, as do WP-CLI, backups and domains. That includes WordPress from a Docker Compose file of your own, such as the official `wordpress` image next to a database.
 
 If an action is refused, see [Troubleshooting](#troubleshooting). Older versions called a project a "user". If output still says `username`, that is the project's name.
@@ -60,7 +60,7 @@ The tool needs the PHP version, so name it, as above. A WordPress site in its ow
 
 ## Set up WordPress
 
-Do the domain first if you are using your own. WordPress records its own site address when it is installed and does not take kindly to that address changing afterwards: [Domains and HTTPS](domains-and-ssl.md).
+If you use your own domain, set it up first. WordPress records its site address when it is installed, and changing that address afterwards causes problems: [Domains and HTTPS](domains-and-ssl.md).
 
 There are two ways, one for each kind of project above.
 
@@ -72,7 +72,11 @@ Create a WordPress site called myblog on this PanelAlpha Engine, titled
 password for the administrator and tell me it once.
 ```
 
-The engine creates the project and its MySQL database, writes `wp-config.php` and installs WordPress. When the task finishes, the site is live and the administrator can sign in. The request needs all of these: the title (up to 255 characters), the administrator's login (1 to 60 letters, digits, spaces or `_ . @ -`), the email and a password of at least 8 characters. You can also ask for a language such as `de_DE` or a version such as `6.6.2`; without them you get the latest release in English. The password does not appear in the engine's task records. The `wp-config.php` it writes is readable by the project's own user only: [Security](security.md#what-a-project-cannot-touch-on-the-server). If the install fails, the project is removed.
+The engine creates the project and its MySQL database, writes `wp-config.php` and installs WordPress. When the task finishes, the site is live and the administrator can sign in.
+
+The request needs all of these: the title (up to 255 characters), the administrator's login (1 to 60 letters, digits, spaces or `_ . @ -`), the email and a password of at least 8 characters. You can also ask for a language such as `de_DE` or a version such as `6.6.2`. Without them you get the latest release in English.
+
+The password does not appear in the engine's task records. The `wp-config.php` it writes is readable by the project's own user only: [Security](security.md#what-a-project-cannot-touch-on-the-server). If the install fails, the project is removed.
 
 **In its own container.** Deploy the official WordPress repository:
 
@@ -81,7 +85,7 @@ Deploy https://github.com/WordPress/WordPress as a new project on this
 PanelAlpha Engine.
 ```
 
-The engine recognises WordPress, creates a MySQL database for it and writes the WordPress configuration. It does not finish the WordPress setup wizard for you; that is the next step.
+The engine recognises WordPress, creates a MySQL database for it and writes the WordPress configuration. It does not finish the WordPress setup wizard; that is the next step.
 
 ## Finish the install
 
@@ -94,7 +98,7 @@ Admin email: admin@example.com. Choose a strong admin password and tell me it on
 
 When it finishes, the site is live at its address. To choose the password yourself, ask the assistant for a paste page: you type the password there, so it never appears in the chat. The same works for the passwords of other users the assistant adds or resets.
 
-You can also finish the setup yourself by opening the site in a browser and completing WordPress's own first-run screens. Either way ends in the same place.
+You can also finish the setup yourself by opening the site in a browser and completing WordPress's own first-run screens.
 
 <!-- TODO screenshot: show the WordPress first-run setup screen (or the site's front page immediately after install) so the reader recognises a finished install. -->
 
@@ -123,7 +127,12 @@ Reset the password for user 5 on this WordPress site.
 Delete WordPress user 5 on this site, reassigning their posts to user 1.
 ```
 
-**Name the user who takes over the content when you delete a WordPress user.** On WordPress in its own container, the posts and pages go to the user you name, or to the first other administrator when you give none; when the site has no other administrator and you name no one, the delete is refused and nothing is removed. On traditional PHP hosting the delete runs WP-CLI, which deletes the user's posts and pages too when you name no one. The assistant asks you to confirm either way, and the user's profile is not kept. Ask for the list of roles if you are not sure which one to give a new user. Changing or deleting a user that does not exist answers that no such user was found. Passwords shorter than 8 characters are refused, here and for FTP, SFTP and MySQL accounts. Listing a user's application passwords shows each one's name and when it was made, never the stored hash. If the assistant cannot do these, see [Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do).
+**Name the user who takes over the content when you delete a WordPress user.** The result depends on the kind of WordPress:
+
+- On WordPress in its own container, the posts and pages go to the user you name, or to the first other administrator when you give none. When the site has no other administrator and you name no one, the engine refuses the delete and removes nothing.
+- On traditional PHP hosting, the delete runs WP-CLI. It deletes the user's posts and pages too when you name no one.
+
+The assistant asks you to confirm either way, and the user's profile is not kept. Ask for the list of roles if you are not sure which one to give a new user. Changing or deleting a user that does not exist answers that no such user was found. The engine refuses passwords shorter than 8 characters, here and for FTP, SFTP and MySQL accounts. Listing a user's application passwords shows each one's name and when it was made, never the stored hash. If the assistant cannot do these, see [Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do).
 
 **Application passwords and the Authorization header.** An app or the WordPress REST API that signs in with an application password sends it in a request header. On traditional PHP hosting the webserver passes that header on to PHP, so those logins work for any PHP app there, not only WordPress.
 
@@ -144,7 +153,10 @@ On WordPress in its own container, the engine finds the container that runs Word
 
 WordPress does not have to be at the top of the project. Two settings point the engine at it:
 
-- **path**: the WordPress directory. On PHP hosting it is inside the project's home: give it relative to the home, such as `example.com/blog`, or in full. The top level of the home belongs to root, so a folder is made below the domain's own, never at the home's top level. A path outside the home is read as inside it, the way the file manager reads one, and a path that climbs out of the home with `..` is refused. On WordPress in its own container, it is the directory as the container sees it: in full, such as `/var/www/html/blog`, or relative to the container's working directory, such as `blog`. Omitted, it is the directory the engine installed WordPress into, and otherwise the main domain's document root.
+- **path**: the WordPress directory.
+  - On PHP hosting it is inside the project's home. Give it relative to the home, such as `example.com/blog`, or in full. The top level of the home belongs to root, so a new folder goes below the domain's own, never at the home's top level. A path outside the home is read as inside it, the way the file manager reads one. A path that climbs out of the home with `..` is refused.
+  - On WordPress in its own container, it is the directory as the container sees it: in full, such as `/var/www/html/blog`, or relative to the container's working directory, such as `blog`.
+  - Omitted, it is the directory the engine installed WordPress into, and otherwise the main domain's document root.
 - **service**: the Compose service whose container runs WordPress. Use it when more than one container has PHP and WordPress.
 
 ```text
@@ -156,9 +168,9 @@ List the plugins of the WordPress in the shop service.
 
 For common jobs the assistant does not have to write a WP-CLI command. Each of these is its own tool (`wp_*`), its own API route under `/projects/{project}/wp/`, and its own `pae` command ([CLI commands](../commands/pae-cli.md#wordpress)):
 
-- **Plugins and themes**: search wordpress.org, list, read one, check whether one is installed, install, activate, update and delete. Plugins can also be deactivated; a theme is switched off by activating another one. Deleting a plugin is WordPress's own Delete: the plugin is deactivated and its uninstall runs before its files are deleted, so a page-cache plugin takes its dropin and its `WP_CACHE` with it, and the settings its uninstall removes are gone while whatever it leaves stays. A plugin whose uninstall fails, such as one that breaks the site when loaded, still has its files deleted, without loading any plugin, and the answer says its uninstall did not run.
+- **Plugins and themes**: search wordpress.org, list, read one, check whether one is installed, install, activate, update and delete. Plugins can also be deactivated; a theme is switched off by activating another one. Deleting a plugin is WordPress's own Delete: the plugin is deactivated and its uninstall runs before its files are deleted. So a page-cache plugin takes its dropin and its `WP_CACHE` with it, and the settings its uninstall removes are gone while whatever it leaves stays. If a plugin's uninstall fails, for example because it breaks the site when loaded, its files are still deleted, without loading any plugin, and the answer says its uninstall did not run.
 - **Users**: list (by `role`, with chosen `fields`), create (with `send_email` to send the welcome mail), update, set a password, delete, application passwords and a one-time login link.
-- **Core**: status, available updates, download, install (with `skip_email`) and update, where `latest` means the newest release and a beta or release candidate is named as WordPress names it, such as `6.8-RC1`. An update to a version WordPress does not publish is refused with a 422 naming that version, and nothing is installed; an update to a release older than the installed one is refused with a 422 naming both, because WordPress does not migrate its database down. The installed version itself answers "up to date" and changes nothing.
+- **Core**: status, available updates, download, install (with `skip_email`) and update, where `latest` means the newest release and a beta or release candidate is named as WordPress names it, such as `6.8-RC1`. An update to a version WordPress does not publish is refused with a 422 naming that version, and nothing is installed. An update to a release older than the installed one is refused with a 422 naming both, because WordPress does not migrate its database down. The installed version itself answers "up to date" and changes nothing.
 - **Site settings**: maintenance mode, cache flush, `wp-config.php` (list, create from database details, read, set and delete constants or variables), options, auto-updates, site language. Reading one constant gives the value as `wp-config.php` defines it: a string stays a string, `true` and `false` are booleans, a number is a number, and an array is a list. A `wp-config.php` value longer than 16384 bytes is refused with a 422 naming that limit, and nothing is written: WP-CLI cannot reliably write or read back a longer entry.
 - **Search and replace** in the database, for example after a domain change.
 - **Database export and import.** An export can be limited to some `tables`.
@@ -191,7 +203,11 @@ A test answers the domain the site would get, or why the import would fail: `unr
 - `project_name`: the name of the new project.
 - `source_ip`: the public address of the source server, when the domain's DNS already points somewhere else.
 
-A start is refused with 422 `domain_taken` when a project here already has the domain, and `domain_required` when the source is given as an IP address and the engine has no PanelAlpha Connect. It is refused with 409 `engine_address_private` when the source site could not reach this engine: see [Install](../getting-started/install.md).
+The engine refuses a start in these cases:
+
+- 422 `domain_taken`: a project here already has the domain.
+- 422 `domain_required`: the source is given as an IP address and the engine has no PanelAlpha Connect.
+- 409 `engine_address_private`: the source site could not reach this engine. See [Install](../getting-started/install.md).
 
 **While the domain still points to the old host.** With [PanelAlpha Connect](../getting-started/connect-to-panelalpha-connect.md), the import opens a preview of the site on a `panelalpha.online` address (`preview_url`). The import status shows the DNS record to set. Every 15 minutes the engine checks the domain; once it points here, the engine requests the certificate and removes the preview. Without Connect there is no preview: the site answers on its domain once DNS points here.
 
@@ -211,7 +227,7 @@ This is a different starting point from asking the engine to set up a fresh Word
 
 ## "Known apps" versus "detected frameworks"
 
-Two different things, and the difference explains some confusing results.
+Detected frameworks and known apps are different things. The difference explains some confusing results.
 
 **Detected frameworks** are Next.js, Laravel, Django and the rest. The engine works these out from the files in your repository: [How detection works](../supported-projects/how-detection-works.md).
 
@@ -266,7 +282,7 @@ The status also names why, in its `state`:
 Exporting, importing or querying the database runs the MySQL client, which the official `wordpress` image does not include. The engine runs those commands in a container of the project that has WordPress and the client, such as a `wordpress:cli` service with the same volumes and environment as the WordPress one. The engine's own WordPress recipe has one; redeploy a project made from it before that.
 
 **"Could not remove the DEFINER clauses from …, so it was not imported"**
-A database import first removes the `DEFINER` clauses that views, triggers and routines from another server carry, by rewriting the file where it is. The file has them, and the folder it is in cannot be written by the user the import runs as. Put the file in a folder the project can write to, and import it from there.
+The import first removes the `DEFINER` clauses from the file, by rewriting it where it is. Views, triggers and routines from another server carry these clauses. Your file has them, and the user the import runs as cannot write to the folder the file is in. Put the file in a folder the project can write to, and import it from there.
 
 **"MySQL rejected … statement(s) in …, so it was not fully imported"**
 MySQL refused one or more statements of the SQL file during a database import; the message lists the first of them with their line numbers. WP-CLI reports such an import as a success, so the engine reads the MySQL client's errors instead. The statements MySQL accepted are already in the database. Fix the file, or the missing privilege or object a listed line names, and import it again.

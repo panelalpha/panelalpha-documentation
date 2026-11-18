@@ -10,13 +10,13 @@ nav:
 
 Connect AI lets an AI assistant manage your projects by chat. Open **Connect AI** in the top menu.
 
-The assistant talks to the panel over **MCP** (the Model Context Protocol), a standard way for AI tools to use other programs. It signs in with a **token**, a long secret text that you create in the panel and paste into your tool.
+The assistant talks to the panel over **MCP** (the Model Context Protocol), a standard way for AI tools to use other programs. It signs in with a **token**. A token is a long secret text that you create in the panel and paste into your tool.
 
-The assistant can reach all your live and staging projects. It cannot reach the project the panel itself runs in, nor any other project that runs a panel.
+The assistant can reach all your live and staging projects. It cannot reach the project the panel runs in, or any other project that runs a panel.
 
 ## Connecting your tool
 
-Every tool connects the same way: you create a token in the panel, then put the panel's address and the token into your tool. The sections below give the steps for each tool:
+Every tool connects the same way. You create a token in the panel, then put the panel's address and the token into your tool. Steps for each tool:
 
 - [Claude Code](#claude-code)
 - [ChatGPT](#chatgpt)
@@ -27,7 +27,7 @@ Every tool connects the same way: you create a token in the panel, then put the 
 - [VS Code](#vs-code)
 - [Other tool](#other-tool)
 
-The **Connect AI** page shows the same steps. Pick your tool under **Your tool** and the page fills in your panel address for you, with a **Copy** button on each part to paste. A **One-click connect** banner on each page is marked `Coming soon`. It does nothing yet.
+The **Connect AI** page shows the same steps. Pick your tool under **Your tool**. The page fills in your panel address and gives a **Copy** button for each part. A **One-click connect** banner on each page is marked `Coming soon`. It does nothing yet.
 
 In the examples below the panel address is `https://panel.example.com`. Use your own.
 
@@ -45,7 +45,7 @@ In every step below, replace `YOUR_TOKEN` with your token.
 
 ## Claude Code
 
-Run and manage this server straight from your terminal.
+Manage this server from your terminal.
 
 1. Create a token: [Creating a token](#creating-a-token).
 2. Run this in a terminal on your own computer, with your token:
@@ -62,7 +62,7 @@ Claude Code's own guide: [Connect Claude Code to tools via MCP](https://code.cla
 
 ## ChatGPT
 
-Connect this server to ChatGPT and control it by asking.
+Control this server from ChatGPT by asking.
 
 1. Create a token: [Creating a token](#creating-a-token).
 2. In ChatGPT, open **Settings → Connectors** and choose **Create**. Name it `PanelAlpha` and select **URL server connection**.
@@ -95,7 +95,7 @@ The Claude app cannot connect yet. It has no place to paste a token, so it canno
 
 ## Cursor
 
-Let Cursor manage this server as you build.
+Let Cursor manage this server while you build.
 
 1. Create a token: [Creating a token](#creating-a-token).
 2. In Cursor, open **Settings → Tools & MCP** and click **New MCP server**. This opens the `mcp.json` file.
@@ -199,31 +199,31 @@ Your tool connects to the panel address with `/mcp` added, for example `https://
 
 ![Connect AI, MCP URL & tokens: the MCP Server URL and the API Tokens table with Name, Token, Last Used, Created, Status and the Revoke and Delete actions](../../assets/single-server/connect-ai-tokens-table.gif)
 
-**A revoked token stops working at once.** Every request that uses it is refused. It stays in the list with the status `Revoked`. Select **Delete**, the bin in **Actions**, to remove it from the list for good. A delete cannot be undone.
+**A revoked token stops working at once.** Every request that uses it is refused. It stays in the list with the status `Revoked`. To remove it from the list for good, select **Delete**, the bin in **Actions**. A delete cannot be undone.
 
 ## What the assistant can do
 
 The assistant can use the Engine's tools on your projects. The panel passes its requests on and has no tool list of its own.
 
-It cannot do these things:
+The assistant cannot do these things:
 
 - Use tools about the whole server.
-- Create a new project or read the server load, because its token reaches only your existing projects.
+- Create a new project or read the server load. Its token reaches only your existing projects.
 - Change a project's limits or suspend a project. The Engine refuses suspend for the panel's tokens.
-- Touch the panel's own project, or any other project that runs a panel. A panel's account, its files, its settings and its certificate are never handed to the assistant.
+- Touch the panel's own project, or any other project that runs a panel. A panel's account, files, settings and certificate are never handed to the assistant.
 
-Some requests have no single tool. "Update all my sites" and "list all sites without automatic backups" make the assistant go through your projects one by one. The Engine's server settings can also narrow what it offers.
+Some requests have no single tool. "Update all my sites" and "list all sites without automatic backups" make the assistant go through your projects one by one. The Engine's server settings can also narrow what the assistant may do.
 
 ### What to ask
 
-The page **What You Can Do with AI** shows examples. It has six groups that open one at a time: **Daily Management**, **Backups**, **Domains & SSL**, **Developer Workflow**, **Monitoring & Troubleshooting** and **Bulk Operations**. Each example is a card with a sentence, such as `Which of my sites are currently down?` or `Create a staging copy of my production WordPress`, and a copy button. Paste the sentence into your assistant's chat.
+The page **What You Can Do with AI** shows examples in six groups that open one at a time: **Daily Management**, **Backups**, **Domains & SSL**, **Developer Workflow**, **Monitoring & Troubleshooting** and **Bulk Operations**. Each example is a card with a sentence and a copy button, such as `Which of my sites are currently down?` or `Create a staging copy of my production WordPress`. Paste the sentence into your assistant's chat.
 
 ### More detail
 
-An assistant loads only a short list of tools at first: listing projects, reading a project, deploying an archive or files, rebuilding a project, reading deploy logs and container logs, health checks, deleting and restarting a project, and listing and adding domains and certificates. For anything else it uses `search_tools` to find a tool and `execute_tools` to run it.
+An assistant first loads only a short list of tools: listing projects, reading a project, deploying an archive or files, rebuilding a project, reading deploy logs and container logs, health checks, deleting and restarting a project, and listing and adding domains and certificates. For anything else it uses `search_tools` to find a tool and `execute_tools` to run it.
 
 ## Activity
 
-**Activity Log** lists each tool the assistant runs: **Time**, **Token**, **Tool** and **Status** (`Success` or `Error`). A request that runs no tool, such as loading the tool list, leaves no row. Filter by token with **Filter by token**. With nothing yet it says `No activity yet. Start using your AI tool to see logs here.`
+**Activity Log** lists each tool the assistant runs: **Time**, **Token**, **Tool** and **Status** (`Success` or `Error`). A request that runs no tool, such as loading the tool list, leaves no row. Filter by token with **Filter by token**. If there is nothing yet, the page says `No activity yet. Start using your AI tool to see logs here.`
 
 ![Connect AI, Activity Log: each tool the assistant ran with its Time, Token, Tool and Status (Success or Error), and the Filter by token list](../../assets/single-server/connect-ai-activity-log.gif)

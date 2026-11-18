@@ -36,7 +36,7 @@ The first line installs create and debug skills. `-s user` stores the engine for
 devin mcp list
 ```
 
-`panelalpha-engine` should be listed. Then ask it something harmless:
+`panelalpha-engine` should be listed. Then ask it something read-only:
 
 ```text
 List the projects on this engine.
@@ -65,20 +65,20 @@ You are on Cascade, the older Windsurf agent, which has no `devin` command. Open
 Use the token and address from step 1. Save, then press refresh in the MCP panel. Putting this file inside a project risks committing your token to a repository.
 
 **It registered, then will not connect.**
-A self-signed certificate on your engine that your computer does not trust. Windsurf is built on Node, so the fix is the same as Claude Code: [Trust a self-signed certificate](claude-code.md#trust-a-self-signed-engine-certificate).
+Your engine has a self-signed certificate that your computer does not trust. Windsurf is built on Node, so the fix is the same as Claude Code: [Trust a self-signed certificate](claude-code.md#trust-a-self-signed-engine-certificate).
 
 Windsurf is normally launched from a desktop icon, so it will not see a certificate setting you added to `~/.bashrc` or `~/.zshrc`. Either start it from a terminal where the setting is active, or set it at the operating-system level.
 
 The lasting fix is giving the engine a real certificate: [Install](../getting-started/install.md#if-connecting-asks-you-to-trust-a-certificate).
 
 **401 Unauthorized.**
-The token is truncated, or it is the wrong type. Assistants need a token from `pae connect`, not `pae api:token:create`.
+The token was cut off when you copied it, or it is the wrong type. Assistants need a token from `pae connect`, not `pae api:token:create`.
 
 **405 Method Not Allowed.**
-The connection is configured as something other than HTTP.
+The connection is set up as something other than HTTP.
 
 **It connects but can barely do anything.**
-The permission settings on your VPS are filtering its abilities. See [Decide what the assistant may do](your-assistant.md#decide-what-the-assistant-may-do).
+The permission settings on your VPS are hiding some of its abilities. See [Decide what the assistant may do](your-assistant.md#decide-what-the-assistant-may-do).
 
 **I want to start over.**
 

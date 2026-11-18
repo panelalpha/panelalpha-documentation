@@ -1,6 +1,6 @@
 ---
 title: Connecting Claude Code
-description: "Claude Code is the one assistant the engine sets up for you. This page shows how to connect it and check the connection."
+description: "Connect Claude Code to your engine with the commands the installer printed, then check the connection."
 nav:
   group: Connecting Your AI
   order: 3
@@ -44,13 +44,13 @@ claude mcp list
 List the projects on this engine.
 ```
 
-An empty list on a fresh engine is a success.
+An empty list on a new engine is a success.
 
 ## Troubleshooting
 
 ### Trust a self-signed engine certificate
 
-Skip this if your engine has a real certificate. You will know because Claude Code connects without extra steps.
+Skip this if your engine has a real certificate. In that case Claude Code connects without extra steps.
 
 **Symptom.** Claude Code registers the server without complaint, then fails when it actually tries to connect:
 
@@ -58,7 +58,7 @@ Skip this if your engine has a real certificate. You will know because Claude Co
 Failed to reconnect to panelalpha-engine: DEPTH_ZERO_SELF_SIGNED_CERT at https://203.0.113.10:2011
 ```
 
-Registering only writes a setting to a file, so it cannot fail. The first real connection is where the certificate gets checked.
+Registering only writes a setting to a file, so it cannot fail. The certificate is checked on the first real connection.
 
 **Fix this on the machine running Claude Code, not on the engine.**
 
@@ -76,7 +76,7 @@ Use your engine's real address.
 export NODE_EXTRA_CA_CERTS="$HOME/panelalpha-engine.cert"
 ```
 
-This lasts only as long as the terminal window. To make it permanent, add it to your shell's startup file. `~/.bashrc` for bash, `~/.zshrc` for zsh:
+This lasts only as long as the terminal window. To make it permanent, add it to your shell's startup file: `~/.bashrc` for bash, `~/.zshrc` for zsh.
 
 ```bash
 echo 'export NODE_EXTRA_CA_CERTS="$HOME/panelalpha-engine.cert"' >> ~/.bashrc
@@ -97,18 +97,18 @@ claude mcp list
 > [!WARNING]
 > **Do not use `NODE_TLS_REJECT_UNAUTHORIZED=0`.** It switches off certificate checking for every Node program in that terminal, not only for your engine.
 
-A real certificate removes all of the above, for every computer you ever connect:
+A real certificate removes the need for all of the above, on every computer you connect:
 
 ```bash
 pae ssl:engine-cert:request --domain panel.example.com
 ```
 
-See [Install](../getting-started/install.md#if-connecting-asks-you-to-trust-a-certificate). Once done, you can remove `NODE_EXTRA_CA_CERTS`.
+Details: [Install](../getting-started/install.md#if-connecting-asks-you-to-trust-a-certificate). Then you can remove `NODE_EXTRA_CA_CERTS`.
 
-Note that `pae mcp:check` passing on your VPS proves nothing about your own computer. The VPS already trusts its own certificate.
+A pass from `pae mcp:check` on your VPS says nothing about your own computer. The VPS already trusts its own certificate.
 
 **It registers, then fails to connect, but without that exact message.**
-Usually the same cause with different wording. Check the setting is visible in the terminal you start Claude Code from:
+Usually the cause is the same, with different wording. Check that the setting is visible in the terminal you start Claude Code from:
 
 ```bash
 echo "$NODE_EXTRA_CA_CERTS"
@@ -128,5 +128,5 @@ claude mcp remove panelalpha
 
 Then run the plugin command again.
 
-**Connected, but Claude cannot do much.**
-The permission settings on your VPS are filtering abilities out. Check with `pae mcp:tool:list` on your VPS: [Decide what the assistant may do](your-assistant.md#decide-what-the-assistant-may-do).
+**It connects but can barely do anything.**
+The permission settings on your VPS are hiding some of its abilities. Check with `pae mcp:tool:list` on your VPS: [Decide what the assistant may do](your-assistant.md#decide-what-the-assistant-may-do).

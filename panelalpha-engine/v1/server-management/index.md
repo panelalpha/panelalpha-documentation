@@ -1,6 +1,6 @@
 ---
 title: Server Management
-description: "Manage a PanelAlpha Engine server: inspect details, manage IPs, configure CSF firewall, ModSecurity WAF, outgoing mail and notifications."
+description: "Manage a PanelAlpha Engine server in PanelAlpha: details, IP addresses, the CSF firewall, ModSecurity, outgoing mail and alerts."
 nav:
   group: Hosting Servers
   order: 7
@@ -10,7 +10,7 @@ nav:
 
 # Server Management
 
-This section covers the server tabs in PanelAlpha (go to **Configuration → Servers → Hosting Servers** and click **Manage**) and work on the Engine server over SSH.
+The server tabs in PanelAlpha manage the Engine server. To open them, go to **Configuration → Servers → Hosting Servers** and click **Manage**. This section also covers work on the Engine server over SSH.
 
 ## Pages in this section
 
@@ -19,7 +19,7 @@ This section covers the server tabs in PanelAlpha (go to **Configuration → Ser
 - [IP Management](ip-management.md)
   Default IPs, subnets, shared and dedicated IPs and assignments.
 - [Firewall (CSF)](firewall.md)
-  ConfigServer Security & Firewall integration, allow/deny rules and the embedded CSF Web UI.
+  ConfigServer Security & Firewall (CSF), allow and deny rules and the CSF web interface.
 - [WAF/ModSecurity](waf-modsecurity.md)
   ModSecurity modes, OWASP Core Rule Set, custom rules and audit logs.
 - [Outgoing Mail](outgoing-mail.md)

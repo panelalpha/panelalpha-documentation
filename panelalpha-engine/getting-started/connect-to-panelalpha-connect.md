@@ -1,6 +1,6 @@
 ---
 title: "Connect to PanelAlpha Connect"
-description: "PanelAlpha Connect is the customer portal at https://hub.panelalpha.com. This page shows how to connect your engine to it."
+description: "PanelAlpha Connect is the customer portal at https://hub.panelalpha.com. Connect your engine to it with a one-time code."
 nav:
   group: Getting Started
   order: 11
@@ -8,7 +8,7 @@ nav:
 
 # Connect to PanelAlpha Connect
 
-PanelAlpha Connect is the customer portal; the engine reaches it at `https://hub.panelalpha.com`. Once your engine is connected to your Connect account, Connect shows its status, version, server capacity, CPU/RAM/disk usage, your applications, usage charts and monitoring events. If you allow it, Connect can also open a one-time admin login into your apps.
+PanelAlpha Connect is the customer portal. The engine reaches it at `https://hub.panelalpha.com`. After you connect your engine to your Connect account, Connect shows the engine's status, version, server capacity and CPU/RAM/disk usage. It also shows your applications, usage charts and monitoring events. If you allow it, Connect can also open a one-time admin login into your apps.
 
 A licence is optional. You can connect without one and attach a licence later in Connect.
 
@@ -16,18 +16,18 @@ A licence is optional. You can connect without one and attach a licence later in
 
 - Connect must be able to reach your engine at `https://<your server's public IP>:2011`. Allow inbound TCP 2011 from the internet, or at least from Connect.
 - The server must be able to open `https://hub.panelalpha.com` (set `PANELALPHA_HUB` in `.env-core` to use another).
-- The server clock must be roughly right.
+- The server clock must be roughly correct.
 
 ## Connect
 
-1. In Connect, click **Connect engine** (Licenses page). Pick a licence or none, and the permissions.
+1. In Connect, click **Connect engine** (Licenses page). Pick a licence or none, and pick the permissions.
 2. Connect shows a command with a one-time code. Run it on your VPS within 10 minutes:
 
 ```bash
 pae hub:connect WDJB-MJHT
 ```
 
-The engine connects straight away and shows what it connected to:
+The engine connects at once and shows what it connected to:
 
 ```
 Connect code accepted by https://hub.panelalpha.com.
@@ -50,27 +50,33 @@ Connect then shows "Engine connected". A code works once. If it has expired or b
 | Option | What it does |
 |---|---|
 | `--ip=203.0.113.10` | The address Connect should use, when the server's main IPv4 is not the public one. It must be a public address. |
-| `--replace` | Connect an engine that is already connected. The old connection is dropped only once the new one works. |
+| `--replace` | Connect an engine that is already connected. The old connection is dropped only after the new one works. |
 
 ### Install and connect in one step
 
-Pass the code to the installer and the new engine connects as soon as it is up:
+Pass the code to the installer. The new engine connects as soon as it is up:
 
 ```bash
 curl -fsSL https://get.panelalpha.com/engine | sh -s -- --hub-code WDJB-MJHT
 ```
 
-On a server that already runs an engine, the same command only connects it; add `--update-engine` to update the engine first. It works together with `--repo`. An engine that is already connected is left as it is: connect it elsewhere with `pae hub:connect CODE --replace`.
+On a server that already runs an engine, the same command only connects it. Add `--update-engine` to update the engine first. The option works together with `--repo`. An engine that is already connected stays as it is. To connect it elsewhere, run `pae hub:connect CODE --replace`.
 
-A code lasts ten minutes from when you create it, and a fresh install takes a few of them, so create the code just before you start the installer. If the connect fails, the engine is still installed: the installer prints why, and you connect with a new code and `pae hub:connect CODE`.
+A code lasts ten minutes from when you create it, and a fresh install takes a few of those minutes. Create the code just before you start the installer. If the connect fails, the engine is still installed. The installer prints why. Connect with a new code and `pae hub:connect CODE`.
 
 ## What Connect can do on your server
 
-Connect gets an API token limited to a handful of read-only routes: the engine version and host details, CPU/RAM/disk usage and its history, the project list with each project's status and each project's backup history. It works out monitoring events itself from what it reads. It cannot deploy, change settings, read files or credentials or use the assistant (MCP) interface.
+Connect gets an API token limited to a few read-only routes:
 
-Admin login into apps is a separate permission, off unless it was ticked when the code was created. With it, Connect may also list an app's users and ask for a one-time login link. Every call Connect makes is recorded; `pae hub:status` shows the last ones.
+- The engine version and host details.
+- CPU/RAM/disk usage and its history.
+- The project list, with each project's status and backup history.
 
-Connect replaces its token every week by itself, and the token expires after 30 days if it stops doing so.
+Connect works out monitoring events itself from what it reads. It cannot deploy, change settings, read files or credentials, or use the assistant (MCP) interface.
+
+Admin login into apps is a separate permission. It is off unless it was ticked when the code was created. With it, Connect may also list an app's users and ask for a one-time login link. The engine records every call Connect makes. `pae hub:status` shows the last ones.
+
+Connect replaces its token every week by itself. The token expires after 30 days if Connect stops doing so.
 
 ## Check and disconnect
 
@@ -78,13 +84,13 @@ Connect replaces its token every week by itself, and the token expires after 30 
 pae hub:status
 ```
 
-Shows the account, address, permissions, when the token expires and the last 20 calls Connect made (admin logins highlighted). When Connect itself says it no longer knows the connection, the engine revokes Connect's tokens and forgets the connection.
+This shows the account, address, permissions, when the token expires and the last 20 calls Connect made (admin logins highlighted). When Connect says it no longer knows the connection, the engine revokes Connect's tokens and forgets the connection.
 
 ```bash
 pae hub:disconnect
 ```
 
-Revokes Connect's access immediately, then tells Connect. It works even when Connect cannot be reached.
+This revokes Connect's access at once, then tells Connect. It works even when Connect cannot be reached.
 
 ## When it does not work
 
@@ -97,6 +103,6 @@ Revokes Connect's access immediately, then tells Connect. It works even when Con
 | `Denied on the Hub.` | The code was cancelled in Connect. Create a new one. |
 | `This engine is already connected to …` | Run the command again with `--replace` to move it. |
 | `The certificate on :2011 changed during connect` | Run the command again. |
-| `The Hub answered: … (HTTP 403)` from `pae hub:status` | Something in front of Connect refused the call (a firewall or bot rule). The engine changed nothing. If you removed the connection in Connect, run `pae hub:disconnect`. |
+| `The Hub answered: … (HTTP 403)` from `pae hub:status` | Something in front of Connect refused the call, such as a firewall or bot rule. The engine changed nothing. If you removed the connection in Connect, run `pae hub:disconnect`. |
 
-When the engine's certificate is renewed with a new key, the engine tells Connect before it starts serving the new certificate. If Connect still reports a certificate problem, create a new code in Connect and run `pae hub:connect CODE --replace`.
+When the engine's certificate is renewed with a new key, the engine tells Connect before it starts to serve the new certificate. If Connect still reports a certificate problem, create a new code in Connect and run `pae hub:connect CODE --replace`.

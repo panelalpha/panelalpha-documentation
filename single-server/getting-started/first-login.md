@@ -14,7 +14,7 @@ The panel works over HTTPS only. Open `https://panel.example.com`, not `http://`
 
 ## Using the setup wizard
 
-The wizard shows when the panel has no account yet. Every address on the panel leads to it until you finish. It creates your account.
+The wizard shows when the panel has no account yet. Every address on the panel leads to it until you finish.
 
 1. On the first screen, `A few steps to your first deploy.`, select **Start Now**.
 
@@ -63,6 +63,6 @@ The project list shows the projects the panel finds on the Engine. On a new Engi
 
 ![The top bar after the first login: the user menu opens with Light Mode, Account Details, Tasks, Settings, Join Our Community and Log Out](../../assets/single-server/first-login-landing.gif)
 
-Open the user menu to reach **Tasks** and **Settings**: [Settings](../the-panel/settings.md). To create your first site: [Create a project](../projects/create-a-project.md).
+Open the user menu to reach **Tasks** and **Settings**: [Settings](../the-panel/settings.md). To create your first site, see [Create a project](../projects/create-a-project.md).
 
 Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: The panel and your account](../troubleshooting/panel-and-account.md#first-login).

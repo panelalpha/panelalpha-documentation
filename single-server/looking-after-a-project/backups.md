@@ -92,7 +92,7 @@ The list shows `Restoring Backup` while it runs.
 
 **To download**, select **Download Backup**. The file opens in a new window. Allow pop-ups for the panel if it does not.
 
-If the backup is split into several files, the panel asks `This backup is split into multiple files. What would you like to download?` and asks which part in **Backup Type**. The list has one entry per part:
+If the backup is split into several files, the panel asks `This backup is split into multiple files. What would you like to download?` You pick the part in **Backup Type**. The list has one entry per part:
 
 - On a PHP hosting project: **Files** and **Database**.
 - On a container project: **Code**, each volume and each database (the entry names the volume or the database).
@@ -101,4 +101,4 @@ One download holds one part, so download the other parts the same way.
 
 **To delete**, select the delete action and tick the confirmation. You can also select several rows and delete them together.
 
-Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: Looking after a project](../troubleshooting/looking-after-a-project.md#backups).
+Something not working? Messages and fixes: [Troubleshooting: Looking after a project](../troubleshooting/looking-after-a-project.md#backups).

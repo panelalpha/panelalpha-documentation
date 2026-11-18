@@ -1,6 +1,6 @@
 ---
 title: Project types
-description: This is what the engine can run. You point it at a repository. It looks at the files and starts the project the way that kind of project expects.
+description: You point the engine at a repository. It reads the files and starts the project the way that kind of project expects.
 nav:
   group: Supported Projects
   order: 2
@@ -8,19 +8,19 @@ nav:
 
 # Project types
 
-This is what the engine can run. You point it at a repository. It looks at the files and starts the project the way that kind of project expects.
+You point the engine at a repository. It reads the files and starts the project the way that kind of project expects.
 
-To check one repository without putting it online, see [How detection works](how-detection-works.md). For the files that have to sit at the top of the repository, see [What your repository needs](what-your-repo-needs.md).
+Check a repository without putting it online: [How detection works](how-detection-works.md). The files that have to sit at the top of the repository: [What your repository needs](what-your-repo-needs.md).
 
 ## Before you start
 
 Three things apply to every project.
 
-The version of the language comes from your own files, not from a setting in the engine. You write it in the project (`composer.json`, `package.json`, `go.mod`, and similar).
+The version of the language comes from your own files, not from a setting in the engine. You write it in the project (`composer.json`, `package.json`, `go.mod` and similar).
 
-The file that marks the project has to sit at the **top** of the repository, not in a subfolder. If it is buried, the engine will misread the project. A few ready-made apps already know their own layout and are handled for you.
+The file that marks the project has to sit at the **top** of the repository, not in a subfolder. If it is buried, the engine misreads the project. A few ready-made apps already know their own layout and are handled for you.
 
-The engine tells the app which address to use. If the app is written to use only `localhost`, or a fixed port of its own, it will build but nobody will be able to open it.
+The engine tells the app which address to use. If the app is written to use only `localhost`, or a fixed port of its own, it builds but nobody can open it.
 
 ## Websites
 
@@ -30,13 +30,13 @@ A folder of files with `index.html` (or `index.htm`) at the top is a static site
 
 ### Pages without an index.html
 
-A hand-written site of pages such as `home.html` and `about.html`, with no `index.html`, is still a website. Every file has to be something a browser can open: a page, stylesheet, script, image, font or media file. One `package.json` or `composer.json` anywhere in the repository, and it is no longer treated this way.
+A hand-written site of pages such as `home.html` and `about.html`, with no `index.html`, is still a website. Every file has to be something a browser can open: a page, stylesheet, script, image, font or media file. If the repository has even one `package.json` or `composer.json`, it is no longer treated this way.
 
 ## WordPress and ready-made apps
 
 WordPress, Matomo, phpBB, Magento, Passbolt, OpenCart, osTicket, Flarum, SuiteCRM, Chamilo, MantisBT, Easy!Appointments, Roundcube, Adminer and phpMyAdmin are recognised as PHP apps and started for you.
 
-Two more apps have their own recipe and deploy from their repository: Roundcube (`https://github.com/roundcube/roundcubemail`, version 1.7 and the development branch) and Postmill (`https://github.com/postmill-ai/postmill-app`).
+Two more apps are also known by name and deploy from their repository: Roundcube (`https://github.com/roundcube/roundcubemail`, version 1.7 and the development branch) and Postmill (`https://github.com/postmill-ai/postmill-app`).
 
 Roundcube is a mail client only. Set `ROUNDCUBE_IMAP_HOST` and `ROUNDCUBE_SMTP_HOST` in the project's environment variables to the mail servers it should log in to and send through. Without them it tries `localhost`, where no mail server runs. The engine creates its database and sets up its configuration on the first deploy.
 
@@ -48,21 +48,21 @@ How to finish the first WordPress setup and look after a site that is already on
 
 ## JavaScript apps
 
-These are projects with a `package.json` at the top of the repository. Commit the lockfile (`package-lock.json`, `yarn.lock`, and similar). The engine uses whichever lockfile is in the project.
+These are projects with a `package.json` at the top of the repository. Commit the lockfile (`package-lock.json`, `yarn.lock` and similar). The engine uses whichever lockfile is in the project.
 
 ### Apps that stay running
 
-Next.js, Nuxt, SvelteKit, Remix, Astro (when it runs on the server), NestJS, TanStack Start, Express, Fastify and a plain Node app. A plain Node app also needs a `start` script in `package.json`, or a file such as `index.js`, `server.js` or `app.js`.
+These apps keep running on the server: Next.js, Nuxt, SvelteKit, Remix, Astro (when it runs on the server), NestJS, TanStack Start, Express, Fastify and a plain Node app. A plain Node app also needs a `start` script in `package.json`, or a file such as `index.js`, `server.js` or `app.js`.
 
 They start from the `start` script when there is one.
 
 ### Apps that build into files
 
-Vite, Angular, Create React App, Astro when it builds a static site and Next.js when it exports static files. The engine builds the files, then shows them as a website.
+These apps build into files: Vite, Angular, Create React App, Astro when it builds a static site and Next.js when it exports static files. The engine builds the files, then shows them as a website.
 
 ### If package.json is almost empty
 
-No known framework, no `start` script, and no server file: the engine does not recognise it. A [general build](#if-the-engine-does-not-recognise-it) is there if you ask for one.
+If there is no known framework, no `start` script and no server file, the engine does not recognise the project. You can ask for a [general build](#if-the-engine-does-not-recognise-it).
 
 ## PHP sites
 
@@ -78,13 +78,20 @@ Ready-made PHP apps are covered under [WordPress and ready-made apps](#wordpress
 
 Django needs a `manage.py` file (it may sit in a subfolder). Other Python projects need one of `requirements.txt`, `pyproject.toml`, `Pipfile` or `setup.py` at the top, and no `manage.py`.
 
-Django starts the way Django usually starts. Other Python projects start from `main.py` or `app.py`, or from a common Python web server if one is already in the project. Failing those, the engine runs the one command the project declares under `[project.scripts]` in `pyproject.toml`, or the one top-level `.py` file that ends in an `if __name__ == "__main__":` block. When there are several of either, name the entry point in a `panelalpha.yaml`.
+Django starts the way Django usually starts. Other Python projects start from `main.py` or `app.py`, or from a common Python web server if one is already in the project.
+
+Failing those, the engine runs one of these:
+
+- The one command the project declares under `[project.scripts]` in `pyproject.toml`.
+- The one top-level `.py` file that ends in an `if __name__ == "__main__":` block.
+
+When there are several commands or files, name the entry point in a `panelalpha.yaml`.
 
 ### Ruby
 
 Rails needs a `Gemfile` and `config/application.rb`. Plain Ruby needs a `Gemfile` plus either a `config.ru` file or a `web:` line in a Procfile.
 
-A `Gemfile` on its own, with none of those, is not recognised. A [general build](#if-the-engine-does-not-recognise-it) is there if you ask for one.
+A `Gemfile` on its own, with none of those, is not recognised. You can ask for a [general build](#if-the-engine-does-not-recognise-it).
 
 ### Go, Rust, Java and .NET
 
@@ -97,7 +104,7 @@ A `Gemfile` on its own, with none of those, is not recognised. A [general build]
 
 **Docker Compose.** A `docker-compose.yml` or `compose.yml` file is checked near the top, so it usually wins. A compose file you only use on your own computer is still picked up. Rename or remove it if you do not want that.
 
-**A Dockerfile.** A `Dockerfile` or `Containerfile`. The image starts the way it was written to start. If both files exist, the `Dockerfile` is used. A Dockerfile in `docker/`, `build/` or `scripts/docker/`, or a variant such as `Dockerfile.prod`, is also found. A single `<name>.dockerfile` at the top is used when nothing else matches. A Dockerfile written for local development (one that maps the host's user id) is not used.
+**A Dockerfile.** The engine looks for a `Dockerfile` or `Containerfile`. The image starts the way it was written to start. If both files exist, the `Dockerfile` is used. A Dockerfile in `docker/`, `build/` or `scripts/docker/`, or a variant such as `Dockerfile.prod`, is also found. A single `<name>.dockerfile` at the top is used when nothing else matches. A Dockerfile written for local development (one that maps the host's user id) is not used.
 
 ## If the engine does not recognise it
 
@@ -144,7 +151,7 @@ These are the short names the engine uses when you inspect a repository and in d
 
 ## Real applications to try
 
-These deploy real applications from the Supported board, a few from each stack. The tools and the way to follow a deploy are on [Connecting with Git](../capabilities/connecting-with-git.md#more-requests-to-try).
+These requests deploy real applications from the Supported board, a few from each stack. The tools and how to follow a deploy: [Connecting with Git](../capabilities/connecting-with-git.md#more-requests-to-try).
 
 | Application | Technology | Repository | Board issue |
 |---|---|---|---|

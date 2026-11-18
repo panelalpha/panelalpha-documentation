@@ -8,7 +8,7 @@ nav:
 
 # Files, Logs and Services
 
-This page is for work on the Engine server over SSH: where things are, which containers run, and how to restart them. Run all commands as root.
+Use this page for work on the Engine server over SSH: where files are, which containers run and how to restart them. Run all commands as root.
 
 ## Files on the server
 
@@ -55,7 +55,7 @@ docker compose -f /opt/panelalpha/shared-hosting/docker-compose.yml ps
 | `dns-proxy` | DNS for the web server containers. |
 | `lighthouse` | Runs Lighthouse reports. |
 
-Each hosting account also has its own containers for PHP. They are separate Compose projects that the Engine creates and rebuilds.
+Each hosting account also has its own PHP containers. They are separate Compose projects that the Engine creates and rebuilds.
 
 ## Restarting services
 
@@ -91,11 +91,11 @@ For the logs of one container, use:
 docker compose -f /opt/panelalpha/shared-hosting/docker-compose.yml logs --tail 200 core
 ```
 
-The outgoing mail log is inside the `exim` container. See [Outgoing Mail](outgoing-mail.md#emails-not-sending).
+The outgoing mail log is inside the `exim` container: [Outgoing Mail](outgoing-mail.md#emails-not-sending).
 
 ## Memory protection (monit)
 
-The installer sets up monit on the server. When memory usage goes above 91%, monit saves a list of processes to `/opt/panelalpha/log/monit_psdump_<date>.log` and restarts the two containers that use the most memory. This keeps the server running, but it also restarts whatever those containers serve.
+The installer sets up monit, a tool that watches the server. When memory use goes above 91%, monit saves a list of processes to `/opt/panelalpha/log/monit_psdump_<date>.log`. It then restarts the two containers that use the most memory. This keeps the server running, but whatever those containers serve restarts too.
 
 If you find these log files, check them to see which site or service used the memory, then fix that site or add RAM.
 
@@ -110,4 +110,4 @@ If the server has a public IP address, the installer and the updater request a L
 The Engine package contains `uninstall.sh` in `/opt/panelalpha/shared-hosting`.
 
 > [!WARNING]
-> **Warning:** `uninstall.sh` stops all containers, deletes their Docker volumes, including the Engine and customer databases, and removes `/opt/panelalpha/shared-hosting`. Back up first. There is no undo. Account home folders in `/home` are not removed.
+> **`uninstall.sh` stops all containers, deletes their Docker volumes (including the Engine and customer databases) and removes `/opt/panelalpha/shared-hosting`.** Back up first. There is no undo. Account home folders in `/home` are not removed.

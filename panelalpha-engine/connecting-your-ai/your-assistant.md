@@ -32,7 +32,7 @@ On your VPS, run `pae connect` and pick yours with the arrow keys. Each page bel
 | Hermes | [Set up Hermes](hermes.md) |
 | OpenClaw | [Set up OpenClaw](openclaw.md) |
 
-Using something else? Any assistant that speaks MCP will work: [Connecting other assistants](other-mcp-clients.md).
+Any assistant that speaks MCP (a standard way for an assistant to use outside tools) will work: [Connecting other assistants](other-mcp-clients.md).
 
 ## Decide what the assistant may do
 
@@ -46,7 +46,7 @@ Read this before you paste a token anywhere.
 pae configure mcp-tokens
 ```
 
-What this does: opens the assistant part of [Configure the engine](../getting-started/configure-the-engine.md). Choose **Global scope** for checkboxes, whole groups or one group's commands at a time, and one setting for how far a ticked command may go. Tick what every assistant may use, untick what it may not. Nothing is written until you pick **Review and save** and say yes, and what it replaces is printed so you can put it back. Add `--dry-run` to see what it would write and write nothing.
+What this does: opens the assistant part of [Configure the engine](../getting-started/configure-the-engine.md). Choose **Global scope**. It offers checkboxes for whole groups or for one group's commands at a time, and one setting for how far a ticked command may go. Tick what every assistant may use and untick what it may not. Nothing is written until you pick **Review and save** and say yes. What it replaces is printed, so you can put it back. Add `--dry-run` to see what it would write and write nothing.
 
 `pae configure` on its own starts one level up, with the address, tokens, the queue and telemetry.
 
@@ -56,22 +56,20 @@ Use it instead of editing the file by hand. The rest of this section is the refe
 
 Everything above applies to the whole engine. To give one assistant less than another, run the same command and choose **Tokens**. It lists your assistants' tokens, and lets you tick what each one may use. It can only take away. An assistant cannot be given a command the engine is not offering. Ticking everything means "no limit", so that assistant keeps whatever the engine offers. `pae mcp:token:list` shows the result in its **Commands** column.
 
-An assistant asked for its command list when it connected, so reconnect it to see the change.
-
-A token minted for an assistant is refused if someone tries to use it against the engine's own API directly, so these limits are not one command away from being stepped around. A token minted for your own software (`pae api:token:create`) is refused at the assistant endpoint for the same reason. Tokens made before this distinction existed can still do both; mint a new one of the right kind to narrow that.
+A token made for an assistant is refused if someone uses it against the engine's own API directly. So nobody can step around these limits with one command. A token made for your own software (`pae api:token:create`) is refused at the assistant endpoint for the same reason. Tokens made before this distinction existed can still do both. Make a new one of the right kind to narrow that.
 
 A token can also be limited to some projects instead of some commands. `pae` cannot make one, software that calls the engine's API does: [A token limited to some projects](create-a-token.md#a-token-limited-to-some-projects).
 
-Whatever the limits, a token you no longer trust should be revoked with `pae mcp:token:revoke {id}`, which stops it everywhere at once.
+Revoke a token you no longer trust with `pae mcp:token:revoke {id}`. It stops working everywhere at once.
 
-These settings live in `/opt/panelalpha/shared-hosting/.env-core`. If you edit that file by hand, the change does nothing until you restart the engine: [Change a setting](../getting-started/install.md#change-a-setting). Either way, an assistant that is already connected keeps the tool list it was given when it connected. Reconnect it to see the change.
+These settings live in `/opt/panelalpha/shared-hosting/.env-core`. If you edit that file by hand, the change does nothing until you restart the engine: [Change a setting](../getting-started/install.md#change-a-setting). Either way, an assistant that is already connected keeps the tool list it was given when it connected. It asked for that list once, so reconnect it to see the change.
 
 ### How far it may go
 
 | Value | What the assistant can do |
 |---|---|
 | `readonly` | Look at what is switched on, change nothing. Inspecting a repository and running a Lighthouse report on one of this engine's sites still work. The tools that hand out a password or a login (`app_credentials_get`, `file_download`) are not offered. |
-| `modify` | Create and change things, and blocks only DELETE routes. It is **not** a "no destructive actions" setting: the write tools that are not plain creations (`ssh_run`, `wp_cli_run`, `backup_restore`, `file_write`, `system_update`, `firewall_disable`, `project_rebuild`) still run. |
+| `modify` | Create and change things. Blocks only DELETE routes. It is **not** a "no destructive actions" setting: the write tools that are not plain creations (`ssh_run`, `wp_cli_run`, `backup_restore`, `file_write`, `system_update`, `firewall_disable`, `project_rebuild`) still run. |
 | `full` | Everything, including deletion. **This is the default.** |
 
 ```bash
@@ -80,7 +78,7 @@ MCP_PERMISSION_MODE=readonly
 
 ### Which areas it can see
 
-A new install exposes every group. The group names the setting accepts are in the table on [Every tool](#every-tool). That is also the default:
+A new install exposes every group. The group names the setting accepts are in the table on [Every tool](#every-tool). The default is:
 
 ```bash
 MCP_TOOLSETS=all
@@ -88,7 +86,7 @@ MCP_TOOLSETS=all
 
 To limit the assistant to some groups, replace `all` with a comma-separated list of those names. Do not add one name on top of `all`: `all` already includes every group.
 
-**An empty value means every group, not none.** A setting nobody has touched and one that permits everything are the same thing here, so if you want no group at all, write `MCP_TOOLSETS=none`. Single tools named in `MCP_TOOLS` still work on top of that.
+**An empty value means every group, not none.** To allow no group at all, write `MCP_TOOLSETS=none`. Single tools named in `MCP_TOOLS` still work on top of that.
 
 If this engine was installed earlier and you never set `MCP_TOOLSETS`, the assistant now sees every group, including ones it could not see before. Narrow the list if that is more than you want.
 
@@ -116,7 +114,7 @@ A tool has to be in an enabled group (or named in `MCP_TOOLS`), allowed by the p
 
 ### How many tools the assistant loads
 
-The full list is 311 tools, and an assistant loads every listed tool's description when it connects. That is about 95 KB of text it carries around before you have asked for anything. So by default the engine lists only what deploying, checking and running a project takes, plus two more:
+The full list is 311 tools. An assistant loads every listed tool's description when it connects. That is about 95 KB of text before you have asked for anything. So by default the engine lists only the tools for deploying, checking and running a project, plus two more:
 
 - `search_tools` finds any other tool by what it does, for example `mysql user` or `cron`.
 - `execute_tools` runs the tool it found.
@@ -139,9 +137,9 @@ MCP_DIRECT_TOOLS=project_get,project_create,project_rebuild,task_get,deploy_log_
 
 Large results come back in pieces. `deploy_log_get` returns about 48 KB of log at a time, and `file_download` and `domain_log_download` return about 48 KB of a file at a time, as text when the file is text. Each result says whether there is `more` and where the next piece starts. Any other result over 256 KB is refused with a note on how to ask for less. The assistant handles this itself.
 
-One thing to know if your assistant asks before it runs a tool: it sees `execute_tools`, not the tool inside it. If you tell it to always allow `execute_tools`, you have allowed every tool it can find. Use `MCP_PERMISSION_MODE` and `MCP_DENIED_TOOLS` for the limits that must hold. The engine enforces those itself.
+Your assistant may ask before it runs a tool. It sees `execute_tools`, not the tool inside it. **If you tell it to always allow `execute_tools`, you have allowed every tool it can find.** Use `MCP_PERMISSION_MODE` and `MCP_DENIED_TOOLS` for the limits that must hold. The engine enforces those itself.
 
-The engine also tells every assistant to ask you what a delete, restore, archive deploy or import will remove or overwrite, and to wait for a yes before it calls the tool. That is an instruction to the assistant, not a block. The settings above are what hold.
+The engine also tells every assistant to ask you what a delete, restore, archive deploy or import will remove or overwrite, and to wait for a yes before it calls the tool. That is an instruction to the assistant and blocks nothing. Only the settings above hold.
 
 These settings only affect the assistant. They do not change the REST API or `pae`.
 
@@ -171,7 +169,7 @@ Anything missing from the first list is missing for the assistant too.
 
 ## What to ask
 
-These are not magic phrases. Describe things your own way. They show the level of detail worth giving. If the assistant refuses, you have limited what it may do: [Decide what the assistant may do](#decide-what-the-assistant-may-do).
+Describe things your own way. These examples show the level of detail worth giving. If the assistant refuses, you have limited what it may do: [Decide what the assistant may do](#decide-what-the-assistant-may-do).
 
 **See what you already host**
 
@@ -186,7 +184,7 @@ List the users on this WordPress site.
 Update all plugins on this site.
 ```
 
-WP-CLI, its named operations (plugins, themes, users, core, cache), backups and domains work on WordPress that is already on this engine, in its own container or on traditional PHP hosting. The App users actions and the install wizard need a WordPress site in its own container. Changing PHP needs traditional PHP hosting: [If WordPress is already on this engine](../capabilities/wordpress-and-apps.md#if-wordpress-is-already-on-this-engine).
+WP-CLI (the WordPress command-line tool), its named operations (plugins, themes, users, core, cache), backups and domains work on WordPress that is already on this engine, in its own container or on traditional PHP hosting. The App users actions and the install wizard need a WordPress site in its own container. Changing PHP needs traditional PHP hosting: [If WordPress is already on this engine](../capabilities/wordpress-and-apps.md#if-wordpress-is-already-on-this-engine).
 
 **Change the PHP version on traditional WordPress**
 
@@ -214,7 +212,7 @@ Deploy https://github.com/org/private-app on this PanelAlpha Engine.
 The repository is private.
 ```
 
-Do not paste the git token into the chat. The assistant sends a link on the engine; open it, paste the token, save and tell the assistant you are done. Full steps: [A private repository](../capabilities/connecting-with-git.md#a-private-repository).
+**Do not paste the git token into the chat.** The assistant sends a link on the engine. Open it, paste the token and save. Then tell the assistant you are done. Full steps: [A private repository](../capabilities/connecting-with-git.md#a-private-repository).
 
 **Check what a repository is before deploying it**
 
@@ -236,7 +234,7 @@ Add the domain shop.example.com to this project and request a Let's Encrypt
 certificate for it.
 ```
 
-Point the DNS record at your VPS first, or the certificate request will fail.
+Point the DNS record at your VPS first. Otherwise the certificate request fails.
 
 **Reach a site through Cloudflare**
 
@@ -253,7 +251,7 @@ This site does not open. Read the deploy log, check what the site is actually
 serving, and fix what you can.
 ```
 
-The assistant sees the deploy log, the health checks, and what the site returns from inside your VPS.
+The assistant sees the deploy log, the health checks and what the site returns from inside your VPS.
 
 **Create a database**
 
@@ -291,7 +289,7 @@ Admin email: admin@example.com. Admin password: <password>
 Set DATABASE_URL to <value> on this project and rebuild.
 ```
 
-The rebuild matters. Most applications only read their settings when they start.
+Most applications read their settings only when they start, so the rebuild is needed.
 
 **Check the VPS itself**
 
@@ -312,7 +310,7 @@ Open the address the assistant gives you, not the one you expected. If it ends i
 ## Troubleshooting
 
 **The assistant registered your VPS but will not connect.**
-Almost always the certificate. Your engine is self-signed and the assistant's machine does not trust it. Fixed on your computer, not your VPS: [Trust a self-signed certificate](claude-code.md#trust-a-self-signed-engine-certificate).
+The cause is almost always the certificate. Your engine's certificate is self-signed (made by the engine itself), and the assistant's machine does not trust it. Fix it on your computer, not on your VPS: [Trust a self-signed certificate](claude-code.md#trust-a-self-signed-engine-certificate).
 
 **A 401 error.**
 Wrong token type. Assistants need a token from `pae connect` or `pae mcp:token:create`, not `pae api:token:create`. Or the token was truncated when you copied it.
@@ -338,7 +336,7 @@ This is every MCP tool the engine ships: **231** tools, grouped by area. You do 
 
 A **project** is one hosting account. Every tool takes it as `name`; what the tools return still calls that value `username`, the REST API's name for it.
 
-A new install exposes all of them. Every group in the table below is on by default. The group name in the **Toolset** column is what you put in `MCP_TOOLSETS` if you want to narrow what the assistant can see. How to turn a group off, add one tool, or deny one: [Decide what the assistant may do](#decide-what-the-assistant-may-do). What this engine is actually offering:
+A new install exposes all of them, so every group in the table below is on by default. To narrow what the assistant can see, put the group name from the **Toolset** column in `MCP_TOOLSETS`. How to turn a group off, add one tool or deny one: [Decide what the assistant may do](#decide-what-the-assistant-may-do). What this engine is actually offering:
 
 ```bash
 pae mcp:tool:list
@@ -907,7 +905,7 @@ Used when a private repository or a Cloudflare tunnel needs a token. You paste t
 
 A secret is never readable again. Not by your assistant, not by you, not by any command. An environment variable set from a `vault:<key>` stays masked in the project's variable list, even when the list is asked to show the values. What you can always see is the **inventory**: each entry's reference (`vault:<key>`), what kind of secret it is, what it is for, which project owns it, whether it has been filled in yet and the dates.
 
-Give a **purpose** when you ask for a link ("deploy key for the shop repo"). It is shown on the paste page, so whoever hands over a credential can see why it is wanted, and it appears in the listing afterwards. Since the value itself can never be read back, the purpose is usually the only thing that tells two entries of the same kind apart when you come to tidy up.
+Give a **purpose** when you ask for a link ("deploy key for the shop repo"). It is shown on the paste page, so whoever hands over a credential can see why it is wanted, and it appears in the listing afterwards. Since the value can never be read back, the purpose is usually the only way to tell two entries of the same kind apart.
 
 ### A secret cannot be edited, only replaced
 
