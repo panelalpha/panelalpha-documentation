@@ -33,7 +33,7 @@ card:
 
 ## What is PanelAlpha Single Server Edition?
 
-PanelAlpha Single Server Edition is a web hosting panel you install on your own VPS (a server you rent). You open it in a browser and look after your sites there. The **Engine** underneath does the hosting. The panel is the screen you use to control it.
+PanelAlpha Single Server Edition is a web hosting panel you install on your own VPS (a server you rent). You open it in a browser and look after your sites there. **PanelAlpha Engine** is the hosting software underneath. The panel is the screen you use to control it.
 
 The panel is free and open source, for one person, with no project limit. In the panel you can:
 
@@ -60,9 +60,9 @@ The panel works on its own. You can also connect it to two free PanelAlpha servi
 
 ## How it works
 
-![How the panel fits on your server: you and your AI assistant reach the panel through nginx-proxy; the panel asks the Engine API, which runs every site in its own container; you reach the engine over SSH with pae; visitors reach the sites through nginx-proxy; the panel checks the licence server, the engine gets certificates from Let's Encrypt and writes backups to a store](../assets/single-server/architecture.gif)
+![Diagram: you and visitors reach the panel and your sites on one VPS; the panel runs on PanelAlpha Engine](../assets/single-server/architecture.gif)
 
-The panel is one project on the Engine, in its own container. When you create a site, the panel asks the Engine to do it, and the Engine gives that site a project of its own. One panel manages the Engine it runs on.
+The panel is one project on PanelAlpha Engine. When you create a site, the panel asks the engine to do it, and the engine gives the site a project of its own.
 
 Removing the panel deletes only the panel's project. Your sites keep running: [Removing the panel](getting-started/removing.md).
 
@@ -91,11 +91,3 @@ Open `https://panel.example.com`. The setup wizard creates your account, or conn
 ### 3. Create your first site
 
 Go to **My Projects**, select **Create First Project** and choose **WordPress**, **Git**, **Files** or **PanelAlpha GO!**. You can also drop a `.zip` or `.tar.gz` archive straight onto the project list: [Create a project](projects/create-a-project.md).
-
-## How to use it
-
-- **[Getting started](getting-started/requirements.md)**: [Requirements](getting-started/requirements.md), [installing the panel](getting-started/install.md), [first login](getting-started/first-login.md), [the panel address](getting-started/panel-address.md), [updating](getting-started/updating.md) and [removing](getting-started/removing.md) the panel.
-- **[Projects](projects/projects.md)**: [Creating a project](projects/create-a-project.md), [managing WordPress](projects/wordpress.md), [importing a WordPress site](projects/importing-wordpress.md), [Git](projects/git.md) and [staging and preview links](projects/staging-and-preview.md).
-- **[Looking after a project](looking-after-a-project/domains-and-ssl.md)**: [Domains and SSL](looking-after-a-project/domains-and-ssl.md), [databases](looking-after-a-project/databases.md), [backups](looking-after-a-project/backups.md), [files, FTP and SFTP](looking-after-a-project/files-and-access.md), [cron jobs and PHP](looking-after-a-project/cron-and-php.md) and [statistics and logs](looking-after-a-project/statistics-and-logs.md).
-- **[The panel](the-panel/settings.md)**: [Settings](the-panel/settings.md), [tasks](the-panel/tasks.md), [your account](the-panel/your-account.md), [Connect AI](the-panel/connect-ai.md) and [around the panel](the-panel/around-the-panel.md).
-

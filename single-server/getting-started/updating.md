@@ -8,7 +8,7 @@ nav:
 
 # Updating the panel
 
-You update the panel by running the installer again on the server. Your accounts, settings, data and domain stay. The panel has no update button and no update check.
+You update the panel by running the installer again on your VPS. Your accounts, settings, data and domain stay. The panel has no update button and no update check.
 
 ## Updating
 
@@ -19,18 +19,16 @@ You update the panel by running the installer again on the server. Your accounts
    curl -fsSL https://get.panelalpha.com/single-server | sh
    ```
 
-   It finds the panel it installed and deploys it again from its repository. It does not add a second panel. The panel keeps its name, domain, settings, data and variables.
+   It finds the panel it installed and updates it. It does not add a second panel.
 
 3. When it finishes, open the panel and sign in.
 
-When the new version starts, it updates its database by itself. The panel's data lives in one volume that the update keeps: [Removing the panel](removing.md).
+## Updating PanelAlpha Engine too
 
-## Updating the Engine too
-
-When a newer Engine is available, the installer updates only the panel and says so. Add `--update-engine` to update the Engine as well:
+When a newer PanelAlpha Engine is available, the installer updates only the panel and says so. Add `--update-engine` to update the engine as well:
 
 ```bash
 curl -fsSL https://get.panelalpha.com/single-server | sh -s -- --update-engine
 ```
 
-Your projects keep running while the Engine is updated.
+Your projects keep running during the update.

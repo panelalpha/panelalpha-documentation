@@ -12,7 +12,7 @@ The panel shows who visits a project, how much disk and bandwidth it uses, and t
 
 ## Visitor statistics
 
-Open the project and go to the **Monitoring** tab. **Visitors Chart** shows visits over the last week, month or year. Below it are the cards **Visits By Country**, **Continent**, **Region**, **Referrer**, **Device Operating System** and **Device Browser**.
+Open the project and go to the **Monitoring** tab. **Visitors Chart** shows visits over the last week, month or year. Below it are cards for country, continent, region, referrer (the site a visitor came from), device operating system and browser.
 
 The panel updates the statistics once a day. A new project shows `There is no data to display yet`. Check again the next day.
 
@@ -20,13 +20,19 @@ The panel updates the statistics once a day. A new project shows `There is no da
 
 The **Project Details** tab also shows **Unique Visitors**, **Average Session Time** and **Bandwidth**. The session time is an estimate.
 
-The **Visits By Country**, **Continent** and **Region** cards stay empty until the server owner downloads the local geolocation database with `pae geolocation:database update`. When they have data, they end with a link, `IP Geolocation by DB-IP`, to the source of that database.
+The country, continent and region cards stay empty until you download the visitor location data on the server: [On the server](../getting-started/on-the-server.md#visitor-countries).
 
 ## Usage of the server
 
-Open the user menu and select **My Server**. The page shows three cards for the whole server: **RAM** and **Disk Space** with **Used** and **Available** in GB, and **CPU**. Below are graphs for **CPU Usage**, **Disk Throughput**, **Disk IOPS**, **Network Traffic** and **Network PPS**.
+Open the user menu and select **My Server**. The page shows how much **RAM**, **Disk Space** and **CPU** the whole server uses. Below are graphs of:
 
-Choose **1 hour**, **12 hours** or **Live** in **Period**. **Live** is the last 5 minutes and is the default. It refreshes every 5 seconds and counts down with `Next update in <n> s`.
+- **CPU Usage**
+- **Disk Throughput**: how much data the disk reads and writes.
+- **Disk IOPS**: how many read and write operations the disk handles.
+- **Network Traffic**: how much data goes in and out.
+- **Network PPS**: how many network packets go in and out.
+
+Choose **1 hour**, **12 hours** or **Live** in **Period**. **Live** is the last 5 minutes.
 
 ![My Server, Usage: RAM, CPU and Disk Space for the whole server, then the graphs Disk Throughput, Network Traffic and CPU Usage one after another](../../assets/single-server/statistics-server-usage.gif)
 
@@ -34,38 +40,29 @@ Choose **1 hour**, **12 hours** or **Live** in **Period**. **Live** is the last 
 
 Open the project and go to **Advanced > Logs**. Which tabs you see depends on the project:
 
-- **Project Logs:** what was done to the project. A table with **User**, **Actions** and **Date**. You can search and sort by date. The page size is 2, 5, 10, 20 or 100.
-- **Deploy Logs:** the deploy log of a container project. Pick a run from the list above the log. A running deploy has a **Live** badge.
-- **WordPress Error Logs:** the error log of a WordPress site, as text. It stays empty unless `WP_DEBUG` and `WP_DEBUG_LOG` are on. It shows the last 100 entries and says `100 entries from the log are displayed. To see more, please download.` Use **Download** for the whole log.
-- **PHP Logs:** the PHP errors, as a table with **Time**, **Level** and **Message**. A container project has no PHP log file here.
-- **Webserver Logs:** the web server logs. Pick a file from the list at the top. An access log has **Time**, **IP Address**, **Request**, **Status** and **Size**. An error log has **Time**, **Level** and **Message**.
+- **Project Logs:** what was done to the project, with who did it and when.
+- **Deploy Logs:** the deploy log of a container project. Pick a run from the list above the log.
+- **WordPress Error Logs:** the error log of a WordPress site. It stays empty until WordPress is set to write errors to its log. Turn on **Debug Mode** in **Advanced > Developer Settings** for debugging. The page shows the last 100 entries. Use **Download** for the whole log.
+- **PHP Logs:** the PHP errors. A container project has no PHP log here.
+- **Webserver Logs:** the web server logs. Pick a file from the list at the top. The access log lists each visit. The error log lists the web server's errors.
 
-Every tab except **Project Logs** has a **Download** button next to the heading. It saves the log you are looking at. It is off while the log loads or is empty. A web server file the panel cannot show as text gets `You Cannot Preview the Contents of This File.` and the same button.
-
-The PHP, web server and deploy logs show 15 rows a page, or 50 or 100.
+Every tab except **Project Logs** has a **Download** button that saves the log you are looking at.
 
 ![Advanced > Logs of the Northwind Journal WordPress project: Project Logs, then PHP Logs with No PHP Logs Were Found, then Webserver Logs with the access log rows and the Download button](../../assets/single-server/statistics-logs-tabs.gif)
 
 A tab with nothing to show says `No PHP Logs Were Found...` or similar. The web server log often holds more detail.
 
-### More detail
-
-A file log loads from its newest end. When you go past the rows loaded, the table fetches the next older part. The search box filters only the rows already loaded.
-
 ## Containers
 
-A container project has the page **Advanced > Containers**. The table lists each service with its image, its state, how long it has been running, the ports it publishes and its own actions. The columns are **Service**, **Image**, **State**, **Uptime**, **Ports** and **Actions**. The list refreshes every 15 seconds.
+A container project has the page **Advanced > Containers**. It lists each service of the project with its image, state, uptime and ports.
 
 ![Advanced > Containers of the ntfy project: the app service with its image, the state running, its uptime and port, the actions of the row, and the Actions menu at the top](../../assets/single-server/statistics-containers-page.gif)
 
 - **Start All**, **Stop All**, **Restart** and **Pull & Redeploy** act on the whole project: [Projects](../projects/projects.md).
-- Each service has its own **Start**, **Stop**, **Restart**, **Logs** and **Public URLs** actions. **Logs** shows the output of one service. An empty service shows `(no output)`.
+- Each service has its own **Start**, **Stop**, **Restart** and **Logs** actions. **Logs** shows the output of one service.
 
-The panel asks for a confirmation before a restart, a stop or a redeploy. A page with no services shows `No Containers Found` above `No containers available. They will appear here once a project is deployed.`
+The panel asks for a confirmation before a restart, a stop or a redeploy.
 
 ### Public URLs
 
-**Public URLs** forwards a domain of the project to a port of that service. Two messages can stop you:
-
-- The address is not a domain of this project: `The server name is not a domain of this project.`
-- The service already has a URL on that port: `<name> already has a public URL on port <port>. Choose another port, or remove that URL first.`
+**Public URLs** is for container projects and developers. It forwards a domain of the project to a port of a service. The panel tells you if the domain is not one of this project or if the service already has a URL on that port.

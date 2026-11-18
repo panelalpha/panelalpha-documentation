@@ -8,54 +8,41 @@ nav:
 
 # Domains and SSL
 
-A project answers on one main domain. You can use your own domain, add more domains and subdomains, redirect a domain and give each domain an SSL certificate, which makes visitors see the padlock. You do this in the project under **Advanced > Domains** and **Advanced > Security**.
+A project answers on one main domain. You can use your own domain, add more domains, redirect a domain and give each domain an SSL certificate, which makes visitors see the padlock. You do this in the project under **Advanced > Domains** and **Advanced > Security**.
 
 ## Pointing your own domain at a project
 
 New projects get an address from the default domain set in the panel: [Settings](../the-panel/settings.md). To use your own domain as the project's main domain:
 
-1. Open the project and select **Change Domain** next to the project address at the top of the page. While the project's domain does not point at this server, the button reads **DNS propagation is in progress** instead and opens the same dialog.
+1. Open the project and select **Change Domain** next to the project address at the top of the page. While the domain does not point at this server, the button reads **DNS propagation is in progress** instead and opens the same dialog.
 2. In **Set Your Domain**, choose **Map your own domain** and enter the domain, for example `example.com`.
-3. Select **Use This Domain**. The panel changes the project's address at once. The dialog then shows **Set DNS Records** with the records to set at your domain provider. A **DNS record** is a line in your domain provider's settings that tells the internet where a name lives.
+3. Select **Use This Domain**. The panel changes the project's address at once. The dialog then shows **Set DNS Records**.
 
-   - Name `example.com` (or `@`), type `A`, address the IPv4 address of your server. The dialog shows the address.
-   - Name `www.example.com`, type `CNAME`, address `example.com`.
+   **DNS** is the system that tells the internet which server a domain name lives on. A **DNS record** is one line of that information. You set the records where you bought the domain (your domain provider). The dialog lists two:
+
+   - Name `example.com` (or `@`), type `A`, address the IPv4 address of your server. An **A record** points a name at a server address. The dialog shows the address.
+   - Name `www.example.com`, type `CNAME`, address `example.com`. A **CNAME record** makes one name follow another.
 
    ![The DNS propagation is in progress badge of the Northwind Store project opens Set Your Domain: the domain shop.example.com with Change, and Set DNS Records with the A record and the CNAME record for www](../../assets/single-server/domains-set-your-domain-dns.gif)
 
 4. Set these records at your domain provider and wait for them to spread. This takes from 2 minutes to a few hours.
 
-The same records show when you open **Change Domain** (or **DNS propagation is in progress**) again on a project that already has a domain. **Change** next to `Your domain` in that dialog takes you back to step 2.
+To see the records again, open **Change Domain** on the project.
 
-**Making another domain the main one changes the project's address, not the project.** Only its main domain and the address it answers on change.
+**Changing the main domain changes the project's address, not the project.** The address changes. The files stay. A WordPress site keeps working, including **WP Admin**. The visitor statistics start again from zero.
 
-- The project keeps its name in My Projects and on the server. Its account, its home directory and its files stay as they are.
-- The new main domain serves the same folder the old one served.
-- A WordPress site's addresses are updated, so its pages and **WP Admin** go on working.
-- The project's custom proxy rules move to the new main domain.
-- Its tunnel and its visitor statistics do not move. A tunnel serves one domain name, and the statistics the panel shows are the main domain's, so they start again from zero.
+**Changing the main domain away from a `panelalpha.online` address removes that address for good.** The dialog warns you first.
 
-**Changing the main domain away from a `panelalpha.online` address removes that address for good.** Such an address is served through a tunnel, and the Engine does not make a `panelalpha.online` name a project's main domain again. The dialog warns you before you change it.
+The other option in **Set Your Domain** is **Use a free subdomain**, which gives the project an address under a base domain your engine offers. If the address is refused, you see `Domain name is not available.` Choose another name.
 
-The other option in **Set Your Domain** is **Use a free subdomain**. It gives the project an address under a base domain your Engine offers. If the address is refused, you see `Domain name is not available.` Choose another name.
-
-The panel checks the name before it changes anything:
-
-- `Domain Name must be valid` under the field means the text is not a domain.
-- A name that starts with `www.` is refused with `Domain cannot start with 'www.'`. Enter `example.com`. The panel adds `www` itself.
-- A project that the server owner has protected cannot be changed: `The server operator has protected this project, so it cannot be deleted, stopped or redeployed from the panel.`
+The panel refuses a name that is not a domain (`Domain Name must be valid`) and a name that starts with `www.` (`Domain cannot start with 'www.'`). Enter `example.com`. The panel adds `www` itself.
 
 ### When the domain does not point at the server
 
-The panel checks the project's domain against the server. If it does not point here, two things change:
+If the domain does not point at this server, the top bar of the project shows **DNS propagation is in progress** and **My Projects** shows a warning icon next to the project's address. Point at the icon to read the reason. It offers two choices:
 
-- The top bar of the project shows **DNS propagation is in progress** in place of **Change Domain**.
-- **My Projects** shows a warning icon next to the project's address.
-
-Point at the icon. It reads `The A record may be missing, pointing elsewhere, or routed through a proxy such as Cloudflare.` It offers two choices:
-
-- **Fix it now** opens **Set Your Domain** with the records to set: the ones in step 3 above.
-- **Ignore** turns the warning off for this project. The tip then reads `DNS alerts are ignored for this instance.` **Restore Alerts** turns it back on.
+- **Fix it now** opens **Set Your Domain** with the records to set.
+- **Ignore** turns the warning off for this project. **Restore Alerts** turns it back on.
 
 If DNS cannot point at the server yet, **Set Your Domain** also offers **Generate URL** under `Not live yet? Preview the site on the server`. It gives a temporary address so you can look at the site first: [Staging and preview](../projects/staging-and-preview.md).
 
@@ -63,82 +50,68 @@ If DNS cannot point at the server yet, **Set Your Domain** also offers **Generat
 
 ## Adding a domain
 
+An **addon domain** is a second, separate domain on the same project, for example `example.org` beside `example.com`. A **subdomain** is a name in front of a domain you already have, for example `shop.example.com`.
+
 1. Open the project, go to **Advanced > Domains** and select **Add Domain**.
 2. In **Type**, choose **Addon Domain** or **Subdomain**.
-3. For an addon domain, enter the domain without `www.`. The panel adds `www` itself. For a subdomain, enter the name and choose the parent domain, for example `shop` under `example.com`.
+3. For an addon domain, enter the domain without `www.`. For a subdomain, enter the name and choose the parent domain, for example `shop` under `example.com`.
 4. Select **Add Domain**.
 
 ![Advanced > Domains of the Northwind Store project: Add Domain with the type Addon Domain and the domain example.com, then the list with the SSL Status column and the row actions](../../assets/single-server/domains-list.gif)
 
-Set the DNS records for the new domain at your domain provider, as in the section above.
+Set the DNS records for the new domain at your domain provider, as above.
 
 ## Changing a domain, redirecting it or removing it
 
 1. Go to **Advanced > Domains** and open the edit action of the row.
 2. Change the **Document Root**, which is the folder the domain serves. It starts with `/`.
-3. To send visitors elsewhere, tick **Redirect Domain** and enter the **Redirect URL**. The list then shows `redirected to <address>`.
+3. To send visitors elsewhere, tick **Redirect Domain** and enter the **Redirect URL**.
 4. Select **Update**.
 
 To remove a domain, use the delete action of the row and tick the confirmation. **The main domain cannot be removed.**
 
 ## Making an addon domain the primary one
 
-The primary domain is the project's main domain. The star is offered on the main domain and on addon domains only.
+The primary domain is the project's main domain.
 
-1. Go to **Advanced > Domains** and select the star on the row.
+1. Go to **Advanced > Domains** and select the star on the row of an addon domain.
 2. Confirm **Set As Primary Domain**.
 
-**All other domains of the project keep the redirect settings they have. The panel does not add a redirect to the new primary domain.** To send the visitors of an old domain to the new one, tick **Redirect Domain** on its row, as in the section above.
+The old main domain stays in the project as an addon domain and keeps serving the site. A WordPress site keeps working on the new main domain. The new main domain starts again without the visitor statistics it had.
 
-What changes for the domains:
-
-- The domain that becomes the main one is removed from the project and added again. It comes back without the tunnel, the custom proxy rules and the visitor statistics it had on its own.
-- The old main domain stays in the project as an addon domain, with its files. It goes on serving the site, because the new main domain serves the same folder.
-- A WordPress site's addresses are updated as on a domain change, so its pages and **WP Admin** go on working on the new main domain.
-
-### More detail about panelalpha.online addresses
-
-If the main domain is a `panelalpha.online` address, the panel keeps it working. It re-adds it as an addon domain together with its tunnel, so the address serves the site as before, and the dialog tells you so.
-
-That address cannot be the main domain again. The Engine refuses a `panelalpha.online` name as a main domain with `A PanelAlpha Online address is served through the proxy as a tunnel, so it cannot be the project's main domain.`
+**The panel does not add a redirect to the new primary domain.** To send visitors of an old domain to the new one, tick **Redirect Domain** on its row.
 
 ## SSL certificates
 
 Each domain has a certificate. It comes from Let's Encrypt or from you, or it is self-signed, which browsers do not trust. The **SSL Status** column in **Advanced > Domains** shows the issuer, `Self Signed`, `No SSL` or `Wrong DNS`.
 
-**`Wrong DNS` means the domain points at another server.** The certificate the panel sees there belongs to that other server. Point at the padlock to read `This certificate comes from a server the domain does not point to. Check the A record of the domain. A domain behind a proxy such as Cloudflare can show this too.` Fix the domain's A record: [When the domain does not point at the server](#when-the-domain-does-not-point-at-the-server).
+**`Wrong DNS` means the domain points at another server.** Fix the domain's A record: [When the domain does not point at the server](#when-the-domain-does-not-point-at-the-server).
 
-1. Go to **Advanced > Domains** and select the padlock icon on the row (its tip reads **Edit SSL**). You can also use **Advanced > Security**, card **SSL Certificate Applied**, button **Manage**.
+1. Go to **Advanced > Domains** and select the padlock icon on the row. You can also use **Advanced > Security**, card **SSL Certificate Applied**, button **Manage**.
 2. In **Set SSL Certificate**, choose the **SSL provider**: **Let's Encrypt** or **Custom Certificate**.
-3. For **Let's Encrypt**, select **Generate**. The panel shows `The SSL certificate is being generated.` The domain must already point at the server, or the certificate waits for DNS.
-4. For a certificate of your own, fill in **Certificate (CRT)** and **Private Key (KEY)**. **Certificate Authority Bundle (CABUNDLE)** is optional. Select **Install**. The panel shows `The SSL certificate has been installed.`
+3. For **Let's Encrypt**, select **Generate**. The domain must already point at the server, or the certificate waits for DNS.
+4. For a certificate of your own, fill in **Certificate (CRT)** and **Private Key (KEY)**. **Certificate Authority Bundle (CABUNDLE)** is optional. Select **Install**.
 
 ![The padlock of a domain opens Set SSL Certificate: Custom Certificate shows Certificate (CRT) and Private Key (KEY), and Let's Encrypt shows Generate](../../assets/single-server/domains-ssl-dialog.gif)
 
-If installation fails, the status reads `The SSL certificate installation for example.com has failed. Please contact support.` Check that the DNS records are right and try again.
+If installation fails, check that the DNS records are right and try again.
 
-A name under `panelalpha.direct`, `panelalpha.online`, `sslip.io` or `nip.io` cannot get a Let's Encrypt certificate from the panel. The panel then shows an error that mentions `shared_zone_issuance`. Use a domain of your own, or ask the server owner to allow it with `pae settings:set ssl_shared_zone_issuance 1`.
-
-Many servers share these names, and Let's Encrypt allows only 50 new certificates a week for each of them. That is why the panel does not issue them.
+Names under `panelalpha.direct`, `panelalpha.online`, `sslip.io` and `nip.io` get no Let's Encrypt certificate from the panel unless you allow it on the server: [On the server](../getting-started/on-the-server.md#certificates-for-shared-names).
 
 ### Removing an installed certificate
 
 **The certificate you replace is not kept, and neither is its private key.** Save the CRT and the KEY first if you want them again.
 
-1. Go to **Advanced > Domains** and select the padlock icon on the row (its tip reads **Edit SSL**), or use **Advanced > Security**, card **SSL Certificate Applied**, button **Manage**.
+1. Open the padlock of the domain as above.
 2. Select **Remove Certificate**, then confirm with **Remove**.
 
-The domain goes back to the certificate the server gives a new domain. That is its own one where that covers the name, otherwise the one its operator configured, which is self-signed by default. A self-signed certificate brings the browser warning back, and the **SSL Status** column reads `Self Signed`.
-
-The dialog shows the certificate the domain carries now once the server confirms the removal. Every page that is open for the project updates. If the server's Engine cannot do this yet, the dialog answers `This server's Engine cannot remove a certificate yet.`
+The domain goes back to the default certificate the server uses for new domains. That certificate is usually self-signed, so the browser warning comes back and the **SSL Status** column reads `Self Signed`.
 
 ### Forcing HTTPS
 
 1. Go to **Advanced > Security**.
 2. Turn on **Force HTTPS Redirect**.
 
-This works only when the domain has a certificate.
-
-Other projects can share the same domain. If so, the panel lists them first: `This project is installed on example.com along with other projects. Changing this option, it will also affect the following projects:`.
+This works only when the domain has a certificate. If other projects share the same domain, the panel lists them first, because the change affects them too.
 
 Something not working? Messages and fixes: [Troubleshooting: Domains and SSL](../troubleshooting/domains-and-ssl.md).
