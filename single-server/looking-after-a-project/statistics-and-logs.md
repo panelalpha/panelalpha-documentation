@@ -20,13 +20,13 @@ The panel updates the statistics once a day. A new project shows `There is no da
 
 The **Project Details** tab also shows **Unique Visitors**, **Average Session Time** and **Bandwidth**. The session time is an estimate.
 
-The **Visits By Country**, **Continent** and **Region** cards stay empty until the server owner downloads the local geolocation database with `pae geolocation:database update`.
+The **Visits By Country**, **Continent** and **Region** cards stay empty until the server owner downloads the local geolocation database with `pae geolocation:database update`. When they have data, they end with a link, `IP Geolocation by DB-IP`, to the source of that database.
 
 ## Usage of the server
 
-Select **My Server** at the top and then **Usage**. The page shows RAM, CPU and **Disk Space** (**Used** and **Available**, in GB) for the whole server. Below are graphs for **CPU Usage**, **Disk Throughput**, **Disk IOPS**, **Network Traffic** and **Network PPS**.
+Open the user menu and select **My Server**. The page shows three cards for the whole server: **RAM** and **Disk Space** with **Used** and **Available** in GB, and **CPU**. Below are graphs for **CPU Usage**, **Disk Throughput**, **Disk IOPS**, **Network Traffic** and **Network PPS**.
 
-Choose **1 hour**, **12 hours** or **Live**. **Live** is the last 5 minutes and is the default.
+Choose **1 hour**, **12 hours** or **Live** in **Period**. **Live** is the last 5 minutes and is the default. It refreshes every 5 seconds and counts down with `Next update in <n> s`.
 
 ![My Server, Usage: RAM, CPU and Disk Space for the whole server, then the graphs Disk Throughput, Network Traffic and CPU Usage one after another](../../assets/single-server/statistics-server-usage.gif)
 

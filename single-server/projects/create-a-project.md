@@ -1,6 +1,6 @@
 ---
 title: "Create a project"
-description: "You can create a project from WordPress, from a Git repository or from an archive of files. Each way has its own steps."
+description: "You can create a project from WordPress, from a Git repository, from an archive of files or from the PanelAlpha GO! app catalog. Each way has its own steps."
 nav:
   group: Projects
   order: 2
@@ -8,12 +8,12 @@ nav:
 
 # Create a project
 
-You create a project from WordPress, from a Git repository or from files. WordPress makes a PHP hosting project. Git and files make a container project: [Projects](projects.md).
+You create a project from WordPress, from a Git repository, from files or from an app in the PanelAlpha GO! catalog. WordPress makes a PHP hosting project. Git, files and PanelAlpha GO! make a container project: [Projects](projects.md).
 
 ## Starting
 
 1. Go to **My Projects** and select **Create First Project**. Later, use the create button on the same page.
-2. Choose how to create your project: **WordPress**, **Git** or **Files**.
+2. Choose how to create your project: **WordPress**, **Git**, **Files** or **PanelAlpha GO!**.
 
    ![Add New on My Projects opens Choose how to create your project with WordPress, Git and Files](../../assets/single-server/create-project-choose-source.gif)
 
@@ -80,6 +80,24 @@ Details on keys, tokens and branches: [Git](git.md).
 ### The project name
 
 The wizard does not ask for a project name. For a Git or files project the panel makes the name from the repository or archive name. It keeps only lowercase letters and digits and cuts the result to 15 characters.
+
+## Creating a project from PanelAlpha GO!
+
+**PanelAlpha GO!** is a catalog of open-source apps from [go.panelalpha.com](https://go.panelalpha.com). PanelAlpha deployed and tested each of them on PanelAlpha Engine. The catalog tells the panel where the app's code is, and the panel deploys it on your server as a Git project.
+
+**The panel must be connected to PanelAlpha Hub first.** Until it is, the **PanelAlpha GO!** option is greyed out and reads `Connect this panel to PanelAlpha Hub first to browse and install apps.` Select **Connect to PanelAlpha Hub** to open **Settings** and connect: [Settings](../the-panel/settings.md#panelalpha-hub). The catalog is free with a PanelAlpha Hub account.
+
+1. Choose **PanelAlpha GO!**. The catalog opens with the heading **Choose an App**.
+2. Find an app. Type in the search field (at least 2 characters). You can search by name, by category or by the app it replaces, for example `Notion`. You can also use the list on the left: **Popular** shows every app, **Latest** shows the most recently verified apps first, and below them is one entry per category.
+3. Select **Install** on the app's card. To read more first, select **Details**. It shows the app's description and screenshots, with the same **Install** button.
+
+<!-- TODO screenshot: assets/single-server/create-project-go-catalog.gif. Show the catalog with the search field, the category list and a few app cards, then Details and Install. -->
+
+Each card shows the app's name, a short description, the apps it replaces and its stars on GitHub or another Git host. The sort menu orders the apps by **Most tried** (the default), **Name A-Z**, **Recently verified** or **Most stars**. The catalog shows 24 apps at a time. **Show more apps** loads the next ones.
+
+After **Install**, the panel creates a container project from the app's repository and shows its live log. It does not ask for a name, a domain, a branch or environment variables. The server picks the project name and address, the same way as for any new project. The project is then an ordinary Git project: [Git](git.md).
+
+If PanelAlpha GO! cannot be reached, the catalog says `The catalog is unavailable` and `PanelAlpha Go could not be reached. Your other ways to create a project still work.` Select **Try Again** to load it again later.
 
 ## Creating a project from files
 

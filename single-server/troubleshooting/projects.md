@@ -34,6 +34,12 @@ More about this: [Projects](../projects/projects.md).
 
 **"The repository did not accept the key. Check that you added it to this repository."** The deploy key is not in the repository yet. A **deploy key** is a key you add to the repository so the panel can read it. Add it in the repository's deploy key settings and select **Continue** again.
 
+**PanelAlpha GO! is greyed out: "Connect this panel to PanelAlpha Hub first to browse and install apps."** The catalog needs the panel connected to PanelAlpha Hub. Select **Connect to PanelAlpha Hub** and connect in **Settings**: [Settings](../the-panel/settings.md#panelalpha-hub).
+
+**"The catalog is unavailable"** The panel could not reach PanelAlpha GO!. Select **Try Again** in a few minutes. Creating a project from WordPress, Git or files still works.
+
+**"The app's details could not be loaded from PanelAlpha Go. Try again in a moment."** PanelAlpha GO! did not answer for this app. Go back to the catalog and open the app again in a moment.
+
 **"Add only one archive."** You added a folder or more than one file. Upload a single `.zip` or `.tar.gz`.
 
 **"Allowed file types: .zip, .tar.gz"** The file has another type. Pack it as `.zip` or `.tar.gz`.

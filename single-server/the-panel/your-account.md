@@ -43,6 +43,8 @@ A password needs at least 8 characters, with upper and lower case letters, numbe
 
 Two-factor authentication asks for a code from an app on your phone each time you sign in, in addition to your password.
 
+**You can turn it on or off only within 15 minutes of signing in with your email and password.** A sign-in with **Sign in with PanelAlpha** does not count. This stops someone who gets hold of your open session from turning it off or reading your codes. If the time has passed, log out and sign in again with your password.
+
 1. In **Security Settings**, select **Two-Factor Authentication**.
 2. Scan the QR code with Google Authenticator or another authenticator app. You can also copy the code and enter it by hand.
 3. Enter the code the app shows.

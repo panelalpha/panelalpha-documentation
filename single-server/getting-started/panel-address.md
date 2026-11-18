@@ -45,7 +45,7 @@ After the move:
 - If you use social login, a dialog titled `Update your login providers` lists new callback URLs. **Add them to each provider's settings, or social login stops working.**
 - Domains you added by hand to the panel project stay.
 
-To use a port other than 443, the server's operator must allow it once with `pae system:public-routing:allow panel --ports`. Without that, the panel keeps port 443.
+The installer lets the panel use a port other than 443. If **Settings** still refuses another port, the server's operator allows it once with `pae system:public-routing:allow panel --ports`. Without that, the panel keeps port 443.
 
 ### More detail: a protected panel project
 

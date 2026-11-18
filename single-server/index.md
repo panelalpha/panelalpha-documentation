@@ -35,9 +35,10 @@ card:
 
 PanelAlpha Single Server Edition is a web hosting panel you install on your own VPS (a server you rent). You open it in a browser and look after your sites there. The **Engine** underneath does the hosting. The panel is the screen you use to control it.
 
-This guide covers the Community Edition. It is free and open source, for one person, with no project limit. In the panel you can:
+The panel is free and open source, for one person, with no project limit. In the panel you can:
 
 - Create a WordPress site, or deploy an app from Git or from files
+- Install a ready app from the PanelAlpha GO! catalog
 - Import a WordPress site from another host
 - Add domains, with certificates from Let's Encrypt
 - Take backups by hand or on a schedule, and restore them
@@ -48,6 +49,14 @@ This guide covers the Community Edition. It is free and open source, for one per
 - Connect the server to your PanelAlpha Hub account and sign in with it
 
 Setting it up takes three steps: [Getting started](#getting-started).
+
+## PanelAlpha Hub and PanelAlpha GO!
+
+The panel works on its own. You can also connect it to two free PanelAlpha services.
+
+**PanelAlpha Hub** at [hub.panelalpha.com](https://hub.panelalpha.com) is your PanelAlpha account. There you see every server you connected, with its status, its sites and how much of the server they use. You also sign in to the panel from there, without a separate password: [Settings](the-panel/settings.md#panelalpha-hub).
+
+**PanelAlpha GO!** at [go.panelalpha.com](https://go.panelalpha.com) is a catalog of open-source apps that PanelAlpha deployed and tested on PanelAlpha Engine. On the website, anyone can try an app for about an hour, with no account. In the panel, you install an app from the catalog as a project on your own server. The catalog shows in the panel once the panel is connected to PanelAlpha Hub: [Create a project](projects/create-a-project.md#creating-a-project-from-panelalpha-go).
 
 ## How it works
 
@@ -81,7 +90,7 @@ Open `https://panel.example.com`. The setup wizard creates your account, or conn
 
 ### 3. Create your first site
 
-Go to **My Projects**, select **Create First Project** and choose **WordPress**, **Git** or **Files**. You can also drop a `.zip` or `.tar.gz` archive straight onto the project list: [Create a project](projects/create-a-project.md).
+Go to **My Projects**, select **Create First Project** and choose **WordPress**, **Git**, **Files** or **PanelAlpha GO!**. You can also drop a `.zip` or `.tar.gz` archive straight onto the project list: [Create a project](projects/create-a-project.md).
 
 ## How to use it
 

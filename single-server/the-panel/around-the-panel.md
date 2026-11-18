@@ -12,7 +12,7 @@ The top bar of the panel holds the menu, the notifications bell and the user men
 
 ## The top menu
 
-The tabs are **My Projects**, **My Server** and **Connect AI**. The button to create a project is beside the bell.
+The tabs are **My Projects** and **Connect AI**. The button to create a project is beside the bell. **My Server** is in the user menu.
 
 ## Searching for a project
 
@@ -32,6 +32,7 @@ Select your avatar to open it:
 
 - **Dark Mode**: a switch for the dark colour scheme. Select anywhere on the row. The panel remembers your choice.
 - **Account Details**: your sign-in details: [Your account](your-account.md).
+- **My Server**: how much RAM, CPU, disk and network the whole server uses: [Statistics and logs](../looking-after-a-project/statistics-and-logs.md#usage-of-the-server).
 - **Tasks**: the work the Engine does for your projects. A dot shows while a task runs: [Tasks](tasks.md).
 - **Settings**: the panel's own options: [Settings](settings.md).
 - **Join Our Community**: opens the PanelAlpha Discord in a new tab.

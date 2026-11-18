@@ -22,6 +22,8 @@ Problems when you add a domain, change the main domain or get an SSL certificate
 
 **"Cannot delete domain with existing subdomains"** Remove the subdomains first, then remove the domain.
 
+**The SSL Status column says `Wrong DNS`.** The domain's A record points at another server, so the certificate you see is that server's. Point the A record at this server. A domain behind a proxy such as Cloudflare can show this too: [Domains and SSL](../looking-after-a-project/domains-and-ssl.md#ssl-certificates).
+
 **"Invalid certificate/key"** The certificate and the private key do not belong together. Paste the key that was made for this certificate.
 
 **"Could not obtain a certificate for <name>: ... is not a public hostname a certificate authority will issue for"** The name is not a public domain name. Use a domain you own.

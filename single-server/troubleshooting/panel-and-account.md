@@ -68,6 +68,10 @@ More about this: [The panel address](../getting-started/panel-address.md).
 
 **"These credentials do not match our records."** The email or the password is wrong. Check both and try again.
 
+**"Sign in again with your password to change two-factor authentication."** More than 15 minutes have passed since you signed in with your password, or you signed in with **Sign in with PanelAlpha**. Log out, then sign in with your email and password and try again.
+
+**"This login link is not valid any more. Log in again from PanelAlpha."** The sign-in link from PanelAlpha was used already or is too old, or it came from a PanelAlpha account other than the one that connected the panel. Start again from the login page. If it keeps failing, sign in to PanelAlpha with the account that connected the panel, or disconnect and connect again with yours: [Settings](../the-panel/settings.md#signing-in-with-panelalpha).
+
 **"The entered code is invalid."** The two-factor code is wrong or expired. Enter the current code from the app, or use an unused backup code.
 
 **"The entered backup code is invalid."** The backup code is wrong or was already used. Each backup code works once. Use one you have not used, or enter the current code from the app.

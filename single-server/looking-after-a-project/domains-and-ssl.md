@@ -104,7 +104,9 @@ That address cannot be the main domain again. The Engine refuses a `panelalpha.o
 
 ## SSL certificates
 
-Each domain has a certificate. It comes from Let's Encrypt or from you, or it is self-signed, which browsers do not trust. The **SSL Status** column in **Advanced > Domains** shows the issuer, `Self Signed` or `No SSL`.
+Each domain has a certificate. It comes from Let's Encrypt or from you, or it is self-signed, which browsers do not trust. The **SSL Status** column in **Advanced > Domains** shows the issuer, `Self Signed`, `No SSL` or `Wrong DNS`.
+
+**`Wrong DNS` means the domain points at another server.** The certificate the panel sees there belongs to that other server. Point at the padlock to read `This certificate comes from a server the domain does not point to. Check the A record of the domain. A domain behind a proxy such as Cloudflare can show this too.` Fix the domain's A record: [When the domain does not point at the server](#when-the-domain-does-not-point-at-the-server).
 
 1. Go to **Advanced > Domains** and select the padlock icon on the row (its tip reads **Edit SSL**). You can also use **Advanced > Security**, card **SSL Certificate Applied**, button **Manage**.
 2. In **Set SSL Certificate**, choose the **SSL provider**: **Let's Encrypt** or **Custom Certificate**.
