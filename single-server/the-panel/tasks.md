@@ -26,7 +26,9 @@ Tasks are grouped by day: `Today`, `Yesterday`, then the date. Each row has five
 
 On a phone each task is a compact card.
 
-<!-- TODO screenshot: tasks-list.gif is outdated. Show the new Tasks page: the status tabs (All, Active, Failed, Completed, Cancelled), the Task type dropdown, tasks grouped under Today and Yesterday, a failed task with its error line, and a row opened to show Queued, Started, Finished and Task ID. -->
+::docs-video{src="../../assets/single-server/tasks-list.webm" title="Tasks opens from the user menu with the status tabs All, Active, Failed, Completed and Cancelled, the Project and Task type lists, and the tasks grouped under Today and Yesterday with their Project, Started, Duration and Status"}
+::
+
 ![Tasks opened from the user menu: deploys, backups and variable changes with their project, start time, duration and status](../../assets/single-server/tasks-list.gif)
 
 ## Task details

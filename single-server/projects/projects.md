@@ -58,6 +58,9 @@ On a WordPress project, you can rename the project: select the pencil next to th
 
 **Project Details** shows where the project comes from: an **Installation** card for WordPress, or a **Source** card with the repository (Git) or the archive (files). Beside it are a thumbnail of the site, **Loading Speed** scores with a **Full Report** link to Google PageSpeed, and a **Security** card with **Automatic Backups**, **SSL** and **Create Backup**. On a server with no backup store, **Automatic Backups** shows `Unavailable` and `No backup store is set up.` with a **Set up store** link to **Settings > Backups**.
 
+::docs-video{src="../../assets/single-server/projects-source-card.webm" title="The project page of Immich on the Site Details tab: the Source card with the repository, the database and Up to date with Manage, the Security card with Create Backup, the Loading Speed scores, and the Project Analytics charts below"}
+::
+
 ### Advanced
 
 **Advanced** holds the rest, in a side list.

@@ -47,9 +47,13 @@ To move an existing site here instead: [Importing a WordPress site](importing-wo
 2. Find an app. Type in the search field (at least 2 characters) a name, a category or the app it replaces, for example `Notion`. You can also use the category list on the left.
 3. Select **Install** on the app's card. To read more first, select **Details**.
 
-<!-- TODO screenshot: assets/single-server/create-project-go-catalog.gif. Show the catalog with the search field, the category list and a few app cards, then Details and Install. -->
+::docs-video{src="../../assets/single-server/create-a-project-go-catalog-choose-app.webm" title="Choosing PanelAlpha GO! in Choose how to create your project, then Continue opens Choose an App, where the category list on the left (Monitoring) and the search field with uptime narrow the cards, a card shows Install and Details, and Details opens the Uptime Kuma page with its Install button"}
+::
 
 After **Install**, the panel creates a container project from the app's repository and shows its live log. It does not ask for a name, a domain, a branch or environment variables. The project is then an ordinary Git project: [Git](git.md).
+
+::docs-video{src="../../assets/single-server/create-a-project-go-catalog-deploy.webm" title="Install on Uptime Kuma opens Your project is being created with the steps Preparing environment, Cloning the repository and Running stack and the live log, then the project list shows Uptime Kuma with its progress and Cancel Installation until it is running"}
+::
 
 If PanelAlpha GO! cannot be reached, the catalog says `The catalog is unavailable`. Your other ways to create a project still work. Select **Try Again** to load it again later.
 

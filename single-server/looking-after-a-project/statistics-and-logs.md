@@ -26,7 +26,8 @@ The country, continent and region cards stay empty until you download the visito
 
 **Advanced > Project Details** shows how much RAM, CPU and disk the project uses now, and the limits it may use. A limit stops one project from taking the whole server.
 
-<!-- TODO screenshot: assets/single-server/project-usage-limits.gif. Show Advanced > Project Details with the Project usage cards (RAM, CPU, Disk), then the Limits row in the Site details card, select Manage, change Memory (GB), open Advanced limits, select Save and show the Some limits apply after the next rebuild. note. -->
+::docs-video{src="../../assets/single-server/statistics-and-logs-usage-limits.webm" title="Advanced opens Project Details with the Project usage cards RAM, CPU and Disk, the Manage link in the Limits row of Site Details opens Project limits, Memory (GB) changes from 2 to 4, and Save shows Project limits have been saved with RAM at a limit of 4 GB"}
+::
 
 **Project usage** has three cards: **RAM**, **CPU** and **Disk**. Each card shows a ring with a percent, then **Used** and **Limit**. Above the cards, the panel says when the reading was taken, for example `Updated 2 minutes ago`.
 

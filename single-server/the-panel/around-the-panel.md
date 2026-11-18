@@ -39,3 +39,9 @@ Select your avatar to open it:
 **Connect AI** is not in this menu. It is a tab in the top menu: [Connect AI](connect-ai.md).
 
 A warning dot on the avatar and on **Settings** means the server is not connected to PanelAlpha Hub. You can connect it or ignore the dot: [Settings](settings.md#panelalpha-hub).
+
+::docs-video{src="../../assets/single-server/around-the-panel-dark-mode.webm" title="The user menu opens with Dark Mode at the top, selecting the Dark Mode row turns the panel dark on Settings, and My Projects opens in the dark scheme"}
+::
+
+::docs-video{src="../../assets/single-server/around-the-panel-my-server.webm" title="The user menu lists Dark Mode, Account Details, My Server, Tasks, Settings, Join Our Community and Log Out, and My Server shows RAM, CPU and Disk Space with the CPU Usage, Disk Throughput and Disk IOPS graphs"}
+::

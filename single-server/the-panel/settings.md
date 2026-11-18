@@ -29,6 +29,9 @@ To connect:
 2. Sign in on PanelAlpha Hub and approve. You come straight back here.
 3. The card shows `This server is connected to PanelAlpha Hub` and `Linked to the account <account>.`
 
+::docs-video{src="../../assets/single-server/settings-hub-and-backups.webm" title="Settings opens from the user menu with the PanelAlpha Hub card showing Connected and Disconnect, then the General tab with Server name, Application URL and Default domain, and the Backups tab with Backup storage and the defaults for new projects"}
+::
+
 If the card shows `PanelAlpha Hub has not confirmed the connection yet. Check again in a moment.`, select **Check again**. If you wait more than 15 minutes, it shows `The link expired. Start again.`
 
 If you deny the request on PanelAlpha Hub, you see `Not connected. The request was denied on PanelAlpha Hub.` If the panel cannot reach the Hub, you see `PanelAlpha Hub could not be reached. Try again in a moment.`

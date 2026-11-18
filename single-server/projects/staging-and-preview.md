@@ -60,7 +60,8 @@ Push To Staging copies the live project to its staging copy, so you can try chan
 2. Tick what to overwrite. The options are the same as for Push To Live: [Pushing staging to live](#pushing-staging-to-live).
 3. Confirm. The panel shows `Push To Staging In Progress`.
 
-<!-- TODO screenshot: assets/single-server/staging-push-to-staging-dialog.gif. Show Push To Staging in the top bar of a live project with a staging copy, the dialog with Overwrite files and Push full database, then Push To Staging In Progress. -->
+::docs-video{src="../../assets/single-server/staging-and-preview-push-to-staging.webm" title="On the live Immich project with a staging tab, Push To Staging in the top bar opens the Push To Staging window with Overwrite files and Overwrite volumes (including databases), and Push To Staging shows Push To Staging In Progress"}
+::
 
 ## Deploying a Git project to staging
 

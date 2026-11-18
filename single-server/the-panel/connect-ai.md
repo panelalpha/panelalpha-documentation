@@ -29,6 +29,9 @@ Every tool connects the same way. You create a token in the panel, then put the 
 
 The **Connect AI** page shows the same steps. Pick your tool under **Your tool**. The page fills in your panel address and gives a **Copy** button for each part.
 
+::docs-video{src="../../assets/single-server/connect-ai-tour.webm" title="Connect AI in the top menu opens the Claude Code steps with Create Token, then MCP URL & tokens shows the MCP Server URL and the API Tokens table, What You Can Do with AI opens Daily Management and the other groups, and Activity Log lists each tool the assistant ran"}
+::
+
 In the examples below the panel address is `https://panel.example.com`. Use your own.
 
 ## Creating a token
