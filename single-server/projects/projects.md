@@ -56,7 +56,7 @@ On a WordPress project, you can rename the project: select the pencil next to th
 
 ### Project Details
 
-**Project Details** shows where the project comes from: an **Installation** card for WordPress, or a **Source** card with the repository (Git) or the archive (files). Beside it are a thumbnail of the site, **Loading Speed** scores with a **Full Report** link to Google PageSpeed, and a **Security** card with **Automatic Backups**, **SSL** and **Create Backup**.
+**Project Details** shows where the project comes from: an **Installation** card for WordPress, or a **Source** card with the repository (Git) or the archive (files). Beside it are a thumbnail of the site, **Loading Speed** scores with a **Full Report** link to Google PageSpeed, and a **Security** card with **Automatic Backups**, **SSL** and **Create Backup**. On a server with no backup store, **Automatic Backups** shows `Unavailable` and `No backup store is set up.` with a **Set up store** link to **Settings > Backups**.
 
 ### Advanced
 
@@ -64,7 +64,7 @@ On a WordPress project, you can rename the project: select the pencil next to th
 
 ![The Advanced tab of the Northwind Journal WordPress project with its side list, opening Domains, MySQL Databases, Cron Jobs, File Manager and Logs](../../assets/single-server/projects-advanced-pages.gif)
 
-Every kind of project has pages for its details, domains, databases, cron, files, logs and Git. A WordPress project also shows its version and **Installation Details** (the directory and the database name, user, host and password). Other projects have **Environment variables**. A WordPress project keeps its variables in **System Configuration**.
+Every kind of project has pages for its details (which also show its usage and limits: [Usage and limits of a project](../looking-after-a-project/statistics-and-logs.md#usage-and-limits-of-a-project)), domains, databases, cron, files, logs and Git. A WordPress project also shows its version and **Installation Details** (the directory and the database name, user, host and password). Other projects have **Environment variables**. A WordPress project keeps its variables in **System Configuration**.
 
 Where each page is described:
 

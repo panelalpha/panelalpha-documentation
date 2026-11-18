@@ -25,13 +25,13 @@ A connected server gives you:
 
 To connect:
 
-1. Select **Connect to PanelAlpha**.
-2. Sign in on PanelAlpha and approve. You come straight back here.
-3. The card shows `This server is connected to PanelAlpha` and `Linked to the account <account>`.
+1. Select **Connect to PanelAlpha Hub**.
+2. Sign in on PanelAlpha Hub and approve. You come straight back here.
+3. The card shows `This server is connected to PanelAlpha Hub` and `Linked to the account <account>.`
 
-If the card shows `PanelAlpha has not confirmed the connection yet.`, select **Check again**. If you wait more than 15 minutes, it shows `The link expired. Start again.`
+If the card shows `PanelAlpha Hub has not confirmed the connection yet. Check again in a moment.`, select **Check again**. If you wait more than 15 minutes, it shows `The link expired. Start again.`
 
-If the card shows `PanelAlpha did not say which account approved the connection.`, sign in to PanelAlpha with your own account and connect again.
+If you deny the request on PanelAlpha Hub, you see `Not connected. The request was denied on PanelAlpha Hub.` If the panel cannot reach the Hub, you see `PanelAlpha Hub could not be reached. Try again in a moment.`
 
 ### Signing in with PanelAlpha
 
@@ -43,7 +43,7 @@ If **Sign in with PanelAlpha** is missing on a panel you connected a while ago, 
 
 ### Disconnecting
 
-**Disconnecting removes this server from your PanelAlpha account and turns off Sign in with PanelAlpha until you connect again.** The PanelAlpha GO! catalog also stops working. To disconnect, select **Disconnect** and confirm. If you signed up through the Hub and have no password, the panel asks you to set one in **My Account** first.
+**Disconnecting removes this server from your PanelAlpha account and turns off Sign in with PanelAlpha until you connect again.** The PanelAlpha GO! catalog also stops working. To disconnect, select **Disconnect** and confirm in the `Disconnect from PanelAlpha Hub?` dialog. If you signed up through the Hub and have no password, the panel asks you to set one in **My Account** first.
 
 ### What the panel reports to the Hub
 

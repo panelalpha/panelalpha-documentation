@@ -85,7 +85,7 @@ The old main domain stays in the project as an addon domain and keeps serving th
 
 Each domain has a certificate. It comes from Let's Encrypt or from you, or it is self-signed, which browsers do not trust. The **SSL Status** column in **Advanced > Domains** shows the issuer, `Self Signed`, `No SSL` or `Wrong DNS`.
 
-**`Wrong DNS` means the domain points at another server.** Fix the domain's A record: [When the domain does not point at the server](#when-the-domain-does-not-point-at-the-server).
+**`Wrong DNS` means the domain points at another server, or sits behind the Cloudflare proxy without a tunnel.** A `panelalpha.online` address or a domain served through its own tunnel, such as a Cloudflare tunnel, does not show it. Fix the domain's A record: [When the domain does not point at the server](#when-the-domain-does-not-point-at-the-server).
 
 1. Go to **Advanced > Domains** and select the padlock icon on the row. You can also use **Advanced > Security**, card **SSL Certificate Applied**, button **Manage**.
 2. In **Set SSL Certificate**, choose the **SSL provider**: **Let's Encrypt** or **Custom Certificate**.

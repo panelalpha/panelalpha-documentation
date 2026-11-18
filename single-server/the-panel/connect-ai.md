@@ -33,6 +33,8 @@ In the examples below the panel address is `https://panel.example.com`. Use your
 
 ## Creating a token
 
+The setup wizard offers the same token step: [First login](../getting-started/first-login.md#connecting-your-ai-assistant).
+
 You need a token for every tool except the Claude app.
 
 1. Open **Connect AI** in the top menu and pick your tool under **Your tool**.
