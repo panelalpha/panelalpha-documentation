@@ -1,6 +1,6 @@
 ---
 title: Outgoing Mail
-description: Configure outgoing SMTP mail in PanelAlpha Engine. Set up SendGrid, MailChannels, Amazon SES or custom relays for reliable delivery.
+description: Set how a PanelAlpha Engine server sends mail: directly, or through SendGrid, MailChannels, Amazon SES or another relay.
 nav:
   group: Server Management
   order: 5
@@ -8,7 +8,7 @@ nav:
 
 # Outgoing Mail
 
-Sites on PanelAlpha Engine send mail through Exim, which runs in its own container on the server. The **Outgoing Mail** tab decides where Exim delivers that mail: straight to the recipients' mail servers, or through a relay (smarthost) such as SendGrid. The setting applies to every site on the server.
+Sites on PanelAlpha Engine send mail through Exim, which runs in its own container on the server. The **Outgoing Mail** tab decides where Exim delivers that mail. It goes either straight to the recipients' mail servers, or through a relay (also called a **smarthost**) such as SendGrid. The setting applies to every site on the server.
 
 The Engine handles outgoing mail only. It does not host mailboxes, IMAP or POP3.
 
@@ -32,23 +32,23 @@ For production, use a relay.
 
 ### Sender domain
 
-Relays accept mail only from domains you have verified with them. On a hosting server, sites send mail from many different domains, and you usually cannot verify all of them. **Sender Domain** solves this.
+Relays accept mail only from domains you have verified with them. On a hosting server, sites send mail from many different domains, and you usually cannot verify all of them. **Sender Domain** solves this problem.
 
 - When you set a sender domain, Exim rewrites the sender of every message to that domain. For example, with the sender domain `mail.example.net`, a message from `info@customer.com` leaves the server as `info_at_customer.com@mail.example.net`. You verify only `mail.example.net` with the relay.
 - When you leave it empty, every message keeps its own sender address. The relay must then accept every domain your sites send from.
 
-Set up SPF and DKIM for the sender domain as your relay describes. See [DNS configuration](#dns-configuration).
+Set up SPF and DKIM for the sender domain as your relay describes: [DNS configuration](#dns-configuration).
 
 ## Saving configuration
 
-1. Pick the **Smarthost Provider** and fill in its fields (see below).
+1. Pick the **Smarthost Provider** and fill in its fields (see the provider sections below).
 2. Enter the **Sender Domain** if you use one.
 3. Click **Save Changes**.
 
 The Engine rebuilds the Exim configuration. New messages use the new settings at once.
 
 > [!WARNING]
-> **Security note:** Relay passwords and API keys are stored in the Engine's database and in the Exim configuration on the server. Keep root access to the server limited.
+> **Relay passwords and API keys are stored in the Engine's database and in the Exim configuration on the server.** Keep root access to the server limited.
 
 ## Testing email delivery
 
@@ -83,7 +83,7 @@ If the message does not arrive:
 
 ### Amazon SES
 
-1. In the SES console, verify the sender domain. If your account is still in the SES sandbox, request production access, otherwise SES sends only to verified addresses.
+1. In the SES console, verify the sender domain. If your account is still in the SES sandbox, request production access. Until then, SES sends only to verified addresses.
 2. Create SMTP credentials in SES.
 3. Select **Smarthost Provider > Amazon SES** and fill in:
    - **SMTP Endpoint**, for example `email-smtp.us-east-1.amazonaws.com`
@@ -96,13 +96,13 @@ If the message does not arrive:
 
 1. Select **Smarthost Provider > SMTP**.
 2. Fill in **SMTP Host**, **SMTP Port**, **SMTP Username** and **SMTP Password**.
-3. Turn on **SMTP over Implicit TLS** only if the relay expects TLS from the first byte, which usually means port `465`. Leave it off for port 587 with STARTTLS.
+3. Turn on **SMTP over Implicit TLS** only if the relay expects an encrypted connection from the first byte, which usually means port `465`. Leave it off for port 587 with STARTTLS.
 4. Set the **Sender Domain** if the relay accepts only verified domains.
 5. Save and send a test email.
 
 ## DNS configuration
 
-Add these records in the DNS zone of the sender domain, or of each site's domain if you do not use a sender domain. Your relay tells you the exact values.
+Add these records in the DNS zone of the sender domain. If you do not use a sender domain, add them in the DNS zone of each site's domain. Your relay tells you the exact values.
 
 - **SPF**: a TXT record that lists the relay, for example `v=spf1 include:sendgrid.net ~all` for SendGrid or `v=spf1 include:relay.mailchannels.net ~all` for MailChannels. A domain can have only one SPF record, so add the relay to the existing record if there is one.
 - **DKIM**: the TXT or CNAME records from the relay.
@@ -129,7 +129,7 @@ docker compose -f /opt/panelalpha/shared-hosting/docker-compose.yml exec exim ta
 
 - SPF, DKIM or DMARC records are missing or wrong for the domain the mail is sent from.
 - With **None**, the server IP has no mail reputation or is on a block list. Use a relay.
-- The content of the message itself triggers spam filters.
+- The content of the message triggers spam filters.
 
 ### Authentication failures
 

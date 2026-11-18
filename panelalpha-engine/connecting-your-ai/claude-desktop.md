@@ -17,7 +17,7 @@ Claude Desktop runs Claude Code behind its chat. On your VPS it prints a prompt 
 pae connect claude-desktop
 ```
 
-Run this on your VPS. It creates a token and prints a sentence, with your address and token already filled in.
+Run this on your VPS. It creates a token and prints a prompt, with your address and token already filled in.
 
 ## 2. Paste it into Claude Desktop
 
@@ -36,10 +36,10 @@ What you should see: it lists the projects on this engine. An empty list on a ne
 ## Troubleshooting
 
 **It registered, then will not connect.**
-A self-signed certificate on your engine that your computer does not trust. The fix is the same as Claude Code, and it belongs on your computer, not on the engine: [Trust a self-signed certificate](claude-code.md#trust-a-self-signed-engine-certificate).
+Your engine has a self-signed certificate that your computer does not trust. The fix is the same as for Claude Code. Do it on your computer, not on the engine: [Trust a self-signed certificate](claude-code.md#trust-a-self-signed-engine-certificate).
 
 **401 Unauthorized.**
 The token is wrong, or it is an API token rather than an MCP token. Create one with `pae connect claude-desktop`, not `pae api:token:create`.
 
-**Connected, but it cannot do much.**
-The permission settings on your VPS are filtering abilities out. Check with `pae mcp:tool:list` on your VPS: [Decide what the assistant may do](your-assistant.md#decide-what-the-assistant-may-do).
+**It connects but can barely do anything.**
+The permission settings on your VPS are hiding some of its abilities. Check with `pae mcp:tool:list` on your VPS: [Decide what the assistant may do](your-assistant.md#decide-what-the-assistant-may-do).

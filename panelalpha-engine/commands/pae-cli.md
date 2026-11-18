@@ -14,7 +14,7 @@ nav:
 
 You do not need a token. `pae` runs as the engine itself.
 
-This page groups the commands by what you are doing. The ones you will use day to day are in the sections above [Advanced and server maintenance](#advanced-and-server-maintenance); that section names the rest. Every command explains itself:
+The commands are grouped by task. The sections above [Advanced and server maintenance](#advanced-and-server-maintenance) cover daily use, and that section names the rest. Every command explains itself:
 
 ```bash
 pae <command> --help
@@ -50,7 +50,7 @@ Choosing assistant tokens, then **Global scope**, opens:
  Back
 ```
 
-**Groups** and **Commands** are checkboxes. Groups ticks whole groups on and off at once; Commands asks which group you want, then lists that group's commands with a box each and what each one does to the server:
+**Groups** and **Commands** are checkboxes. Groups ticks whole groups on and off at once. Commands asks which group you want, then lists that group's commands with a box each and what each one does to the server:
 
 ```text
  ◼ app_info                     read
@@ -58,15 +58,15 @@ Choosing assistant tokens, then **Global scope**, opens:
  ◻ app_user_delete              write
 ```
 
-Tick what the assistant may use and untick what it may not. You never have to think about which settings file line carries which decision. The wizard works that out when it saves.
+Tick what the assistant may use and untick what it may not. The wizard writes the settings file when it saves.
 
 **Tokens**, on that same assistant menu, asks the same thing one token at a time: pick an assistant's token, tick what that one may use. It can only narrow. An assistant cannot be given a command the engine is not offering. Ticking everything means "no limit", so that token keeps following the engine. `pae mcp:token:list` shows the result in its **Commands** column, as `all` or `40 of 196`.
 
-**Ceiling** is the one thing that is not a tick, and it is worth setting first. It is a ceiling on what a ticked command may *do*: at `readonly` the assistant can look and change nothing, whatever you have ticked. Nothing below it can raise it.
+**Ceiling** is not a tick box. Set it first. It limits what a ticked command may *do*: at `readonly` the assistant can look and change nothing, whatever you have ticked. Nothing below it can raise it.
 
 Nothing is written until you pick **Review and save** and confirm it, and the settings it replaces are printed so you can put them back. When you save, you land back on the first menu.
 
-The wizard takes over the terminal while it runs. Each step is drawn over the last, so you always see the current one and nothing else. What it wrote is printed once more as it exits, and that is what stays on your screen afterwards.
+The wizard takes over the terminal while it runs and shows only the current step. When it exits, it prints what it wrote once more, and that stays on your screen.
 
 The settings themselves are ordinary lines in `.env-core` and you can still edit them by hand: [Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do).
 
@@ -85,10 +85,10 @@ The settings themselves are ordinary lines in `.env-core` and you can still edit
 | `pae project:limit:set --project={project} --memory-limit=512` | Changes a limit. Memory is in megabytes, at least 6 (256 for a container project), and may not exceed what projects may have on this server. Every project has a memory limit, so it can be changed but not removed. Any other limit takes `-1` for unlimited. Asks you to confirm; `--force` skips that. |
 | `pae project:cpu-limit:apply --project={project}` | Puts the stored CPU limit of a container project on its running account. Use it when a limit was changed after the project was created and the project still runs with the old one. |
 | `pae project:network:move --all` | Moves running projects created before this version onto the isolated network. The project container stays up. An application using the server's MySQL may restart, and its site is unavailable until it answers again. A stopped project is left alone; start it and run the command again. `--project={project}` moves one. |
-| `pae project:ssh {project} '{command}'` | Runs one command inside the project. `--timeout` (300 seconds by default) bounds it, and it ends with its caller: if that connection goes away, the command is stopped instead of left running. |
+| `pae project:ssh {project} '{command}'` | Runs one command inside the project. `--timeout` limits how long it runs (300 seconds by default). If your connection drops, the command is stopped instead of left running. |
 | `pae project:delete {project}` | Deletes the project and everything in it. Asks you to confirm. Without a terminal, such as in a script, it refuses and changes nothing unless you add `--force`. Work still queued for the project is cancelled first. While a deploy or rebuild, staging copy, push, backup or restore is running on it, the delete is refused and changes nothing; cancel that task or wait for it, then delete again. |
-| `pae project:orphan:list` | Names on this server that no project has but something the engine made still holds: an account, a home directory, a project directory or a container left behind by a create or a delete that did not finish. A name only the server's own accounts or files hold, such as its admin user, is not listed. A create refuses such a name and says which of the four holds it. |
-| `pae project:orphan:delete {name}` | Frees such a name: its container first, then its account, its home and its project directory. Asks you to confirm; without a terminal it refuses unless you add `--force`. It refuses a name a project still has (delete that project instead) and it leaves alone an account the engine did not make (remove it with `userdel <name>`), a home directory without the engine's `.panelalpha` folder and no engine account (remove it with `rm -rf /home/<name>`), or a container the engine did not start from the project's directory (remove it with `docker rm -f <name>`). |
+| `pae project:orphan:list` | Lists names on this server that no project has but that something the engine made still holds. The holder is an account, a home directory, a project directory or a container, left behind by a create or a delete that did not finish. A name held only by the server's own accounts or files, such as its admin user, is not listed. A create refuses such a name and says which of the four holds it. |
+| `pae project:orphan:delete {name}` | Frees such a name: its container first, then its account, its home and its project directory. Asks you to confirm; without a terminal it refuses unless you add `--force`. It refuses a name a project still has (delete that project instead). It leaves these alone: an account the engine did not make (remove it with `userdel <name>`); a home directory without the engine's `.panelalpha` folder and no engine account (remove it with `rm -rf /home/<name>`); a container the engine did not start from the project's directory (remove it with `docker rm -f <name>`). |
 
 Create a project from a public repository and wait until it is up:
 
@@ -96,7 +96,7 @@ Create a project from a public repository and wait until it is up:
 pae project:create --repo=https://github.com/org/app
 ```
 
-What this does: creates the hosting account and deploys the repository in this command. Leave out the project name and the domain and the engine assigns them.
+What this does: creates the hosting account and deploys the repository in one command. Leave out the project name and the domain, and the engine assigns them.
 
 What you should see: a summary with the project name and the address to open. The deploy log prints while it runs. `--quiet-deploy` hides that log. `--json` prints the project as JSON instead of the summary.
 
@@ -114,7 +114,7 @@ An application that manages the engine, such as a hosting panel:
 pae project:create --repo=https://github.com/org/panel --full-privileges
 ```
 
-What this does: before the first deploy, it does what `pae system:api-access:allow {project} --scope=all` and `pae system:public-routing:allow {project} --host-domain --ports` do, so that deploy already hands the application its Engine API token and can move it to the server's own name. Once the application is live, the project is protected as with `pae project:settings:set protected on`. If the deploy fails, the project is not protected. `--full-privileges` needs a container project: `--repo`, or `--template=dind`.
+What this does: before the first deploy, it does what `pae system:api-access:allow {project} --scope=all` and `pae system:public-routing:allow {project} --host-domain --ports` do. That first deploy then already gives the application its Engine API token and can move it to the server's own name. Once the application is live, the project is protected, as with `pae project:settings:set protected on`. If the deploy fails, the project is not protected. `--full-privileges` needs a container project: `--repo`, or `--template=dind`.
 
 To deploy the project that already runs this repository again, instead of creating a second one:
 
@@ -130,7 +130,7 @@ Deploy a local archive into a project that was created without a repository:
 pae project:deploy-archive --project={project} --file=/opt/panelalpha/app.tar.gz
 ```
 
-What this does: puts the archive into the project and queues its deploy, as the API does. The engine's queue worker runs it and removes the archive once the deploy has ended, whether it worked, failed or was cancelled. `.zip`, `.tar.gz` and `.tgz` are accepted. `pae` runs inside the engine's container, so the file must be somewhere that container can read; anything under `/opt/panelalpha` is. A project that deploys from a repository refuses an archive: push the change and rebuild instead. While another task of the project holds its account (a deploy, an environment or an API-access apply) the command refuses at once with one plain line naming that task and what to do, and a deploy asked for through the API meanwhile is refused with this one's task.
+What this does: puts the archive into the project and queues its deploy, as the API does. The engine's queue worker runs it and removes the archive once the deploy has ended, whether it worked, failed or was cancelled. `.zip`, `.tar.gz` and `.tgz` are accepted. `pae` runs inside the engine's container, so the file must be somewhere that container can read; anything under `/opt/panelalpha` is. A project that deploys from a repository refuses an archive: push the change and rebuild instead. While another task of the project holds its account (a deploy, an environment or an API-access apply), the command refuses at once. It prints one plain line that names that task and says what to do. A deploy asked for through the API meanwhile is refused with this one's task.
 
 What you should see: `Queued the deploy of <file> to <project> as task <id>.`, the deploy log as the worker writes it, then `Deployed <file> to <project>.` When the deploy fails or is cancelled, the command prints why on one line and exits non-zero. Ctrl-C stops only the printing: the deploy goes on, and the command names its task. While no queue worker has taken the deploy, it says so once. `--timeout` (default 1800 seconds, the wait for a worker included) stops watching the same way and exits non-zero. `--no-wait` returns as soon as the deploy is queued. `--quiet-deploy` hides the log but still waits for the result. `--recipe` and `--env-var=KEY=VALUE` work as they do for `project:create`.
 
@@ -142,9 +142,9 @@ More project commands:
 |---|---|
 | `pae project:deploy:list` | Lists every project that has deploy logs. Pass a name for that project's kept deploys: status, install or redeploy, source, branch, trigger, commit and times. `DEPLOY_LOG_KEEP` in `.env-core` sets how many each project keeps (10). |
 | `pae project:attach {project}` | Opens a shell inside the project's container. `--u=root` to attach as another user. |
-| `pae projects:php-config:refresh` | On traditional PHP hosting, makes projects created before this version write PHP errors to a log file of their own, which the assistant can then read, and re-read a domain's PHP settings within seconds instead of minutes. `--project={project}` does one, `--all` every project. Safe to run again. Each project picks it up when its PHP handler next restarts; until then a saved PHP setting still reaches the site at once, through the worker replacement the engine keeps for that case. |
+| `pae projects:php-config:refresh` | On traditional PHP hosting, makes projects created before this version write PHP errors to a log file of their own, which the assistant can then read. It also makes them re-read a domain's PHP settings within seconds instead of minutes. `--project={project}` does one, `--all` every project. Safe to run again. Each project picks it up when its PHP handler next restarts. Until then, a saved PHP setting still reaches the site at once, through the worker replacement the engine keeps for that case. |
 | `pae projects:domain-config:refresh` | On traditional PHP hosting behind nginx-proxy, writes the Apache config of each domain inside the project again from the current template and reloads that Apache, so a fix to the template reaches domains created before it. Certificates, PHP handlers and container projects are not touched. `--project={project}` does one, `--all` every project; an update runs it for every project. Safe to run again. |
-| `pae projects:wp-config:restrict` | On traditional PHP hosting, makes the `wp-config.php` in each domain's document root, and in the folder above it, readable by the project's own user only, as the engine writes new ones: one written before this version is readable by every other project. A link at that name is left alone. `--project={project}` does one, `--all` every project; an update runs it for every project. Safe to run again. |
+| `pae projects:wp-config:restrict` | On traditional PHP hosting, makes the `wp-config.php` in each domain's document root, and in the folder above it, readable by the project's own user only, as the engine writes new ones. One written before this version is readable by every other project. A link at that name is left alone. `--project={project}` does one, `--all` every project; an update runs it for every project. Safe to run again. |
 | `pae projects:config-mounts:restrict` | On traditional PHP hosting, mounts the engine's own configuration read-only inside existing projects, so a project cannot change it. Each project picks it up when its container is next recreated. `--recreate` does that now for running projects, which restarts their sites. `--project={project}` does one, `--all` every project. Safe to run again. |
 | `pae project:dind:recover --project={project}` | Brings back a container project whose account stopped answering. `--detect` only lists the stuck ones and `--all-stuck` recovers every one. `--recreate` recreates the account only when it was stuck: a healthy account is left alone and the command says so. |
 | `pae system:nat:prune` | Removes stored IPv4 address maps that a project could never use. The installer runs it on an update, so you rarely need it. |
@@ -161,7 +161,7 @@ These are the values your application reads when it starts. Change one, then reb
 | `pae project:settings:unset {name} --project={project}` | Removes one setting. |
 | `pae project:settings:set protected on --project={project}` | Marks the project protected. While it is on, an assistant or API token can no longer delete, stop or redeploy it, and the answer says the project is protected. Your own `pae` commands are not affected, and a token cannot turn it off. `pae project:settings:unset protected --project={project}` turns it off. |
 | `pae project:settings:set persist-paths /app/storage,/app/public/uploads --project={project}` | Keeps what the application writes under these container paths across redeploys and rebuilds, on volumes of the project's own. Takes effect from the next deploy. A project that brings its own `docker-compose.yml` declares its volumes there instead. |
-| `pae project:settings:set registry-auth "ghcr.io {user} {token}" --project={project}` | Logs the project in to private image registries, one `host username token` line per registry. The deploy uses it to pull images and build from them; the Docker login file is present in the project only while a deploy runs, and an image it covers never goes through the server's shared registries. |
+| `pae project:settings:set registry-auth "ghcr.io {user} {token}" --project={project}` | Logs the project in to private image registries, one `host username token` line per registry. The deploy uses it to pull images and build from them; the Docker login file is present in the project only while a deploy runs. An image it covers never goes through the server's shared registries. |
 
 Context: [Environment variables](../capabilities/projects.md#environment-variables).
 
@@ -178,7 +178,7 @@ For projects deployed from git, these act on the checkout the engine owns. A pul
 | `pae git:commits {project}` | Lists recent commits. `--branch` picks another branch; one the checkout has not fetched is fetched for the listing. |
 | `pae git:revert {project}` | Returns the checkout to the last deployed commit, then rebuilds. |
 | `pae git:update-credentials {project}` | Replaces the stored git access token. |
-| `pae git:deploy-hook {project}` | Creates the push-to-deploy hook and prints its URL and secret; the secret is shown only this once. Run again, it prints the same URL without the secret. `--register` also adds the webhook at GitHub, GitLab or Bitbucket with the project's git token, `--rotate` issues a new URL and secret, `--delete` removes the hook, `--path` picks another checkout, `--provider` narrows the TLS setup notes to one git host. |
+| `pae git:deploy-hook {project}` | Creates the push-to-deploy hook and prints its URL and secret. The secret is shown only this once. Run again, it prints the same URL without the secret. `--register` also adds the webhook at GitHub, GitLab or Bitbucket with the project's git token, `--rotate` issues a new URL and secret, `--delete` removes the hook, `--path` picks another checkout, `--provider` narrows the TLS setup notes to one git host. |
 | `pae git:deploy-key {project}` | Creates the project's SSH deploy key and prints its public half to add to the repository. Run again, it prints the same key. `--host` also trusts a git server other than github.com, gitlab.com and bitbucket.org, `--delete` removes the key. |
 
 Context: [Connecting with Git](../capabilities/connecting-with-git.md), [Push to deploy](../capabilities/push-to-deploy.md).
@@ -199,7 +199,7 @@ Context: [Connecting with Git](../capabilities/connecting-with-git.md), [Push to
 | `pae project:backup:delete {project} {id}` | Deletes one backup. |
 | `pae backup:container:show {store}` | Shows a store's settings, and whether it is the default. |
 | `pae backup:container:update {store}` | Changes a store's connection details. `--default` makes it the store a panel uses when nobody configured one. |
-| `pae backup:container:delete {store}` | Removes a store. The oldest store left becomes the default. A store a project's enabled automatic backup schedule uses is refused, naming the projects; a disabled schedule does not hold it and is removed with the store. |
+| `pae backup:container:delete {store}` | Removes a store. The oldest store left becomes the default. The command refuses a store that an enabled automatic backup schedule uses, and names the projects. A disabled schedule does not hold the store and is removed with it. |
 | `pae backup:container:ensure-default` | Creates the default local store on a server that has none; an install and an update run it. |
 
 After an install there is a store named `local` in `/opt/panelalpha/backups/local`, and it is the default. An update creates it only on a server that has no store at all, and never changes a store you made: yours are kept, the oldest as the default. A backup that a panel takes without being given a store goes to the default one; `GET /system/info` names it in `default_backup_container`.
@@ -238,7 +238,7 @@ Context: [Domains and HTTPS](../capabilities/domains-and-ssl.md) · [Cloudflare]
 
 Every command takes the project first. They work on traditional PHP hosting and on WordPress in the project's own containers. Each one also takes `--path=` (the WordPress directory), `--service=` (the Compose service that runs WordPress) and `--skip-plugins` (load WordPress without its plugins and themes, for a site a broken plugin stops).
 
-A WP-CLI flag it does not name itself goes after `--`, or the engine's own command line reads it first and refuses it: `pae wordpress:command shop -- core version --version=6.8.2`, `pae wordpress:search-replace shop old.example new.example -- --dry-run`.
+Put a WP-CLI flag that the command does not name itself after `--`. Otherwise the engine's own command line reads it first and refuses it: `pae wordpress:command shop -- core version --version=6.8.2`, `pae wordpress:search-replace shop old.example new.example -- --dry-run`.
 
 | Command | What it does |
 |---|---|
@@ -344,7 +344,7 @@ Context: [A token shared by several projects](../capabilities/connecting-with-gi
 | `pae project:domain:bandwidth {project} {domain} --start= --end=` | Transfer series for one hostname. |
 | `pae project:domain:visitors {project} {domain} --start= --end=` | Visitor overview for one hostname (`domain_visitors`). Daily hits and visits clip to the range; unique visitors and session length are calendar months. |
 | `pae project:domain:visitors-breakdown {project} {domain} {dimension} --start= --end=` | Visitor breakdown (`domain_visitors_breakdown`): pages, countries, continents, regions, referrers, os or browsers, at month grain; or `status_codes`, requests and bytes per HTTP status for exactly the range. |
-| `pae geolocation:database update` | Downloads the local City MMDB used for country / continent / region. Not scheduled. Geo lists stay empty until this has run. `--accept-terms` for scripts; `--force` to replace this month's file. |
+| `pae geolocation:database update` | Downloads the local City MMDB file used to look up country, continent and region. Not scheduled. Geo lists stay empty until this has run. `--accept-terms` for scripts; `--force` to replace this month's file. |
 
 Country charts still need a visible [DB-IP](https://db-ip.com) backlink: [Visitor statistics](../capabilities/visitor-statistics.md).
 
@@ -467,7 +467,7 @@ bash /opt/panelalpha/shared-hosting/scripts/pae-command.sh register
 List them with `pae project:deploy:list`. The name you want is the one in the `Project` column.
 
 **A destructive command is asking me to confirm and I am in a script.**
-Most take `--force` to skip the prompt. Run with `--no-interaction` and without `--force`, such a command changes nothing, says so on stderr and exits with 1. Be certain before you use `--force`: `pae project:delete --all --force` deletes every project on your VPS with no further questions.
+Most take `--force` to skip the prompt. Run with `--no-interaction` and without `--force`, such a command changes nothing, says so on stderr and exits with 1. **Be certain before you use `--force`:** `pae project:delete --all --force` deletes every project on your VPS with no further questions.
 
 **A project name is refused although the project is gone.**
-An account, a home directory, a project directory or a container still holds the name. `pae project:orphan:list` shows each name with what holds it, and `pae project:orphan:delete <name> --force` frees it. Nothing else uses those names while they are held, and the refusal a create gives names the holder and the same command.
+An account, a home directory, a project directory or a container still holds the name. `pae project:orphan:list` shows each name with what holds it, and `pae project:orphan:delete <name> --force` frees it. Nothing else uses those names while they are held. The refusal from a create names the holder and the same command.

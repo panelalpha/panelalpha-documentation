@@ -54,4 +54,4 @@ The project card shows **Migration is in progress**, then **Import completed** o
 
 When the domain points here, the Engine removes the preview address and requests a Let's Encrypt certificate. It checks every 15 minutes.
 
-Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: Projects](../troubleshooting/projects.md#importing-a-wordpress-site).
+Something not working? Messages and fixes: [Troubleshooting: Projects](../troubleshooting/projects.md#importing-a-wordpress-site).

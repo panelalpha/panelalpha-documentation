@@ -1,6 +1,6 @@
 ---
 title: Update
-description: Guide to updating PanelAlpha Engine safely. Back up your server, download the updater, verify the update and troubleshoot issues.
+description: Update PanelAlpha Engine safely. Back up the server, run the updater, check the result and recover from a failed update.
 nav:
   group: Installation & Updates
   order: 2
@@ -17,17 +17,17 @@ You can update the Engine in two ways:
 
 ## What happens during an update
 
-The updater downloads the new version, stops all Engine containers, replaces the Engine files, builds and starts the containers again, and then rebuilds the web server configuration and file permissions for every account. Websites are unavailable for a short time while the containers restart, so update outside peak hours.
+The updater downloads the new version, stops all Engine containers and replaces the Engine files. It then builds and starts the containers again and rebuilds the web server configuration and file permissions for every account. Websites are unavailable for a short time while the containers restart, so update outside peak hours.
 
 The updater keeps files you may have changed in `webserver-config` and the ModSecurity exclusions. It does not change site files or databases.
 
-The updater does not roll back on its own. If it fails, the server can be left between two versions.
+**The updater does not roll back on its own.** If it fails, the server can be left between two versions.
 
 ## Before you update
 
 1. Back up the server. A snapshot from your hosting provider is the simplest option.
 2. Read the [changelog](https://panelalpha.com/changelog).
-3. Make sure the server has a few GB of free disk space for the new Docker images.
+3. Check that the server has a few GB of free disk space for the new Docker images.
 
 ## Update steps
 
@@ -48,7 +48,7 @@ The updater does not roll back on its own. If it fails, the server can be left b
 
    The updater uses the licence key saved on the server. To use a different key, add `--key 'YOUR_LICENSE_KEY'`.
 
-4. The updater shows whether a newer version is available and asks for confirmation. Type `y`.
+4. The updater shows whether a newer version is available and asks you to confirm. Type `y`.
 
 ### Updater options
 

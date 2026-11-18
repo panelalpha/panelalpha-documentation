@@ -10,7 +10,7 @@ nav:
 
 Every container project has its own Docker, so nothing one project builds is reused by the next. When many projects start from the same heavy Dockerfile, such as a PHP server with Apache, extensions and a loader, each one installs all of it again on its first deploy.
 
-Build that common part once on the server instead. The engine keeps it in the server's image cache, the same registry it keeps its own base images in, and every project's Dockerfile starts `FROM` it by its plain name:
+Build that common part once on the server instead. The engine keeps it in the server's image cache, the same registry it keeps its own base images in. Every project's Dockerfile then starts `FROM` it by its plain name:
 
 ```dockerfile
 FROM whmcs-dev-base:php8.3
@@ -29,9 +29,9 @@ The project then builds only its own layers. The base comes from the server in s
 
 ## Adding an image
 
-There are three ways to add one. Each prints the build or download as it runs and finishes with the image's digest.
+There are three ways to add one. Each prints the build or download as it runs and finishes with the image's digest (its unique ID).
 
-**Build it from a Dockerfile** on the server. The Dockerfile comes on standard input and is built with no build context, so it cannot `COPY` files from the server: write small files with `RUN`, and take files from other images with `COPY --from=<image>`.
+**Build it from a Dockerfile** on the server. The Dockerfile comes on standard input and is built with no build context, so it cannot `COPY` files from the server. Write small files with `RUN`, and take files from other images with `COPY --from=<image>`.
 
 ```bash
 pae system:image:add whmcs-dev-base:php8.3 --build --why="WHMCS dev server base" < Dockerfile
@@ -80,7 +80,7 @@ The name always needs a tag, such as `:php8.3` or `:1.4`.
 
 ## Using it in a project
 
-Write the name after `FROM`, exactly as you added it, in the project's Dockerfile or in the Dockerfile of any service a compose file builds. Before it builds, the deploy fetches every base it recognises as yours from the image cache, and the deploy log says so:
+Write the name after `FROM`, exactly as you added it, in the project's Dockerfile or in the Dockerfile of any service a compose file builds. Before it builds, the deploy fetches every base it recognises as yours from the image cache. The deploy log says so:
 
 ```
 Pulled base image whmcs-dev-base:php8.3 from the cache registry
@@ -92,7 +92,7 @@ Write the name literally. A `FROM ${BASE}` built from a build argument is not re
 
 ## Images the engine downloads for you
 
-**PHP, Python and Ruby base images.** A host downloads the base images PanelAlpha publishes instead of compiling them, which saves several minutes on the first deploy of a PHP version. `DEPLOY_BASE_IMAGE_REGISTRY` in `.env-core` names where they come from. Set it to `none` to always compile them on the server.
+**PHP, Python and Ruby base images.** The server downloads the base images PanelAlpha publishes instead of compiling them, which saves several minutes on the first deploy of a PHP version. `DEPLOY_BASE_IMAGE_REGISTRY` in `.env-core` names where they come from. Set it to `none` to always compile them on the server.
 
 **`pae configure prewarm`** lists the images the server can keep ready before a project asks. It also offers the bases some shipped apps need, such as PHP with ffmpeg for Castopod. A prewarm run also downloads the image every project account starts from, so the first project you create does not wait for it.
 

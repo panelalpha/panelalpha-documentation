@@ -1,6 +1,6 @@
 ---
 title: "Projects"
-description: "A project is one site or app on your server. This page explains the two kinds of project, the project list and the project page."
+description: "A project is one site or app on your server. It is either a PHP hosting project or a container project."
 nav:
   group: Projects
   order: 1
@@ -139,4 +139,4 @@ The **Delete Project** button stays disabled until every box is ticked. The boxe
 
 A project that has a staging copy cannot be deleted. Delete the staging copy first: [Staging and preview](staging-and-preview.md).
 
-Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: Projects](../troubleshooting/projects.md#projects).
+Something not working? Messages and fixes: [Troubleshooting: Projects](../troubleshooting/projects.md#projects).

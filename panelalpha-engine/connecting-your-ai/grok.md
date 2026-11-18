@@ -1,6 +1,6 @@
 ---
 title: Connecting Grok
-description: Run this on your VPS. It creates a token and prints the exact command, with your address and token already filled in.
+description: Connect Grok to your engine. Get the command on your VPS, run it on your computer, then check the connection.
 nav:
   group: Connecting Your AI
   order: 10
@@ -8,6 +8,8 @@ nav:
 ---
 
 # Connecting Grok
+
+To connect Grok, you get a command on your VPS and run it on your computer.
 
 ## 1. Get the command on your VPS
 
@@ -35,7 +37,7 @@ The first two commands install create and debug skills from `panelalpha/agent-sk
 grok mcp list
 ```
 
-`panelalpha-engine` should be listed. Then ask it something harmless:
+`panelalpha-engine` should be listed. Then ask it something read-only:
 
 ```text
 List the projects on this engine.
@@ -46,7 +48,7 @@ An empty list on a new engine is a success.
 ## Troubleshooting
 
 **It registered, then will not connect.**
-A self-signed certificate on your engine that your computer does not trust. The lasting fix is giving the engine a real certificate: [Install](../getting-started/install.md#if-connecting-asks-you-to-trust-a-certificate). If you cannot do that yet, copy the certificate to your computer and tell your system to trust it:
+Your engine has a self-signed certificate that your computer does not trust. The lasting fix is giving the engine a real certificate: [Install](../getting-started/install.md#if-connecting-asks-you-to-trust-a-certificate). If you cannot do that yet, copy the certificate to your computer and tell your system to trust it:
 
 ```bash
 scp root@203.0.113.10:/opt/panelalpha/shared-hosting/crt/server.cert ~/panelalpha-engine.cert
@@ -55,7 +57,7 @@ scp root@203.0.113.10:/opt/panelalpha/shared-hosting/crt/server.cert ~/panelalph
 If Grok is a Node-based tool on your system, pointing `NODE_EXTRA_CA_CERTS` at that file is enough: [Trust a self-signed certificate](claude-code.md#trust-a-self-signed-engine-certificate). Otherwise add the certificate to your operating system's trust store.
 
 **401 Unauthorized.**
-The token was truncated, or it is the wrong type. Assistants need a token from `pae connect`, not `pae api:token:create`.
+The token was cut off when you copied it, or it is the wrong type. Assistants need a token from `pae connect`, not `pae api:token:create`.
 
 **405 Method Not Allowed.**
 `--transport http` was missing or set to something else.
@@ -64,7 +66,7 @@ The token was truncated, or it is the wrong type. Assistants need a token from `
 Port 2011 is not reachable from your computer. Check any firewall between you and your VPS, then confirm the engine is answering with `pae mcp:check` on your VPS itself.
 
 **It connects but can barely do anything.**
-The permission settings on your VPS are filtering its abilities. See [Decide what the assistant may do](your-assistant.md#decide-what-the-assistant-may-do).
+The permission settings on your VPS are hiding some of its abilities. See [Decide what the assistant may do](your-assistant.md#decide-what-the-assistant-may-do).
 
 **I want to start over.**
 

@@ -52,7 +52,7 @@ On the **Users** tab, select the eye action of the user (its tooltip reads **Sho
 
 A WordPress project also lists **Database Name**, **Database User**, **Database Password** and **Database Host** under **Advanced > Project Details**, in the **Installation Details** card. **Database User and Database Password are masked.** Select **Show** to read one. The panel asks for your password first when you have not entered it for a while. Each request is recorded in the project's **Logs**, so you can see when the login or the password was read.
 
-The card has Redis rows only when the project reports a Redis host, and the panel reports none.
+The card has no Redis rows, because the panel reports no Redis host.
 
 ![The Users tab of MySQL Databases: the eye action of the WordPress database user opens MySQL Access Details with MySQL User, MySQL Host and MySQL Port](../../assets/single-server/databases-access-details.gif)
 
@@ -79,4 +79,4 @@ If you have no databases, you see `No databases available.`
 
 The **Databases** tab has no import button. Import a SQL file through phpMyAdmin.
 
-Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: Looking after a project](../troubleshooting/looking-after-a-project.md#databases).
+Something not working? Messages and fixes: [Troubleshooting: Looking after a project](../troubleshooting/looking-after-a-project.md#databases).

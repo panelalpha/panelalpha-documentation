@@ -1,6 +1,6 @@
 ---
 title: Connecting Codex
-description: Run this on your VPS. It creates a token and prints the exact command, with your address and token already filled in.
+description: Connect Codex to your engine. Get the command on your VPS, run it on your computer, then check the connection.
 nav:
   group: Connecting Your AI
   order: 6
@@ -8,6 +8,8 @@ nav:
 ---
 
 # Connecting Codex
+
+To connect Codex, you get a command on your VPS and run it on your computer.
 
 ## 1. Get the command on your VPS
 
@@ -27,7 +29,7 @@ codex plugin add engine@panelalpha
 PANELALPHA_MCP_TOKEN='<token>' codex mcp add panelalpha-engine --url https://<host>:2011/mcp --bearer-token-env-var PANELALPHA_MCP_TOKEN
 ```
 
-The first two commands install create and debug skills from `panelalpha/agent-skills`. The third registers this engine. The token goes in front of that command so that Codex stores the *name* of the variable rather than the token itself. Marketplace add and plugin add are separate lines so they paste in bash and in PowerShell. The MCP line sets the variable the bash way (`VAR=value command`); on PowerShell set `PANELALPHA_MCP_TOKEN` first, then run `codex mcp add`.
+The first two commands install create and debug skills from `panelalpha/agent-skills`. The third registers this engine. The token goes in front of that command, so Codex stores the *name* of the variable and not the token itself. The first two commands are separate lines so they paste in both bash and PowerShell. The third line sets the variable the bash way (`VAR=value command`). On PowerShell, set `PANELALPHA_MCP_TOKEN` first, then run `codex mcp add`.
 
 Because Codex looks the token up by name, **the `PANELALPHA_MCP_TOKEN` variable has to be set whenever you run Codex**, not only when you registered the engine. Add it to your shell startup file:
 
@@ -43,7 +45,7 @@ Use `~/.zshrc` instead if you use zsh. Then open a new terminal.
 codex mcp list
 ```
 
-`panelalpha-engine` should be listed. Then ask it something harmless:
+`panelalpha-engine` should be listed. Then ask it something read-only:
 
 ```text
 List the projects on this engine.
@@ -54,7 +56,7 @@ An empty list on a new engine is a success.
 ## Troubleshooting
 
 **It registered, then will not connect.**
-A self-signed certificate on your engine that your computer does not trust. The lasting fix is giving the engine a real certificate: [Install](../getting-started/install.md#if-connecting-asks-you-to-trust-a-certificate). If you cannot do that yet, copy the certificate to your computer and add it to your operating system's trust store:
+Your engine has a self-signed certificate that your computer does not trust. The lasting fix is giving the engine a real certificate: [Install](../getting-started/install.md#if-connecting-asks-you-to-trust-a-certificate). If you cannot do that yet, copy the certificate to your computer and add it to your operating system's trust store:
 
 ```bash
 scp root@203.0.113.10:/opt/panelalpha/shared-hosting/crt/server.cert ~/panelalpha-engine.cert
@@ -73,10 +75,10 @@ Empty output is the problem. See step 2.
 Either the variable holds the wrong value, or it holds an API token rather than an MCP token. Assistants need one from `pae connect`, not `pae api:token:create`.
 
 **405 Method Not Allowed.**
-The connection is configured as something other than HTTP.
+The connection is set up as something other than HTTP.
 
 **It connects but can barely do anything.**
-The permission settings on your VPS are filtering its abilities. See [Decide what the assistant may do](your-assistant.md#decide-what-the-assistant-may-do).
+The permission settings on your VPS are hiding some of its abilities. See [Decide what the assistant may do](your-assistant.md#decide-what-the-assistant-may-do).
 
 **I want to start over.**
 

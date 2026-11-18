@@ -8,13 +8,13 @@ nav:
 
 # Troubleshooting
 
-This page covers PanelAlpha Engine 1.x, the version used with PanelAlpha Single Server and Multi Server. For Engine 2.0+, see the [Troubleshooting Center](../../troubleshooting-center/servers/panelalpha-engine.md).
+These fixes are for PanelAlpha Engine 1.x, the version used with PanelAlpha Single Server and Multi Server. For Engine 2.0+, see the [Troubleshooting Center](../../troubleshooting-center/servers/panelalpha-engine.md).
 
-Run the commands on this page as root on the Engine server. The paths are explained in [Files, Logs and Services](server-management/files-and-logs.md).
+Run the commands on this page as root on the Engine server. For what the paths mean, see [Files, Logs and Services](server-management/files-and-logs.md).
 
 ## Installation fails
 
-The installer prints the reason when it stops. Common messages:
+The installer prints the reason when it stops. These are the common messages:
 
 | Message | What to do |
 | --- | --- |
@@ -46,23 +46,23 @@ First read the logs of the last run in `/opt/panelalpha/log/engine-updates/lates
 | `The license key is invalid` | Check the licence in the client area, or pass another key with `--key`. |
 | `Cannot detect current version` | Run the updater with `--force`. |
 
-If the update stopped halfway, fix the cause and run the updater again. See [Recovering from a failed update](installation-updates/update.md#recovering-from-a-failed-update).
+If the update stopped halfway, fix the cause and run the updater again: [Recovering from a failed update](installation-updates/update.md#recovering-from-a-failed-update).
 
 ## PanelAlpha cannot connect to the Engine
 
 **Problem:** **Test Connection** fails, or the server shows an error in PanelAlpha.
 
-- Check that port 2011 is open in your hosting provider's firewall and that PanelAlpha can reach it. From the PanelAlpha server, run `curl -k https://<engine-ip>:2011/api`. Any HTTP response means the port is reachable.
+- Check that port 2011 is open in your hosting provider's firewall and that PanelAlpha can reach it. To test, run `curl -k https://<engine-ip>:2011/api` on the PanelAlpha server. Any HTTP response means the port is reachable.
 - Check the **API URL** in the server settings. It is the value the installer printed, for example `https://203.0.113.10:2011/api`.
-- If you lost the API token, create a new one with `api-tokens:create` (see [Artisan Commands](command-reference.md#api-tokens)) and enter it in the server settings.
-- Check that the Engine containers run (see below).
+- If you lost the API token, create a new one with `api-tokens:create` and enter it in the server settings: [Artisan Commands](command-reference.md#api-tokens).
+- Check that the Engine containers run (see "Containers not starting" below).
 
 ## "This server is outdated"
 
 The panel shows this message when the server runs an Engine version older than 1.0.9-beta, or when it cannot read the version at all.
 
 - Run `system:version` on the Engine server. If the version is older than 1.0.9-beta, update from the command line as described in [Update](installation-updates/update.md).
-- If the version is newer, PanelAlpha probably cannot reach the Engine. See [PanelAlpha cannot connect to the Engine](#panelalpha-cannot-connect-to-the-engine).
+- If the version is newer, PanelAlpha probably cannot reach the Engine: [PanelAlpha cannot connect to the Engine](#panelalpha-cannot-connect-to-the-engine).
 
 ## Containers not starting
 
@@ -77,7 +77,7 @@ df -h
 
 ## Containers restart on their own
 
-If you find `monit_psdump_*.log` files in `/opt/panelalpha/log/`, the server ran out of memory and monit restarted the containers that used the most. Read the newest file to see which processes used the memory. See [Memory protection](server-management/files-and-logs.md#memory-protection-monit).
+If you find `monit_psdump_*.log` files in `/opt/panelalpha/log/`, the server ran out of memory. Monit (the tool that watches the containers) then restarted the containers that used the most. Read the newest file to see which processes used the memory: [Memory protection](server-management/files-and-logs.md#memory-protection-monit).
 
 ## Web server change failed
 
@@ -87,7 +87,7 @@ For LiteSpeed, a failed or expired trial licence is a common cause. Enter your L
 
 ## Site returns 403 after a form submit or upload
 
-ModSecurity may be blocking the request. Check the [audit log](server-management/waf-modsecurity.md#audit-log-files) for the site's domain and the time of the request. The entry shows the ID of the rule that matched. Turn off that rule file in **Loaded Config Files**, or add an exclusion in **Custom Rules**.
+ModSecurity (the web application firewall) may be blocking the request. Check the [audit log](server-management/waf-modsecurity.md#audit-log-files) for the site's domain and the time of the request. The entry shows the ID of the rule that matched. Turn off that rule file in **Loaded Config Files**, or add an exclusion in **Custom Rules**.
 
 To check whether ModSecurity is the cause, switch the mode to **Detection Only** for a moment and try again.
 
@@ -113,4 +113,4 @@ See [Outgoing Mail](server-management/outgoing-mail.md#common-issues).
 
 ## Contact support
 
-If none of this helps, contact the [Support Center](https://manage.panelalpha.com/contact). Include the Engine version (`system:version`), what you did, and the relevant log files.
+If none of this helps, contact the [Support Center](https://manage.panelalpha.com/contact). Include the Engine version (`system:version`), what you did and the relevant log files.

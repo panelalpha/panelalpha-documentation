@@ -8,7 +8,7 @@ nav:
 
 # Projects
 
-Problems when you create, manage, import or copy a project, with what each message means and what to do. Each part names the page it belongs to, with a link to the full page.
+Problems when you create, manage, import or copy a project, with what each message means and what to do.
 
 ## Projects
 
@@ -28,11 +28,11 @@ More about this: [Projects](../projects/projects.md).
 
 **"The repository refused this token. Check the token and that it can read this repository."** The token is wrong or has no read access.
 
-**"The host cannot be reached from the panel."** The panel cannot connect to that host. It refuses private addresses and the address of this server, so a repository that runs on the same server cannot be used. Check the host name, or host the repository somewhere else.
+**"The host cannot be reached from the panel."** The panel cannot connect to that host. It refuses private addresses and the address of this server, so a repository on the same server cannot be used. Check the host name, or host the repository somewhere else.
 
-**"Could not read the repository."** The panel could not open the repository and got no clear reason from the server. The host may be down or slow. Check the address and the token and try again.
+**"Could not read the repository."** The panel could not open the repository and got no clear reason from the server. The host may be down or slow. Check the address and the token, then try again.
 
-**"The repository did not accept the key. Check that you added it to this repository."** The deploy key is not in the repository yet. Add it in the repository's deploy key settings and select **Continue** again.
+**"The repository did not accept the key. Check that you added it to this repository."** The deploy key is not in the repository yet. A **deploy key** is a key you add to the repository so the panel can read it. Add it in the repository's deploy key settings and select **Continue** again.
 
 **"Add only one archive."** You added a folder or more than one file. Upload a single `.zip` or `.tar.gz`.
 
@@ -53,13 +53,13 @@ If the install fails again, see the task in [Tasks](../the-panel/tasks.md).
 
 A project created from an archive cannot repeat that deploy, because the archive is deleted when its deploy ends. The panel asks for the archive again (see the next entry).
 
-**Cancel Installation** deletes the project with its files and databases instead of trying again. These all open the same confirmation:
+**Cancel Installation** deletes the project with its files and databases instead of trying again. Each of these opens the same confirmation:
 
 - the card's **Cancel Installation** button
 - the button behind the card's installation indicator (point at it)
 - **Cancel Installation** in the table view's **Actions** menu
 
-The delete runs only after you tick **Yes, I understand and want to cancel the installation.** there.
+The delete runs only after you tick **Yes, I understand and want to cancel the installation.** in that confirmation.
 
 **"This project deploys from an uploaded archive, and that archive is deleted when its deploy ends. Upload the archive again to retry."** **Try Again** has no archive left to deploy. Upload the archive again with **Upload new version** on the **Source** card of **Project Details**.
 
@@ -69,13 +69,13 @@ More about this: [Create a project](../projects/create-a-project.md).
 
 **"This project is not a WordPress installation."** The project is a container project. WordPress screens work only on a WordPress site.
 
-**"Error: No matching entries found in 'wp-config.php'."** A setting holds a value too long to read back. **Advanced > System Configuration** says so where the list would be. Use **Remove by name**, next to **Create Configuration**, to delete it, then **Retry** on the page or load it again.
+**"Error: No matching entries found in 'wp-config.php'."** A setting holds a value too long to read back. **Advanced > System Configuration** says so where the list would be. To delete the setting, use **Remove by name**, next to **Create Configuration**. Then select **Retry** on the page, or load it again.
 
 **"WordPress is already installed or being installed on this project."** An install is already running. Wait for it to finish.
 
-**Maintenance Mode reads off, and Installation Details keeps the database values `wp-config.php` holds.** The panel cannot read the mode while WordPress cannot reach its database. So **Advanced > Developer Settings** shows Maintenance Mode off, and the **Installation** card keeps the installed version. A WordPress-typed project with no `wp-config.php` yet lists no database values there at all. Everything reads again once the database answers and `wp-config.php` exists.
+**Maintenance Mode reads off, and Installation Details keeps the database values `wp-config.php` holds.** The panel cannot read the mode while WordPress cannot reach its database. So **Advanced > Developer Settings** shows Maintenance Mode off, and the **Installation** card keeps the installed version. A WordPress-typed project with no `wp-config.php` yet lists no database values there. Everything reads again once the database answers and `wp-config.php` exists.
 
-**The Plugins tab, Installed Themes and both catalogues are empty.** The panel cannot read WordPress in the two states above. Listing plugins and themes, and searching wordpress.org for new ones, needs the database and `wp-config.php`. The pages show no error message, only these texts:
+**The Plugins tab, Installed Themes and both catalogues are empty.** The panel cannot read WordPress in the two states above. Listing plugins and themes, and searching wordpress.org for new ones, need the database and `wp-config.php`. The pages show no error message, only these texts:
 
 - **Plugins** shows `No Installed Plugins Found`.
 - **Advanced > Installed Themes** shows `No Installed Themes Found`.
@@ -83,7 +83,7 @@ More about this: [Create a project](../projects/create-a-project.md).
 
 Everything comes back once the database answers and `wp-config.php` exists.
 
-**Advanced > System Configuration** is the exception. Its list is the `wp-config.php` itself. When that file cannot be read, the page says why it lists nothing and keeps **Remove by name** and **Retry**. For a value too long to read back, the text is `Error: No matching entries found in 'wp-config.php'.`
+**Advanced > System Configuration** is the exception. Its list is the `wp-config.php` file itself. When that file cannot be read, the page says why it lists nothing and keeps **Remove by name** and **Retry**. For a value too long to read back, the text is `Error: No matching entries found in 'wp-config.php'.`
 
 More about this: [Managing WordPress](../projects/wordpress.md).
 
@@ -91,7 +91,7 @@ More about this: [Managing WordPress](../projects/wordpress.md).
 
 **"Importing over FTP is not available. Use your WordPress admin login or the migration plugin."** The panel shows the **Advanced Method** (FTP and SFTP) form, but the server refuses it. Go back and choose **Simple Method**.
 
-**"Source WordPress host did not resolve."** The panel could not reach that name. Check it and that the old site is online, or fill the old server's IPv4 address in **Advanced** (step 3 of [Importing a site](../projects/importing-wordpress.md#importing-a-site)).
+**"Source WordPress host did not resolve."** The panel could not reach that name. Check the name and that the old site is online, or fill in the old server's IPv4 address in **Advanced** (step 3 of [Importing a site](../projects/importing-wordpress.md#importing-a-site)).
 
 **"No WordPress REST API at <address>"** WordPress did not answer at that address. Check the address of the old site and that its REST API is not blocked.
 
@@ -127,7 +127,7 @@ More about this: [Importing a WordPress site](../projects/importing-wordpress.md
 
 **"The project has no live parent to push to."** The project is not a staging copy. **Push To Live** works only from a staging copy.
 
-**"Could not compare database changes. You can still push files and database, but selective table changes are unavailable."** The panel could not read the tables. Push the full database or only files.
+**"Could not compare database changes. You can still push files and database, but selective table changes are unavailable."** The panel could not read the tables. Push the full database, or push only files.
 
 **"A preview tunnel is already being created for this project. Try again in a moment."** Another preview is being made. Wait a moment and select the button again.
 

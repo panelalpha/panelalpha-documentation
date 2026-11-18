@@ -33,9 +33,9 @@ card:
 
 ## What is PanelAlpha Single Server Edition?
 
-PanelAlpha Single Server Edition is a web hosting panel you install on your own VPS (a server you rent). You open it in a browser and look after your sites there. Underneath, the **Engine** does the hosting. The panel is the screen you use to control it.
+PanelAlpha Single Server Edition is a web hosting panel you install on your own VPS (a server you rent). You open it in a browser and look after your sites there. The **Engine** underneath does the hosting. The panel is the screen you use to control it.
 
-This guide covers the Community Edition. It is free and open source, it is for one person and it has no project limit. In the panel you can:
+This guide covers the Community Edition. It is free and open source, for one person, with no project limit. In the panel you can:
 
 - Create a WordPress site, or deploy an app from Git or from files
 - Import a WordPress site from another host

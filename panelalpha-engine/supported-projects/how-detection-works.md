@@ -10,7 +10,7 @@ nav:
 
 You do not have to tell the engine what kind of project you have. It looks at the files in your repository and works it out.
 
-When this goes wrong, the usual reason is simple: the file that marks the project is not at the top of the repository. That file is often named `package.json` or `composer.json`. It is rarely a problem with your VPS.
+When detection goes wrong, the file that marks the project is usually not at the top of the repository. That file is often `package.json` or `composer.json`. A wrong result is rarely a problem with your VPS.
 
 ### Check first
 
@@ -35,7 +35,7 @@ Not deployable usually means the project is a library, or it has no file that st
 
 A repository that has moved to another address is refused: the engine does not follow redirects. Give it the new address.
 
-**.NET** projects are read as the .NET SDK reads them: the SDK version comes from `global.json` (`sdk.version`, or `tools.dotnet`), and the target framework from the projects in the solution and any `Directory.Build.props` above them. Desktop apps and libraries are not claimed, because neither serves a website. A .NET Framework web app is refused, since the engine runs only modern .NET.
+**.NET** projects are read the way the .NET SDK reads them. The SDK version comes from `global.json` (`sdk.version`, or `tools.dotnet`). The target framework comes from the projects in the solution and any `Directory.Build.props` above them. The engine does not claim desktop apps and libraries, because neither serves a website. It refuses a .NET Framework web app, because it runs only modern .NET.
 
 If it lists more than one way to run the project, you can choose:
 
@@ -57,7 +57,7 @@ A general build (Railpack) is never picked by itself. Ask for it, for example `D
 
 Some stacks that Railpack would have built, such as Deno and Elixir, are therefore unknown unless you ask for the general build.
 
-The first match is the one it uses. That matters most if you have a `docker-compose.yml` you only use on your own computer. The engine cannot tell that from a file meant for the live site, so it will try to use it. Rename the file if you do not want that.
+The first match is the one it uses. This matters most if you have a `docker-compose.yml` that you only use on your own computer. The engine cannot tell it from a file meant for the live site, so it tries to use it. Rename the file if you do not want that.
 
 A few ready-made apps, such as WordPress, are recognised even when they also ship a Compose file.
 
@@ -71,9 +71,9 @@ Those notes cannot tell the engine to look in a subfolder. The files that mark t
 
 A folder of pages such as `home.html` and `about.html`, with a `css/` folder and no `index.html`, is still treated as a website.
 
-Every file in the repository has to be something a browser can open: a page, stylesheet, script, image, font or media file. One `package.json` or `composer.json` anywhere in the repository, and it is no longer treated as a plain HTML site.
+Every file in the repository has to be something a browser can open: a page, stylesheet, script, image, font or media file. If the repository has even one `package.json` or `composer.json`, it is no longer treated as a plain HTML site.
 
-A site that does have an `index.html` is handled as an ordinary static site. See [Project types](project-types.md).
+A site that does have an `index.html` is handled as an ordinary static site: [Project types](project-types.md).
 
 ### Next
 

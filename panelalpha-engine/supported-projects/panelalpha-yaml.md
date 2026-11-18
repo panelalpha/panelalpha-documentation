@@ -18,7 +18,7 @@ Put it at the top of the repository, in one of three forms. The engine reads the
 2. A `panelalpha.md` page at the top of the repository: [The markdown form](#the-markdown-form).
 3. A `panelalpha.yaml` at the top of the repository.
 
-Your repository's file wins over any recipe the engine ships for the same repository.
+Your repository's file wins over any **recipe** the engine ships for the same repository. A recipe is the engine's built-in settings for a known kind of app.
 
 Inside `.panelalpha/`:
 
@@ -39,10 +39,10 @@ A file in the folder wins over the same thing written inline. A folder cannot sh
 ## How the engine reads it
 
 - **Every key is optional.** A key written with no value says nothing: under `extends`, it leaves the recipe's own value alone.
-- **A key the engine does not know fails the deploy.** The deploy log names it and lists the keys that are allowed. So does a value of the wrong shape. Every error names the file it comes from, whether yours or one of the engine's own recipes.
+- **A key the engine does not know fails the deploy.** The deploy log names it and lists the keys that are allowed. A value of the wrong shape fails the deploy in the same way. Every error names the file it comes from, yours or one of the engine's own recipes.
 - **A `strategy` the engine does not know is refused** the same way, instead of being ignored.
 - **`detect` is not allowed.** The file is found by where it is, not by detection.
-- **Editors can check the file as you write it.** The engine ships a JSON schema for it. With the YAML extension of VS Code or any editor using yaml-language-server, put this line at the top:
+- **Editors can check the file as you write it.** The engine ships a JSON schema for it. In VS Code with the YAML extension, or in any editor that uses yaml-language-server, put this line at the top:
 
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/panelalpha/panelalpha-engine/develop/core/resources/sources/_schema.json
@@ -71,7 +71,7 @@ health:
 | `priority` | Detection order. Only the engine's own recipes need it. |
 | `strategy`, `runtime` | How it is built and run. `runtime` is `node`, `nginx`, `command`, `php`, `compose` or `dockerfile`. |
 | `port` | The port the application listens on, where its domain sends HTTP. For a compose file it wins over the port the engine reads from the file. The compose file must publish it. |
-| `port_scheme` | `https` for an application that serves only TLS on its port. The domain's rules then reach it over HTTPS without checking its certificate. |
+| `port_scheme` | `https` for an application that serves only HTTPS on its port. The domain's rules then reach it over HTTPS without checking its certificate. |
 | `image`, `runtime_image`, `requires` | The base image, a different image for the final stage, or the toolchains it needs (names only; the version comes from your project's own files). |
 | `app_root` | Where the application is when it is not the top of the repository, such as `phpBB/`. |
 | `docroot` | PHP only: the web root inside the application, such as `public`, `pub` or `upload`. Without it, `public/` if there is one, else the application root. |
@@ -93,11 +93,13 @@ env:
 
 `env` adds to the recipe's values and wins on the same name. The project's own environment variables, set in the panel or over the API, win over both: [Environment variables](../capabilities/projects.md#environment-variables).
 
-`env` reaches every application the engine builds. For a project that runs its own compose file, the values go into the project's `.env`, under the environment variables you set yourself. When the repository tracks its own `.env`, the engine leaves that file as committed and writes them to `.env.panelalpha` instead, which every service that loads `.env` also loads.
+`env` reaches every application the engine builds. A project that runs its own compose file gets the values in the project's `.env`, under the environment variables you set yourself.
+
+If the repository tracks its own `.env`, the engine leaves that file as committed. It writes the values to `.env.panelalpha` instead. Every service that loads `.env` also loads that file.
 
 `${PA_PUBLIC_URL}` is the project's address, such as `https://shop.example.com`, and `${PA_PUBLIC_HOST}` is its domain alone. Names starting with `PA_` belong to the engine and cannot be set.
 
-Write a boolean as a string. Compose hands `false` to the container as the text "false", which many applications read as true.
+Write a true or false value (a boolean) as a string. Compose hands `false` to the container as the text "false", which many applications read as true.
 
 ## Commands at each stage
 
@@ -146,7 +148,7 @@ prepare: |
 
 | Key | What it is |
 |---|---|
-| `precheck` | A script run in the account before the clone. A non-zero exit stops the deploy, and its output is the reason the deploy log gives. It is read from the checkout already there, so it runs from a project's second deploy on. |
+| `precheck` | A script run in the account before the clone. If it exits with a non-zero code, the deploy stops and the deploy log gives its output as the reason. It is read from the checkout already there, so it first runs on a project's second deploy. |
 | `prepare` | A script run in the account after the clone, before the build. It can write files the build reads, or a compose file when neither the repository nor `compose` has one. |
 | `entrypoint` | Replaces the container's generated entrypoint outright. The `install`, `upgrade` and `start` commands and the `serve` command no longer run. |
 
@@ -211,7 +213,7 @@ health:
   start_period: 900
 ```
 
-The seconds a container that runs, but listens on no port yet, may take to start answering, after the deploy's own wait has run out. The default is 300, the most is 1800, and 0 turns the wait off. Set it for an application that installs itself on its first start.
+`start_period` is how many seconds a container may take to start answering after the deploy's own wait has run out. It applies to a container that is running but does not listen on a port yet. The default is 300, the most is 1800, and 0 turns the wait off. Set it for an application that installs itself on its first start.
 
 ## Public ports and the server's own name
 

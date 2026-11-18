@@ -8,7 +8,7 @@ nav:
 
 # Git
 
-Problems when you connect a repository, save a token, turn on Auto-deploy or deploy a Git project, with what each message means and what to do. Each part names the page it belongs to, with a link to the full page.
+Problems when you connect a repository, save a token, turn on Auto-deploy or deploy a Git project, with what each message means and what to do.
 
 ## Git
 
@@ -16,7 +16,7 @@ Each message belongs to the card it starts from.
 
 **Advanced > Git > Connect repository**
 
-A refused **Connect repository** over HTTPS shows its message under **Repository URL** or **Access token**. The message stays there until you change that field or select **Connect repository** again.
+When an HTTPS repository is refused, the message shows under **Repository URL** or **Access token**. It stays there until you change that field or select **Connect repository** again.
 
 **"The repository refused this token. Check the token and that it can read this repository."** The token is wrong or has no read access to the repository. Make a token that can read it and try again.
 
@@ -28,18 +28,18 @@ A refused **Connect repository** over HTTPS shows its message under **Repository
 
 **"The repository has no branch to connect yet. Push a commit to it first, then connect again."** The repository is empty, so there is nothing to deploy. Nothing was connected. Push a commit, then connect again.
 
-**"The repository could not be read: <git's reason>"** This is git's own reason, shown when none of the messages above fits. Nothing was connected. Read the reason and fix what it names.
+**"The repository could not be read: <git's reason>"** Git gives its own reason when none of the messages above fits. Nothing was connected. Read the reason and fix what it names.
 
 **"Could not connect the repository. Check the URL and token."** The panel could not read the answer. Try again.
 
-An SSH address shows its refusal under the deploy key instead:
+An SSH address shows its refusal under the deploy key instead. A **deploy key** is the key you add to the repository so the panel can read it.
 
 - **"The repository did not accept the key. Check that you added it to this repository."** The key is not on the repository yet. Add it.
-- **"Could not connect. Check the address and the key."** This is shown for every other reason. Check the address and the key.
+- **"Could not connect. Check the address and the key."** This message covers every other reason. Check the address and the key.
 
 **Advanced > Git > Access token > Manage > Save token**
 
-**"The repository refused this token. Check the token and that it can read this repository."** and **"The repository was not found. Check the repository address and that the token can read it if the repository is private."** The causes are the same as above, and the token is not saved. The first message also appears when your provider does not know the token, however public the repository is.
+**"The repository refused this token. Check the token and that it can read this repository."** and **"The repository was not found. Check the repository address and that the token can read it if the repository is private."** The causes are the same as above, and the token is not saved. The first message also appears when your provider does not know the token, even if the repository is public.
 
 **"The repository could not be reached to check the token. Try again later."** The Git provider did not answer, so the token was not checked and not saved. Try again later.
 
@@ -57,9 +57,9 @@ An SSH address shows its refusal under the deploy key instead:
 
 **"A deploy of this project is already running."** or **"The project is busy with another operation. Please try again later."** Another operation is running. Wait for it to end, or cancel the deploy in its Deploy Logs window.
 
-**"Deploys are only available for container projects."** The project is not a container project, so the panel cannot build it from the repository. For a WordPress or classic PHP project it only pulls and pushes files. Create a project from Git to deploy one.
+**"Deploys are only available for container projects."** The project is not a container project, so the panel cannot build it from the repository. For a WordPress or classic PHP project it only pulls and pushes files. To deploy from a repository, create a project from Git.
 
-**"This project cannot be deployed from git. Create a new project instead."** This appears in the create-project wizard. The project that step would turn into a Git project cannot become one. Create a new project from Git.
+**"This project cannot be deployed from git. Create a new project instead."** This appears in the create-project wizard. The project cannot become a Git project. Create a new project from Git.
 
 **"Git is not available for this server yet."** The Engine does not support Git for this project.
 

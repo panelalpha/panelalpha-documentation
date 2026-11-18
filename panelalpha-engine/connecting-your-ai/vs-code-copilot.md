@@ -44,7 +44,7 @@ An empty list on a new engine is a success.
 ## Troubleshooting
 
 **It registered, then will not connect.**
-A self-signed certificate on your engine that your computer does not trust. VS Code is built on Node, so the fix is the same as Claude Code: [Trust a self-signed certificate](claude-code.md#trust-a-self-signed-engine-certificate).
+Your engine has a self-signed certificate that your computer does not trust. VS Code is built on Node, so the fix is the same as Claude Code: [Trust a self-signed certificate](claude-code.md#trust-a-self-signed-engine-certificate).
 
 VS Code is normally started from a desktop icon, so it will not pick up a certificate setting you added to `~/.bashrc` or `~/.zshrc`. Either start VS Code from a terminal where the setting is active, or set it at the operating-system level.
 
@@ -60,10 +60,10 @@ The quoting is the usual culprit. On Windows PowerShell, adding the server throu
 The chat is not in agent mode. The engine's abilities do not exist in ordinary chat.
 
 **401 Unauthorized.**
-The token was truncated, or it is the wrong type. Assistants need a token from `pae connect`, not `pae api:token:create`.
+The token was cut off when you copied it, or it is the wrong type. Assistants need a token from `pae connect`, not `pae api:token:create`.
 
 **It connects but can barely do anything.**
-The permission settings on your VPS are filtering its abilities. See [Decide what the assistant may do](your-assistant.md#decide-what-the-assistant-may-do).
+The permission settings on your VPS are hiding some of its abilities. See [Decide what the assistant may do](your-assistant.md#decide-what-the-assistant-may-do).
 
 **I want to start over.**
 Open VS Code's MCP settings, remove `panelalpha-engine`, and run the command again with a fresh token.

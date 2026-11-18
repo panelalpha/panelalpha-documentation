@@ -17,7 +17,7 @@ ChatGPT Desktop runs Codex behind its chat. On your VPS it prints a prompt you p
 pae connect chatgpt-desktop
 ```
 
-Run this on your VPS. It creates a token and prints a sentence, with your address and token already filled in.
+Run this on your VPS. It creates a token and prints a prompt, with your address and token already filled in.
 
 ## 2. Paste it into ChatGPT Desktop
 
@@ -38,13 +38,13 @@ Because Codex looks the token up by name, **the `PANELALPHA_MCP_TOKEN` variable 
 ## Troubleshooting
 
 **It registered, then will not connect.**
-A self-signed certificate on your engine that your computer does not trust. The lasting fix is giving the engine a real certificate: [Install](../getting-started/install.md#if-connecting-asks-you-to-trust-a-certificate). If you cannot do that yet, copy the certificate to your computer and add it to your operating system's trust store, the same way as [Codex](codex.md).
+Your engine has a self-signed certificate that your computer does not trust. The lasting fix is giving the engine a real certificate: [Install](../getting-started/install.md#if-connecting-asks-you-to-trust-a-certificate). If you cannot do that yet, copy the certificate to your computer and add it to your operating system's trust store, the same way as [Codex](codex.md).
 
 **401 Unauthorized.**
-Either the token is wrong, or it is an API token rather than an MCP token. Assistants need one from `pae connect chatgpt-desktop`, not `pae api:token:create`.
+The token is wrong, or it is an API token rather than an MCP token. Assistants need one from `pae connect chatgpt-desktop`, not `pae api:token:create`.
 
 **It worked when I registered it, then stopped in a new terminal.**
 The `PANELALPHA_MCP_TOKEN` variable is missing. See [Connecting Codex](codex.md).
 
-**Connected, but it cannot do much.**
-The permission settings on your VPS are filtering abilities out. Check with `pae mcp:tool:list` on your VPS: [Decide what the assistant may do](your-assistant.md#decide-what-the-assistant-may-do).
+**It connects but can barely do anything.**
+The permission settings on your VPS are hiding some of its abilities. Check with `pae mcp:tool:list` on your VPS: [Decide what the assistant may do](your-assistant.md#decide-what-the-assistant-may-do).

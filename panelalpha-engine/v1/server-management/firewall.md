@@ -1,6 +1,6 @@
 ---
 title: Firewall (CSF)
-description: Manage ConfigServer Security & Firewall (CSF) in PanelAlpha Engine. Configure rules, allow/deny IPs and secure your hosting server.
+description: Manage the CSF firewall of a PanelAlpha Engine server from PanelAlpha: check its status, open the web interface and add allow and deny rules.
 nav:
   group: Server Management
   order: 3
@@ -8,7 +8,7 @@ nav:
 
 # Firewall (CSF)
 
-PanelAlpha Engine uses ConfigServer Security & Firewall (CSF) and its login failure daemon (lfd). The installer sets CSF up, and the **Firewall (CSF)** tab lets you manage it from the panel. For CSF itself, see the [ConfigServer Security & Firewall](https://configserver.com/csf) site.
+PanelAlpha Engine uses ConfigServer Security & Firewall (CSF) and its login failure daemon (lfd, the part that blocks IPs after repeated failed logins). The installer sets CSF up. The **Firewall (CSF)** tab lets you manage it from the panel. For CSF itself, see the [ConfigServer Security & Firewall](https://configserver.com/csf) site.
 
 ![PanelAlpha Engine: Firewall (CSF) Overview](../../../assets/img/panelalpha-engine/server-management/firewall-overview.png)
 
@@ -23,7 +23,7 @@ The top of the tab shows:
 While CSF is disabled, the rest of the tab is greyed out.
 
 > [!WARNING]
-> **Warning:** Disabling the firewall leaves every port on the server open. Enable it again as soon as you can.
+> **Disabling the firewall leaves every port on the server open.** Enable it again as soon as you can.
 
 ## Default open ports
 
@@ -34,7 +34,7 @@ The installer opens these ports in CSF:
 
 The Docker network is on the allow list so the containers can talk to each other. Outgoing connections are allowed.
 
-If you run SSH on a port other than 22, add that port before you restart CSF, or you can lock yourself out.
+If you run SSH on a port other than 22, add that port before you restart CSF. Otherwise you can lock yourself out.
 
 ## CSF Web UI
 
@@ -42,7 +42,7 @@ The **CSF Web UI** card shows the CSF web interface inside the panel. Use **Enla
 
 ![PanelAlpha Engine: CSF Web UI Interface](../../../assets/img/panelalpha-engine/server-management/csf-webui.png)
 
-The CSF web interface gives you all CSF options, logs and lfd settings, including those the panel tables do not cover. Pay attention to warnings it shows, for example:
+The CSF web interface gives you all CSF options, logs and lfd settings, including those the panel tables do not cover. Read the warnings it shows, for example:
 
 ```
 WARNING: RESTRICT_SYSLOG is disabled. See SECURITY WARNING in Firewall Configuration
@@ -67,7 +67,7 @@ Each table has its own search, so a search in **Allow rules** does not filter **
 
 ### Rule format
 
-The rules are stored in `csf.allow` and `csf.deny` in the standard CSF format:
+CSF stores the rules in `csf.allow` and `csf.deny` in its standard format:
 
 `protocol|direction|<s=|d=>port|<s=|d=|u=>target`
 
@@ -80,9 +80,9 @@ The meaning of `s=` and `d=` depends on the field:
 
 ### Example rules
 
-Block one IP from the whole server: add a deny rule with only the **Target** `198.51.100.25` and a comment. Without advanced settings the rule covers all ports and protocols.
+To block one IP from the whole server, add a deny rule with only the **Target** `198.51.100.25` and a comment. Without advanced settings, the rule covers all ports and protocols.
 
-Allow SSH only from one office IP: add an allow rule, turn on **Advanced Settings** and set:
+To allow SSH only from one office IP, add an allow rule, turn on **Advanced Settings** and set:
 
 - Protocol: TCP
 - Direction: IN (incoming)

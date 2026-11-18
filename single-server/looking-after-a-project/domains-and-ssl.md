@@ -23,7 +23,7 @@ New projects get an address from the default domain set in the panel: [Settings]
 
    ![The DNS propagation is in progress badge of the Northwind Store project opens Set Your Domain: the domain shop.example.com with Change, and Set DNS Records with the A record and the CNAME record for www](../../assets/single-server/domains-set-your-domain-dns.gif)
 
-4. Set these records. Wait for them to spread. This takes from 2 minutes to a few hours.
+4. Set these records at your domain provider and wait for them to spread. This takes from 2 minutes to a few hours.
 
 The same records show when you open **Change Domain** (or **DNS propagation is in progress**) again on a project that already has a domain. **Change** next to `Your domain` in that dialog takes you back to step 2.
 
@@ -104,7 +104,7 @@ That address cannot be the main domain again. The Engine refuses a `panelalpha.o
 
 ## SSL certificates
 
-Each domain has a certificate. It comes from Let's Encrypt, from you, or it is self-signed, which browsers do not trust. The **SSL Status** column in **Advanced > Domains** shows the issuer, `Self Signed` or `No SSL`.
+Each domain has a certificate. It comes from Let's Encrypt or from you, or it is self-signed, which browsers do not trust. The **SSL Status** column in **Advanced > Domains** shows the issuer, `Self Signed` or `No SSL`.
 
 1. Go to **Advanced > Domains** and select the padlock icon on the row (its tip reads **Edit SSL**). You can also use **Advanced > Security**, card **SSL Certificate Applied**, button **Manage**.
 2. In **Set SSL Certificate**, choose the **SSL provider**: **Let's Encrypt** or **Custom Certificate**.
@@ -128,7 +128,7 @@ Many servers share these names, and Let's Encrypt allows only 50 new certificate
 
 The domain goes back to the certificate the server gives a new domain. That is its own one where that covers the name, otherwise the one its operator configured, which is self-signed by default. A self-signed certificate brings the browser warning back, and the **SSL Status** column reads `Self Signed`.
 
-The dialog shows the certificate the domain carries now as soon as the server confirms the removal, and every page that is open for the project updates. If the server's Engine cannot do this yet, the dialog answers `This server's Engine cannot remove a certificate yet.`
+The dialog shows the certificate the domain carries now once the server confirms the removal. Every page that is open for the project updates. If the server's Engine cannot do this yet, the dialog answers `This server's Engine cannot remove a certificate yet.`
 
 ### Forcing HTTPS
 
@@ -139,4 +139,4 @@ This works only when the domain has a certificate.
 
 Other projects can share the same domain. If so, the panel lists them first: `This project is installed on example.com along with other projects. Changing this option, it will also affect the following projects:`.
 
-Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: Domains and SSL](../troubleshooting/domains-and-ssl.md).
+Something not working? Messages and fixes: [Troubleshooting: Domains and SSL](../troubleshooting/domains-and-ssl.md).

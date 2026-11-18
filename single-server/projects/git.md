@@ -1,6 +1,6 @@
 ---
 title: "Git"
-description: "A Git project is a container project that the panel builds from your repository. This page covers redeploys, branches, variables and keys."
+description: "A Git project is built from your repository. You redeploy it, change its branch, set variables and manage tokens and keys."
 nav:
   group: Projects
   order: 5
@@ -52,7 +52,8 @@ Earlier deploys are in **Advanced > Logs**, on the **Deploy Logs** tab. Select a
 Changing the branch deploys the project again from another branch.
 
 1. Open the project and go to **Advanced > Git**.
-2. In the **Branch** card, select **Manage**. Choose the branch in **Branch name** and select **Change branch**. The window says `Enter the branch name for this site.` and warns `Save or discard local file changes on the server before changing the branch.`
+2. In the **Branch** card, select **Manage**. Choose the branch in **Branch name** and select **Change branch**.
+   The window says `Enter the branch name for this site.` and warns `Save or discard local file changes on the server before changing the branch.`
 
 A branch change needs files on the server that match the repository. If the site has files that are not in the repository, the panel opens the **Local changes detected** dialog instead of switching: see [Local changes on the server](#local-changes-on-the-server).
 
@@ -80,13 +81,13 @@ Environment variables are settings that your app reads when it starts, such as a
 
 The panel keeps the variables with the project, so a redeploy does not lose them.
 
-Saving applies them. The panel restarts the app container, and the new values are in it when it comes back, a few seconds later.
+Saving applies them. The panel restarts the app container, and the new values are in place a few seconds later.
 
 If you turn off **Restart the app container after saving**, the panel only stores the variables. The next **Redeploy** applies them. **Restart** in **Advanced > Containers** does not apply stored variables.
 
 ![Adding environment variables to the ntfy project in Advanced > Environment variables: Add variable with NTFY_BASE_URL set to https://ntfy.example.com, then Import with the line NTFY_BEHIND_PROXY=true, and the table with both variables and their edit and delete buttons](../../assets/single-server/git-environment-variables.gif)
 
-**Advanced > Environment variables** is on every project that is not WordPress, and a Git project is one of them. A WordPress project has no such page. It keeps its configuration in **Advanced > System Configuration**.
+Every project that is not WordPress has **Advanced > Environment variables**, so a Git project has it. A WordPress project keeps its configuration in **Advanced > System Configuration** instead.
 
 ## Connecting and disconnecting a repository
 
@@ -139,14 +140,14 @@ The card shows `Token saved` or `No token saved`. If the repository stops answer
 
 ### More detail about the access token
 
-The panel tests the token before it saves it. It reads the repository with the token, and it asks your Git provider's API (GitHub, GitLab, Bitbucket) for the repository with the token.
+The panel tests the token before it saves it. It reads the repository with the token. It also asks your Git provider's API (GitHub, GitLab or Bitbucket) about the repository, using the token.
 
 - If the provider does not know the token, the panel does not save it, however public the repository is. A message gives the reason.
 - If the provider's API cannot be asked, or answers something other than a refusal, the panel keeps the token as long as it could read the repository.
 
 ## Deploy key
 
-An SSH repository uses a **deploy key**. **Advanced > Git** shows it in the **Deploy key (SSH)** card: the public key and its **Fingerprint**. Add the key in the **Deploy keys** settings of your repository. Read-only access is enough.
+An SSH repository uses a **deploy key**, an SSH key you add to the repository so the panel can read it. **Advanced > Git** shows it in the **Deploy key (SSH)** card: the public key and its **Fingerprint**. Add the key in the **Deploy keys** settings of your repository. Read-only access is enough.
 
 **Generate a new key replaces the old one, and pull and deploy stop working until you add the new key to the repository.** If you select **Delete key**, pull and deploy over SSH stop working. Remove the key at your Git provider as well.
 
@@ -169,4 +170,4 @@ Turning **Auto-deploy on push** off removes the webhook at your Git provider.
 
 ![Advanced > Git of a project from a private repository: the Access token card shows Token saved, and the Auto-deploy on push switch in the Auto-deploy card is turned on, with Auto-deploy settings updated](../../assets/single-server/git-auto-deploy.gif)
 
-Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: Git](../troubleshooting/git.md).
+Something not working? Messages and fixes: [Troubleshooting: Git](../troubleshooting/git.md).

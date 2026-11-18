@@ -1,6 +1,6 @@
 ---
 title: Installation
-description: Step-by-step guide to installing PanelAlpha Engine via SSH. Download the installer, run with your licence key and connect through the wizard.
+description: Install PanelAlpha Engine over SSH. Download the installer, run it with your licence key and connect the server in the wizard.
 nav:
   group: Installation & Updates
   order: 1
@@ -13,9 +13,9 @@ Install PanelAlpha Engine 1.x on a server with the installer, then connect it to
 ## Before you begin
 
 1. Use a fresh server that meets the [system requirements](../index.md#system-requirements). Do not install the Engine on the server that runs PanelAlpha.
-2. Make sure you can log in to the server over SSH as `root`.
+2. Check that you can log in to the server over SSH as `root`.
 3. Have your PanelAlpha licence key ready. It is in the product details under [Licenses](https://manage.panelalpha.com/clientarea.php?action=services) in the client area.
-4. Make sure the server can reach the internet. The installer downloads packages and Docker images.
+4. Check that the server can reach the internet. The installer downloads packages and Docker images.
 
 ## Download and install
 
@@ -40,7 +40,7 @@ The PanelAlpha installation wizard shows the same commands. See [Access the Wiza
 
 4. Wait for the installer to finish. At the end it prints the **API URL** and the **API Token**. Copy both. You need them to add the server in PanelAlpha.
 
-The installer sets up Docker, the Engine containers, the CSF firewall, monit and some kernel settings. If the server has a public IP address, it also gets a Let's Encrypt certificate for that address. The Engine is installed in `/opt/panelalpha/shared-hosting`.
+The installer sets up Docker, the Engine containers, the CSF firewall, monit and some kernel settings. If the server has a public IP address, the installer also gets a Let's Encrypt certificate for that address. The Engine goes into `/opt/panelalpha/shared-hosting`.
 
 ### Installer options
 
@@ -48,8 +48,8 @@ The installer sets up Docker, the Engine containers, the CSF firewall, monit and
 | --- | --- |
 | `--key <key>` | Your PanelAlpha licence key. Required. |
 | `--version <version>` | Installs a given Engine version instead of the latest. |
-| `--no-local-ip` | If the server's own address is private, uses the public IPv4 address (looked up online) for the API URL and the default IP. |
-| `--enable-nat` | For servers behind 1:1 NAT, for example on some cloud providers. The Engine looks up the public IPv4 address for each private address. |
+| `--no-local-ip` | Use this when the server's own address is private. The installer then uses the public IPv4 address (looked up online) for the API URL and the default IP. |
+| `--enable-nat` | Use this for servers behind 1:1 NAT, for example on some cloud providers. The Engine looks up the public IPv4 address for each private address. |
 | `--debug` | Prints more output. Use it when you send the output to support. |
 
 ### Lost API token

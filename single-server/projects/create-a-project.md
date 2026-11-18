@@ -1,6 +1,6 @@
 ---
 title: "Create a project"
-description: "You create a project from WordPress, from a Git repository or from files. This page gives the steps for each."
+description: "You can create a project from WordPress, from a Git repository or from an archive of files. Each way has its own steps."
 nav:
   group: Projects
   order: 2
@@ -33,7 +33,7 @@ The panel starts the install and shows `Your site is now being created for you!`
 
 When it finishes, the screen reads `Congratulations!` and `Your site has been installed!`. Select **Start Creating** to open the project, or **Back To Dashboard** to return to the project list.
 
-Unless the install form says otherwise, the panel sets the WordPress administrator name to `admin`, uses your account email as the administrator email, and generates a random password. You do not need that password. **WP Admin** in the project's top bar opens the dashboard signed in for you: [Managing WordPress](wordpress.md).
+The panel sets the WordPress administrator name to `admin`, uses your account email as the administrator email and generates a random password, unless the install form says otherwise. You do not need that password. **WP Admin** in the project's top bar opens the dashboard signed in for you: [Managing WordPress](wordpress.md).
 
 If the domain still needs DNS records, the panel lists them after the install. Set them at your DNS provider: [Domains and SSL](../looking-after-a-project/domains-and-ssl.md).
 
@@ -41,7 +41,7 @@ To move an existing site here instead: [Importing a WordPress site](importing-wo
 
 ### The full install form
 
-Some servers open a full install form instead of the domain screen. Without that form, the panel installs the newest WordPress in the document root of the domain.
+Some servers open a full install form instead of the domain screen. Without that form, the panel installs the newest WordPress in the **document root** of the domain (the folder the domain serves).
 
 The form has two tabs:
 
@@ -68,7 +68,7 @@ The deploy then starts and the panel shows its live log.
 
 ### An SSH address
 
-An SSH address (for example `git@github.com:example/app.git`) works differently. The panel creates a **deploy key** for you to add to the repository:
+An SSH address (for example `git@github.com:example/app.git`) works differently. The panel creates a **deploy key**, an SSH key that lets the panel read the repository. You add it to the repository:
 
 1. Enter the address and the branch (the default is `main`).
 2. Select **Generate deploy key**. The project is created now.
@@ -97,4 +97,4 @@ Use **Upload new version** on the **Source** card of **Project Details**. It tak
 
 If the upload does not finish, the project waits for its files. This happens when you select **Cancel Deploy** while it runs or you close the window. **Project Details** then says `Waiting for your files`. Upload the archive afterwards with **Upload new version** on the **Source** card.
 
-Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: Projects](../troubleshooting/projects.md#create-a-project).
+Something not working? Messages and fixes: [Troubleshooting: Projects](../troubleshooting/projects.md#create-a-project).

@@ -32,7 +32,7 @@ The copy appears under its live project, not as a separate project:
 
 The project page of a staging copy has no WordPress screens such as **Plugins** or **Users**. To change the copy's files, use **Advanced > File Manager**, or **WP Admin** from the copy's **Actions** menu.
 
-A copy under `panelalpha.direct` has a self-signed certificate, so your browser warns when you open it.
+A copy under `panelalpha.direct` has a self-signed certificate, which browsers do not trust, so your browser warns when you open it.
 
 ## Pushing staging to live
 
@@ -111,4 +111,4 @@ The domain warning on a project also has **Not live yet? Preview the site on the
 - On the panel's free `panelalpha.online` address, **Open Project** opens the site itself in a new tab, so there is nothing to preview.
 - In **My Projects**, the button is on the card of a project that is not WordPress. A WordPress card has no **Open Project**. Open the project and select **Open Project** in its top bar. Every project has it there.
 
-Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: Projects](../troubleshooting/projects.md#staging-and-preview).
+Something not working? Messages and fixes: [Troubleshooting: Projects](../troubleshooting/projects.md#staging-and-preview).

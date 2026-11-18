@@ -1,6 +1,6 @@
 ---
 title: "Managing WordPress"
-description: "This page shows how to log in to a WordPress site, update it, manage plugins and themes, and change its settings in the panel."
+description: "You log in to a WordPress site, update it, manage its plugins and themes and change its settings from the panel."
 nav:
   group: Projects
   order: 3
@@ -8,7 +8,7 @@ nav:
 
 # Managing WordPress
 
-This page shows how to log in to a WordPress site, update it, manage plugins and themes, and change its settings. A WordPress site in the panel is a PHP hosting project. Create one first: [Create a project](create-a-project.md).
+A WordPress site in the panel is a PHP hosting project. You log in to it, update it, manage its plugins and themes and change its settings from the project page. Create one first: [Create a project](create-a-project.md).
 
 ## Logging in to WordPress
 
@@ -53,7 +53,7 @@ To update:
 2. Pick the version and tick **Create Backup** if you want a backup first.
 3. Confirm.
 
-**Update** in the row's **Actions** menu and **Update** in the top bar apply to the WordPress core only. The row's entry answers `No updates available.` while the core is current.
+**Update** in the row's **Actions** menu and **Update** in the top bar apply to the WordPress core only (WordPress itself, not plugins or themes). The row's entry answers `No updates available.` while the core is current.
 
 A WooCommerce update comes from the same card button. When only WooCommerce has an update, that button reads **Update WooCommerce**.
 
@@ -70,7 +70,7 @@ Themes are under **Advanced > Installed Themes**, which lists **Installed Themes
 ## Other WordPress pages in Advanced
 
 - **Users**: WordPress users. **Create User**, **Edit User**, **Reset Password** and **Delete User**. **Create User** needs a username, an email address, a display name, a role and a password. The password needs at least 8 characters, with an upper case letter, a lower case letter, a number and a symbol.
-- **System Configuration**: values of `wp-config.php`. Create, edit and delete a setting. The database user and password and the keys and salts are masked (`********`). Select **Show** to read one. The panel asks for your panel password when you have not entered it recently. Every request is recorded in the project's **Logs**. A value can be at most 4094 bytes long: [More detail](#more-detail).
+- **System Configuration**: the settings in `wp-config.php`. Create, edit and delete a setting. The database user and password and the keys and salts are masked (`********`). Select **Show** to read one. The panel asks for your panel password when you have not entered it recently. Every request is recorded in the project's **Logs**. A value can be at most 4094 bytes long: [More detail](#more-detail).
 - **Auto Updates**: **Auto Upgrade**, **Auto Upgrade Plugins** and **Auto Upgrade Themes**. A site can block automatic updates itself: [More detail](#more-detail).
 - **Developer Settings**: **Debug Mode**, **Maintenance Mode**, **PHPMyAdmin** and **PHP Version**.
 - **Security**: **Force HTTPS Redirect** and **Disable Search Engine Indexing**.
@@ -84,7 +84,7 @@ To clear the cache, choose **Clear Cache** in the row's **Actions** menu in the 
 PHP version and limits: [Cron jobs and PHP](../looking-after-a-project/cron-and-php.md).
 Domains and the certificate: [Domains and SSL](../looking-after-a-project/domains-and-ssl.md).
 
-Something not working? The messages you may see on this page and what to do about them: [Troubleshooting: Projects](../troubleshooting/projects.md#managing-wordpress).
+Something not working? Messages and fixes: [Troubleshooting: Projects](../troubleshooting/projects.md#managing-wordpress).
 
 ## More detail
 

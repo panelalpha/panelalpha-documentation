@@ -1,6 +1,6 @@
 ---
 title: Projects
-description: "A project is one hosting account: one website or application. This page covers creating, inspecting, rebuilding, cloning, suspending and protecting one."
+description: "A project is one hosting account: one website or application. Create, inspect, rebuild, copy, suspend, protect and delete it here."
 nav:
   group: Capabilities
   order: 2
@@ -10,18 +10,18 @@ nav:
 
 A project is one hosting account: one website or application. Everything else on the engine belongs to a project: its domains, its databases, its files, its FTP logins.
 
-This page covers creating, inspecting, rebuilding, copying, suspending, protecting and deleting them. Backups have their own page: [Backups](backups.md).
+Backups have their own page: [Backups](backups.md).
 
 ## Creating one
 
-A project is created in one request, together with its code. Creating a project from a repository *is* the deploy, and it is covered in full on [Connecting with Git](connecting-with-git.md). Looking after WordPress you already host is on [WordPress](wordpress-and-apps.md).
+You create a project in one request, together with its code. Creating a project from a repository is the deploy: [Connecting with Git](connecting-with-git.md). WordPress you already host is covered on [WordPress](wordpress-and-apps.md).
 
 The code can come from any of these:
 
-- **A git repository.** Over HTTPS the assistant asks for a token on a paste page, if the repository is private. An SSH address (`git@git.example.com:team/app.git`) needs a **deploy key**, and the engine refuses it without one. The assistant has the engine make the key and shows you its public half, and you add it to the repository as a read-only deploy key. Then the project is created. The private half is kept by the engine and is never shown. For a git server other than GitHub, GitLab.com or Bitbucket, the engine reads and remembers that server's SSH host key when it makes the deploy key.
-- **An archive.** A `.zip`, `.tar.gz` or `.tgz`. The assistant either uploads it first, or gives the engine a web address to download it from. An upload nobody uses expires after 24 hours and is deleted.
+- **A git repository.** For a private repository over HTTPS, the assistant asks for a token on a paste page. An SSH address (`git@git.example.com:team/app.git`) needs a **deploy key**, and the engine refuses it without one. The assistant has the engine make the key and shows you its public half. You add it to the repository as a read-only deploy key. Then the project is created. The engine keeps the private half and never shows it. For a git server other than GitHub, GitLab.com or Bitbucket, the engine also reads and remembers that server's SSH host key when it makes the deploy key.
+- **An archive.** A `.zip`, `.tar.gz` or `.tgz` file. The assistant either uploads it first or gives the engine a web address to download it from. An upload that nobody uses expires after 24 hours and is deleted.
 - **A copy of another project.** It is made in the background, with its databases if you ask for them. It is the same copy as [Cloning](#cloning).
-- **A new WordPress site.** On traditional PHP hosting. The request needs a title (up to 255 characters) and the administrator's login, email and password. The login is 1 to 60 letters, digits, spaces or `_ . @ -`, and the password has at least 8 characters. You can also name a language (`de_DE`) and a WordPress version (`6.6.2`); the default is the latest release in `en_US`. The engine keeps the password out of its task records. If the install fails, the project is removed.
+- **A new WordPress site.** On traditional PHP hosting. The request needs a title (up to 255 characters) and the administrator's login, email and password. The login is 1 to 60 letters, digits, spaces or `_ . @ -`. The password has at least 8 characters. You can also name a language (`de_DE`) and a WordPress version (`6.6.2`). The default is the latest release in `en_US`. The engine keeps the password out of its task records. If the install fails, the project is removed.
 
 ```text
 Create a project called tshop from https://example.com/files/shop.tar.gz.
@@ -36,9 +36,9 @@ deploy key for it first and show me the public half.
 Create a WordPress site called tblog titled "My blog", with admin you@example.com.
 ```
 
-A project created with nothing to deploy is an empty container project, unless you ask for traditional PHP hosting: "Create it on traditional PHP hosting." A request with a field the engine does not know, or one that does not fit the source (a build recipe for an empty project, say), is refused with the field named, and nothing is created.
+A project created with nothing to deploy is an empty container project. To get traditional PHP hosting instead, ask for it: "Create it on traditional PHP hosting." The engine refuses a request with a field it does not know, or one that does not fit the source (a build recipe for an empty project, say). It names the field, and nothing is created.
 
-An empty container project can be given its code later. Ask for a git repository or an archive as its source, and the engine deploys it. An archive replaces the files in `~/project`. It is refused on a traditional PHP project, and on a project that deploys from a git repository: push the change to the repository and rebuild instead.
+You can give an empty container project its code later. Ask for a git repository or an archive as its source, and the engine deploys it. An archive replaces the files in `~/project`. The engine refuses an archive on a traditional PHP project, and on a project that deploys from a git repository. For a git project, push the change to the repository and rebuild instead.
 
 ```text
 Use this repository as the source of tshop.
@@ -50,7 +50,7 @@ To see what you already have:
 List the projects on this engine.
 ```
 
-Projects on traditional PHP hosting are reported as WordPress or as plain PHP. A WordPress the engine installed into a subfolder of the site's folder, such as `<domain>/blog`, is reported as WordPress together with the folder it was installed in, and the WordPress operations use that folder when they are not given one. Ask the assistant for the project's app type.
+Projects on traditional PHP hosting are reported as WordPress or as plain PHP. When the engine installed WordPress into a subfolder of the site's folder, such as `<domain>/blog`, the project is reported as WordPress with that folder. The WordPress operations use that folder when you give none. Ask the assistant for the project's app type.
 
 ## Inspecting one
 
@@ -61,11 +61,11 @@ Inspect this project. Tell me the stack, and whether it still matches the last
 deploy.
 ```
 
-**That last part is the interesting one.** The inspection compares how the app would be run now (strategy, platform, runtime, port) and the commit with what the last deploy recorded. A difference means the files changed after the deploy, for example over FTP, or a different commit is checked out. It does not compare file contents. When a site is behaving unexpectedly and nobody deployed recently, that is the first thing to check.
+The check against the last deploy compares how the app would be run now (strategy, platform, runtime, port) and the commit with what the last deploy recorded. A difference means the files changed after the deploy, for example over FTP, or a different commit is checked out. It does not compare file contents. When a site behaves unexpectedly and nobody deployed recently, check this first.
 
 ## The application's login
 
-Many ready-made applications start with an administrator account. The engine makes up the username and a strong password, sets the application up with them and keeps them, so a rebuild does not change them.
+Many ready-made applications start with an administrator account. The engine makes up the username and a strong password, sets the application up with them and keeps them. A rebuild does not change them.
 
 ```text
 What is the admin login for this project?
@@ -75,21 +75,21 @@ The assistant answers with the sign-in address, the username and the password. I
 
 ## Rebuilding
 
-A rebuild replays the exact plan from the last successful deploy against the current files. On a project connected to git, the current files are a fresh clone of its branch: anything changed in `~/project` on the server is replaced by what the repository holds.
+A rebuild runs the last successful deploy again on the current files. A project connected to git gets a fresh clone of its branch, so anything changed in `~/project` on the server is replaced by what the repository holds.
 
 ```text
 Rebuild this project.
 ```
 
-Use it after you change files directly on a project without a repository, after you change an environment variable or when a site has degraded and you want it put back the way it shipped.
+Use it in three cases: you changed files directly on a project without a repository, you changed an environment variable, or a site has degraded and you want it put back the way it shipped.
 
-A rebuild runs in the background, and so does deploying an uploaded archive. The engine answers the assistant at once and the assistant follows the deploy until it ends, however long the build takes. Asking again while one is still running is refused and points at the one already under way, so a slow deploy is never started twice.
+A rebuild runs in the background, and so does deploying an uploaded archive. The engine answers at once, and the assistant follows the deploy until it ends, however long the build takes. If you ask again while one is running, the engine refuses and points at the one under way. A slow deploy is never started twice.
 
 On the server, `pae project:deploy-archive` queues the deploy and follows it. Add `--no-wait` to print the task and return, or `--timeout` to stop watching after that many seconds (1800 by default). Pressing Ctrl-C stops only the printing: the deploy carries on.
 
 A rebuild does not wipe what the application keeps. For applications with a ready-made recipe, the passwords and keys the engine generated and the files people uploaded stay as they were. A project you set up yourself keeps only the storage you declared for it.
 
-A rebuild judges itself on what the site is actually serving afterwards, not merely on whether the process started. So a rebuild that "succeeded" but left a broken page will be marked `partial` and tell you why. See [What the engine checks](monitoring-and-logs.md#what-the-engine-checks).
+After a rebuild, the engine checks what the site actually serves, not only whether the process started. A rebuild that "succeeded" but left a broken page is marked `partial`, with the reason. See [What the engine checks](monitoring-and-logs.md#what-the-engine-checks).
 
 ## Staging
 
@@ -99,7 +99,7 @@ Staging is a linked copy of a live site, for trying changes where visitors canno
 Make a staging copy of this project.
 ```
 
-You get a second project with its own hostname: `staging.` in front of the live one's, or, for a project on a free `panelalpha.online` name, a new name of its own there. Break it freely. When you are happy:
+You get a second project with its own hostname. The hostname is `staging.` in front of the live one's. A project on a free `panelalpha.online` name gets a new name there instead. Break it freely. When you are happy:
 
 ```text
 Push the staging copy live.
@@ -115,9 +115,20 @@ A project can have **one** staging copy, and a staging copy cannot itself have o
 Make a staging copy of this project without its databases.
 ```
 
-A WordPress site on a traditional PHP project is the exception: its copy is pointed at the databases copied for it, so a staging copy or a clone of it without its databases is refused before anything is copied. The engine rewrites the `wp-config.php` of the copied WordPress, in its WordPress directory, a subdirectory included, and the addresses the copy answers on; a copy whose `wp-config.php` it cannot find there is refused, so it never keeps writing to the live database. A WordPress the engine did not install itself is looked for up to three folders below the document root and remembered as the project's WordPress directory. A copy is refused before anything is copied when there is more than one WordPress there, or a `wp-config.php` that no WordPress loads.
+A WordPress site on a traditional PHP project is the exception. Its copy is pointed at the databases copied for it, so the engine refuses a staging copy or a clone of it without its databases, before anything is copied.
 
-**A push replaces the other side's files and databases.** Both are pushed unless you say otherwise. A domain's own PHP settings (`pae domain:php-directives`) are the project's own and are not among the files a push carries: each side keeps its set, so a push neither clears the other side's nor brings its own there. Before it replaces a database, the engine saves a copy of the one it is about to overwrite, and puts it back if the push fails. On a container project the pushed app has to come up: one that keeps restarting, is stopped or still listens on no port after the time a deploy gives it to start, fails the push, and the other side is put back as it was. Once the other side is running the pushed site, the push is done: a leftover copy the engine then fails to remove is reported as a warning on the push, and nothing is put back. The other project keeps its own database users and passwords, so the site there keeps connecting. A database the other side does not have yet is created there, and its users get the permissions the pushed project's users had on it. If the push fails, that database is dropped again and those permissions are taken back.
+To point the copy at its own databases, the engine rewrites the `wp-config.php` of the copied WordPress, and the addresses the copy answers on. It looks in the WordPress directory, a subdirectory included. If it cannot find a `wp-config.php` there, it refuses the copy, so the copy never keeps writing to the live database.
+
+A WordPress the engine did not install itself is looked for up to three folders below the document root, and remembered as the project's WordPress directory. The engine refuses the copy before anything is copied when it finds more than one WordPress there, or a `wp-config.php` that no WordPress loads.
+
+**A push replaces the other side's files and databases.** Both are pushed unless you say otherwise.
+
+- A domain's own PHP settings (`pae domain:php-directives`) are the project's own, so a push does not carry them. Each side keeps its set: a push neither clears the other side's nor brings its own there.
+- Before it replaces a database, the engine saves a copy of the one it is about to overwrite. It puts that copy back if the push fails.
+- On a container project the pushed app has to come up. If it keeps restarting, is stopped or still listens on no port after the time a deploy gives it to start, the push fails and the other side is put back as it was.
+- Once the other side is running the pushed site, the push is done. If the engine then fails to remove a leftover copy, it reports a warning on the push, and nothing is put back.
+- The other project keeps its own database users and passwords, so the site there keeps connecting.
+- A database the other side does not have yet is created there, and its users get the permissions the pushed project's users had on it. If the push fails, that database is dropped again and those permissions are taken back.
 
 ```text
 Push the staging copy live, files only.
@@ -131,11 +142,11 @@ Which database tables differ between this project and its staging copy? Then
 push only those tables.
 ```
 
-Each table you push is named by its database and its name. After a full database push, the diff can still list tables. On a WordPress site, the push keeps the other side's own site address, so the data there differs from the pushed side by that address.
+You name each table you push by its database and its name. After a full database push, the diff can still list tables. On a WordPress site, the push keeps the other side's own site address, so the data there differs from the pushed side by that address.
 
-Container projects have no table push. On a container project, `databases` covers two things. The MySQL database the engine made for the app is pushed on its own, so a databases-only push carries it. The stored data volumes go only together with the files, so a push with both left on carries both. A databases-only push from a container project that has no such database has nothing to carry, and is refused before either app is stopped. The project's deploy settings, such as how it is built and which commit it runs, go with the files: a databases-only push leaves the other side's own.
+Container projects have no table push. For them, `databases` covers two things. The MySQL database the engine made for the app is pushed on its own, so a databases-only push carries it. The stored data volumes go only together with the files, so a push with both left on carries both. A databases-only push from a container project that has no such database has nothing to carry. The engine refuses it before either app is stopped. The project's deploy settings, such as how it is built and which commit it runs, go with the files. A databases-only push leaves the other side's own.
 
-Only the volumes your compose file names are copied. An anonymous volume, such as the data directory a database image declares for itself when the compose file gives that service no volume, or an entry that gives only the path inside the container (`- /var/lib/mysql`), is left out of a staging copy, a clone and a push, and the result's warnings name each one that held data. Name the volume in your compose file to have it copied.
+Only the volumes your compose file names are copied. An anonymous volume is left out of a staging copy, a clone and a push. Two examples are the data directory a database image declares for itself when the compose file gives that service no volume, and an entry that gives only the path inside the container (`- /var/lib/mysql`). The result's warnings name each one that held data. Name the volume in your compose file to have it copied.
 
 **A container project's environment variables go with its files.** A staging copy starts with the live project's variables, and a push that includes the files gives the other side the pushed project's variables, so a later rebuild keeps them. A value that names the project's own address or the database the engine made for it is changed to the copy's, both in the stored variables and in the copied `.env` files, so the copy answers as itself from the start.
 
@@ -143,7 +154,7 @@ Only the volumes your compose file names are copied. An anonymous volume, such a
 
 A clone is an independent copy, with no ongoing link and no later push.
 
-The clone gets a hostname of its own: `clone.` in front of its source's, or, for a project on a free `panelalpha.online` name, a new name of its own there. It never takes the `staging.` address, so a staging copy of the same project can still be made afterwards. Give the clone an address of your own when you make it, and it uses that.
+The clone gets a hostname of its own: `clone.` in front of its source's. A project on a free `panelalpha.online` name gets a new name there instead. A clone never takes the `staging.` address, so you can still make a staging copy of the same project afterwards. If you give the clone an address when you make it, it uses that.
 
 ```text
 Clone this project.
@@ -166,7 +177,7 @@ A suspended project is also skipped by the engine's automatic health checks, bec
 
 ## Protecting
 
-A project can be marked protected. While it is, an assistant or any other tool using a token cannot delete the project, suspend it, stop or restart it, rebuild or redeploy it, change its environment variables or push into it. The engine refuses with `project_protected` and nothing runs. Starting it (`up`) is refused too when that would write its run file again from the compose file, so environment variables saved without applying them cannot be applied that way.
+A project can be marked protected. While it is, an assistant or any other tool using a token cannot delete the project, suspend it, stop or restart it, rebuild or redeploy it, change its environment variables or push into it. The engine refuses with `project_protected` and nothing runs. It also refuses starting the project (`up`) when that would write its run file again from the compose file, so environment variables saved without applying them cannot be applied that way.
 
 Only you can turn protection on or off, on the server, so a tool cannot lift it. The assistant can read the setting but not change it.
 
@@ -224,9 +235,15 @@ A website made only of files (a static site) gets them too: the container servin
 
 Only the keys you name are changed; the rest are left alone. To see what is set, ask the assistant to list the project's environment variables. Values are hidden in the list.
 
-If your repository commits its own `.env` file, the engine leaves that file exactly as committed. Your environment variables go into a separate file, `.env.panelalpha`, which each service that loads `.env` loads after it, so your values win. Code that reads `.env` straight from disk does not see them, and neither does a build step that reads `.env` while the site is being built, as Vite and Next.js do. Only the running application's environment has them. If you need a value at build time, either stop committing `.env`, or make the build read the value from the environment rather than from the file.
+If your repository commits its own `.env` file, the engine leaves that file exactly as committed. Your environment variables go into a separate file, `.env.panelalpha`. Each service that loads `.env` loads this file after it, so your values win.
 
-The `.env`, `.env.default` and `.env.panelalpha` files the engine creates in the project folder are readable only by the project's own user, and so is a project-folder `.env` that an app config's `files` put there. Compose reads them as that user and hands the values to the application. A `.env` it creates in a subfolder, from that folder's `.env.example` or empty because a compose `env_file:` names it, is readable by every user on the account, secrets included, because a Docker image may copy it in and read it as a user other than root. No other project can read either kind, and a symlink to another project's file does not make the engine read it for a project either: detection, inspection and the deploy all refuse a file that a link puts in another project's home. A file that already exists keeps its permissions and is never made more readable, so a subfolder `.env` you made private stays private.
+Two things do not see your variables: code that reads `.env` straight from disk, and a build step that reads `.env` while the site is being built, as Vite and Next.js do. Only the running application's environment has them. If you need a value at build time, either stop committing `.env`, or make the build read the value from the environment rather than from the file.
+
+The `.env`, `.env.default` and `.env.panelalpha` files the engine creates in the project folder are readable only by the project's own user. So is a project-folder `.env` that an app config's `files` put there. Compose reads them as that user and hands the values to the application.
+
+A `.env` the engine creates in a subfolder is readable by every user on the account, secrets included. This covers one made from that folder's `.env.example`, and one made empty because a compose `env_file:` names it. The reason is that a Docker image may copy it in and read it as a user other than root.
+
+No other project can read either kind. A symlink to another project's file does not make the engine read it for a project: detection, inspection and the deploy all refuse a file that a link puts in another project's home. A file that already exists keeps its permissions and is never made more readable, so a subfolder `.env` you made private stays private.
 
 If your application refuses to start because a setting is missing or still has a placeholder value, the engine recognises that specifically and says so: [Reading errors](../getting-started/reading-errors.md).
 
@@ -240,9 +257,9 @@ You cannot set it yourself: names starting with `PA_` belong to the engine. Thre
 
 ### Sending mail through the server
 
-A container project's application is handed the server's own mail relay, so an application that sends mail does not have to be told an address or reach out to a mail provider. Projects built from a recipe (PHP, Node.js, Python, Ruby and the other detected stacks), from the repository's own `Dockerfile` and from your own Docker Compose file receive it; apps from the general build (`railpack` in the log) and websites served as plain files (`static` or `fallback` in the log) do not:
+The engine hands a container project's application the server's own mail relay. An application that sends mail does not have to be told an address or reach out to a mail provider. Projects built from a recipe (PHP, Node.js, Python, Ruby and the other detected stacks), from the repository's own `Dockerfile` and from your own Docker Compose file receive it. Apps from the general build (`railpack` in the log) and websites served as plain files (`static` or `fallback` in the log) do not. The relay is given as two variables:
 
-- `PA_SMTP_HOST` is the relay's address: the gateway of the network the server's projects run on, which the server's mail service listens on beside its loopback and which an application reaches from inside the project. It is read from the server when the project is deployed, so it differs between installs. It is not the server's `docker0` address or `host.docker.internal`: each project has its own Docker inside it, whose own bridge usually takes Docker's default first address, so on most servers that address leads back into the project itself.
+- `PA_SMTP_HOST` is the relay's address. It is the gateway of the network the server's projects run on. The server's mail service listens there, beside its loopback, and an application reaches it from inside the project. The engine reads it from the server when the project is deployed, so it differs between installs. It is not the server's `docker0` address or `host.docker.internal`. Each project has its own Docker inside it, whose own bridge usually takes Docker's default first address, so on most servers that address leads back into the project itself.
 - `PA_SMTP_PORT` is `25`.
 
 In PHP, read them with `getenv('PA_SMTP_HOST')` and `getenv('PA_SMTP_PORT')`. The connection is plain SMTP: no user name, no password, no TLS. It never leaves the server.
@@ -251,9 +268,19 @@ A project deployed from your own Docker Compose file receives both in `.env.pane
 
 The address is only the relay. Whether the message arrives is decided by the outgoing-mail settings: the smarthost or relay configured for the server, and the sender domain's SPF, DKIM and DMARC records. Mail a domain has no records for is refused, bounced or filed as spam by the receiver.
 
-**The relay decides which sender address leaves.** A message whose sender address is at a domain this project owns, one of its domains or aliases, leaves unchanged: the envelope sender and the `From:`, `Reply-To:` and `Sender:` headers all keep that address, and the display name in front of it. Adding a domain to a project checks only how the name is written, so the relay keeps a domain only when the engine can show it is this server's: it is below the server's sites base domain or its own name (`cert_domain`, else its `.panelalpha.direct` name), a tunnel of the project holds it (the only way a `panelalpha.online` name counts), or its A or AAAA record names one of this server's addresses. The engine checks every minute and asks DNS about a domain at most every 10 minutes, so a domain whose DNS was pointed here a moment ago keeps its sender within about 10 minutes, and one pointed away loses it as quickly. Any other sender address is replaced by the same mailbox name at the server's own sending name: the sender domain set in the server's mail settings, else the name the server's own certificate is issued for, else the address-derived `.panelalpha.direct` name of the server; a server with none of the three sends as `panelalpha-sender.invalid`, a reserved name no receiver accepts, and never as the mail service's internal host name. A project cannot send as another project's domain, as a domain nobody here serves or as someone else's domain it added without pointing it here, so a receiver is never asked to verify a domain that is not this server's.
+**The relay decides which sender address leaves.** A message whose sender address is at a domain this project owns, one of its domains or aliases, leaves unchanged. The envelope sender and the `From:`, `Reply-To:` and `Sender:` headers all keep that address, and the display name in front of it.
 
-What the receiver still checks, and the engine does not give it: an SPF record for that sending domain that names this server's address or the relay's, a DKIM signature from this server or its relay, and a reverse DNS name (PTR) on the address the message leaves from. Publish SPF, DKIM and DMARC for every domain a project sends as, as [the mail DNS records](domains-and-ssl.md#mail-from-a-domain) describes, and give the server's own address a PTR that names it; without them the message leaves with a sender that exists and resolves, and a receiver may still refuse it or file it as spam.
+Adding a domain to a project checks only how the name is written. So the relay keeps a domain only when the engine can show it is this server's, which is the case when one of these holds:
+
+- it is below the server's sites base domain or its own name (`cert_domain`, else its `.panelalpha.direct` name);
+- a tunnel of the project holds it (the only way a `panelalpha.online` name counts);
+- its A or AAAA record names one of this server's addresses.
+
+The engine checks every minute and asks DNS about a domain at most every 10 minutes. A domain whose DNS was pointed here a moment ago keeps its sender within about 10 minutes, and one pointed away loses it as quickly.
+
+Any other sender address is replaced by the same mailbox name at the server's own sending name. That name is the sender domain set in the server's mail settings, else the name the server's own certificate is issued for, else the address-derived `.panelalpha.direct` name of the server. A server with none of the three sends as `panelalpha-sender.invalid`, a reserved name no receiver accepts, and never as the mail service's internal host name. A project cannot send as another project's domain, as a domain nobody here serves or as someone else's domain it added without pointing it here, so a receiver is never asked to verify a domain that is not this server's.
+
+The receiver still checks three things that the engine does not provide: an SPF record for that sending domain that names this server's address or the relay's, a DKIM signature from this server or its relay, and a reverse DNS name (PTR) on the address the message leaves from. Publish SPF, DKIM and DMARC for every domain a project sends as, as [the mail DNS records](domains-and-ssl.md#mail-from-a-domain) describes, and give the server's own address a PTR that names it. Without them, the message leaves with a sender that exists and resolves, and a receiver may still refuse it or file it as spam.
 
 A project on traditional PHP hosting receives no environment from the engine, so it cannot read these two: its PHP's own `mail()` (and anything else using `sendmail`) already goes through the same relay from inside the account.
 
@@ -267,13 +294,15 @@ Every project has plan limits: disk, memory, CPU, bandwidth and how many databas
 Show this project's limits. Raise its memory limit to 2048 MB and rebuild.
 ```
 
-**-1 means unlimited.** Every limit except memory takes `-1` for unlimited, a number of 0 or more or nothing (`null`), which means no limit was set. Any other negative number is refused. The engine stores and answers `-1` as it is: an unlimited project reports `disk.limit_bytes: -1`, and its usage reports `-1` as the maximum. `pae project:limit:get` prints "no limit" for both. An unlimited CPU or disk I/O limit is left out of the project's container settings.
+**-1 means unlimited.** Every limit except memory takes `-1` for unlimited, a number of 0 or more, or nothing (`null`), which means no limit was set. The engine refuses any other negative number. It stores and answers `-1` as it is: an unlimited project reports `disk.limit_bytes: -1`, and its usage reports `-1` as the maximum. `pae project:limit:get` prints "no limit" for both. An unlimited CPU or disk I/O limit is left out of the project's container settings.
 
 **The rebuild is not optional.** The new limit is written into the running application when it is deployed, so changing the number without rebuilding changes nothing you can see.
 
-**A container project's CPU limit applies at once.** It is put on the running project without a rebuild, and removing it gives the running project every CPU of the server again. When the engine's root broker cannot change the running project, the limit is still saved and applies the next time the project's container is recreated; the answer says so. A limit that was changed before 2.3.0 and never reached the running project is applied by `pae project:cpu-limit:apply --all`; the update runs it.
+**A container project's CPU limit applies at once.** It is put on the running project without a rebuild, and removing it gives the running project every CPU of the server again. When the engine's root broker cannot change the running project, the limit is still saved and applies the next time the project's container is recreated. The answer says so. A limit changed before 2.3.0 may never have reached the running project. `pae project:cpu-limit:apply --all` applies it, and the update runs that command.
 
-**Every project has a memory limit.** It is at least 6 MB, the least Docker starts a container with, and at least 256 MB for a container project, whose account runs its own Docker: measured, that Docker was stopped for lack of memory at 112 MB and barely ran a small static site at 128 MB. No project may have more than the server's RAM less what is kept for the engine, 512 MB by default; on a 4 GB server that is about 3.3 GB. A project created without a limit gets exactly that maximum. How much memory is free at the moment does not matter: a project is not refused because others are using memory, so projects together can be given more than the server has. Ask for the server's current metrics to see the numbers; they are under `memory_budget`.
+**Every project has a memory limit.** The minimum is 6 MB, the least Docker starts a container with. For a container project the minimum is 256 MB, because its account runs its own Docker. In measurements, that Docker was stopped for lack of memory at 112 MB and barely ran a small static site at 128 MB.
+
+The maximum for a project is the server's RAM less what is kept for the engine, 512 MB by default. On a 4 GB server that is about 3.3 GB. A project created without a limit gets exactly that maximum. How much memory is free at the moment does not matter: the engine does not refuse a project because others are using memory, so projects together can be given more than the server has. Ask for the server's current metrics to see the numbers. They are under `memory_budget`.
 
 To keep more for the engine, or for other things the server runs, set `DEPLOY_ENGINE_MEMORY` (in MB) in the engine's environment; that lowers the maximum for every project. `DEPLOY_PROJECT_MEMORY_DEFAULT` gives projects created without a limit a smaller default.
 
@@ -281,7 +310,7 @@ The application gets a little less than the number you set. The project itself n
 
 Memory limits are the ones that bite. A build that runs out of memory fails with a message that looks like a code problem but is not: [Reading errors](../getting-started/reading-errors.md).
 
-**A build gets the server's build memory, not the whole server.** When `DEPLOY_BUILD_MEMORY` in `.env-core` is left empty, the default, a build gets 8192 MB. Set or not, it never gets more than half the server's RAM, nor the server's RAM less `DEPLOY_ENGINE_MEMORY` (512 MB by default). Setting `DEPLOY_BUILD_MEMORY` fixes the figure for every build on the server, up to that ceiling. Whatever the figure, if memory runs out while a build runs, the build is what the kernel stops first, before the application.
+**A build gets the server's build memory, not the whole server.** When `DEPLOY_BUILD_MEMORY` in `.env-core` is left empty, the default, a build gets 8192 MB. Whether it is set or not, a build never gets more than half the server's RAM, and never more than the server's RAM less `DEPLOY_ENGINE_MEMORY` (512 MB by default). Setting `DEPLOY_BUILD_MEMORY` fixes the figure for every build on the server, up to that ceiling. Whatever the figure, if memory runs out while a build runs, the kernel stops the build first, before the application.
 
 Frontend assets, Java, Rust and PHP dependencies are often built on the server, in a separate build container, before the application starts. That build does not use the project's memory limit: it gets the build memory above, and only one such build runs at a time. The deploy log states the figure, and where it came from, in a line starting `Host build container memory`.
 
@@ -306,9 +335,13 @@ Every five minutes, run php artisan schedule:run in the app service of this proj
 
 The command runs in that service's running container, as that container's own user and in its own working directory, so it sees the application's files and environment. A job never overlaps itself: while a run is still going, the next one is skipped. If the service is not running when a job is due, that run is skipped too. Every run, and every skipped one, is written to `~/.panelalpha/cron/cron.log` in the project's home, together with the command's output. The schedule is in UTC.
 
-On traditional PHP hosting the job runs inside the project's own container, as the project's own user and in its home directory, so it sees the project's files. Its output goes to the same log: every run is appended to `~/.panelalpha/cron/cron.log` in the project's home, with the time it started and the status it exited with. Nothing is mailed there: cron would answer a failing job's output to the bare account name, which the mail server refuses, so the engine turns that mail off and the log is where a job that produced nothing on the site explains itself. Read it in the panel's file manager, in `.panelalpha/cron` in the project's home; it holds both streams of the run. A command never overlaps itself: while a run is still going, the next is skipped and the log says so, and two jobs with the same command count as one here, even on different schedules.
+On traditional PHP hosting the job runs inside the project's own container, as the project's own user and in its home directory, so it sees the project's files. Its output goes to the same log: every run is appended to `~/.panelalpha/cron/cron.log` in the project's home, with the time it started and the status it exited with. Read it in the panel's file manager, in `.panelalpha/cron` in the project's home. It holds both streams of the run.
 
-A command can be up to 640 bytes. On traditional PHP hosting, a job written before the engine logged its runs whose command is longer than that keeps running as it did, but its runs are not logged. A container project has no cron jobs until its first deploy has run, and a job asked for before that is refused. The log rolls over at 1 MB.
+Nothing is mailed there. Cron would send a failing job's output to the bare account name, which the mail server refuses, so the engine turns that mail off. The log is where a job that produced nothing on the site explains itself.
+
+A command never overlaps itself: while a run is still going, the next is skipped and the log says so. Two jobs with the same command count as one here, even on different schedules.
+
+A command can be up to 640 bytes. On traditional PHP hosting, a job written before the engine logged its runs may have a longer command. It keeps running as it did, but its runs are not logged. A container project has no cron jobs until its first deploy has run, and the engine refuses a job asked for before that. The log rolls over at 1 MB.
 
 On traditional PHP hosting, write a `%` in a command as it is: the engine writes it so cron does not read it as a line break.
 
@@ -358,7 +391,7 @@ The application reads that value while it is being built, so it needs a rebuild.
 You did not rebuild, or the application needs more than the limit you set. See [Limits](#limits). The application gets a little less than the number you chose. If it is the *build* that runs out, check the deploy log for `Host build container memory` or `Image build memory`: they say how much the build was given and why. See [Limits](#limits).
 
 **The assistant says stored secrets cannot be decoded.**
-Ask the assistant to list the affected secrets and check the engine's system information. The engine's encryption key, `APP_KEY` in `/opt/panelalpha/shared-hosting/.env-core`, may be invalid or may have changed since the secrets were stored. The project's environment variables, Git token, Cloudflare token, registry login or site password then read as empty, and the next save of the project, a redeploy included, stores them empty. Put the previous `APP_KEY` back before you change or redeploy the project. If you no longer have it, ask the assistant to set each named secret again. The application's database password is the exception: it is kept, and deploys are refused until it can be read, because a new one would lock the application out of its own database.
+Ask the assistant to list the affected secrets and check the engine's system information. The engine's encryption key, `APP_KEY` in `/opt/panelalpha/shared-hosting/.env-core`, may be invalid or may have changed since the secrets were stored. The project's environment variables, Git token, Cloudflare token, registry login or site password then read as empty. The next save of the project, a redeploy included, stores them empty. Put the previous `APP_KEY` back before you change or redeploy the project. If you no longer have it, ask the assistant to set each named secret again. The application's database password is the exception. The engine keeps it and refuses deploys until it can read it, because a new one would lock the application out of its own database.
 
 ## More requests to try
 
