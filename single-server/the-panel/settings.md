@@ -14,13 +14,14 @@ Open it from the user menu with **Settings**. It has two tabs, **General** and *
 
 ## PanelAlpha Hub
 
-The card above the tabs connects this server to your PanelAlpha Hub account at [hub.panelalpha.com](https://hub.panelalpha.com). It reads `Free and optional. This server keeps working on its own either way.`
+The card above the tabs connects this server to your PanelAlpha Hub account at [hub.panelalpha.com](https://hub.panelalpha.com). PanelAlpha Hub is your PanelAlpha account: one place where you see all the servers you connected. The card reads `Free and optional. This server keeps working on its own either way.`
 
 A connected server gives you:
 
 - **App monitoring**: the status of every site on this server, in the Hub.
 - **Reusable integrations**: link a service once, and every server of yours uses it.
-- **One login**: one PanelAlpha account for all your servers, and **Sign in with PanelAlpha** on the panel's login page.
+- **One login**: one PanelAlpha account for all your servers, and **Sign in with PanelAlpha** on the panel's login page. **Login** next to the server in the Hub opens the panel signed in.
+- **PanelAlpha GO!**: the catalog of ready apps in **Create a project**: [Create a project](../projects/create-a-project.md#creating-a-project-from-panelalpha-go).
 
 To connect:
 
@@ -30,13 +31,30 @@ To connect:
 
 If the card shows `PanelAlpha has not confirmed the connection yet.`, select **Check again**. If you wait too long, it shows `The link expired. Start again.` A connect link lasts 15 minutes by default.
 
-**Signing in through PanelAlpha skips the panel's two-factor check.** The Hub sign-in counts as that check.
+If the card shows `PanelAlpha did not say which account approved the connection.`, the approval did not come from your own PanelAlpha account. Sign in to PanelAlpha with your own account and connect again.
 
-**Disconnecting removes this server from your PanelAlpha account and turns off Sign in with PanelAlpha until you connect again.** To disconnect, select **Disconnect** and confirm. If you signed up through the Hub and have no password, the panel asks you to set one in **My Account** first.
+### Signing in with PanelAlpha
+
+**Only the PanelAlpha account that approved the connection can sign in with it.** Another account, for example a colleague's in the same Hub team, gets `This login link is not valid any more. Log in again from PanelAlpha.` To change the account, disconnect, then connect again while signed in to the other account on PanelAlpha.
+
+**Signing in through PanelAlpha skips the panel's two-factor check.** The Hub sign-in counts as that check. It does not count as your password. To turn two-factor authentication on or off, sign in with your email and password: [Your account](your-account.md#two-factor-authentication).
+
+If **Sign in with PanelAlpha** is missing on the login page of a panel you connected a while ago, disconnect and connect again. The panel then knows which account may sign in.
+
+### Disconnecting
+
+**Disconnecting removes this server from your PanelAlpha account and turns off Sign in with PanelAlpha until you connect again.** The PanelAlpha GO! catalog also stops working. To disconnect, select **Disconnect** and confirm. If you signed up through the Hub and have no password, the panel asks you to set one in **My Account** first.
 
 ### What the panel reports to the Hub
 
-While connected, the panel reports to the Hub every five minutes. The report has the name, type and status of each project, the panel's version and its address. The panel also reports right after pairing and right after you save a new Application URL.
+While connected, the panel reports to the Hub every five minutes. The report has:
+
+- the name, type, status and address of each project
+- how much of the server's CPU, memory and disk is in use, and how much the server has
+- the version of the panel and of the PanelAlpha Engine
+- the panel's own address
+
+The panel also reports right after pairing and right after you save a new Application URL. It does not send the files, databases or passwords of your projects.
 
 ## General
 

@@ -59,6 +59,18 @@ For a PHP hosting project, **Push structure changes in tables** and **Push table
 
 If the panel cannot compare the two databases, the window says `Could not compare database changes. You can still push files and database, but selective table changes are unavailable.` The two lists are not shown, and a push then copies the whole database.
 
+## Pushing live to staging
+
+Push To Staging copies the live project to its staging copy, so you can try changes on fresh content.
+
+**Push To Staging replaces what you tick on the staging copy with the live project's.** Changes you made only on the copy are lost.
+
+1. Open the live project and select **Push To Staging** in its top bar. The button shows only when the project has a staging copy.
+2. Tick what to overwrite. The options are the same as for Push To Live: [Pushing staging to live](#pushing-staging-to-live).
+3. Select **Push To Staging**. The panel shows `Push To Staging In Progress`.
+
+<!-- TODO screenshot: assets/single-server/staging-push-to-staging-dialog.gif. Show Push To Staging in the top bar of a live project with a staging copy, the dialog with Overwrite files and Push full database, then Push To Staging In Progress. -->
+
 ## Deploying a Git project to staging
 
 You can deploy a branch of a Git project to its staging copy and leave production unchanged. The project needs a staging copy first: [Creating a staging copy](#creating-a-staging-copy).

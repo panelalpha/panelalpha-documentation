@@ -8,7 +8,7 @@ nav:
 
 # Projects
 
-A project is one site or app on your server. Every project lives on the one server that runs the panel (a PanelAlpha Engine). The Community Edition has no project limit.
+A project is one site or app on your server. Every project lives on the one server that runs the panel (a PanelAlpha Engine). The panel has no project limit.
 
 ## The two kinds of project
 
@@ -19,13 +19,14 @@ A **PHP hosting project** runs on the server's shared PHP. WordPress sites and o
 - **A WordPress site** has the WordPress screens on its project page. Its card has a **Manage Site** button and a **WP Admin** button. **WP Admin** also sits in the project's top bar.
 - **A PHP site that is not WordPress** has no WordPress screens and no **WP Admin**. Its card has **Manage** and **Open Project**. Its project page has only **Project Details**, **Monitoring**, **Backups** and **Advanced**.
 
-A **container project** runs in its own containers. A site created from Git or from files is a container project. Its card has a **Manage** button, and its project page has a **Containers** page.
+A **container project** runs in its own containers. A site created from Git, from files or from the PanelAlpha GO! catalog is a container project. Its card has a **Manage** button, and its project page has a **Containers** page.
 
 | You want to run | Create it from | Kind |
 |---|---|---|
 | A new or imported WordPress site | WordPress | PHP hosting project |
 | An app from a Git repository | Git | Container project |
 | An app from an archive of files | Files | Container project |
+| A ready open-source app | PanelAlpha GO! | Container project |
 
 Create one: [Create a project](create-a-project.md).
 

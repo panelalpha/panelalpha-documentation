@@ -69,7 +69,7 @@ Themes are under **Advanced > Installed Themes**, which lists **Installed Themes
 
 ## Other WordPress pages in Advanced
 
-- **Users**: WordPress users. **Create User**, **Edit User**, **Reset Password** and **Delete User**. **Create User** needs a username, an email address, a display name, a role and a password. The password needs at least 8 characters, with an upper case letter, a lower case letter, a number and a symbol.
+- **Users**: WordPress users. **Create User**, **Edit User**, **Reset Password** and **Delete User**. **Create User** needs a username, an email address, a display name, a role and a password. The password needs at least 8 characters, with an upper case letter, a lower case letter, a number and a symbol. The dialog lists these rules under the field and checks them before it creates the user.
 - **System Configuration**: the settings in `wp-config.php`. Create, edit and delete a setting. The database user and password and the keys and salts are masked (`********`). Select **Show** to read one. The panel asks for your panel password when you have not entered it recently. Every request is recorded in the project's **Logs**. A value can be at most 4094 bytes long: [More detail](#more-detail).
 - **Auto Updates**: **Auto Upgrade**, **Auto Upgrade Plugins** and **Auto Upgrade Themes**. A site can block automatic updates itself: [More detail](#more-detail).
 - **Developer Settings**: **Debug Mode**, **Maintenance Mode**, **PHPMyAdmin** and **PHP Version**.

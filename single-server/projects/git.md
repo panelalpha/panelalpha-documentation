@@ -107,13 +107,13 @@ If the panel cannot download the branch, it refuses the connect and nothing is c
 
 An SSH address asks for the branch and shows a deploy key instead: [Deploy key](#deploy-key).
 
-Once a repository is connected, the card shows it under **Repository**, with a **Disconnect** button. **Disconnect** asks you to confirm in `Disconnect repository`. It removes the Git link from the panel and leaves the files on the server.
+Once a repository is connected, the card shows it under **Repository**, with a **Disconnect** button. **Disconnect** asks you to confirm in `Disconnect repository`. It removes the Git link from the panel and leaves the files on the server. A project created from Git or from PanelAlpha GO! has no **Disconnect** button.
 
 ### More detail about connecting
 
 The page is the same for every kind of project.
 
-- A project deployed from its repository is already connected. The Engine refuses to disconnect it: **Disconnect** shows `Git is managed by deploy.` and the repository stays.
+- A project created from its repository stays connected to it.
 - A WordPress site starts with no repository, so it is the project this card is for.
 - A connected site can still have files of its own. **Pull** or a branch change asks before dropping them: see [Local changes on the server](#local-changes-on-the-server).
 
