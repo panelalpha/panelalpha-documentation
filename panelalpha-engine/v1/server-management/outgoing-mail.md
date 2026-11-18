@@ -1,6 +1,6 @@
 ---
 title: Outgoing Mail
-description: Set how a PanelAlpha Engine server sends mail: directly, or through SendGrid, MailChannels, Amazon SES or another relay.
+description: "Set how a PanelAlpha Engine server sends mail: directly, or through SendGrid, MailChannels, Amazon SES or another relay."
 nav:
   group: Server Management
   order: 5
