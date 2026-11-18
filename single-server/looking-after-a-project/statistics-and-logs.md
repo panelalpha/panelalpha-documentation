@@ -22,6 +22,37 @@ The **Project Details** tab also shows **Unique Visitors**, **Average Session Ti
 
 The country, continent and region cards stay empty until you download the visitor location data on the server: [On the server](../getting-started/on-the-server.md#visitor-countries).
 
+## Usage and limits of a project
+
+**Advanced > Project Details** shows how much RAM, CPU and disk the project uses now, and the limits it may use. A limit stops one project from taking the whole server.
+
+<!-- TODO screenshot: assets/single-server/project-usage-limits.gif. Show Advanced > Project Details with the Project usage cards (RAM, CPU, Disk), then the Limits row in the Site details card, select Manage, change Memory (GB), open Advanced limits, select Save and show the Some limits apply after the next rebuild. note. -->
+
+**Project usage** has three cards: **RAM**, **CPU** and **Disk**. Each card shows a ring with a percent, then **Used** and **Limit**. Above the cards, the panel says when the reading was taken, for example `Updated 2 minutes ago`.
+
+- **A limit is set.** The percent is the share of that limit.
+- **No limit on RAM or disk.** **Limit** shows `No limit`. The percent is the share of the whole server, and a **Server** line gives the size of the server.
+- **No limit on CPU.** The percent is the share of one core, written as `% of 1 core`.
+- **No recent reading.** The card shows a dash and `No recent data`. Look again in a few minutes.
+
+The **Limits** row in the project details lists the limits that are set, for example `2 GB RAM · 1 core CPU · 10 GB disk`. `+2 more` means two other limits are set. A staging copy has no **Limits** row. Change the limits on the live project.
+
+### Changing the limits
+
+1. Open the project and go to **Advanced > Project Details**.
+2. In the **Limits** row, select **Manage**.
+3. In **Project limits**, change **Memory (GB)**, **CPU (cores)** or **Disk space (GB)**. Under a field, `Currently used` shows the present use. Under **Memory (GB)**, `Minimum` shows the lowest value.
+4. To remove a limit, tick **No limit** under **CPU (cores)** or **Disk space (GB)**. **Memory (GB)** always needs a value.
+5. To change the file and disk speed limits, select **Advanced limits**:
+   - **Inodes (files)**: how many files and folders the project may hold.
+   - **Disk read speed (MB/s)** and **Disk write speed (MB/s)**: how fast the project may read from and write to the disk.
+   These three fields also have **No limit**.
+6. Select **Save**. The panel shows `Project limits have been saved.`
+
+The lowest memory is 256 MB for a container project and 6 MB for a PHP hosting project. CPU can be a fraction of a core, from 0.01. The other fields take whole numbers from 1.
+
+**On a container project, only a new memory limit takes effect at once. Every other limit, and memory on a PHP hosting project, applies after the next rebuild.** After such a change the panel shows `Some limits apply after the next rebuild.` On a container project with a Git or archive source, **Redeploy now** starts the redeploy: [Git](../projects/git.md#redeploying). Select **Close** to leave it for later.
+
 ## Usage of the server
 
 Open the user menu and select **My Server**. The page shows how much **RAM**, **Disk Space** and **CPU** the whole server uses. Below are graphs of:

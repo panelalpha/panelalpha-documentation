@@ -46,6 +46,18 @@ More about this: [Databases](../looking-after-a-project/databases.md).
 
 More about this: [Files and access](../looking-after-a-project/files-and-access.md).
 
+## Usage and limits
+
+**"Enter a value."** A limit field is empty or holds text that is not a number. Type a number, or tick **No limit** where the field has it.
+
+**"The value must be at least 256 MB."** (or `6 MB`, `0.01 cores`, `1 MB`) The value is below the lowest the field takes. A container project needs at least 256 MB of memory, a PHP hosting project 6 MB. Raise the value.
+
+**"The value must be at most ... ."** The value is above the highest the field takes. Lower it.
+
+**A message from the server appears in the limits window.** The server can refuse a value the panel accepts, for example memory above what the server has left. Lower the value and save again.
+
+**The limit is saved but the usage cards do not follow it.** Some limits apply only after the next rebuild: [Usage and limits of a project](../looking-after-a-project/statistics-and-logs.md#usage-and-limits-of-a-project).
+
 ## Cron jobs and PHP
 
 **A cron job seems not to run.** The panel does not show what a cron job (a command that runs on a schedule) printed, so make it write a file you can check:
