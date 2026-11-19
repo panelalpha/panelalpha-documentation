@@ -3,7 +3,7 @@ title: "Removing the panel"
 description: "Removing the panel deletes its project from PanelAlpha Engine. Your sites are separate projects and stay."
 nav:
   group: Getting Started
-  order: 6
+  order: 7
 ---
 
 # Removing the panel

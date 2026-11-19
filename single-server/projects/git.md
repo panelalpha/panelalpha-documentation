@@ -3,7 +3,7 @@ title: "Git"
 description: "A Git project is built from your repository. You redeploy it, change its branch, set variables and manage tokens and keys."
 nav:
   group: Projects
-  order: 5
+  order: 6
 ---
 
 # Git
@@ -20,12 +20,13 @@ A **deploy** builds and starts the project from the latest commit of a branch. A
 
 A redeploy runs the deploy again with the newest commits. The **Source** card on **Project Details** shows the repository, the deployed commit and whether the project is `Up to date`.
 
-:docs-video{src="../../assets/single-server/git-redeploy.webm" title="Redeploying the ntfy project: the Source card, the Redeploy window with the Branch list and new commits, and the deploy log"}
+1. Open the project and select **Redeploy** at the bottom of the **Source** card.
+2. In the **Redeploy** window, the **Branch** list shows the branch that is deployed now. Open it to pick another branch. If you choose a branch other than the deployed one, the window warns `This resets the target to origin of the selected branch.`
+3. Read the list of new commits under the branch. Each line is one change, with a short code and the text the author wrote. If the project deploys with commands of its own, the panel lists its deploy steps below the commits. Untick a step to skip it for this deploy.
+4. Select **Redeploy** to start. Select **Cancel** to leave without deploying.
 
-1. Select **Redeploy** on the **Source** card.
-2. Pick the **Branch**. If you choose a branch other than the deployed one, the window warns `This resets the target to origin of the selected branch.`
-3. Review the new commits. If the project deploys with commands of its own, the panel lists its deploy steps below the commits. Untick a step to skip it for this deploy.
-4. Confirm.
+::docs-video{src="../../assets/single-server/git-redeploy.webm" title="On the Immich project page the Redeploy button on the Source card opens the Redeploy window with the branch main and two new commits, the Branch list is opened and release is chosen, and the window warns that this resets the target"}
+::
 
 Once the project has a staging copy, the window also offers **Deploy to staging environment**. If you tick it, the chosen branch goes to the copy and production stays as it is: [Staging and preview](staging-and-preview.md).
 
@@ -37,7 +38,13 @@ The **Deploy Logs** window lists the steps with their times and the log below th
 
 Earlier deploys are in **Advanced > Logs**, on the **Deploy Logs** tab.
 
-:docs-video{src="../../assets/single-server/git-deploy-logs.webm" title="Opening the deploy log of the ntfy project from the Actions menu, then the Deploy Logs window"}
+1. Open the project and select the **Advanced** tab.
+2. In the list on the left, select **Logs**.
+3. Select the **Deploy Logs** tab.
+4. The box at the top picks the deploy, by its date and result (for example `Success`). The table lists each line of that deploy with its time, its **Stage** (for example `clone`, `build`, `start`, `health`), its **Level** (`Ok` or `Info`) and its **Message**. Use the search box to find a word. **Download** saves the log as a file.
+
+::docs-video{src="../../assets/single-server/git-deploy-logs.webm" title="On the Immich project page the Advanced tab, then Logs and Deploy Logs, which lists the lines of the last deploy with the stages clone, build, start and health"}
+::
 
 ## Changing the branch
 
@@ -64,12 +71,15 @@ After **Discard local changes** or **Force pull**, select **Pull** or **Change b
 
 Environment variables are settings that your app reads when it starts, such as an address or a key. **Advanced > Environment variables** keeps them.
 
-- **Add variable** adds one. The pencil edits a row and the bin deletes it.
+- **Add variable** adds one. It asks for a **Key** (the name, for example `IMMICH_LOG_LEVEL`) and a **Value**. Select **Save** to keep it or **Cancel** to leave.
+- The pencil on a row edits it and the bin deletes it.
 - **Import** adds a block of `KEY=value` lines at once. Turn on **Overwrite existing keys** to replace values you already have.
+- The search box above the table finds a variable by its name.
 
-Saving restarts the app container, and the new values are in place a few seconds later. If you turn off **Restart the app container after saving**, the panel only stores the variables and the next **Redeploy** applies them. **Restart** in **Advanced > Containers** does not apply them. A redeploy does not lose the variables.
+Saving restarts the app container, and the new values are in place a few seconds later. If you untick **Restart the app container after saving** in the window, the panel only stores the variables and the next **Redeploy** applies them. **Restart** in **Advanced > Containers** does not apply them. A redeploy does not lose the variables.
 
-:docs-video{src="../../assets/single-server/git-environment-variables.webm" title="Adding environment variables to the ntfy project with Add variable and Import"}
+::docs-video{src="../../assets/single-server/git-environment-variables.webm" title="The Environment variables page of Immich: Add variable opens a window where IMMICH_LOG_LEVEL and debug are typed and cancelled, then Import opens the window for a block of lines"}
+::
 
 Every project that is not WordPress has this page. A WordPress project keeps its configuration in **Advanced > System Configuration** instead.
 
@@ -104,9 +114,10 @@ An HTTPS repository uses an **access token**, a password-like text that your Git
 2. Select **Manage**.
 3. Paste the token and select **Save token**.
 
-The card shows `Token saved` or `No token saved`. If the repository stops answering, the page shows `Cannot access the repository. Update your access token.` The panel does not save a token that your Git provider does not accept.
+The card shows `Token saved` or `No token saved`. The window never shows a token that you saved before. If the repository stops answering, the page shows `Cannot access the repository. Update your access token.` The panel does not save a token that your Git provider does not accept.
 
-:docs-video{src="../../assets/single-server/git-access-token.webm" title="The Access token card shows No token saved, and Manage opens the token window"}
+::docs-video{src="../../assets/single-server/git-access-token.webm" title="The Access token card of Immich shows Token saved, and Manage opens the Access token window with an empty field and Save token"}
+::
 
 ## Deploy key
 
@@ -114,19 +125,19 @@ An SSH repository uses a **deploy key**, an SSH key you add to the repository so
 
 **Generate a new key replaces the old one, and pull and deploy stop working until you add the new key to the repository.** If you select **Delete key**, pull and deploy over SSH stop working. Remove the key at your Git provider as well.
 
-:docs-video{src="../../assets/single-server/git-deploy-key.webm" title="Generating a deploy key for an SSH address in the Connect repository card"}
-
-:docs-video{src="../../assets/single-server/git-deploy-key-card.webm" title="The Deploy key (SSH) card with the public key, Fingerprint, Generate a new key and Delete key"}
+::docs-video{src="../../assets/single-server/git-deploy-key.webm" title="The Deploy key (SSH) card of Immich with the public key and its Fingerprint, then Generate a new key opens a warning window that is cancelled, and the Delete key button"}
+::
 
 ## Auto-deploy
 
 **Auto-deploy** redeploys the project when someone pushes to the branch.
 
 1. Open **Advanced > Git**.
-2. Turn on **Auto-deploy on push** in the **Auto-deploy** card.
+2. Turn on the switch in the **Auto-deploy** card.
 
 The panel adds a webhook at your Git provider with your saved token, so the token must be allowed to manage webhooks. If there is no token, or the provider refuses it, the switch goes back off and the panel shows the reason: [Troubleshooting: Git](../troubleshooting/git.md). Turning the switch off removes the webhook.
 
-:docs-video{src="../../assets/single-server/git-auto-deploy.webm" title="The Auto-deploy on push switch turned on for a project with a saved token"}
+::docs-video{src="../../assets/single-server/git-auto-deploy.webm" title="The Auto-deploy card of Immich: the switch is turned off and then on again"}
+::
 
 Something not working? Messages and fixes: [Troubleshooting: Git](../troubleshooting/git.md).

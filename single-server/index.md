@@ -86,7 +86,7 @@ More: [Installing the panel](getting-started/install.md).
 
 ### 2. Sign in
 
-Open `https://panel.example.com`. The setup wizard creates your account, or connects your PanelAlpha Hub account, and opens the panel. The wizard can also connect your AI assistant and ends by creating your first project: [First login](getting-started/first-login.md).
+Open `https://panel.example.com`. The setup wizard creates your account, or connects your PanelAlpha Hub account, and opens the panel. The wizard can also connect your AI assistant and ends by creating your first project: [First login](getting-started/first-login.md). Later visits start on the login screen: [Signing in](getting-started/signing-in.md).
 
 ### 3. Create your first site
 

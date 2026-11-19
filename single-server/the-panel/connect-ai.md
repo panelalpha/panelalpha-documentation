@@ -29,7 +29,7 @@ Every tool connects the same way. You create a token in the panel, then put the 
 
 The **Connect AI** page shows the same steps. Pick your tool under **Your tool**. The page fills in your panel address and gives a **Copy** button for each part.
 
-::docs-video{src="../../assets/single-server/connect-ai-tour.webm" title="Connect AI in the top menu opens the Claude Code steps with Create Token, then MCP URL & tokens shows the MCP Server URL and the API Tokens table, What You Can Do with AI opens Daily Management and the other groups, and Activity Log lists each tool the assistant ran"}
+::docs-video{src="../../assets/single-server/connect-ai-tour.webm" title="Connect AI in the top menu opens the Claude Code steps, Your tool switches to ChatGPT and back, MCP URL & tokens shows the MCP Server URL and the API Tokens table, What You Can Do with AI opens a group of requests, and Activity Log lists each tool the assistant ran"}
 ::
 
 In the examples below the panel address is `https://panel.example.com`. Use your own.
@@ -196,6 +196,19 @@ Ask in the chat, for example `List my projects.` The page **What You Can Do with
 
 Your tool connects to the panel address with `/mcp` added, for example `https://panel.example.com/mcp`. **MCP URL & tokens** shows it as **MCP Server URL**.
 
+## The token list
+
+**MCP URL & tokens** has two parts. At the top, **MCP Server URL** is the address your tool connects to, with a copy button. Below it, **API Tokens** lists your tokens, with a **Create Token** button to make more.
+
+Each row of the table has six columns:
+
+- **Name**: the name you gave the token. You can sort by it.
+- **Token**: always shown as dots. The panel does not keep the text of a token, so it cannot show it again.
+- **Last Used**: when a tool last used the token. You can sort by it.
+- **Created**: when you made the token. You can sort by it.
+- **Status**: `Active` while the token works, `Revoked` after you revoke it.
+- **Actions**: **Revoke** and **Delete**.
+
 ## Revoking a token
 
 1. Open **MCP URL & tokens**. The table lists each token.
@@ -219,6 +232,6 @@ For a request like "Update all my sites", the assistant goes through your projec
 
 ## Activity
 
-**Activity Log** lists each tool the assistant runs: **Time**, **Token**, **Tool** and **Status** (`Success` or `Error`). Filter by token with **Filter by token**. If there is nothing yet, the page says `No activity yet. Start using your AI tool to see logs here.`
+**Activity Log** lists each tool the assistant runs: **Time** is when it ran, **Token** is the name of the token it used, **Tool** is what the assistant did, and **Status** is `Success` or `Error`. The list shows 20 entries a page. Filter by token with **Filter by token**. If there is nothing yet, the page says `No activity yet. Start using your AI tool to see logs here.`
 
 :docs-video{src="../../assets/single-server/connect-ai-activity-log.webm" title="Connect AI, Activity Log: each tool the assistant ran with its Time, Token, Tool and Status (Success or Error), and the Filter by token list"}

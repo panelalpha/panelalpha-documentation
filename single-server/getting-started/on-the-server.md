@@ -3,7 +3,7 @@ title: "On the server"
 description: "Commands you run on your VPS as root over SSH, for the few things the panel cannot do itself."
 nav:
   group: Getting Started
-  order: 7
+  order: 8
 ---
 
 # On the server

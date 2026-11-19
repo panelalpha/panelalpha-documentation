@@ -27,47 +27,174 @@ A **container project** runs in its own containers. A project created from Git, 
 
 Create one: [Create a project](create-a-project.md).
 
-## The project list
+## My Projects
 
-**My Projects** lists your projects as cards. Each card has a **Manage** button (**Manage Site** on a WordPress card) and either **WP Admin** or **Open Project**.
+**My Projects** is the first page after you sign in. It lists every project on your server. The list shows 8 projects at a time, newest first.
 
-:docs-video{src="../../assets/single-server/projects-list.webm" title="My Projects with the Northwind Journal, memos and ntfy cards and their Manage Site, WP Admin, Manage and Open Project buttons, then the table view with the Actions menu of the Northwind Journal row open: Manage, WP Admin, Staging, Update, Clear Cache and Delete Project"}
+::docs-video{src="../../assets/single-server/projects-list.webm" title="My Projects with the Bagisto and Immich cards: the address, the Production and Clients tags, the live mark and the Manage and Open Project buttons on a card, then the Filters, Newest and search controls and the grid and list switch"}
+::
+
+### The project card
+
+Each project is one card. From top to bottom it shows:
+
+- **A picture of the site.** Move the mouse over it to see the buttons. **Manage** opens the project page. **Open Project** opens the site (see [Open Project](#open-project)). A WordPress site has **Manage Site** and **WP Admin** instead. **WP Admin** signs you in to the WordPress dashboard without a password: [Managing WordPress](wordpress.md).
+- **A small box in the top left corner of the picture.** Tick it to select the project: [Selecting several projects](#selecting-several-projects).
+- **The name.** Select it to open the project page.
+- **The address.** The lock beside it shows that the site has a working SSL certificate. Select the address to open the site in a new tab. A project on the free `panelalpha.online` address has an address like `immich-9b17.panelalpha.online`.
+- **The tags.** See [Tags](#tags).
+- **The word `live`.** It marks the live project. A project that has a staging copy shows a second mark for the copy: [Staging and preview](staging-and-preview.md).
+- **A warning sign.** It appears only when something needs your attention. Hold the mouse over it to read what is wrong and to fix it.
+
+While a project is being created or deployed, its card shows the progress instead of the picture. **Show Logs** on that card opens the deploy log: [Deploy logs](git.md#deploy-logs).
+
+### Open Project
 
 **Open Project** works in two ways:
 
 - On a project with the free `panelalpha.online` address, it opens the site in a new tab.
-- On a project with a domain of your own, it opens the **Preview Site** window, whether or not that domain points to this server yet: [Staging and preview](staging-and-preview.md).
+- On a project with a domain of your own, it opens the **Preview Site** window, whether or not that domain points to this server yet: [Staging and preview](staging-and-preview.md#preview-link).
 
-**WP Admin** signs you in to the WordPress dashboard without a password: [Managing WordPress](wordpress.md).
+### Tags
 
-The grid and table switch beside the heading changes the view. In the table view, each row ends with an **Actions** menu with the same actions, plus **Show Logs**, **Push To Live** and **Clear Cache**. Use the search field to find a project, or **Filters** to filter by tag.
+A tag is a coloured word you put on projects to group them, for example `Production`, `Clients` or `Personal`. A project can have several tags. Tags belong to your account, so the same tag can be on many projects.
 
-**Show Logs** opens the deploy log of a container project. You find it on the card while the project deploys or after a failed deploy. **Advanced > Logs**, on the **Deploy Logs** tab, keeps the earlier deploys.
+::docs-video{src="../../assets/single-server/projects-tags.webm" title="Add tags on the Karakeep card opens the Assigned Tags window with No tags assigned, the Assign existing tag list is opened and Personal is chosen, and the tag appears on the card"}
+::
 
-To delete several projects at once, tick the box on each card or row, then select **Remove** in the bar at the bottom. It opens the same dialog as **Delete Project**: [Deleting a project](#deleting-a-project).
+1. On a card, select **Add tags**. If the project already has tags, select the round **+** button after them.
+2. The **Assigned Tags** window shows the tags of this project. Open **Assign existing tag...** and pick a tag. It is added at once.
+3. To make a new tag, select **Add New** in the same window. Type a name, pick a colour and select **Add**. Use **Cancel** to go back.
+4. To take a tag off the project, select the **x** on its chip in the **Assigned Tags** window.
+5. Close the window with the **x** at its top right.
+
+A tag that is still on a project cannot be deleted. The list shows `Cannot be removed if currently in use.` beside its **Remove** button.
+
+Select a tag on a card to show only the projects with that tag.
+
+### Filters, sort and search
+
+The three controls on the right of the heading change what the list shows.
+
+::docs-video{src="../../assets/single-server/projects-filter-by-tag.webm" title="Filters opens the Tags list, Production is ticked and Apply shows only the three Production projects, then Filters and Clear Filter show all projects again"}
+::
+
+**Filters** filters by tag.
+
+1. Select **Filters**. The window lists your tags.
+2. Pick one or more tags. They appear in **Selected tags**.
+3. Select **Apply**. The list shows the projects that have at least one of the tags you picked.
+4. The **Filters** button now shows how many tags you use, and a **Clear Filter** link appears under it. To see all projects again, select that link, or open **Filters** and select **Clear Filter**.
+
+**Sort** is the box that says **Newest**. It sets the order of the cards:
+
+- **Name** orders the projects by name.
+- **Bandwidth** orders the projects by the data they send to visitors.
+- **Storage** orders the projects by the disk space they use.
+- **Newest** orders the projects by the day you created them, the last one first.
+
+**Search** is the box that says **Enter search term**. Type part of a project name or address. The list shrinks while you type. Empty the box to see all projects.
+
+::docs-video{src="../../assets/single-server/projects-sort-search-pages.webm" title="The Newest box is changed to Name, grafana is typed in the search box and only Grafana is left, the search is cleared, then page 2 and Records Per Page 16 show more projects"}
+::
+
+### Pages
+
+Under the list you find the page numbers on the left. Use the numbers and the arrows to move between pages. **Records Per Page** is on the right. Choose **8**, **16**, **32** or **all** to see more projects at once.
+
+### Grid and table view
+
+The two small buttons beside the heading switch the view. The first one shows cards (the grid). The second one shows a table.
+
+The table has one row for each project. Its columns are **Name**, **Status**, **Visitors**, **Bandwidth**, **Storage**, **Tags** and **Newest**, then **Actions**. Select the arrows beside **Name**, **Bandwidth**, **Storage** or **Newest** to sort by that column. A narrow window shows each row as a stack, one value under the other.
+
+The **Actions** menu at the end of a row (the three dots) holds the same actions as the card, and more:
+
+- **Manage** opens the project page.
+- **Staging**, **Push To Live** and **Push To Staging** work with the staging copy: [Staging and preview](staging-and-preview.md).
+- **WP Admin**, **Update** and **Clear Cache** are for WordPress projects. **Update** updates WordPress and **Clear Cache** clears the cache of the site.
+- **Delete Project** deletes the project: [Deleting a project](#deleting-a-project).
+
+### Selecting several projects
+
+Tick the box on each card or row. A bar appears at the bottom with **Remove**. It opens the same dialog as **Delete Project**: [Deleting a project](#deleting-a-project).
+
+### Notifications
+
+The bell at the top right shows messages about your projects, for example a finished deploy or a backup. A green dot on it means there are messages you have not read.
 
 ## The project page
 
-Select **Manage** to open a project. The tabs are **Project Details**, **Monitoring**, **Backups**, **Plugins** and **Advanced**. **Plugins** is only for a WordPress project.
+Select **Manage** on a card, or the name of the project, to open its page.
 
-On a WordPress project, you can rename the project: select the pencil next to the name, type a new name and confirm. The name also becomes the WordPress site title.
+::docs-video{src="../../assets/single-server/projects-project-page.webm" title="Opening the Immich card shows its project page: the Open Project, Staging and Delete Project buttons and Change Domain are shown one after another, then the tabs Monitoring, Backups, Advanced and Project Details"}
+::
 
-:docs-video{src="../../assets/single-server/projects-project-page.webm" title="Manage Site on the Northwind Journal card opens the project page with the Installation card, then the tabs Monitoring, Backups, Plugins and Advanced one after another"}
+### The top bar
+
+The top of the page shows:
+
+- **The arrow on the left** goes back to **My Projects**.
+- **The name.** The small arrow beside it opens a search box, so you can jump to another project.
+- **The address.** The two squares beside it copy the address.
+- **Change Domain** opens the **Set Your Domain** window, where you give the project a domain of your own: [Domains and SSL](../looking-after-a-project/domains-and-ssl.md).
+- **The tags**, with the round **+** button to add more: [Tags](#tags).
+- **The `live` tab, and a `staging` tab** when the project has a staging copy. Select a tab to switch between them. The **+** button beside them creates a staging copy.
+
+The buttons on the right:
+
+- **Open Project** opens the site: [Open Project](#open-project). A WordPress site also has **WP Admin**, which signs you in to the WordPress dashboard.
+- **Preview** appears on a project with a domain of your own and opens the **Preview Site** window: [Preview link](staging-and-preview.md#preview-link).
+- **Staging** creates a staging copy. When the copy exists, **Push To Staging** takes its place on the live project, and **Push To Live** shows on the copy: [Staging and preview](staging-and-preview.md).
+- **Update** and **Cache** appear on a WordPress project. **Update** updates WordPress. It is grey when nothing can be updated, and the tip says `There are no available updates.` **Cache** clears the cache of the site.
+- **Delete Project** deletes the project: [Deleting a project](#deleting-a-project).
+
+Under the top bar are the tabs **Project Details**, **Monitoring**, **Backups** and **Advanced**. A WordPress project also has **Plugins**.
+
+### Renaming a project
+
+You can rename a WordPress project. The name also becomes the WordPress site title.
+
+1. Open the project and select the pencil next to the name.
+2. Type the new name.
+3. Select the check mark to save it, or the cross to leave without saving.
+
+::docs-video{src="../../assets/single-server/projects-rename-project.webm" title="On the Stories project page the pencil next to the name opens the name field, Stories Blog is typed, and the check mark and cross buttons appear; the cross leaves the name as it was"}
+::
+
+A project that is not WordPress has no pencil. Its name stays as it was when you created it.
 
 ### Project Details
 
-**Project Details** shows where the project comes from: an **Installation** card for WordPress, or a **Source** card with the repository (Git) or the archive (files). Beside it are a thumbnail of the site, **Loading Speed** scores with a **Full Report** link to Google PageSpeed, and a **Security** card with **Automatic Backups**, **SSL** and **Create Backup**. On a server with no backup store, **Automatic Backups** shows `Unavailable` and `No backup store is set up.` with a **Set up store** link to **Settings > Backups**.
+**Project Details** is the first tab. It shows these cards:
 
-::docs-video{src="../../assets/single-server/projects-source-card.webm" title="The project page of Immich on the Site Details tab: the Source card with the repository, the database and Up to date with Manage, the Security card with Create Backup, the Loading Speed scores, and the Project Analytics charts below"}
+- **A picture of the site.** Move the mouse over it to see two buttons. **Open Project** opens the site: [Open Project](#open-project). **Refresh Thumbnail** takes a new picture of the site, for example after you changed how it looks.
+
+- **Source** (a Git or Files project) shows where the project comes from: the repository and branch with the last deployed commit, the database, and whether the project is `Up to date`. **Manage** beside the database opens the containers page. The button at the bottom is **Redeploy** for a Git project: [Redeploying](git.md#redeploying). A WordPress project has an **Installation** card instead.
+- **Security** shows when the next automatic backup runs, with a **Disable** button, the SSL certificate with a **Manage** button, and **Create Backup**, which makes a backup now: [Backups](../looking-after-a-project/backups.md). On a server with no backup store, the backup line shows `Unavailable` and `No backup store is set up.` with a **Set up store** link to **Settings > Backups**.
+- **Loading Speed** shows two scores from 0 to 100, one for a computer (**Desktop**) and one for a phone (**Mobile**). **Full Report** opens the complete report from Google PageSpeed.
+- **Project Analytics** shows the visitors, the time they stay and the data sent, for the last week or month. Choose the period in the box at the right.
+
+::docs-video{src="../../assets/single-server/projects-source-card.webm" title="The Project Details tab of Immich: the Source card with the repository immich-app/immich and the PostgreSQL database, the Security card with Create Backup, the Loading Speed scores with Full Report, and Project Analytics below"}
 ::
+
+To take a new picture of the site, hold the mouse over the picture and select **Refresh Thumbnail**.
+
+::docs-video{src="../../assets/single-server/projects-refresh-thumbnail.webm" title="On the Immich project page the mouse goes over the picture of the site, and Refresh Thumbnail takes a new picture"}
+::
+
+### Monitoring and Backups
+
+**Monitoring** shows charts of visitors, countries and the length of the visits. **Backups** lists the backups of the project, lets you make a new one and restore an old one: [Backups](../looking-after-a-project/backups.md).
 
 ### Advanced
 
-**Advanced** holds the rest, in a side list.
+**Advanced** holds the rest, in a list on the left. Select an item to open its page.
 
-:docs-video{src="../../assets/single-server/projects-advanced-pages.webm" title="The Advanced tab of the Northwind Journal WordPress project with its side list, opening Domains, MySQL Databases, Cron Jobs, File Manager and Logs"}
+::docs-video{src="../../assets/single-server/projects-advanced-pages.webm" title="The Advanced tab of Immich with its list on the left, opening Domains, MySQL Databases, Cron Jobs, File Manager, Containers and Logs one after another"}
+::
 
-Every kind of project has pages for its details (which also show its usage and limits: [Usage and limits of a project](../looking-after-a-project/statistics-and-logs.md#usage-and-limits-of-a-project)), domains, databases, cron, files, logs and Git. A WordPress project also shows its version and **Installation Details** (the directory and the database name, user, host and password). Other projects have **Environment variables**. A WordPress project keeps its variables in **System Configuration**.
+Every kind of project has pages for its details (which also show its usage and limits: [Usage and limits of a project](../looking-after-a-project/statistics-and-logs.md#usage-and-limits-of-a-project)), security, domains, databases, cron, files, logs and Git. A WordPress project also shows its version and **Installation Details** (the directory and the database name, user, host and password). Other projects have **Environment variables**. A WordPress project keeps its variables in **System Configuration**.
 
 Where each page is described:
 
@@ -95,9 +222,12 @@ Each container also has its own actions: [Statistics and logs](../looking-after-
 
 **Deleting a project erases its files and databases on the server and cannot be undone.** Take a backup first if you may need it: [Backups](../looking-after-a-project/backups.md).
 
-1. In **My Projects**, open the **Actions** menu of the project and choose **Delete Project**.
-2. Tick the three boxes that confirm you understand.
-3. Select **Delete Project**.
+1. Open the project and select **Delete Project** at the top right. You can also open the **Actions** menu of the project in the table view and choose **Delete Project**.
+2. The **Delete Project** window says `Any data stored on the server will be permanently erased` and `this action cannot be undone!` Under it is the name of the project. Tick the three boxes: one for the files, one for the databases, and `Yes, I understand and want to proceed with the removal of the project.`
+3. Select **Delete Project**. The button stays pale until every box is ticked. Select **Cancel** if you changed your mind.
+
+::docs-video{src="../../assets/single-server/projects-delete-project.webm" title="On the Immich project page Delete Project opens the Delete Project window with its warning and the boxes to tick, and Cancel closes it without deleting anything"}
+::
 
 A project that has a staging copy cannot be deleted. Delete the staging copy first: [Staging and preview](staging-and-preview.md).
 

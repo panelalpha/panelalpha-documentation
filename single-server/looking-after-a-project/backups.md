@@ -22,9 +22,20 @@ A server installed long ago and never updated may have no store. The **Backups**
 
 A backup of a PHP hosting project holds its files (**Directory**) and its databases (**Database**).
 
-A backup of a container project holds two parts: **Code** and **Data**. Code is the project's files. Data is what the app saved while running, including its databases. The **Backups** tab shows them as separate columns.
+A backup of a container project holds two parts: **Code** and **Data**. Code is the project's files. Data is what the app saved while running, including its databases. For Immich, the photos and the database are Data. The files that came from the Git repository are Code.
 
-:docs-video{src="../../assets/single-server/backups-container-code-data-rows.webm" title="The Backups tab of the ntfy container project: each backup has its own Code and Data columns, and pointing at an entry shows what it holds"}
+The **Backups** tab lists every backup of the project, newest first. Each row has these columns:
+
+- **Date:** when the backup was made.
+- **Data** and **Code:** a green check means that part is inside the backup. A backup made with only one part ticked shows a check for that part only.
+- **Size:** how much space the backup takes. A backup that is still running shows **Creating Backup** instead.
+- **Type:** **Manual** for a backup you made, **Automatic** for one made by the schedule.
+- **Note:** the text you wrote when you made the backup.
+
+At the end of each row are three buttons: download, restore and delete. Tick the box in the first column to select a row. The box in the header selects all rows. Type in **Enter search term** to find a backup by its note or date.
+
+::docs-video{src="../../assets/single-server/backups-container-code-data-rows.webm" title="The Backups tab of Immich: the three backups with the columns Date, Data, Code, Size, Type and Note, and the pointer moving over each row and the Code column"}
+::
 
 The two kinds of project: [Projects](../projects/projects.md).
 
@@ -32,10 +43,10 @@ The two kinds of project: [Projects](../projects/projects.md).
 
 1. Open the project and go to the **Backups** tab, **Backup History**.
 2. Select **Add New**.
-3. In **Create Backup**, write a **Backup Note** if you want one. On a PHP hosting project, keep **Backup Directory** and **Backup Database** ticked for the parts you want.
-4. Select **Create**.
+3. In **Create Backup**, write a **Backup Note** if you want one. The note helps you remember why you made the backup, for example `Before the update`. You can leave it empty. On a PHP hosting project, keep **Backup Directory** and **Backup Database** ticked for the parts you want. A container project has no ticks: its backup always holds the code and the data.
+4. Select **Create**. Select **Cancel** to close the window without a backup.
 
-   :docs-video{src="../../assets/single-server/backups-create-dialog.webm" title="Making a backup of the Northwind Journal WordPress project: Add New, the note Before installing WooCommerce, Backup Directory and Backup Database ticked, Create, then the row shows Creating Backup and finally its size and the type Manual"}
+   :docs-video{src="../../assets/single-server/backups-create-dialog.webm" title="Making a backup of Immich: Add New opens Create Backup, Create starts it, the new row shows Creating Backup and then its size 615 MB with the type Manual"}
 
 **A container project is stopped while its code and data are copied.** It starts again right after.
 
@@ -46,10 +57,11 @@ A finished backup has a size and a **Type**: **Manual** or **Automatic**. A back
 Each project can have a schedule. New projects get one by default: [Settings](../the-panel/settings.md). You can change or stop it.
 
 1. On the **Backups** tab, switch **Automatic Backups** on. The **Automatic Backups** dialog opens.
-2. Choose **How Often**: Daily, Weekly or Monthly. Then choose the time and, for weekly or monthly, the day.
-3. Select **Enable Automatic Backups**.
+2. Choose **How Often**: **Daily**, **Weekly** or **Monthly**.
+3. Choose when. **Choose Time** sets the time of day. **Weekly** also asks for **Choose Day**, one day from Mon to Sun. **Monthly** asks for the day of the month.
+4. Select **Enable Automatic Backups**. When a schedule already exists the button reads **Edit Automatic Backups**.
 
-   :docs-video{src="../../assets/single-server/backups-automatic-dialog.webm" title="Changing the automatic backups of the Northwind Journal project: Change opens Automatic Backups with How Often set to Daily, a new time is picked in Choose Time and Edit Automatic Backups saves it"}
+   :docs-video{src="../../assets/single-server/backups-automatic-dialog.webm" title="The schedule of Immich: Change beside Every day at 2:00 AM opens Automatic Backups, How Often switches from Daily to Weekly, which adds Choose Day, then back to Daily with Choose Time, and the button Edit Automatic Backups"}
 
 To change a schedule, select **Change** beside it. To stop it, switch **Automatic Backups** off and select **Disable**. The time is shown in your local time.
 

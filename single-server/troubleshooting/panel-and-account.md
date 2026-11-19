@@ -48,9 +48,9 @@ More about this: [The panel address](../getting-started/panel-address.md).
 
 ## Your account
 
-**"These credentials do not match our records."** The email or the password is wrong. Check both and try again.
+**"These credentials do not match our records."** The email or the password is wrong. Check both and try again. If you forgot the password: [Signing in](../getting-started/signing-in.md#if-you-forgot-your-password).
 
-**"Sign in again with your password to change two-factor authentication."** More than 15 minutes have passed since you signed in with your password, or you signed in with **Sign in with PanelAlpha**. Log out, sign in with your email and password and try again.
+**"Sign in again with your password to change two-factor authentication."** More than 15 minutes have passed since you signed in with your password, or you signed in with **Sign in with PanelAlpha**. Log out, sign in with your email and password and try again: [Signing in](../getting-started/signing-in.md#signing-out).
 
 **"This login link is not valid any more. Log in again from PanelAlpha."** The sign-in link from PanelAlpha was used already or is too old, or it came from a PanelAlpha account other than the one that connected the panel. Start again from the login page. If it keeps failing, sign in to PanelAlpha with the account that connected the panel, or disconnect and connect again with yours: [Settings](../the-panel/settings.md#signing-in-with-panelalpha).
 
@@ -58,7 +58,7 @@ More about this: [The panel address](../getting-started/panel-address.md).
 
 **"Two-Factor Authentication is on, but your backup codes could not be loaded. Try again; if it keeps failing, turn Two-Factor Authentication off and on again to get a new set."** The panel could not read your backup codes. Follow the message to get a new set.
 
-More about this: [Your account](../the-panel/your-account.md).
+More about this: [Signing in](../getting-started/signing-in.md) and [Your account](../the-panel/your-account.md).
 
 ## Settings
 

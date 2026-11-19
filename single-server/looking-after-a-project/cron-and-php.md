@@ -14,13 +14,14 @@ A **cron job** is a command that the server runs again and again on a schedule, 
 
 ## Adding a cron job
 
-1. Open the project, go to **Advanced > Cron Jobs** and select **Add Cron Job**.
-2. In **Common Settings**, pick how often it runs, for example **Every 5 minutes (*/5 * * * *)** or **Once a day**. Choose **Custom** to write your own **Cron Expression**. The **Frequency** line reads it back in words.
-3. Enter the **Command**. It must be on one line.
-4. On a container project, choose the **Service** the command runs in. **A run is skipped while that service is not running.**
-5. Save.
+1. Open the project, go to **Advanced > Cron Jobs** and select **Add Cron Job**. The list shows the jobs the project already has, with the columns **Cron Expression** (the schedule), **Description** (the schedule in words), **Service** (container projects only), **Command** and **Actions** (edit and delete).
+2. In **Add Cron Job**, set **Common Settings**. This is a list of ready-made schedules: **Every minute**, **Every 5 minutes**, **Twice an hour**, **Once an hour**, **Twice a day**, **Once a day**, **Once a week**, **Twice a month** (the 1st and the 15th), **Once a month** and **Once a year**. Pick the one that fits. Pick **Custom** if none does.
+3. **Cron Expression** has five boxes: minute, hour, day of the month, month and day of the week. A ready-made schedule fills them for you. With **Custom** you type your own. A `*` means every. The **Frequency** line under the boxes reads the schedule back in words. Check that line before you save.
+4. On a container project, choose the **Service** the command runs in. Immich, for example, has `immich-server`, `immich-machine-learning`, `redis` and `database`. **A run is skipped while that service is not running.**
+5. Enter the **Command**. It must be on one line. It is the text the server runs, for example `find /home/app/project/upload/tmp -type f -mtime +7 -delete`.
+6. Select **Add Cron Job**. Select **Cancel** to close the window without saving.
 
-   :docs-video{src="../../assets/single-server/cron-add-form.webm" title="Adding a cron job to the Northwind Journal project: Add Cron Job, Common Settings set to Once a day, the command wp cron event run --due-now, and the new job in the list"}
+   :docs-video{src="../../assets/single-server/cron-add-form.webm" title="Adding a cron job to Immich: Add Cron Job, Common Settings set to Once a day, the service immich-server, the command find /home/app/project/upload/tmp -type f -mtime +7 -delete, and the new job in the list"}
 
 You can edit or delete a job from its row. If the schedule is not valid, the panel does not save it and shows the reason.
 
@@ -34,21 +35,31 @@ date >> /home/<name>/example.com/cron.log
 
 **Never write the job's output in `public_html`.** Every visitor of the site can read files there.
 
+## The Developer Settings page
+
+PHP is set on **Advanced > Developer Settings**. The page of a WordPress project such as Stories has five cards:
+
+- **Debug Mode:** a switch. When it is on, WordPress shows its errors while you browse the site. It also fills the WordPress error log: [Statistics and logs](statistics-and-logs.md#logs).
+- **Maintenance Mode:** a switch. When it is on, visitors see a notice that the site is being worked on.
+- **PHPMyAdmin:** a button, **Log In to PHPMyAdmin**, for people who know databases: [Databases](databases.md#phpmyadmin).
+- **PHP Version:** the version PHP runs with.
+- **PHP Settings:** limits such as memory.
+
 ## Changing the PHP version
 
 **The PHP version applies to a domain, so it changes all projects on that domain.**
 
 1. Open the project and go to **Advanced > Developer Settings**.
-2. In the card **PHP Version**, select **Manage**.
-3. In **Set PHP Version**, choose the version for the domain.
-4. Save.
+2. In the card **PHP Version**, read **Current PHP version** and select **Manage**.
+3. In **Set PHP Version**, the window names the **Domain** and offers a list of versions. Choose one.
+4. Select **Save Changes**. Select **Cancel** to leave the version as it is.
 
 ## Changing PHP settings
 
 1. Go to **Advanced > Developer Settings**.
-2. In the card **PHP Settings**, select **Manage**.
-3. Set the value of a setting. **Add Directive** takes any other setting.
-4. Save. The site uses the new value within a few seconds.
+2. In the card **PHP Settings**, select **Manage**. When the card says `PHP Settings cannot be changed in this domain.`, the button is grey and you cannot open it.
+3. **Set PHP Settings** lists the settings as **Directive** and **Value**. To change one, select the pencil button on its row, type the new value and select **Save Changes**. The trash button removes a setting. **Add Directive** takes any other setting.
+4. The site uses the new value within a few seconds.
 
 The dialog always lists four settings:
 
@@ -59,6 +70,7 @@ The dialog always lists four settings:
 
 An empty value means this project does not set that setting, so the server's own value applies. To go back to it, clear the value and save.
 
-:docs-video{src="../../assets/single-server/php-settings-dialog.webm" title="Advanced > Developer Settings of the Northwind Journal project: the PHP Version card with Current PHP version, then Manage on PHP Settings, memory_limit set to 256M and Save Changes"}
+::docs-video{src="../../assets/single-server/php-settings-dialog.webm" title="Advanced > Developer Settings of Stories: the cards Debug Mode, Maintenance Mode, PHPMyAdmin, PHP Version and PHP Settings, Manage on PHP Version opens Set PHP Version with 8.3, then Manage on PHP Settings lists memory_limit, upload_max_filesize, post_max_size and max_execution_time, memory_limit is changed to 256M and Save Changes closes it"}
+::
 
 Something not working? Messages and fixes: [Troubleshooting: Looking after a project](../troubleshooting/looking-after-a-project.md#cron-jobs-and-php).

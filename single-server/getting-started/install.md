@@ -37,7 +37,7 @@ If you have a PanelAlpha Hub account, you can install from there. The panel then
 
 When the install finishes, it prints the panel address and a password for your Hub email, after `Log in as:`. Keep that password. Your Hub email is the panel's account, and you can sign in in three ways:
 
-- **Sign in with PanelAlpha** on the panel's login page
+- **Sign in with PanelAlpha** on the panel's login page ([Signing in](signing-in.md#signing-in-with-panelalpha-hub))
 - **Login** next to the server in the Hub
 - your Hub email and the printed password
 

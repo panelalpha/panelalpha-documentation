@@ -3,7 +3,7 @@ title: "Importing a WordPress site"
 description: "Importing copies a WordPress site from another host into a new project on this server, using your WordPress admin login or the migration plugin."
 nav:
   group: Projects
-  order: 4
+  order: 5
 ---
 
 # Importing a WordPress site
@@ -13,38 +13,42 @@ Importing copies an existing WordPress site from another host into a new PHP hos
 Before you start:
 
 - The old site must be online and reachable on the internet, not on this server.
+- You need the address of the old site and either an administrator login of it or the right to install a plugin on it.
 - The new project gets the domain of the source site, without `www.`. Make sure that domain is not already used by another project on this server.
 
 ## Importing a site
 
-1. Go to **My Projects**, select **Create First Project** (or the create button) and choose **WordPress**.
-2. Choose **Import Existing WordPress Project**.
-3. Enter **Your Current WordPress Project URL**. The panel checks that it can reach the site.
+Each step below is one window. The progress dots at the bottom show how far you are.
+
+1. Go to **My Projects**, select **Add New** (or **Create First Project**), choose **WordPress** and select **Continue**.
+2. In **Add New Project**, choose **Import Existing WordPress Project** ("Import your site from another provider by filling out a simple form") and select **Continue**.
+3. In **Import Existing WordPress Project**, enter **Your Current WordPress Project URL**, the address of the site you want to copy. The panel checks that it can reach the site while you type.
    - WordPress found: select **Continue**.
    - The site answers, but WordPress is not on it: `WordPress could not be detected on this URL.` Select **Continue Anyway** to go on.
    - The check fails: the reason shows under the field (for example `Source WordPress host did not resolve`) and **Continue** stays unavailable until the URL is right.
-4. Choose **Simple Method** (recommended).
-5. Choose how to connect:
-   - **Use WordPress admin login credentials**: enter the **URL**, **Username** and **Password** of a WordPress administrator.
-   - **Install the plugin manually**: select **Download Plugin**, install and activate it in the WordPress admin of the old site, then select **Continue**.
-6. Select **Continue** to start.
+4. If the old domain does not lead to the old site yet (for example during a move), open **Advanced** on this window and enter the old server's IPv4 address in **IP Address**. The panel then reaches the old site at that address. Leave it empty otherwise.
+5. Choose how to copy the site:
+   - **Simple Method**, marked **Recommended**. It uses the migration plugin for WordPress. Choose this one.
+   - **Advanced Method**, which asks for FTP or SFTP details. The panel shows it, but the server refuses it, so do not use it.
+6. On the Simple Method window, choose how to connect:
+   - **Use WordPress admin login credentials.** Enter the **URL**, the **Username** and the **Password** of a WordPress administrator of the old site. The panel does the rest on its own. This may not work, depending on the security settings and the host of your old site. If it fails, use the plugin.
+   - **Install the plugin manually.** Select **Download Plugin** and install and activate it in the WordPress admin of the old site. Then come back and select **Continue**.
+7. Select **Continue** to start.
 
-:docs-video{src="../../assets/single-server/importing-wordpress-connect.webm" title="Importing a WordPress site: Add New, WordPress, Import Existing WordPress Project, the URL https://old-site.example.com, Simple Method, then Use WordPress admin login credentials with the URL, Username and Password (hidden) and Continue, until The import process has been started!"}
+:docs-video{src="../../assets/single-server/importing-wordpress-connect.webm" title="Importing a WordPress site: Add New, WordPress, Import Existing WordPress Project, the URL stories.example.net, Simple Method, Use WordPress admin login credentials with the URL, Username and Password (hidden), Continue, until The import process has been started!"}
 
-The admin login method may not work, depending on the security settings and the host of your old site. If it fails, use the plugin.
+The new project gets the domain of the source site, without `www.`.
 
-If the old domain does not lead to the old site yet (for example during a move), open **Advanced** on the first step and enter the old server's IPv4 address in **IP Address**. The panel then reaches the old site at that address.
-
-The panel shows `Congratulations!` and `The import process has been started!`. If you leave the page while the panel is still starting the import, the browser asks you to confirm with `The import is still in progress. If you leave this page, the import may be interrupted.`
+The panel shows `Congratulations!` and `The import process has been started!`, and tells you that the site will be imported under its domain. The import takes some time, and the panel sends a notification when it ends. If you leave the page while the panel is still starting the import, the browser asks you to confirm with `The import is still in progress. If you leave this page, the import may be interrupted.` Select **Return To Dashboard** to go back to the project list.
 
 ## Following the import
 
-The project card shows **Migration is in progress**, then **Import completed** or **Importing failed.** Open the migration log to see each step and its status.
+The project card shows **Migration is in progress** with a bar and the name of the current step, then **Import completed** or **Importing failed.** Select **Show Logs** on the card to open **Migration Logs**. The window lists each step with its status (not started, in progress, completed or failed), and shows the progress of the step that runs now. A step name is, for example, **Migrating Database** or **Migrating Files**.
 
 - **Cancel Migration** stops it and removes what was entered.
 - **Try Again** retries a failed import.
 
-:docs-video{src="../../assets/single-server/importing-wordpress-progress.webm" title="The oldsite card in My Projects shows Migration is in progress with Show Logs and Cancel Migration, and Show Logs opens Migration Logs with the progress of the current step and the status of each step"}
+:docs-video{src="../../assets/single-server/importing-wordpress-progress.webm" title="The stories.example.net card in My Projects shows Migration is in progress, and Show Logs opens Migration Logs with the progress of the current step, Migrating Database, and the status of each step"}
 
 ## After the import
 

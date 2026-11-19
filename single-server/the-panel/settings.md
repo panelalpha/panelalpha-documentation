@@ -10,7 +10,7 @@ nav:
 
 Settings holds the panel's own options: its name, language, date format, address, the default domain for new projects and the default backup schedule.
 
-Open it from the user menu with **Settings**. It has two tabs, **General** and **Backups**. Save a change with **Save Changes**. You see `Settings saved.`
+Open it from the user menu with **Settings**. It has two tabs, **General** and **Backups**. Save a change with **Save Changes**. The button is grey until you change something. You see `Settings saved.`
 
 ## PanelAlpha Hub
 
@@ -20,7 +20,7 @@ A connected server gives you:
 
 - **App monitoring**: the status of every site on this server, in the Hub.
 - **Reusable integrations**: link a service once, and every server of yours uses it.
-- **One login**: **Sign in with PanelAlpha** on the panel's login page, and **Login** next to the server in the Hub.
+- **One login**: **Sign in with PanelAlpha** on the panel's login page, and **Login** next to the server in the Hub: [Signing in](../getting-started/signing-in.md#signing-in-with-panelalpha-hub).
 - **PanelAlpha GO!**: the catalog of ready apps in **Create a project**: [Create a project](../projects/create-a-project.md#creating-a-project-from-panelalpha-go).
 
 To connect:
@@ -29,7 +29,7 @@ To connect:
 2. Sign in on PanelAlpha Hub and approve. You come straight back here.
 3. The card shows `This server is connected to PanelAlpha Hub` and `Linked to the account <account>.`
 
-::docs-video{src="../../assets/single-server/settings-hub-and-backups.webm" title="Settings opens from the user menu with the PanelAlpha Hub card showing Connected and Disconnect, then the General tab with Server name, Application URL and Default domain, and the Backups tab with Backup storage and the defaults for new projects"}
+::docs-video{src="../../assets/single-server/settings-hub-and-backups.webm" title="Settings opens with the PanelAlpha Hub card showing Connected and Disconnect, the General tab below it, and then the Backups tab with Backup storage and the defaults for new projects"}
 ::
 
 If the card shows `PanelAlpha Hub has not confirmed the connection yet. Check again in a moment.`, select **Check again**. If you wait more than 15 minutes, it shows `The link expired. Start again.`
@@ -62,10 +62,10 @@ It does not send the files, databases or passwords of your projects.
 ## General
 
 - **Server name**: the name the panel shows in page titles. The default is `My Server`.
-- **Default language**: the language people see before they choose their own. The default is English.
+- **Default language**: the language people see before they choose their own. The list holds the languages this panel offers. The default is English.
 - **Default date format**: how the panel writes dates. Choose `YYYY-MM-DD` (default), `DD.MM.YYYY`, `DD/MM/YYYY` or `MM/DD/YYYY`. Accounts have no date format of their own.
 
-:docs-video{src="../../assets/single-server/settings-general-tab.webm" title="Settings opened from the user menu, General tab: Server name, Default language, Default date format, Application URL, Default domain and Save Changes"}
+:docs-video{src="../../assets/single-server/settings-general-tab.webm" title="Settings, General tab: Server name, the Default language list, the Default date format list with its four formats, Application URL, the help icon next to Default domain, and Save Changes"}
 
 ## Application URL
 
@@ -99,7 +99,7 @@ The tab shows the store in use as its type and directory, for example `Local · 
 3. Choose a **Store type**: Local, S3, SFTP, FTP or FTPS.
 4. Fill in the fields for that type and save. You see `Backup store saved.`
 
-   :docs-video{src="../../assets/single-server/settings-backup-store-form.webm" title="Settings, Backups tab: Change store opens the store form with the Store type list (Local, S3, SFTP, FTP and FTPS) and the Directory of the Local store"}
+   :docs-video{src="../../assets/single-server/settings-backup-store-form.webm" title="Settings, Backups tab: Change store opens the form, and the Store type list moves through S3, SFTP and FTP, which show their own fields, then back to Local, and Cancel closes it"}
 
 | Type | Fields |
 |---|---|
@@ -107,6 +107,13 @@ The tab shows the store in use as its type and directory, for example `Local · 
 | S3 | **Bucket**, **Access key ID**, **Secret access key**, **Region**, **Endpoint (optional)**, **Use path-style endpoint** |
 | FTP and FTPS | **Host**, **Port**, **Username**, **Password**, **Remote path** |
 | SFTP | **Host**, **Port**, **Username**, **Password** or **Private key (instead of a password)**, **Key passphrase (optional)**, **Remote path** |
+
+What each type needs:
+
+- **Local** keeps backups in a folder on this server. **Directory** is that folder.
+- **S3** keeps backups in an online storage bucket, such as Amazon S3. **Bucket** is its name. **Access key ID** and **Secret access key** are the sign-in pair your storage provider gave you. **Region** is where the bucket lives. **Endpoint (optional)** is the address of the provider, for a provider other than Amazon. **Use path-style endpoint** is a switch that some providers need. Leave it off if you do not know.
+- **FTP and FTPS** keep backups on another server. **Host** is its address, **Port** its port, **Username** and **Password** your sign-in, and **Remote path** the folder there. FTPS is FTP with encryption.
+- **SFTP** also keeps backups on another server. Sign in with a **Password**, or with a **Private key (instead of a password)** and an optional **Key passphrase (optional)**. **Remote path** is the folder there.
 
 **A local store must be inside `/home/<name>`, `/opt/panelalpha` or `/var/www/html/storage`.** A backup anywhere else is lost when PanelAlpha Engine is updated.
 
@@ -127,7 +134,7 @@ These defaults apply to projects you create from now on. Existing projects keep 
 
 Each new project gets its own minute inside that hour, so backups do not all start at once. The project's **Backups** tab shows its exact schedule.
 
-:docs-video{src="../../assets/single-server/settings-backup-schedule.webm" title="Settings, Backups tab: the defaults for new projects, Automatic backups, Backups to keep, Frequency and Time"}
+:docs-video{src="../../assets/single-server/settings-backup-schedule.webm" title="Settings, Backups tab: the defaults for new projects, Automatic backups and Backups to keep, then Frequency changes to Weekly, which adds Day of the week, to Monthly, which adds Day of the month, and back to Daily"}
 
 For taking and restoring a backup of one project: [Backups](../looking-after-a-project/backups.md).
 

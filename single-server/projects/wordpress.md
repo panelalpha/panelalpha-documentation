@@ -25,33 +25,27 @@ A WordPress site in the panel is a PHP hosting project. You log in to it, update
 
 ## Updating WordPress
 
-The **Installation** card on **Project Details** shows the WordPress version and whether an update is ready.
+The **Installation** card on **Project Details** shows the WordPress version in large green numbers and whether an update is ready. Under it you see **Updated** when the site is current. A second column shows WooCommerce, the shop add-on for WordPress. It says **Not Installed** with an **Install Now** link, or its version. The wide button at the bottom reads **WordPress is up to date** and is disabled when there is nothing to update.
 
-:docs-video{src="../../assets/single-server/wordpress-installation-card.webm" title="The Installation card on Project Details of the Northwind Journal project: WordPress 7.1.4 with Updated under it and the disabled WordPress is up to date button"}
+:docs-video{src="../../assets/single-server/wordpress-installation-card.webm" title="The Installation card on Project Details of the Stories project: the WordPress version 6.4.0 with Updated under it, the WooCommerce line and the disabled WordPress is up to date button"}
 
 When an update is ready, select **Update WordPress** on the card, or **Update** in the top bar or in the row's **Actions** menu. Pick the version, tick **Create Backup** if you want a backup first, and confirm. These buttons update WordPress itself, not plugins or themes. When only WooCommerce has an update, the card button reads **Update WooCommerce**.
 
 ## Plugins and themes
 
-The **Plugins** tab lists **Installed Plugins** and **New Plugins**. For each plugin you can choose **Install Plugin**, **Activate**, **Disable**, **Update** or **Remove**. Use **Add New** and the search field to find more.
+The **Plugins** tab opens on **Installed Plugins**. Each plugin is a card with its name and a line about it. The top edge of a card is green for an active plugin, grey for an inactive one and red when the plugin needs an update. The buttons on a card are:
 
-:docs-video{src="../../assets/single-server/wordpress-plugins-tab.webm" title="The Plugins tab of the Northwind Journal project: Installed Plugins, then Add New and a search for contact form in New Plugins"}
+- **Activate** turns an inactive plugin on. **Disable** turns an active plugin off.
+- **Update** appears when a newer version exists. The tab name also shows a red mark with the number of plugins to update.
+- **Remove** deletes the plugin from the site.
+
+Above the cards, the two icons next to the title switch between cards and a table. **Name** sorts the list, and the field **Enter search term** filters the plugins you already have. **Add New** opens **New Plugins**. There you see the featured plugins from wordpress.org, and you can type a name in the search field to find others. Use **Install Plugin** on a card to add one. The arrow next to **New Plugins** takes you back.
+
+:docs-video{src="../../assets/single-server/wordpress-plugins-tab.webm" title="The Plugins tab of the Stories project: Installed Plugins with Akismet Anti-Spam, Classic Editor, Yoast SEO and Hello Dolly, then Add New and a search for contact form in New Plugins"}
 
 **You install a plugin or theme by its wordpress.org name.** Installing from a URL is not available.
 
-Themes are under **Advanced > Installed Themes**. Use **Use This Theme**, **Preview**, **Install This Theme**, **Update** or **Remove**. The active theme cannot be removed.
-
-## Other WordPress pages in Advanced
-
-- **Users**: create, edit, reset the password of and delete WordPress users. A new password needs at least 8 characters, with an upper case letter, a lower case letter, a number and a symbol.
-- **System Configuration**: the settings in `wp-config.php`. It is for advanced users. You can create, edit and delete a setting. The database password and the keys are masked. Select **Show** to read one. The panel may ask for your panel password.
-- **Auto Updates**: **Auto Upgrade**, **Auto Upgrade Plugins** and **Auto Upgrade Themes**.
-- **Developer Settings**: **Debug Mode**, **Maintenance Mode**, **PHPMyAdmin** and **PHP Version**.
-- **Security**: **Force HTTPS Redirect** and **Disable Search Engine Indexing**.
-
-:docs-video{src="../../assets/single-server/wordpress-developer-settings.webm" title="Advanced > Developer Settings of the Northwind Journal project with the cards Debug Mode, Maintenance Mode, PHPMyAdmin and PHP Version"}
-
-**Debug Mode and Maintenance Mode should be off on a live site.** Debug Mode shows application errors to visitors. Maintenance Mode shows them the maintenance notice instead of the site. Check both switches in **Advanced > Developer Settings** before the site goes live.
+Themes, WordPress users, the settings in `wp-config.php`, automatic updates, security and developer settings are on the **Advanced** tab: [WordPress Advanced pages](wordpress-advanced.md).
 
 To clear the cache, choose **Clear Cache** in the row's **Actions** menu in the table view, or **Cache** in the project's top bar, and confirm.
 

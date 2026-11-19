@@ -3,7 +3,7 @@ title: "Updating the panel"
 description: "You update the panel by running the installer again on the server. Your accounts, settings, data and domain stay."
 nav:
   group: Getting Started
-  order: 5
+  order: 6
 ---
 
 # Updating the panel
