@@ -1,0 +1,135 @@
+# Writing pages
+
+This file is for anyone who edits the PanelAlpha documentation. What the repo is and how a
+change reaches the site: [README](README.md).
+
+## Making a change
+
+1. Create a branch from `development`.
+2. Edit or add pages. Check them on your computer: [Preview on your computer](#preview-on-your-computer).
+3. Open a pull request to `development`. Once it is merged, the test site updates in about
+   5 minutes.
+
+## Page format
+
+A page is plain GitHub Markdown, so it also reads well in the GitHub preview.
+
+- **Notes.** Use GitHub alerts: `> [!NOTE]`, `> [!TIP]`, `> [!IMPORTANT]` and `> [!WARNING]`,
+  then the text on lines that start with `> `. The site shows them as callouts.
+- **Links to other pages.** Use relative links to the `.md` file, for example
+  `[Stripe](../direct-billing/stripe.md#setup)` or `[Intro](../index.md)`. Do not write
+  `/documentation/...` links. The build fails when the file does not exist. The text after `#` is
+  the heading id used by the site (lower case, dashes, `_` before a leading digit). GitHub may
+  not jump to it in the preview.
+- **Images.** Put a new image in `assets/<product>/` and link it relatively. From
+  `single-server-edition/projects/git.md` that is `![Git card](../../assets/single-server-edition/git-card.png)`.
+- **Video and download button.** These two stay in the site format:
+  `::docs-video{src="https://www.youtube.com/embed/..."}` followed by a line with `::`, and
+  `:docs-button{href="https://..."}[Label]`. Their links must be full URLs.
+- **Code.** Code blocks and inline code are published as they are.
+
+## Frontmatter
+
+Every page needs a `title`. The `nav` block puts the page in the sidebar. Leave it out for a page
+that is not in the sidebar.
+
+```yaml
+---
+title: "Stripe"                # page title (H1, browser title)
+description: "Connect Stripe"  # shown under the page title and used by search engines:
+                               # one or two full sentences, up to about 160 characters, never cut with "..."
+nav:
+  group: Direct Billing        # group title, declared in the section index
+  order: 3                     # position in that group, starting at 1, unique per group
+  title: Stripe Setup          # only when the sidebar label differs from the title
+  section: multi-server-edition        # only when the group is in another section than the page folder
+---
+```
+
+`nav` can be a list when a page shows up in more than one group. Two pages in one group cannot
+have the same `order`, and a `group` that the section does not declare fails the build.
+
+The first file of a section, `<section>/index.md`, also holds the section settings:
+
+```yaml
+section:
+  title: Single Server         # name in the sidebar and the product switcher
+  order: 1                     # order of the sections
+  groups:                      # order and options of the groups; pages join a group by its title
+    - title: Getting Started
+      path: getting-started/index.md  # optional: page the group heading links to,
+                                      # relative to the section folder
+      collapsable: false              # only when the group must stay open
+      dividerBefore: true             # only when a divider line goes above the group
+card:                          # card of this section on the documentation home page
+  title: Single Server Edition
+  subtitle: Open source        # optional
+  description: Deploy and manage PanelAlpha on one server.
+  order: 1                     # position among the cards
+  tag: One server              # optional: small label at the top of the card
+  start:                       # optional: pages under "Start here" on the card
+    - getting-started/install.md
+    - getting-started/first-login.md
+```
+
+The paths in `start` are relative to the section folder. The link text is the sidebar label of
+the page. A page that does not exist fails the build.
+
+The root `index.md` holds the rest of the documentation home page: `title` (the heading),
+`seoTitle` (optional, the browser tab and search results; without it `title` is used), `lead`,
+`description`, `seoDescription`, `community` (title, description, items with title, description,
+href and label) and `cards` for cards that are not a section (external links), each with
+`title`, `description`, `href` and `order`. A card can have an `id` so that `resources` can use it.
+Its text body is not published.
+
+The root `index.md` also lists the pages the home page highlights. Every page is a path in
+this repo, for example `single-server-edition/getting-started/install.md`, and a page that does not
+exist fails the build.
+
+```yaml
+popular:                       # chips under the search box
+  - title: Backups             # text of the chip
+    page: single-server-edition/looking-after-a-project/backups.md
+guides:                        # cards under "Popular Guides", in this order
+  - single-server-edition/projects/create-a-project.md   # title and description come from the page
+resources:                     # cards under "More Resources", in this order
+  - card: troubleshooting-center   # a section card (folder name) or a root card with this id
+  - card: api
+  - title: PanelAlpha Engine 1.x   # or any page, with its own title and description
+    description: The guide for the Engine 1.x used by Single Server and Multi Server panels.
+    page: panelalpha-engine/v1/index.md
+```
+
+A new product is a new folder with its own `index.md`. It appears in the sidebar, the product
+switcher, search and on the documentation home page.
+
+## Preview on your computer
+
+1. Clone panelalpha-homepage and run `git submodule update --init --remote` in it. This puts this
+   repo in its `documentation/` folder.
+2. Run `bun install` and `bun run dev`. Open `http://localhost:3000/documentation`. You need
+   Bun 1.4 and Node.js 26.13.1 or newer.
+3. Edit the files in `documentation/`. That folder is a normal clone of this repo, so you can
+   branch and commit there. The dev server rebuilds the pages when a file changes. Errors from
+   the checks (missing title, broken link or image, unknown group) are printed in the terminal.
+
+To run the checks only, run `bunx nuxt prepare` in panelalpha-homepage.
+
+## Repository settings
+
+These are set once by a maintainer, under Settings > Secrets and variables > Actions.
+
+| Name | Kind | Value |
+|---|---|---|
+| `HOMEPAGE_REPO` | variable | `panelalpha/panelalpha-homepage` |
+| `HOMEPAGE_DEPLOY_TOKEN` | secret | fine-grained personal access token, see below |
+
+Create the token under GitHub > Settings > Developer settings > Fine-grained tokens:
+
+- Resource owner: `panelalpha`
+- Repository access: `panelalpha-homepage` and `panelalpha-documentation`
+- Permissions: Actions: Read and write (starts the site deploy), Contents: Read (lets the site
+  build read this repo). GitHub adds Metadata: Read itself.
+
+The same token is saved in panelalpha-homepage as `DOCS_READ_TOKEN`. **When the token expires,
+the site stops updating.** Make a new one before the date set on it and save it in both places.

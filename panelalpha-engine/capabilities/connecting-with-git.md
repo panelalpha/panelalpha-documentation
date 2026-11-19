@@ -1,0 +1,525 @@
+---
+title: Connecting with Git
+description: "Most projects on the engine start from a git repository. You give the assistant a link. Private repositories need a token or a deploy key."
+nav:
+  group: Capabilities
+  order: 1
+---
+
+# Connecting with Git
+
+Most projects on the engine start from a git repository. You give the assistant a link. It creates the project, clones the code, works out the stack and puts it on HTTPS. You do not need to pick a domain, create a database or name the framework first.
+
+```text
+Deploy my application https://github.com/org/app on this PanelAlpha Engine.
+```
+
+What this does: the assistant creates a **project** (one application or website on this VPS), downloads the code, works out the framework, builds it and starts it on HTTPS.
+
+What you should see: a web address. **Open the address it gives you**, not the one you expected. The engine may assign a different one.
+
+The file that identifies the application (`package.json`, `composer.json`, `go.mod` and so on) must sit at the top level of the repository: [What your repository needs](../supported-projects/what-your-repo-needs.md). For what the engine does after you ask, see [How a deploy works](../getting-started/how-a-deploy-works.md).
+
+The repository URL must be `https://`, with no username or password in it.
+
+## A private repository
+
+Tell the assistant the repository is private. Do not put the access token in the chat.
+
+```text
+Deploy https://github.com/org/private-app on this PanelAlpha Engine.
+The repository is private.
+```
+
+The assistant sends you a link on this engine. Open it and paste a git access token that can clone that repository. Select **Save secret**, then go back to the chat and say you are done.
+
+- A token that cannot read that repository is refused on the page, before it is saved.
+- The engine stores the token encrypted and uses it to clone. Later rebuilds reuse it. The assistant never sees the value.
+- The link lasts one hour.
+- The token is kept until it is deleted. If you ask for it to expire ("keep it for 30 days"), the engine deletes it from the vault by itself.
+
+That token belongs to the project it was pasted for. The first project given it keeps it, and no other project can use it.
+
+![Connect your repository page: paste a git token and select Save secret](../../assets/engine/connect-repository.jpg)
+
+If the stored token later stops working, ask the assistant to replace it. You get the same paste page. Do not put the new token in the chat. A paste page made for a git token works both when you create a project and when you replace the token of an existing one.
+
+## A token shared by several projects
+
+To paste a Git token once and use it on several projects, ask for a global one:
+
+```text
+Save a global Git token for the acme GitHub organisation.
+```
+
+The assistant sends the same paste page. You can keep several global tokens, for example one per organisation. The purpose you give tells them apart. Like a project token, it is kept until deleted unless it was given an expiry. The link closes after one hour.
+
+A global token is used only when you name it:
+
+```text
+Create a project from https://github.com/acme/shop with the global
+acme Git token.
+```
+
+The assistant passes the token's reference, such as `vault:Kq3xT9bL...`, in place of the token. A project created without a token clones without one, even when the engine holds global tokens.
+
+A project stores the token it was given. Deleting a vault entry does not take the token away from projects that already used it. To change a project's token, give the project the new one. Pasting again on the old link does not change a stored secret.
+
+## A deploy key instead of a token
+
+A deploy key gives the engine read access to one repository and nothing else, over SSH. Ask for a new project with one:
+
+```text
+Deploy git@github.com:acme/shop.git, branch main, as the project shop.
+Use a deploy key.
+```
+
+The assistant creates the key first and shows you its public half, a line that starts with `ssh-ed25519`. Add that line to the repository as a read-only deploy key (on GitHub: **Settings > Deploy keys**). Then tell the assistant you are done.
+
+The assistant creates the project with the key in one step. The engine reads the repository with the key before it creates anything. A key that is not on the repository yet is refused, and nothing is left behind. Later pulls and rebuilds use the same key. The private half is stored encrypted and never leaves the engine.
+
+The engine checks the server's identity on every connection. It already knows github.com, gitlab.com and bitbucket.org. For your own git server, name it when the key is created, for example `git.example.com` or `git.example.com:2222`. The engine reads that server's keys once and trusts only those afterwards.
+
+The server must be on a public address, like any repository the engine fetches from: see `host_refused` under Troubleshooting below. If the server's key changes later, the connection is refused. Create a new key with the server named again.
+
+A project that already exists can get a key of its own too:
+
+```text
+Create a deploy key for the project shop and connect git@github.com:acme/shop.git, branch main.
+```
+
+The key is made once. Every time you ask, the engine answers with the same public half and fingerprint. A public half you lost can be shown again without making a new key, and reading it back never changes it. Neither request shows the private half.
+
+## A zip of files, not a repository
+
+```text
+Deploy this archive as a new project: /path/to/app.zip
+```
+
+```text
+Deploy https://example.com/releases/app.tar.gz as the project shop.
+```
+
+The archive is uploaded to the engine first, or downloaded from its address. The project is then created and deployed from it in one step. A .zip, .tar.gz or .tgz works, and a single top-level folder is unwrapped. Use this when the code is not in git.
+
+After the first deploy, an update rebuilds the files already on the VPS, unless you give the project a new archive:
+
+```text
+Deploy /path/to/app-v2.zip into the project shop.
+```
+
+## After the project is connected
+
+The engine keeps a copy of the repository. Ask the assistant to pull, switch branch or go back to the last deployed commit. A successful pull rebuilds the site, so you do not ask for the rebuild as well. Switching branch or going back to an earlier commit rebuilds the same way.
+
+The engine installs the project's dependencies in that copy on every deploy. What the install writes there is the engine's own work: the dependency folder, and a lockfile when the repository ships none. It never shows up as your change, never blocks a pull or a branch change, and is never pushed.
+
+A `package.json` whose install scripts set up git hooks (husky, lefthook and the like) is trimmed for that install and left as the commit has it. Those scripts cannot run in a build.
+
+**Submodules.** A repository that uses git submodules gets them fetched on every pull, branch change and push. A submodule that moved in the repository is deployed at its new commit.
+
+- Once the project has deployed, a submodule that the last deployed commit already had keeps its old copy when it cannot be fetched. The deploy log warns.
+- A submodule that cannot be fetched fails the first deploy. It also fails a deploy whose commit adds the submodule, and a rebuild that would lose a copy the previous deploy had. See Troubleshooting below.
+- A submodule addressed over SSH (`git@host:...`) is fetched over HTTPS unless the project has a deploy key.
+
+**Checks before the work starts.** The engine checks the request at once: the repository answers, and the branch or commit exists. Connecting a folder of the project to a repository is checked the same way, before the connection is saved. These are refused, and the folder keeps its files and the connection it had:
+
+- an address with no repository behind it
+- a private repository whose token is not there
+- a branch the repository does not have
+
+A folder can be left with no commit, either by a connect that never fetched its branch or by a disconnect. When you connect it again, it is fetched and synced, so it serves the repository without a pull. A folder that has commits keeps its files until a pull.
+
+**While it runs.** The pull or switch and the rebuild run in the background, like any rebuild. The assistant follows them until they end.
+
+- Asking again while one is running is refused, and the answer points at the one under way.
+- A pull, branch change or revert is also refused while a deploy, backup or restore is running on the project. The answer says which one.
+- If the new version fails, or you cancel the change, while the previous version is still running, the site keeps serving the previous one. The project stays on the branch and commit it was on.
+
+```text
+Pull the latest commit on this project.
+```
+
+```text
+Switch this project to the branch release.
+```
+
+```text
+Show recent commits on this project.
+```
+
+```text
+This project's git token no longer works. Send me the page to replace it.
+```
+
+Pulling, going back to a commit, switching branch and pushing start the project first when it is stopped. Then they do their work.
+
+Going back to an older commit works on a project that holds only the newest commit. The engine fetches the commit you name from the repository. A commit the repository does not have is refused.
+
+You can list commits for a branch the project has not deployed yet. The engine fetches that branch for the listing, so a branch you pick in the panel's **Redeploy** window shows its commits before anything is deployed from it. A branch the repository does not have is refused. So is a branch the engine could not fetch. Neither answer repeats git's own error message.
+
+## Pushing local edits
+
+Pushing is for a project whose files are kept in git (a folder such as `public_html`). A project the engine deploys from a repository is changed in the repository, not from the server.
+
+```text
+Commit my edits on this project and push them to the repository.
+```
+
+The assistant commits what changed and pushes. Ask it to confirm before it does, because it commits everything in the folder. The exception is the files the engine itself wrote there, such as a lockfile its install generated because the repository ships none. Those stay on the server and are never pushed. Pushing into a repository that is still empty creates the branch.
+
+When the repository turns a push down, nothing changes there. Your work stays on the server as uncommitted changes, with the files as they were. The answer gives the reason:
+
+- **The branch has newer commits.** Or a protected branch or a rule on the repository's side declined the push. Pull first, or push to another branch.
+- **The token or key may not write.** No token is stored, or the token or deploy key can read the repository and not change it. Store a token with write access, or give the deploy key write access.
+
+A repository that answers with a redirect is refused when you connect it, and the answer gives the address to use instead. The engine does not follow redirects. On GitLab that address often ends in `.git`.
+
+## A project that was created without a repository
+
+You can give a repository to a project created without one, for example a project set up first and pointed at its code later. The assistant checks the repository the same way as for a new project, saves it and starts the first deploy.
+
+```text
+Connect https://github.com/org/app to the project shop and deploy it.
+```
+
+This works only for a project that runs in its own container and has not run an application yet. Two cases are refused: a project that already has a repository, and a classic hosting project, which cannot be converted. A private repository needs a token or a deploy key, as above.
+
+## Look at branches and tags first
+
+To see which branches and tags a repository has before any project exists, ask:
+
+```text
+List the branches and tags of https://github.com/org/app.
+```
+
+The engine reads the list from the repository without downloading the code, and shows the default branch first. A private repository needs a token. Without one, a private repository and one that does not exist both come back as "authentication failed".
+
+A rebuild of a project connected to git clones its branch again before it builds. It deploys the newest commit, and it undoes a revert to an older commit. Anything written into `~/project` since the last deploy is discarded, whether by the file tools, FTP or SSH. A change that must last belongs in the repository. Data the application writes, in its volumes or a database, is kept: [How a deploy works](../getting-started/how-a-deploy-works.md#deploying-again-later).
+
+Instead of asking for a pull each time, you can have your git host redeploy the project itself on every push: [Push to deploy](push-to-deploy.md).
+
+## Troubleshooting
+
+**The clone failed with "repository not found".**
+The URL is wrong, or the repository is private and no token was saved. Check that the URL is `https://` with no username in it. For a private repository, ask the assistant to send the paste page again.
+
+**The deploy failed with "The repository's submodules could not be fetched".**
+The engine fetches the repository's submodules with the same token on every deploy, including after a pull or a push.
+
+- A private submodule on another account or forge needs a token that can read it too.
+- A submodule addressed over SSH is fetched over HTTPS when the project has no deploy key. It uses the git token when it is on the repository's own host. A private one elsewhere needs a deploy key that can read it.
+- If the application does not need that submodule, the repository's `.panelalpha/panelalpha.yaml` can name the ones it does need: `git: {submodules: [path/to/one]}`.
+
+**Connecting a repository is refused and nothing changed.**
+Nothing is connected, and the folder keeps its files and the connection it had. The answer tells you why:
+
+- "The repository could not be read" means the address has no repository behind it, or the repository is private and no token was stored. Check the address. For a private repository, store a token first.
+- When the answer says the token was refused, that token cannot see this repository.
+- When it says the remote has no branch named `x`, the branch does not exist in the repository. Connect a branch it does have.
+- "Could not reach `github.com`" means the engine could not open a connection to the host at all.
+
+**The repository is refused with `host_refused`.**
+The engine does not fetch from internal addresses. These are its own machine, the private networks and the Docker networks. It also refuses the reserved ranges that no real server uses, such as the documentation networks (192.0.2.0/24, 198.51.100.0/24, 203.0.113.0/24, 2001:db8::/32).
+
+This covers:
+
+- a repository, a submodule and an SSH remote
+- the git server named for a deploy key
+- a file fetched by URL
+- the webhook a push-to-deploy hook registers at your git host (a redirect to another host is not followed either)
+
+It applies to a git server inside your own network too.
+
+The server operator can allow such an address in `/opt/panelalpha/shared-hosting/.env-core`:
+
+- `EGRESS_ALLOW_PRIVATE=true` allows private network addresses.
+- `EGRESS_ALLOW_HOSTS=git.internal` allows named hosts only, comma separated (a name, never an address).
+
+Loopback, link-local and other reserved addresses stay refused either way. Reload the engine after the change: [Change a setting](../getting-started/install.md#change-a-setting).
+
+On traditional PHP hosting, a server whose git is older than 2.37 (Ubuntu 22.04) also refuses a pull, and the first fetch of a connect, from any host name not in `EGRESS_ALLOW_HOSTS`. The message says git 2.37 or newer is required: [Troubleshooting](../getting-started/install.md#troubleshooting).
+
+The engine also refuses a host name it cannot resolve, because it cannot check where the name leads. Check the spelling, and write an address in its usual dotted form.
+
+**The repository is refused and the answer gives another address.**
+The repository redirects, for example after it was renamed or moved. Use the address in the answer.
+
+**A push is refused.**
+The answer says which of the two reasons applies, as above. Nothing was pushed, and your edits are still on the server.
+
+**A pull or branch change is refused because the project is busy.**
+A deploy, backup or restore holds the project. The answer names which. Wait for it to end, or cancel the deploy, then ask again.
+
+**The deploy picked the wrong kind of application.**
+The identifying file is often not at the top of the repository: [What your repository needs](../supported-projects/what-your-repo-needs.md).
+
+**I pasted the git token in the chat.**
+Revoke that token at your git host and create a new one. Ask the assistant to send the paste page. The engine never needs the value in chat.
+
+## More requests to try
+
+**Mode** is the lowest permission mode that allows it: read, modify or full ([Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do)). Deploys of real applications, one per stack, are on [Project types](../supported-projects/project-types.md#real-applications-to-try).
+
+**Is the name free?**
+
+```text
+Is the project name tshop free on this engine?
+```
+
+Mode: read. Tools: `project_verify_name`. Check: the answer says free, taken or unavailable on this host (200 with `valid`, and a `reason` when it is not free), and only a name that breaks the rules (for example `Shop-1`) is refused, with 422 and the reason.
+
+**Look before deploying**
+
+```text
+Check https://github.com/FreshRSS/FreshRSS without deploying it. What stack,
+which branch, which port?
+```
+
+Mode: read. Tools: `source_inspect`. Check: the answer names a stack, a branch and the way it was read (`partial`, `tree` or `clone`). No project exists afterwards (`project_list` does not show a new one). No `.env` values appear, only names.
+
+**List branches and tags**
+
+```text
+Which branches and tags does https://github.com/org/app have? Which is the
+default branch?
+```
+
+Mode: read. Tools: `source_refs`. Check: the default branch is named and listed first, no project is created, and a URL on an internal address is refused with `host_refused`.
+
+**Choose another way to run it**
+
+```text
+Inspect https://github.com/org/app and list every way the engine could run it.
+Then deploy it as php.
+```
+
+Mode: modify. Tools: `source_inspect`, `project_create`. Check: the ways to run it come from the inspection, and the deploy log names the one that was asked for.
+
+**Deploy from a public repository, in the background**
+
+```text
+Deploy https://github.com/usememos/memos as project tmemos on this PanelAlpha
+Engine and tell me the address when it is up.
+```
+
+Mode: modify. Tools: `project_create`, `task_get` (repeated), `project_get`. Check: the first answer carries a task id at once, the assistant polls until `completed`, and `project_get` shows the domain. The assistant does not start a second deploy while the first runs.
+
+**Deploy and wait in one call**
+
+```text
+Create project tntfy from https://github.com/binwiederhier/ntfy and wait for
+the deploy to finish before you answer.
+```
+
+Mode: modify. Tools: `project_create_sync`. Check: one call returns the project with its final deploy status, without the assistant having to poll.
+
+**Deploy with settings**
+
+```text
+Deploy https://github.com/org/app as project tsettings, branch develop, with
+the environment variable APP_MODE set to staging and a 1024 MB memory limit.
+```
+
+Mode: modify. Tools: `project_create` (`git_branch`, `env_vars`), `project_update` (`memory_limit`), `project_rebuild`. Check: the deployed branch is `develop`; `project_inspect` lists `APP_MODE` by name only, never by value; the memory limit reads 1024.
+
+**Private repository without a token in the chat**
+
+```text
+Deploy https://github.com/org/private-app as project tprivate. The repository
+is private. Do not ask me to paste the token here.
+```
+
+Mode: modify. Tools: `vault_secret_create`, `vault_secret_status`, `project_create`. Check: the assistant returns a page address, not a request for the token. After the paste, `vault_secret_status` reads `filled`. The token appears nowhere in the conversation.
+
+**Shared token, inventory, replace, remove**
+
+```text
+Save a global Git token for the acme organisation. Then list the secrets stored
+on this engine, show which global ones exist, and delete the acme one.
+```
+
+Mode: full. Tools: `vault_secret_create` (`scope` global), `vault_secret_list`, `vault_config_get`, `vault_secret_delete`. Check: the list never contains a secret value, only reference, type, scope, purpose and status. After the delete, using the reference fails. A stored secret is replaced by delete and create, never by overwrite.
+
+**Follow a deploy**
+
+```text
+What is the deploy of tmemos doing right now? Show me the log so far, and the
+task's own log lines.
+```
+
+Mode: read. Tools: `deploy_log_get` (with `offset` while `more` is true), `task_get`, `task_log_list`. Check: the log is read in pages, the second call continues from `next_offset`, and a failed deploy shows a `problem` with the fix when the failure is a known one.
+
+**Deploy history**
+
+```text
+List the deploys tmemos still has a log of. Show me the log of the second newest.
+```
+
+Mode: read. Tools: `deploy_list`, `deploy_log_read` (with `offset` while `more` is true). Check: each deploy shows its status, branch, commit and what started it, newest first, and the engine keeps the last 10 by default. With `page` or `per_page` the answer is one page with `meta` and `links`. A classic hosting project keeps no deploy log and the request is refused with 403.
+
+**Cancel a deploy**
+
+```text
+Start a rebuild of tmemos, then cancel it while it is running.
+```
+
+Mode: full. Tools: `project_rebuild`, `deploy_cancel` or `task_cancel`. Check: the task ends `cancelled`, the version that was live keeps answering, only what the cancelled deploy created is removed, and the project can be rebuilt again afterwards.
+
+**Is it really the application?**
+
+```text
+Is tmemos serving the application itself, or a placeholder page?
+```
+
+Mode: read. Tools: `app_health_check`. Check: the answer says the application itself is answering. A page that answers but is not the application is not a pass.
+
+**Deploy a zip**
+
+```text
+Upload /path/to/app.zip into project tzip and deploy it.
+```
+
+Mode: modify. Tools: `upload_create`, `project_source_set` (or `file_upload` and `project_deploy_archive`), `task_get`. Check: a single top-level folder in the zip is unwrapped, the deploy completes, and a second request while it runs is refused with a pointer to the running task.
+
+**Attach a repository later**
+
+```text
+Create the project tlater without a repository. Then connect
+https://github.com/usememos/memos to it and deploy it.
+```
+
+Mode: modify. Tools: `project_create`, `project_source_set`, `task_get`. Check: the attach answers with a task id, the deploy completes, and attaching a second repository to the same project is refused.
+
+**Do not deploy twice**
+
+```text
+Rebuild tmemos. While that runs, rebuild it again.
+```
+
+Mode: modify. Tools: `project_rebuild` twice. Check: the second answer is a conflict that names the running task. No second deploy starts.
+
+**Project inspection against the last deploy**
+
+```text
+Inspect tmemos. Is it still set up the way the last deploy left it?
+```
+
+Mode: read. Tools: `project_inspect`. Check: `drift` is empty when the strategy, platform, runtime, port and commit match the last deploy, and lists each one that differs. It does not compare file contents.
+
+**Pull, branch, history**
+
+```text
+On tmemos: show git status, list the branches and the recent commits.
+Then switch to the branch release and pull the latest commit.
+```
+
+Mode: modify. Tools: `git_status`, `git_branches`, `git_commits`, `git_change_branch`, `git_pull`, `task_get`. Check: `git_status` is called first and says the project is deployed by the engine. On a freshly deployed project `git_commits` lists one commit: a deploy clones only the newest one, unless the app config asks for the full history. Both the branch change and the pull return a task and rebuild the app. A dirty tree or a missing branch is refused.
+
+**Go back**
+
+```text
+Roll tmemos back to the previous commit.
+```
+
+Mode: modify. Tools: `git_commits`, `git_revert` with `ref`, `task_get`. Check: the assistant warns that local changes are discarded and asks first. The deployed commit afterwards is the one asked for. `git_commits` lists only the newest commit on a project deployed from git, unless the repository's `.panelalpha/panelalpha.yaml` sets `git: {history: full}`. A revert to an older commit named by its id still works: the engine fetches it. A commit the repository does not have is refused.
+
+**Push local edits, force a pull**
+
+```text
+On project tsitegit, commit my edits and push them. Then pull, and if history
+has diverged, tell me before you force anything.
+```
+
+Mode: modify. Tools: `git_push`, `git_pull` with `strategy` ff, `push_first` or `force`. Check: on a project the engine deploys, the push is refused with the reason. On a project whose files are kept in git, it commits and pushes. `force` is never used without confirmation.
+
+**Connect and disconnect git on files**
+
+```text
+Connect the project tfiles to https://github.com/org/site.git, branch main.
+Later, disconnect it again without deleting the files.
+```
+
+Mode: full. Tools: `git_connect`, `git_status` (poll while `connecting` is true), `git_disconnect`. Check: connect is not called a second time while `connecting` is true. After the disconnect the files are still there, and a deploy hook, if it had one, is gone together with the webhook the engine registered at the git host.
+
+**Push into an empty repository**
+
+```text
+On tsitegit, commit my edits and push them to the empty repository I just
+created, branch main.
+```
+
+Mode: modify. Tools: `git_push`, `git_status`. Check: the branch exists on the remote afterwards and `git_status` shows nothing to push.
+
+**A refused push keeps the work**
+
+```text
+On tsitegit, commit my edits and push them. If the repository refuses, tell me
+why and what happened to my edits.
+```
+
+Mode: modify. Tools: `git_push`, `git_status`. Check: when the branch has newer commits, the answer says so and `git_status` shows the edits as uncommitted. When the token may not write, the answer says to store a token with write access. Nothing is pushed in either case.
+
+**A repository that redirects**
+
+```text
+Deploy https://github.com/old-org/app as the project tredirect. The repository
+was renamed.
+```
+
+Mode: modify. Tools: `project_create`. Check: the request is refused with the address to use, and no project is left behind. Skip it when no renamed repository is at hand.
+
+**Go back to an older commit**
+
+```text
+Roll tmemos back to the commit before the newest one, then pull to return to
+the latest.
+```
+
+Mode: modify. Tools: `git_commits`, `git_revert` with `ref`, `git_pull`, `task_get`. Check: the revert works although the project holds only the newest commit, and a project that was stopped is started first.
+
+**Replace a token**
+
+```text
+The git token of tmemos no longer works. Send me the page to replace it.
+```
+
+Mode: modify. Tools: `vault_secret_create`, `git_update_credentials`. Check: the token is not typed in chat and the secret is created with the type `git_token`. `git_pull` works afterwards.
+
+**Deploy key for an SSH remote**
+
+```text
+Create a deploy key for tprivate and connect git@github.com:acme/shop.git,
+branch main. Then remove the key.
+```
+
+Mode: full. Tools: `git_deploy_key_create`, `git_deploy_key_show`, `git_connect`, `git_deploy_key_delete`. Check: only the public half is shown, and it starts with `ssh-ed25519`. Asking again returns the same key, and `git_deploy_key_show` reads it back without making one. After the delete, SSH remotes stop authenticating.
+
+**A new project from an SSH remote**
+
+```text
+Deploy git@github.com:acme/shop.git as the project tssh, with a deploy key.
+```
+
+Mode: modify. Tools: `vault_deploy_key_create`, `project_create`, `task_get`. Check: the public key is shown before the project exists, a create before the key is on the repository is refused with nothing created, and the create after it deploys.
+
+**A new project from an archive**
+
+```text
+Deploy https://github.com/usememos/memos/archive/refs/heads/main.zip as the project tarch.
+```
+
+Mode: modify. Tools: `project_create`, `task_get`. Check: one task creates and deploys it, and `project_get` shows source type archive.
+
+**A deploy that fails**
+
+```text
+Deploy https://github.com/org/repo-without-a-start-script as project tbroken.
+The deploy fails: read the log and tell me what to change.
+```
+
+Mode: modify. Tools: `project_create`, `task_get`, `deploy_log_get`. Check: the task ends `failed`, the answer quotes the engine's own explanation from `problem` or `details.problems`, and the assistant does not retry in a loop.
+
+## From the server
+
+Git commands for a project that is already deployed: [CLI commands](../commands/pae-cli.md#repository-projects). The paste link and the shared token: [Secrets](../commands/pae-cli.md#secrets).

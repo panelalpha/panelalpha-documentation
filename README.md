@@ -1,55 +1,56 @@
-# PanelAlpha documentation
+<div align="center">
 
-Source of the documentation published at panelalpha.com/documentation. This repo holds only
-the pages (Markdown) and their images. The site itself is built by
-[panelalpha-homepage](https://github.com/panelalpha/panelalpha-homepage).
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset=".github/assets/panelalpha-documentation.svg"><img src=".github/assets/panelalpha-documentation-light.svg" alt="PanelAlpha Documentation" width="380"></picture></p>
 
-The pages still live in panelalpha-homepage and in the old VuePress repo. They move here in a
-later step.
+<h3>
+Guides for installing and using PanelAlpha.
+</h3>
 
-## Layout
+<p>
+<a href="https://www.panelalpha.com/documentation"><b>Read the documentation</b></a> ·
+<a href="https://community.panelalpha.com/"><b>Community Forum</b></a> ·
+<a href="https://discord.gg/9twHWR7xGX"><b>Discord</b></a>
+</p>
 
-One folder per product. A new product is a new folder.
+</div>
 
-```
-index.md               documentation home page
-single-server/
-multi-server/
-  troubleshooting/
-panelalpha-engine/
-  v1/                  Engine 1.x
-```
+This is the PanelAlpha documentation, the same pages you read at
+[panelalpha.com/documentation](https://www.panelalpha.com/documentation). Each page is a Markdown
+file, so you can also read it here on GitHub.
 
-## Branches
+## What is inside
 
-| Branch | Site |
-|---|---|
-| `development` | test site |
-| `main` | panelalpha.com (not connected yet) |
+**[Single Server Edition](single-server-edition/index.md)**
+A web hosting panel you install on your own VPS. Installing it, creating projects, domains,
+backups, staging and the panel's settings.
 
-Work in your own branch and open a pull request to `development`.
+**[Multi Server Edition](multi-server-edition/index.md)**
+PanelAlpha for hosting providers who run WordPress hosting on many servers. Servers, billing
+systems, migrations, the Admin Area and the Client Area.
 
-## How a change reaches the site
+**[Troubleshooting Center](troubleshooting-center/index.md)**
+Known problems and how to fix them: installation, configuration, servers, backups and integrations.
 
-1. A push to `development` runs `.github/workflows/update-site.yml`.
-2. That workflow starts `deploy.yml` in panelalpha-homepage on its `development` branch.
-3. panelalpha-homepage runs its checks, builds the site and deploys it to the test site. This
-   takes about 5 minutes. The result is in the Actions tab of panelalpha-homepage.
+**[PanelAlpha Engine](panelalpha-engine/index.md)**
+The open source engine that hosts your projects on your own server, controlled by your AI
+assistant. The guide for Engine 1.x is in [`v1/`](panelalpha-engine/v1/index.md).
 
-## Settings in GitHub
+Images used by the pages are in `assets/`.
 
-Settings > Secrets and variables > Actions:
+## Found a mistake?
 
-| Name | Kind | Value |
-|---|---|---|
-| `HOMEPAGE_REPO` | variable | `panelalpha/panelalpha-homepage` |
-| `HOMEPAGE_DEPLOY_TOKEN` | secret | fine-grained personal access token, see below |
+Open an issue with the page and what is wrong, or send a pull request with the fix. How pages are
+written: [Writing pages](CONTRIBUTING.md).
 
-The token: GitHub > Settings > Developer settings > Fine-grained tokens > Generate new token.
+## Talk to us on Discord
 
-- Resource owner: `panelalpha`
-- Repository access: only `panelalpha-homepage`
-- Permissions: Actions: Read and write (Metadata: Read is added by GitHub)
+**Discord is the main place to reach the PanelAlpha team.** Ask a question, share an idea or tell
+us what is missing from a page.
 
-The token expires on the date chosen when it was made. After that the site stops updating
-until someone makes a new one and saves it in `HOMEPAGE_DEPLOY_TOKEN`.
+<br><div align="center">
+<a href="https://discord.gg/9twHWR7xGX">
+<img src=".github/assets/discord-banner.png" alt="Talk to us on Discord, the main place to reach the PanelAlpha team" width="760">
+</a>
+</div><br>
+
+Not into Discord? The [Community Forum](https://community.panelalpha.com/) is open too.

@@ -1,0 +1,404 @@
+---
+title: Security
+description: "The engine host is a privileged machine by design. This page covers password protection, how projects are kept apart, the firewall and ModSecurity."
+nav:
+  group: Capabilities
+  order: 9
+---
+
+# Security
+
+The engine host is a privileged machine by design. The engine controls every container on it, and the installer replaces the firewall and the domain-name resolver. Treat your VPS as single-purpose and do not run anything else on it.
+
+## Password protection
+
+A project stays open until you set a password on it. Nothing asks for one on its own. Once you set one, that password covers every address of the project. It does not cover the engine's own address, the one your assistant connects to.
+
+```text
+Set a password on this project so visitors have to type it before they see the site.
+```
+
+What you should see: the next visit shows a page with a password box. The page says "This site is password protected." A correct password is remembered until the browser is closed. If you set a new password, those visitors are asked again.
+
+```text
+Remove the password from this project.
+```
+
+The site opens with no prompt.
+
+The password box is the usual prompt. The whole engine can use the browser's own login window instead. Both accept the same password. In the browser window the name beside the password is ignored. One setting chooses between them, `SITE_PASSWORD_AUTH_MODE`: `custom` is the page and is the default, and `basic` is the browser window. Changing a setting: [Install](../getting-started/install.md#change-a-setting).
+
+A monitor that checks the site without sending the password gets "not allowed" and reports the site as down. Give the monitor the password.
+
+Let's Encrypt can still confirm you control the domain, because that check is not behind the password.
+
+A Cloudflare tunnel on the project is checked the same way. This is enforced on the webserver a normal install uses.
+
+Every wrong password, on any site, is written with the visitor's address to one file, `/opt/panelalpha/shared-hosting/webserver-logs/nginx-proxy/site-password.log`. A first visit, the password page itself and a correct password are not written. After 10 wrong passwords in 10 minutes, fail2ban bans that address for an hour, the same kind of ban as below.
+
+Behind Cloudflare this ban does not stop anyone. Through a proxied DNS record, the log names the real visitor, but their requests reach the server from Cloudflare's addresses, which the ban does not block. Through a Cloudflare tunnel, every visitor arrives from the project's own address on the server. That address is never banned, since that would cut the project off.
+
+## The most important setting on this page
+
+**A token with default permissions can permanently delete an entire project and everything in it.**
+
+Before you paste a token into any AI assistant, decide what that token is allowed to do. That includes which areas it can see and which projects it can reach: [Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do). A token can be limited to some projects. It cannot reach the others, and it cannot change a project's limits or suspend it.
+
+Any client holding that token has the same power. An assistant is the one you will hand a token to most casually, so that is where the decision gets made.
+
+Revoke a token the moment you suspect it has leaked:
+
+```bash
+pae mcp:token:list
+pae mcp:token:revoke <id>
+```
+
+Revoking stops the token working at once and keeps it in the list, so you keep a record of what existed.
+
+## Projects kept apart
+
+Projects can reach the internet (within the [limits on outbound connections](#limits-on-outbound-connections)), the server's MySQL databases and image caches, and the server's mail and web services. They cannot connect directly to another project, the engine's API, FTP, SFTP or phpMyAdmin, or private addresses on your network. Visitors still reach the sites through the engine's webserver.
+
+There is one exception, on purpose. A project that runs in its own container can be allowed to call the engine's API, for an app that manages the engine, such as a deploy dashboard. The engine gives that project its own token, limited to that project, to chosen projects, or to everything. Replacing that token, denying the access or deleting the project removes the old one. Allowing and denying is a server command: [CLI commands](../commands/pae-cli.md#engine-api-for-projects) (`pae system:api-access:allow`). Allow it only for an app you trust with that reach.
+
+The update tries to move running projects created on an earlier version onto the isolated network. An application using the server's MySQL may restart during the move, and its site is unavailable until it answers again. A stopped project is left where it was. If a project was stopped or the update reports that its move failed, start it and retry the move from the server: [CLI commands](../commands/pae-cli.md#projects-and-deploys).
+
+## Limits on outbound connections
+
+The engine limits the new connections projects open to the rest of the internet. This stops one application from scanning networks, flooding a server or sending spam from your server's address. Hosting providers lock servers that do, and their abuse report is the first you would hear of it. The limits are on for every install:
+
+- Mail sent straight to other servers on port 25 is blocked. A project sends mail through the server's own mail relay, or through a mail service on port 587 or 465.
+- A project may open 100 new connections a second. The ones over that are dropped.
+- A project may reach 60 new addresses at once, then 20 a minute. Going over looks like a network scan, so the project loses every new outbound connection for 30 minutes. Each block that follows within a day lasts twice as long as the one before, up to a day. An address it reached in the last 10 minutes is not new.
+- The web ports, 80 and 443 over TCP, are counted on their own, with ten times more room: 600 new addresses at once, then 200 a minute. A federated server, a feed reader or an uptime monitor reaches many servers there. An address reached on a web port is still new on any other port.
+
+The same limits apply to the builds the engine runs for a project. A build that goes over is blocked on its own, and the project's site keeps its connections. Some traffic is not counted, and a blocked project still reaches it: connections already open, answers to visitors, and the server's own services (the databases, the mail relay, the sites, the engine API a project may call).
+
+When a limit stops a project, its deploy log gets a line that says what happened and until when, and the engine's log names the project. With telemetry on, the engine reports it to monitoring too. These commands show what is stopped now, show every event of the last week, and lift a block early:
+
+```bash
+pae system:egress:list
+pae system:egress:list --days=7
+pae system:egress:unblock <project>
+```
+
+Lifting a block also clears the project's count of new addresses, and its next block lasts 30 minutes again. It does not open port 25 or raise the connection limit: those have no block to lift, only their settings below.
+
+The API has the same: `GET /system/egress` and `DELETE /system/egress/{project}`.
+
+Each limit is a setting in `/opt/panelalpha/shared-hosting/.env`. 0 turns a limit off. A change applies within a minute, with no restart.
+
+| Setting | Default | What it does |
+|---|---|---|
+| `EGRESS_BLOCK_SMTP` | `1` | `1` blocks mail to other servers on port 25. |
+| `EGRESS_NEW_CONNECTIONS_PER_SECOND` | `100` | New connections a project may open each second, in bursts of up to ten times that. |
+| `EGRESS_NEW_DESTINATIONS_BURST` | `60` | New addresses a project may reach at once, on any port but 80 and 443. |
+| `EGRESS_NEW_DESTINATIONS_PER_MINUTE` | `20` | New addresses a minute after that. |
+| `EGRESS_WEB_NEW_DESTINATIONS_BURST` | `600` | New addresses a project may reach at once on ports 80 and 443 (TCP). |
+| `EGRESS_WEB_NEW_DESTINATIONS_PER_MINUTE` | `200` | New addresses a minute on those ports after that. |
+| `EGRESS_SCAN_BLOCK_MINUTES` | `30` | How long a project that went over is blocked the first time in a day. `0` drops only the connections over the limit. |
+
+An application that reaches more servers than that on purpose will be stopped. Examples are a crawler, a proxy checker, a large federated server (Mastodon, Matrix) or a monitor of hundreds of sites. Raise the limits for the whole server, or lift its block. The settings apply to every project. One project cannot be given its own yet.
+
+The limits do not cover everything:
+
+- A blocked project reaches up to 60 new addresses again each time its block ends, though each block after it is longer.
+- A flood of traffic to one address over UDP, or plain bandwidth, is not limited.
+- A scan of ports 80 and 443 alone is stopped only past the higher web limits. HTTP/3 (UDP 443) counts with the other ports, not the web ones.
+
+On the server, `journalctl -k -g pa-egress` shows each time a limit was hit, and `nft list table inet pa_egress` shows the rules.
+
+## How the engine works as root
+
+The engine's own code runs as an ordinary user, `www-data`, and has no `sudo`. Everything it must do as root is one of a fixed list of named actions, such as making a project's account, writing in a home or restarting a container. The engine's container has no privileges and cannot see the server's processes. A small root process in a container of its own, the **root broker**, does the work. It takes requests only from the engine's container, checks every value it is sent, refuses a path that leads through a link, and runs only its own command for that action, never one it is handed.
+
+Every action leaves one line in the engine's log, with who asked, the action, its values and how it ended. A refused action says why. To see them:
+
+```bash
+cd /opt/panelalpha/shared-hosting && docker compose logs root-broker | grep pa-root-audit
+```
+
+A password or a licence key an action takes is left out of its line.
+
+The engine's own scripts and compose files must stay owned by root and not writable by group or others, because the broker refuses to run anything else. The installer and the update set this. If they cannot, they print a warning, and the broker refuses those files until you fix it.
+
+Two of those scripts keep the firewall in place for the projects: the one that guards the projects' network and the one that hooks the host firewall into Docker. The system information the assistant reads (`system_info`) says whether the last run of each worked. If one failed, it says what failed and gives the command that fixes it.
+
+Root on the server can run the same actions with `pae-broker`, which the installer registers next to `pae`, for example `pae-broker --host host.applyTenantNetworkFirewall --`. They are checked the same way, and each line is marked `"via": "pa-broker"`.
+
+## What a project cannot touch on the server
+
+- **Project homes** are mounted so that a program in one cannot gain privileges from a file in it and cannot create device files (`nosuid,nodev`).
+- **A project on PHP hosting** sees the engine's own configuration read-only. On projects created before 2.3.0 this applies the next time their container is recreated. To apply it at once, which restarts their sites:
+
+  ```bash
+  pae projects:config-mounts:restrict --all --recreate
+  ```
+
+- **A project's own compose file** may mount only the project's folder (`~/project`) and its `~/.panelalpha` folder from the server. Any other mount from the server is dropped, and the deploy log names it. The Docker socket is never allowed.
+- **Rollback database dumps** that a push makes, and the copies a container restore works from, are kept outside the project's home, so the project cannot read or change them.
+- **`wp-config.php`** of a PHP hosting project, which holds the database password, is readable only by that project. The update applies it to every project. To apply it yourself: `pae projects:wp-config:restrict --all`.
+- **The engine's own login cookie** is set so that a browser sends it only over HTTPS and only to the exact address that set it.
+
+Projects named under one parent name are also kept from sharing cookies: [Cookies between projects under one parent name](domains-and-ssl.md#cookies-between-projects-under-one-parent-name).
+
+## The firewall
+
+The installer sets up ufw as the server's firewall. Incoming connections are refused, except on the ports the engine serves: SSH, 80 and 443 for the sites, 2011 for the engine itself, 21 and 30000-30009 for FTP and 2222 for SFTP. Those rules are marked as the engine's, and your assistant cannot change or remove them. Outgoing connections are allowed.
+
+```text
+Show the firewall status and its rules.
+```
+
+You can list rules, add and remove them, and enable, disable or reload the firewall through your assistant. A rule allows or denies a port, an address, or both. A deny rule goes above every allow rule, so blocking an address works even on a port that is open to everyone. If the assistant cannot do this, those tools have been turned off: [Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do).
+
+```text
+Block 203.0.113.7 from this server, both ways.
+```
+
+A rule applies to one direction, incoming or outgoing, unless you ask for both. A rule in both directions blocks (or allows) traffic from the address and to it, as one rule.
+
+ufw keeps one rule for the same ports, addresses and direction. These cases are refused:
+
+- A new rule, or an edit, that matches what a rule already there matches, whatever its action or comment. The answer names that rule: change or delete it instead.
+- A rule that ufw would store as one with a rule already there. Examples are an incoming rule from an address beside an outgoing one to it, or a host deny beside a published-port deny, with the same action, ports and comment. ufw stores such a pair exactly like one rule in both directions, or one deny for both. Change the rule already there instead.
+- `0.0.0.0/0` and `::/0`. To match any address, leave the source or destination out.
+- A port that is not a number from 1 to 65535 with no leading zero. `8080` is accepted, `08080` is refused.
+- A range that runs backwards.
+- More than 15 ports in one rule. A range counts as two.
+- A comment that is not one line, or that has `'`. ufw would read a few comments as part of the rule, so they are refused with the reason: one that is only `in`, `out`, `log` or `log-all`, and, on a published-port rule or an incoming deny, one that is only `delete` or that has `in` or `out` followed by more words. `delete everything` is kept: only `delete` on its own is read as part of the rule.
+- A comment that starts with `by Fail2Ban`. That is how a ban is told apart, and deleting a ban also lifts it in fail2ban. An edit keeps such a comment only on a rule that has it already, and on a deny from an address only if that rule is a ban from the same address.
+
+The firewall protects you from locking yourself out:
+
+- A deny whose port, range or list includes 2011, the engine's own port, is always refused.
+- A deny with no port blocks its address from every port, 2011 included, the way a ban does. It is added with a warning for each of the engine's ports it covers.
+- A deny that covers your own address on SSH, or on every port, is refused until you confirm it, and the assistant should ask you first.
+- A deny that also covers the web, FTP or SFTP ports is added with a warning that names them.
+
+If the firewall cannot load a change, the change is taken back and the rules stay as they were. If another firewall change holds the lock for too long, the request fails with 409: ask again. The engine opens the port a proxy rule listens on, other than 80 and 443. If you already have a rule for that port from any address, such as a deny, it is left as it is, and the engine's log names it.
+
+There are two kinds of rule. **Host rules** cover the server's own ports, such as SSH and the sites on 80 and 443: `ufw allow 22/tcp` on the server. **Published-port rules** cover the ports Docker publishes for a container, such as the engine's own 2011, FTP and SFTP: `ufw route allow proto tcp to any port 8080` on the server. On its own, ufw does not see published ports at all. The engine sends their traffic through ufw's route rules, and drops whatever those do not allow. Neither kind reaches the other. Allowing 22 on the host does not open a container published on 22, and a published-port rule does not open a host port.
+
+A published-port rule names the port inside the container, not the one on the server. A container started with `-p 28081:8080` is opened by a rule for 8080. The engine's own published ports have published-port rules marked as the engine's, which your assistant cannot change or remove.
+
+```text
+List the published-port rules. Allow 203.0.113.7 to reach published container port 8080.
+```
+
+Through the assistant or the API, an allow is a host rule unless you ask for published ports. A deny covers both kinds, as a ban does. Blocking an address closes SSH and the sites, and the engine's 2011, FTP and SFTP and every published container port with them. It is listed once, as a rule for both, and deleting it lifts it everywhere. Ask for a deny on published ports only if that is all you want blocked. A deny you write with `ufw deny` on the server covers the host only; add `ufw route deny` for published ports.
+
+A server updated from an engine without published-port rules keeps working. Each allow rule that covered a port a container published at the time, and each incoming deny rule, gets a matching published-port rule, and the update log names each one.
+
+fail2ban watches the logins the server takes: SSH, SFTP, FTP, the sites' passwords ([Password protection](#password-protection)), and the engine's own API on 2011. On the API, a request with a wrong or expired token counts as a failed login.
+
+After 5 failed attempts in 10 minutes, an address is banned for an hour, and for longer each time it comes back. The API and site passwords allow 10 failed attempts instead of 5, since a client with a stale token retries. A site-password or API ban is always an hour. A ban closes every port to that address, published ports included. It is listed as one deny rule for both. Delete it to lift the ban early.
+
+Trust the addresses that must never be locked out: your office, your monitoring, the panel that drives this engine. A trusted address is never banned, and trusting it lifts a ban it has now. It is not an allow rule: the firewall rules still apply to it. A range wider than /8 (IPv4) or /16 (IPv6) is refused, since it would keep much of the internet from ever being banned.
+
+```text
+Trust 203.0.113.7, that's our office. Show me the trusted addresses.
+```
+
+The firewall keeps a log of what it refused and whom it banned, newest first:
+
+```text
+What did the firewall block in the last hour? Was 203.0.113.7 banned?
+```
+
+A blocked entry is a connection refused because no rule allowed it, on any port, the ones Docker publishes included. The firewall writes at most a few of these a minute, so a flood shows as a sample. A connection dropped by a deny rule you added is not logged.
+
+A server that ran CSF before is moved to ufw on its next engine update. Its allow and deny lists become ufw rules, and its configuration is saved in `/var/backups/panelalpha-csf-<date>.tgz`. The addresses it trusted are never banned by fail2ban. If CSF had been switched off, ufw stays off too. CSF's own automatic login blocks are not carried over. A rule's comment that ufw cannot store as it is, such as one with an apostrophe, is adjusted (`Bob's office` becomes `Bob’s office`). The update's output says how, and no rule is left behind because of its comment.
+
+Before CSF is removed, every stored ufw rule is test-loaded. If iptables refuses one, such as a port written `08080`, CSF stays in place and the update's output names the rule. Delete it (`ufw status numbered`, then `ufw delete <number>`) and update again. On any server, the firewall status lists such rules under `refused_rules`, with the id to delete each one by. Until it is deleted, every reload of the rules fails, and a rule change ends with the firewall turned off so the server stays reachable.
+
+> [!WARNING]
+> **Do not open a public port for an application.** Applications deliberately do not publish public ports. Traffic should arrive at the engine's webserver, which routes it into the right sandbox. Opening a port bypasses that routing, the HTTPS termination and the isolation. If a site is unreachable, the cause is almost never the firewall: [What the engine checks](monitoring-and-logs.md#what-the-engine-checks). Extra HTTP routing belongs in a proxy rule, not a firewall hole: [Extra routes](domains-and-ssl.md#extra-routes). An application that really needs a TCP or UDP port lists it in its `panelalpha.yaml`, and gets it once you allow it: [Ports and the server's name an application asks for](domains-and-ssl.md#ports-and-the-servers-name-an-application-asks-for).
+
+## Extra IP addresses
+
+If this VPS has more than one public IPv4 address, you can assign one to a project so that project's sites bind to it.
+
+```text
+List the IP addresses and subnets on this engine.
+```
+
+Most single-address servers never need this. If the assistant cannot manage addresses, those tools have been turned off: [Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do).
+
+## ModSecurity
+
+ModSecurity is a web application firewall on the public webserver. It inspects incoming requests and blocks those that match known attack patterns.
+
+```text
+Show me the ModSecurity audit log. A legitimate form submission was blocked.
+```
+
+Two rulesets ship with the engine. `owasp-crs` is the OWASP Core Rule Set. `panelalpha-wordpress` stops an anonymous visitor from reading WordPress login names through `?author=1` or the REST users list. Both are off until you switch them on, and neither does anything while ModSecurity itself is off. A WordPress site on this engine is only covered once both are on.
+
+Your own rules go in a third ruleset, `custom`: one rule file for the whole server. The assistant can write them from a description:
+
+```text
+Add a ModSecurity rule that blocks every request to /xyz with a 403, and switch the custom ruleset on.
+```
+
+The webserver checks the rules before they are saved. A rule it cannot parse is refused with the parser's message, and the rules already in place keep working. These are refused too:
+
+- A misspelt operator such as `@beginWith`. ModSecurity itself would accept it and read it as a regular expression, so the rule would not do what it says.
+- Rules that, when the check runs them once, would switch ModSecurity off or to detection-only for every site, stop the rules around them or the reading of request bodies, or deny an ordinary request.
+- `SecRuleEngine` or `ctl:ruleEngine` anywhere in them, since the mode is a setting of its own.
+- `skip`, and a `skipAfter` that does not name a `SecMarker` that comes after it in your rules. Either could otherwise skip rules that are not yours.
+
+Each directive goes on its own line. Rule ids must be between 1100000 and 1199999, which keeps them apart from the OWASP set and the engine's own rules. A rule that parses can still block too much, so test it on one site first.
+
+An update brings a shipped rule file up to date when the server's copy is exactly a version an earlier release shipped. This way a fixed rule reaches servers installed before the fix. An update never changes ruleset files you edited on the server. Those, and files the engine does not ship, are listed under "ModSecurity ruleset files on this host that differ from the shipped ones" and left as they are. A shipped rule file you switched off by renaming it to `.conf.disabled` stays off and as it is. The `custom` ruleset is not compared.
+
+You can read the mode, switch rulesets on and off, write your own rules and read the audit log. If the assistant cannot, those tools have been turned off: [Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do).
+
+**When a legitimate request gets blocked**, that is a false positive. It is a tuning problem, not a broken deploy. The audit log names the specific rule that fired. Turn off that rule, not the whole firewall. Ask the assistant to find it:
+
+```text
+Read the ModSecurity audit log and tell me which rule blocked this request.
+```
+
+The assistant reads the 10 newest entries unless you ask for more, up to 500 at a time.
+
+Do not disable ModSecurity entirely to fix one form. That is a large step backwards for a small problem.
+
+## Keep the engine updated
+
+Security fixes reach your VPS through engine updates. An engine nobody has updated in a year runs year-old versions of everything it installed. [Updating](../getting-started/updating.md).
+
+A project built on an official image, such as Node.js 22, gets the newest release of that version every time it deploys. A project that is already running keeps the release it was built with, so rebuild it after a security release: [Rebuild after you change files](../getting-started/looking-after-your-project.md#rebuild-after-you-change-files). Versions that are no longer supported upstream, such as PHP 7.4, 8.0 and 8.1 or Node.js 18 and 20, get no more fixes. Move those projects to a supported version.
+
+## Reporting a vulnerability
+
+**Disclose privately. Do not open a public issue.**
+
+Use [manage.panelalpha.com/contact](https://manage.panelalpha.com/contact).
+
+A failing deploy is not a vulnerability. That goes through [What happens when a deploy fails](../getting-started/what-happens.md).
+
+## More requests to try
+
+Keep another way into the server open while you try firewall requests, so a mistake does not lock you out. **Mode** is the lowest permission mode that allows it: read, modify or full ([Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do)). Site passwords are in [Projects](projects.md#more-requests-to-try).
+
+**Firewall state**
+
+```text
+Is the firewall on? Show every rule in the order it is evaluated, then the
+published-port rules.
+```
+
+Mode: read. Tools: `firewall_status`, `firewall_rule_list` (also with `scope` published). Check: the engine's own rules are marked as managed, and the two lists are different.
+
+**Block and unblock an address**
+
+```text
+Block 203.0.113.7 from this server, both ways. Show me the rule, then delete it.
+```
+
+Mode: full. Tools: `firewall_rule_create` with `action` deny, `direction` both, `firewall_rule_list`, `firewall_rule_delete`. Check: the deny is one rule for both host and published ports, it sits above the allows, and a second identical rule is refused naming the first. A deny that covers 2011 is refused, and one that covers the caller's own address on SSH needs confirmation.
+
+**Allow a published port, then edit it**
+
+```text
+Allow 203.0.113.7 to reach published container port 8080. Then change the
+comment to "office", then to "by Fail2Ban", and try the same rule for ports
+08080 and 70000. Do not open any port for an application's website.
+```
+
+Mode: modify. Tools: `firewall_rule_create` with `scope` published, `firewall_rule_update`. Check: the rule is created as a published-port rule, the comment changes to `office`, and a comment starting `by Fail2Ban` is refused. A port such as 08080 or 70000 is refused. No port is opened for the application's website.
+
+**What the outbound limits stopped**
+
+```text
+Is any project blocked from opening connections to the internet? Show the
+limits in force and everything they stopped this week.
+```
+
+Mode: read. Tools: `system_egress_list` (also with `days` 7). Check: the answer says whether the limits are in place and gives the seven settings, and each event names a project or build, what it did (scan, flood or SMTP) and, for a block, when it ends.
+
+**Lift an outbound block**
+
+```text
+tshop was blocked for a network scan, but it is our uptime monitor. Lift the
+block.
+```
+
+Mode: full. Tools: `system_egress_list`, `system_egress_unblock`. Check: the block is lifted and the list shows it lifted by `api`. The assistant says the block comes back if the project goes over the limit again, and that the limits are server settings.
+
+**Trusted addresses and the log**
+
+```text
+Trust 203.0.113.7, that's our office. Show the trusted addresses. What did the
+firewall block in the last hour, and was 203.0.113.7 banned?
+```
+
+Mode: full. Tools: `firewall_trusted_add`, `firewall_trusted_list`, `firewall_log_list` with `address`, `firewall_trusted_delete`. Check: a trusted address is never banned, and it still follows the firewall rules. A range wider than /8 is refused.
+
+**Off and on, reload**
+
+```text
+Reload the firewall. Then disable it, check the status, and enable it again.
+```
+
+Mode: full. Tools: `firewall_reload`, `firewall_disable`, `firewall_status`, `firewall_enable`. Check: the assistant warns that every port is open while it is off, and the engine's own ports answer after the enable.
+
+**ModSecurity mode and rulesets**
+
+```text
+What mode is ModSecurity in? List the rulesets. Switch on owasp-crs, then
+switch it off again.
+```
+
+Mode: modify. Tools: `modsec_mode_get`, `modsec_mode_set`, `modsec_ruleset_list`, `modsec_ruleset_enable`, `modsec_ruleset_disable`. Check: neither ruleset does anything while the mode is off, and the state reads back.
+
+**Tune a ruleset**
+
+```text
+In owasp-crs, switch off one config file that causes false positives and keep
+the rest. Show what changed.
+```
+
+Mode: modify. Tools: `modsec_ruleset_configs_set` with `enable` and `disable`, `modsec_ruleset_list`. Check: only the named files change.
+
+**Your own rule**
+
+```text
+Add a ModSecurity rule that blocks every request to /xyz with a 403, and switch
+the custom ruleset on. Show me the custom rules. Then replace them with an
+empty set.
+```
+
+Mode: modify. Tools: `modsec_custom_rules_get`, `modsec_custom_rules_set`, `modsec_ruleset_enable`. Check: `/xyz` answers 403, the rule id is between 1100000 and 1199999, and a rule that uses `SecRuleEngine` is refused with the parser's message while the rules in place keep working.
+
+**Find which rule blocked a request**
+
+```text
+A legitimate form submission was blocked. Read the ModSecurity audit log and
+tell me which rule fired.
+```
+
+Mode: read. Tools: `modsec_audit_log_list`, `modsec_audit_log_tail`, `modsec_audit_log_download`. Check: the answer names one rule id and suggests turning off that rule, not ModSecurity as a whole. A large log is read in pieces with `offset`, and an older rotated (compressed) log can be read too.
+
+**Check that the engine's files and firewall scripts are in order**
+
+```text
+Show the system information. Did the host firewall script and the project
+network guard run fine the last time? If not, what failed?
+```
+
+Mode: read. Tools: `system_info`. Check: `host_firewall` and `tenant_network_firewall` each say whether they are failing, and a failing one carries the warning with the command that fixes it.
+
+**Extra IP addresses**
+
+```text
+List the IP subnets and the assigned addresses. Add the subnet 203.0.113.0/24,
+assign 203.0.113.20 to tshop, then unassign it and remove the subnet.
+```
+
+Mode: full. Tools: `ip_subnet_list`, `ip_assigned_list`, `ip_subnet_create`, `ip_assign`, `ip_unassign`, `ip_subnet_delete`. Check: each step reads back.
+
+## From the server
+
+The project password, and the ModSecurity audit log: [CLI commands](../commands/pae-cli.md#security).
