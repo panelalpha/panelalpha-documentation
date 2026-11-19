@@ -41,7 +41,7 @@ card:
 # PanelAlpha Engine
 
 > [!NOTE]
-> **This documentation covers PanelAlpha Engine version 2.0+.** The PanelAlpha Single Server and Multi Server control panels do not support this version yet. They still use PanelAlpha Engine v1.x: [PanelAlpha Engine 1.x documentation](v1/index.md).
+> **This documentation covers PanelAlpha Engine version 2.0 and later.** PanelAlpha Single Server Edition runs on it. PanelAlpha Multi Server Edition and older PanelAlpha Single Server installations use PanelAlpha Engine 1.x: [PanelAlpha Engine 1.x documentation](v1/index.md).
 
 ## What is PanelAlpha Engine?
 
