@@ -114,7 +114,7 @@ An application that manages the engine, such as a hosting panel:
 pae project:create --repo=https://github.com/org/panel --full-privileges
 ```
 
-What this does: before the first deploy, it does what `pae system:api-access:allow {project} --scope=all` and `pae system:public-routing:allow {project} --host-domain --ports` do. That first deploy then already gives the application its Engine API token and can move it to the server's own name. Once the application is live, the project is protected, as with `pae project:settings:set protected on`. If the deploy fails, the project is not protected. `--full-privileges` needs a container project: `--repo`, or `--template=dind`.
+What this does: before the first deploy, it does what `pae system:api-access:allow {project} --scope=all` and `pae system:public-routing:allow {project} --host-domain --ports` do. That first deploy then already gives the application its Engine API token and can move it to the server's own name. Once the application is live, it is a system project, as with `pae project:settings:set system on`: hidden from every token but its own, and protected. If the deploy fails, it is neither. `--full-privileges` needs a container project: `--repo`, or `--template=dind`.
 
 To deploy the project that already runs this repository again, instead of creating a second one:
 
@@ -157,8 +157,9 @@ These are the values your application reads when it starts. Change one, then reb
 |---|---|
 | `pae project:settings:list --project={project}` | Lists the project's stored settings. |
 | `pae project:settings:get {name} --project={project}` | Prints one setting. |
-| `pae project:settings:set {name} {value} --project={project}` | Sets one setting. |
+| `pae project:settings:set {name} {value} --project={project}` | Sets one setting. For a secret setting (`cloudflare-api-token` or `registry-auth`), the value can be `vault:<key>` from `pae vault:secret:create` instead of the secret itself. Other settings store `vault:...` as plain text. |
 | `pae project:settings:unset {name} --project={project}` | Removes one setting. |
+| `pae project:settings:set system on --project={project}` | Marks the project a system project. No API or assistant token but the project's own then lists it or reaches it, and it is protected. A token cannot turn it off. `pae project:settings:unset system --project={project}` turns it off; protection then stays only if it was set on its own. |
 | `pae project:settings:set protected on --project={project}` | Marks the project protected. While it is on, an assistant or API token can no longer delete, stop or redeploy it, and the answer says the project is protected. Your own `pae` commands are not affected, and a token cannot turn it off. `pae project:settings:unset protected --project={project}` turns it off. |
 | `pae project:settings:set persist-paths /app/storage,/app/public/uploads --project={project}` | Keeps what the application writes under these container paths across redeploys and rebuilds, on volumes of the project's own. Takes effect from the next deploy. A project that brings its own `docker-compose.yml` declares its volumes there instead. |
 | `pae project:settings:set registry-auth "ghcr.io {user} {token}" --project={project}` | Logs the project in to private image registries, one `host username token` line per registry. The deploy uses it to pull images and build from them; the Docker login file is present in the project only while a deploy runs. An image it covers never goes through the server's shared registries. |
@@ -252,7 +253,7 @@ Put a WP-CLI flag that the command does not name itself after `--`. Otherwise th
 | `pae wordpress:maintenance:get {project}` / `maintenance:set {project} {1\|0}` | Reads or switches maintenance mode. |
 | `pae wordpress:config:list {project}` | Lists `wp-config.php` entries. Also `config:get`, `config:set`, `config:delete` (`--type=constant`, `variable` or `all`) and `config:create {dbname} {dbuser}`. |
 | `pae wordpress:option:list {project}` | Lists options. Also `option:get {option}` and `option:set {option} {value}`. |
-| `pae wordpress:auto-update:get {project}` / `auto-update:set {project} {core} {plugins} {themes}` | Reads or sets automatic updates: core `off`, `on` or `minor`; plugins and themes `off` or `on`. |
+| `pae wordpress:auto-update:get {project}` / `auto-update:set {project} {core} {plugins} {themes}` | Reads or sets automatic updates: core `off`, `on` or `minor`; plugins and themes `off` or `on`. `get` also names the `wp-config.php` constants that stop automatic updates: `DISALLOW_FILE_MODS` or `AUTOMATIC_UPDATER_DISABLED` set to true, or a `WP_AUTO_UPDATE_CORE` value the engine does not know. Core then reads as off. |
 | `pae wordpress:language:set {project} {language}` | Sets the site language, for example `pl_PL`. |
 | `pae wordpress:search-replace {project} {search} {replacement}` | Replaces a string in the database. After that, table names, and its flags (`--dry-run`, `--precise`, `--all-tables`, `--all-tables-with-prefix`, `--regex`, `--skip-columns=`, `--regex-delimiter=`) following `--`. |
 | `pae wordpress:database:export {project} {file}` | Exports the database to a file only the project's user can read. `--tables=` (comma-separated) limits it. Also `database:import {project} {file}`. |
@@ -303,7 +304,7 @@ An application that manages the engine itself, such as a dashboard or an agent r
 
 Deleting a project takes it out of every other project's scope, so a project created later under the same name is not reached. A scope left with no project reaches none until you allow the project again with a new one.
 
-The project's environment gets `PANELALPHA_ENGINE_URL` and `PANELALPHA_ENGINE_TOKEN` on every deploy. `PANELALPHA_ENGINE_CA` is added only when the engine's certificate is not one the project could verify on its own. A token limited to a project cannot change that project's limits or suspend it.
+The project's environment gets `PANELALPHA_ENGINE_URL` and `PANELALPHA_ENGINE_TOKEN` on every deploy. `GET /api/tokens/current` with that token answers the project's own name. `PANELALPHA_ENGINE_CA` is added only when the engine's certificate is not one the project could verify on its own. A token limited to a project cannot change that project's limits or suspend it.
 
 ## Public ports and the server's name for projects
 
@@ -323,7 +324,7 @@ A paste link for a Git or Cloudflare token. The value is never printed back.
 
 | Command | What it does |
 |---|---|
-| `pae vault:secret:create {type} --purpose=` | Prints a paste link and the reference (`vault:<key>`). `{type}` is `git_token` or `cloudflare_api_token`. By default the secret belongs to the first project given it; `--project=NAME` makes it that project's from the start (the project need not exist yet); `--scope=global` lets any project use it. `--expires-in=SECONDS` makes the secret expire and be deleted automatically; without it the secret is kept until deleted. The link expires in an hour. |
+| `pae vault:secret:create {type} --purpose=` | Prints a paste link and the reference (`vault:<key>`). `{type}` is `git_token`, `cloudflare_api_token` or `registry_auth`. By default the secret belongs to the first project given it; `--project=NAME` makes it that project's from the start (the project need not exist yet); `--scope=global` lets any project use it. `--expires-in=SECONDS` makes the secret expire and be deleted automatically; without it the secret is kept until deleted. The link expires in an hour. |
 | `pae vault:secret:list` | Lists entries: reference, type, purpose, scope, the project that owns it and whether it is filled. Never the secret. `--scope=` or `--type=` narrows the list. |
 | `pae vault:secret:delete {ref}` | Deletes one entry and its secret. `{ref}` is the `vault:<key>` from the list. Projects that already used it keep their copy. Asks you to confirm. `--force` skips that. |
 | `pae vault:config` | Lists the global secrets. A project uses one only when it is given that secret's `vault:<key>`. |
