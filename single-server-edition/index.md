@@ -60,8 +60,6 @@ The panel works on its own. You can also connect it to two free PanelAlpha servi
 
 ## How it works
 
-:docs-video{src="../assets/single-server-edition/architecture.webm" title="Diagram: you and visitors reach the panel and your sites on one VPS; the panel runs on PanelAlpha Engine"}
-
 The panel is one project on PanelAlpha Engine. When you create a site, the panel asks the engine to do it, and the engine gives the site a project of its own.
 
 Removing the panel deletes only the panel's project. Your sites keep running: [Removing the panel](getting-started/removing.md).
