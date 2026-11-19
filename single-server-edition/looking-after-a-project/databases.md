@@ -27,7 +27,7 @@ Both lists have a search box, **Enter search term**. The **Users** tab never sho
 
 A name starts with a letter, an underscore or a hyphen. It uses only letters, numbers, underscores and hyphens. The panel tells you if it is too long.
 
-::docs-video{src="../../assets/single-server-edition/databases-list-tab.webm" title="Advanced > MySQL Databases of Immich with the tabs Databases, Users and PHPMyAdmin: Add Database with the name newsletter, and the new database immich_newsletter in the list with its Size and Updated columns"}
+::docs-video{src="../../assets/single-server-edition/databases-list-tab.webm" title="Advanced > MySQL Databases of Immich with the tabs Databases, Users and PHPMyAdmin: Add Database with the name newsletter, a message that the database has been created, and the new database immich_newsletter in the list with its Size and Updated columns"}
 ::
 
 ## Creating a database user

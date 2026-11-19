@@ -137,7 +137,7 @@ An SSH repository uses a **deploy key**, an SSH key you add to the repository so
 
 The panel adds a webhook at your Git provider with your saved token, so the token must be allowed to manage webhooks. If there is no token, or the provider refuses it, the switch goes back off and the panel shows the reason: [Troubleshooting: Git](../troubleshooting/git.md). Turning the switch off removes the webhook.
 
-::docs-video{src="../../assets/single-server-edition/git-auto-deploy.webm" title="The Auto-deploy card of Immich: the switch is turned off and then on again"}
+::docs-video{src="../../assets/single-server-edition/git-auto-deploy.webm" title="The Auto-deploy card of Immich: the switch is turned off and then on again, and each time a message says Auto-deploy settings updated"}
 ::
 
 Something not working? Messages and fixes: [Troubleshooting: Git](../troubleshooting/git.md).

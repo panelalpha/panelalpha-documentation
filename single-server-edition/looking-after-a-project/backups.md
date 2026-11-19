@@ -46,7 +46,7 @@ The two kinds of project: [Projects](../projects/projects.md).
 3. In **Create Backup**, write a **Backup Note** if you want one. The note helps you remember why you made the backup, for example `Before the update`. You can leave it empty. On a PHP hosting project, keep **Backup Directory** and **Backup Database** ticked for the parts you want. A container project has no ticks: its backup always holds the code and the data.
 4. Select **Create**. Select **Cancel** to close the window without a backup.
 
-   :docs-video{src="../../assets/single-server-edition/backups-create-dialog.webm" title="Making a backup of Immich: Add New opens Create Backup, Create starts it, the new row shows Creating Backup and then its size 615 MB with the type Manual"}
+   :docs-video{src="../../assets/single-server-edition/backups-create-dialog.webm" title="Making a backup of Immich: Add New opens Create Backup, Create starts it, a message says Backup creation is in progress, the new row shows Creating Backup and then its size 615 MB with the type Manual"}
 
 **A container project is stopped while its code and data are copied.** It starts again right after.
 

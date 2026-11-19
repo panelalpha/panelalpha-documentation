@@ -60,7 +60,7 @@ Right-click a file or a folder to open its menu. The menu offers only what fits 
 
 **To see the details to connect**, select the eye button on the row. The window shows **FTP Username**, **FTP Host** and **FTP Port**. The host is the main domain of the project, and the port is 21. On a project on a `panelalpha.online` address, use the server's IP address as the host. The window does not show the password. Use the one you set.
 
-::docs-video{src="../../assets/single-server-edition/files-ftp-login-details.webm" title="Adding an FTP account to Immich: Add Account, the name editor, a hidden password, Add Account again, then the eye button of the new row opens the login details with FTP Username, FTP Host and FTP Port"}
+::docs-video{src="../../assets/single-server-edition/files-ftp-login-details.webm" title="Adding an FTP account to Immich: Add Account, the name editor, a hidden password, Add Account again, a message that the FTP account has been added, then the eye button of the new row opens the login details with FTP Username, FTP Host and FTP Port"}
 ::
 
 ## SFTP accounts

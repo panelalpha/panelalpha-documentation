@@ -226,7 +226,7 @@ Each container also has its own actions: [Statistics and logs](../looking-after-
 2. The **Delete Project** window says `Any data stored on the server will be permanently erased` and `this action cannot be undone!` Under it is the name of the project. Tick the three boxes: one for the files, one for the databases, and `Yes, I understand and want to proceed with the removal of the project.`
 3. Select **Delete Project**. The button stays pale until every box is ticked. Select **Cancel** if you changed your mind.
 
-::docs-video{src="../../assets/single-server-edition/projects-delete-project.webm" title="On the Immich project page Delete Project opens the Delete Project window with its warning and the boxes to tick, and Cancel closes it without deleting anything"}
+::docs-video{src="../../assets/single-server-edition/projects-delete-project.webm" title="The Delete Project window for Immich with its warning, the project name and three unticked boxes, the Delete Project button still pale, and Cancel closing it without deleting anything"}
 ::
 
 A project that has a staging copy cannot be deleted. Delete the staging copy first: [Staging and preview](staging-and-preview.md).

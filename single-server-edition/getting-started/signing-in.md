@@ -60,7 +60,7 @@ A wrong code shows `The entered code is invalid.`
 5. On the **Reset password** page, enter the new password in **Enter new password** and again in **Confirm Password**, then select **Reset Password**. The password follows the same rules as in the wizard.
 6. A message reads `Your password has been reset.` and the panel takes you to the login screen. Sign in with the new password.
 
-:docs-video{src="../../assets/single-server-edition/signing-in-forgot-password.webm" title="The password step, Forgot password?, the Forgot password page with the email you@example.com, Send Password Reset Link and the message that a link was sent, and the link Sign In to go back"}
+:docs-video{src="../../assets/single-server-edition/signing-in-forgot-password.webm" title="The password step, Forgot password?, the Forgot password page with the email you@example.com, Send Password Reset Link and the message that a link was sent, and the pointer on the link Sign In"}
 
 :docs-video{src="../../assets/single-server-edition/signing-in-reset-password.webm" title="The Reset password page: Enter new password and Confirm Password shown as dots, Reset Password, then the login screen with the message Your password has been reset"}
 

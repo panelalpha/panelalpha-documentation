@@ -70,8 +70,9 @@ To add a domain:
 2. In **Add New Domain**, enter the **Domain**. The field starts with `www.`, which the panel adds itself, so do not type it.
 3. In **Type**, choose **Addon Domain** or **Subdomain**. For a subdomain, enter the name and choose the parent domain, for example `shop` under `example.com`.
 4. Select **Add Domain**. Select **Cancel** to close the window without a new domain.
+5. The panel adds the domain and shows **Set Your Domain** with the DNS records to set, the same as for the main domain. Select **Close**. The domain is in the list.
 
-::docs-video{src="../../assets/single-server-edition/domains-list.webm" title="Advanced > Domains of Immich with the columns Domain, SSL Status, Type and Points to: Add Domain opens Add New Domain with the type Addon Domain, example.org is added, and the pointer stops on Edit SSL in its row"}
+::docs-video{src="../../assets/single-server-edition/domains-list.webm" title="Advanced > Domains of Immich with the columns Domain, SSL Status, Type and Points to: Add Domain opens Add New Domain with the type Addon Domain and the DNS records, example.org is typed and added, Set Your Domain shows the A and CNAME records for it, Close shows example.org in the list, and the pointer stops on Edit SSL in its row"}
 ::
 
 Set the DNS records for the new domain at your domain provider, as above.
@@ -103,7 +104,7 @@ Each domain has a certificate. It comes from Let's Encrypt or from you, or it is
 **`Wrong DNS` means the domain points at another server, or sits behind the Cloudflare proxy without a tunnel.** A `panelalpha.online` address or a domain served through its own tunnel, such as a Cloudflare tunnel, does not show it. Fix the domain's A record: [When the domain does not point at the server](#when-the-domain-does-not-point-at-the-server).
 
 1. Go to **Advanced > Domains** and select the padlock icon on the row. You can also use **Advanced > Security**, card **SSL Certificate Applied**, button **Manage**.
-2. **Set SSL Certificate** names the **Domain**. Under it, **SSL Certificate installed on server** shows the certificate the panel put on the server. **Detected SSL Certificate** shows the one a browser finds on the domain. They can differ, for example while a new certificate is not live yet. Then choose the **SSL provider**: **Let's Encrypt** or **Custom Certificate**.
+2. **Set SSL Certificate** names the **Domain**. Under it, **SSL Certificate installed on server** shows the certificate the panel put on the server. **Detected SSL Certificate** shows the one a browser finds on the domain. They can differ, for example while a new certificate is not live yet. Then choose the **SSL provider**: **Let's Encrypt**, **Custom Certificate** or another provider the list offers.
 3. For **Let's Encrypt**, select **Generate**. The domain must already point at the server, or the certificate waits for DNS.
 4. For a certificate of your own, fill in **Certificate (CRT)** and **Private Key (KEY)**. **Certificate Authority Bundle (CABUNDLE)** is optional. Select **Install**.
 

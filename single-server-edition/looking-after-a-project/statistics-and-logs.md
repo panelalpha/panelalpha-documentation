@@ -26,7 +26,7 @@ Below the chart is one card for each question. Each card lists the biggest group
 
 The panel updates the statistics once a day. A new project shows `There is no data to display yet`. Check again the next day.
 
-::docs-video{src="../../assets/single-server-edition/statistics-monitoring-tab.webm" title="The Monitoring tab of Immich: the Visitors Chart, then the cards below it scroll past, from the pages and referrers to the device, operating system and browser"}
+::docs-video{src="../../assets/single-server-edition/statistics-monitoring-tab.webm" title="The Monitoring tab of Immich: the Visitors Chart with the total of visits, then the cards Visits By Country and Visits Chart (the pages) below it"}
 ::
 
 The **Project Details** tab also shows **Unique Visitors**, **Average Session Time** and **Bandwidth**. The session time is an estimate.
@@ -37,7 +37,7 @@ The country, continent and region cards stay empty until you download the visito
 
 **Advanced > Project Details** shows how much RAM, CPU and disk the project uses now, and the limits it may use. A limit stops one project from taking the whole server.
 
-::docs-video{src="../../assets/single-server-edition/statistics-and-logs-usage-limits.webm" title="Advanced opens Project Details of Immich with the Project usage cards RAM, CPU and Disk, the Manage link in the Limits row opens Project limits, Advanced limits shows Inodes, Disk read speed and Disk write speed, Memory (GB) changes from 2 to 4, and Save closes the window"}
+::docs-video{src="../../assets/single-server-edition/statistics-and-logs-usage-limits.webm" title="Advanced opens Project Details of Immich with the Project usage cards RAM, CPU and Disk, the Manage link in the Limits row opens Project limits, Advanced limits shows Inodes, Disk read speed and Disk write speed, Memory (GB) changes from 2 to 4, Save closes the window with the message Project limits have been saved, and the RAM limit shows 4 GB"}
 ::
 
 **Project usage** has three cards: **RAM**, **CPU** and **Disk**. Each card shows a ring with a percent, then **Used** and **Limit**. Above the cards, the panel says when the reading was taken, for example `Updated 2 minutes ago`.
@@ -77,7 +77,7 @@ Open the user menu and select **My Server**. The page shows how much **RAM**, **
 
 Choose **1 hour**, **12 hours** or **Live** in **Period**. **Live** is the last 5 minutes.
 
-::docs-video{src="../../assets/single-server-edition/statistics-server-usage.webm" title="My Server, Usage: RAM, CPU and Disk Space for the whole server, then the graphs Disk Throughput, Network Traffic and CPU Usage one after another"}
+::docs-video{src="../../assets/single-server-edition/statistics-server-usage.webm" title="My Server, Usage: RAM, CPU and Disk Space for the whole server, then the Period list set to Live and the graphs CPU Usage, Disk Throughput and Disk IOPS"}
 ::
 
 ## Logs

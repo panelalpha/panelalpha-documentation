@@ -234,4 +234,4 @@ For a request like "Update all my sites", the assistant goes through your projec
 
 **Activity Log** lists each tool the assistant runs: **Time** is when it ran, **Token** is the name of the token it used, **Tool** is what the assistant did, and **Status** is `Success` or `Error`. The list shows 20 entries a page. Filter by token with **Filter by token**. If there is nothing yet, the page says `No activity yet. Start using your AI tool to see logs here.`
 
-:docs-video{src="../../assets/single-server-edition/connect-ai-activity-log.webm" title="Connect AI, Activity Log: each tool the assistant ran with its Time, Token, Tool and Status (Success or Error), and the Filter by token list"}
+:docs-video{src="../../assets/single-server-edition/connect-ai-activity-log.webm" title="Connect AI, Activity Log: each tool the assistant ran with its Time, Token, Tool and Status, and the Filter by token list"}

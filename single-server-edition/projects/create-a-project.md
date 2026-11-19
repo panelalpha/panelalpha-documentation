@@ -64,7 +64,7 @@ If the domain still needs DNS records, the panel lists them after the install. S
 ::docs-video{src="../../assets/single-server-edition/create-a-project-go-catalog-choose-app.webm" title="Choosing PanelAlpha GO! in Choose how to create your project, then Continue opens Choose an App, where the category Monitoring and the search uptime narrow the cards, and Details on the Uptime Kuma card opens its page with the Install button"}
 ::
 
-After **Install**, the panel creates a container project from the app's repository and shows `Your project is being created` with its live log. It does not ask for a name, a domain, a branch or environment variables. Select **Back To Dashboard** if you do not want to watch. The new project shows on the list with its progress and turns `live` when it runs. The project is then an ordinary Git project: [Git](git.md).
+After **Install**, the panel creates a container project from the app's repository and shows `Your project is being created` with its live log. It does not ask for a name, a domain, a branch or environment variables. Select **Back To Dashboard** if you do not want to watch. The new project shows on the list with its progress and turns `live` when it runs. While it is created, its card shows `Deploy in progress` with **Show Logs** and **Cancel Deploy**. The project is then an ordinary Git project: [Git](git.md).
 
 ::docs-video{src="../../assets/single-server-edition/create-a-project-go-catalog-deploy.webm" title="Install on the Uptime Kuma card opens Your project is being created with the live log, Back To Dashboard shows Uptime Kuma on the project list while it is created, and then the card turns live"}
 ::

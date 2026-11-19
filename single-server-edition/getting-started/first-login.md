@@ -73,7 +73,7 @@ A local account works on this server only. On the **Server name** step, fill in 
 
 **Connect with Hub instead**, under the title, goes back to the Hub card. **Back** returns to step 1. Select **Continue** to go on to step 3.
 
-:docs-video{src="../../assets/single-server-edition/first-login-wizard-local-account.webm" title="The Name your server step of a local account: the link Connect with Hub instead, the Server name My server, Your Name Jane Doe, Email you@example.com, and the Password field with the list of rules, 1 uppercase character, 1 lowercase character, 1 number, 1 symbol and 8 characters"}
+:docs-video{src="../../assets/single-server-edition/first-login-wizard-local-account.webm" title="Start Now and Create a local account instead lead to the Name your server step: the link Connect with Hub instead, the Server name My server, Your Name Jane Doe, Email you@example.com, and the Password field with the list of rules, 1 uppercase character, 1 lowercase character, 1 number, 1 symbol and 8 characters"}
 
 ## Connecting with PanelAlpha Hub
 

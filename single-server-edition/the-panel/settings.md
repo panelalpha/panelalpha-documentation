@@ -129,12 +129,12 @@ These defaults apply to projects you create from now on. Existing projects keep 
 
 - **Automatic backups**: Enabled (default) or Disabled.
 - **Backups to keep**: a number from 1 to 365. The default is 7.
-- **Frequency**: Daily (default), Weekly or Monthly. Weekly adds **Day of the week**. Monthly adds **Day of the month**, 1 to 28.
+- **Frequency**: Daily (default), Weekly or Monthly. Weekly adds **Day of the week**. Monthly adds **Day of the month**, 1 to 28. Until you choose the day, the field shows `Choose a day of the month`.
 - **Time**: the hour, 0 to 23, in which backups start. The default is 03:00 UTC. You see it in your local time.
 
 Each new project gets its own minute inside that hour, so backups do not all start at once. The project's **Backups** tab shows its exact schedule.
 
-:docs-video{src="../../assets/single-server-edition/settings-backup-schedule.webm" title="Settings, Backups tab: the defaults for new projects, Automatic backups and Backups to keep, then Frequency changes to Weekly, which adds Day of the week, to Monthly, which adds Day of the month, and back to Daily"}
+:docs-video{src="../../assets/single-server-edition/settings-backup-schedule.webm" title="Settings, Backups tab: the defaults for new projects, Automatic backups and Backups to keep, then Frequency changes to Weekly, which adds Day of the week, to Monthly, which adds Day of the month with the message Choose a day of the month, and back to Daily"}
 
 For taking and restoring a backup of one project: [Backups](../looking-after-a-project/backups.md).
 
