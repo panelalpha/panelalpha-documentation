@@ -34,8 +34,7 @@ The **Backups** tab lists every backup of the project, newest first. Each row ha
 
 At the end of each row are three buttons: download, restore and delete. Tick the box in the first column to select a row. The box in the header selects all rows. Type in **Enter search term** to find a backup by its note or date.
 
-::docs-video{src="../../assets/single-server-edition/backups-container-code-data-rows.webm" title="The Backups tab of Immich: the three backups with the columns Date, Data, Code, Size, Type and Note, and the pointer moving over each row and the Code column"}
-::
+![The Backups tab of Immich with three backups and the columns Date, Data, Code, Size, Type and Note](../../assets/single-server-edition/backups-container-code-data-rows.webp)
 
 The two kinds of project: [Projects](../projects/projects.md).
 
@@ -61,7 +60,7 @@ Each project can have a schedule. New projects get one by default: [Settings](..
 3. Choose when. **Choose Time** sets the time of day. **Weekly** also asks for **Choose Day**, one day from Mon to Sun. **Monthly** asks for the day of the month.
 4. Select **Enable Automatic Backups**. When a schedule already exists the button reads **Edit Automatic Backups**.
 
-   :docs-video{src="../../assets/single-server-edition/backups-automatic-dialog.webm" title="The schedule of Immich: Change beside Every day at 2:00 AM opens Automatic Backups, How Often switches from Daily to Weekly, which adds Choose Day, then back to Daily with Choose Time, and the button Edit Automatic Backups"}
+   ![The Automatic Backups window with How Often set to Daily, the time 2:00 AM and Edit Automatic Backups](../../assets/single-server-edition/backups-automatic-dialog.webp)
 
 To change a schedule, select **Change** beside it. To stop it, switch **Automatic Backups** off and select **Disable**. The time is shown in your local time.
 

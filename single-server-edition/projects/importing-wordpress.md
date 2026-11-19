@@ -48,7 +48,7 @@ The project card shows **Migration is in progress** with a bar and the name of t
 - **Cancel Migration** stops it and removes what was entered.
 - **Try Again** retries a failed import.
 
-:docs-video{src="../../assets/single-server-edition/importing-wordpress-progress.webm" title="The stories.example.net card in My Projects shows Migration is in progress, and Show Logs opens Migration Logs with the progress of the current step, Migrating Database, and the status of each step"}
+![The Migration Logs window with the progress bar and the steps of the import, each with its status](../../assets/single-server-edition/importing-wordpress-progress.webp)
 
 ## After the import
 

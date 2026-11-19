@@ -43,8 +43,7 @@ Earlier deploys are in **Advanced > Logs**, on the **Deploy Logs** tab.
 3. Select the **Deploy Logs** tab.
 4. The box at the top picks the deploy, by its date and result (for example `Success`). The table lists each line of that deploy with its time, its **Stage** (for example `clone`, `build`, `start`, `health`), its **Level** (`Ok` or `Info`) and its **Message**. Use the search box to find a word. **Download** saves the log as a file.
 
-::docs-video{src="../../assets/single-server-edition/git-deploy-logs.webm" title="On the Immich project page the Advanced tab, then Logs and Deploy Logs, which lists the lines of the last deploy with the stages clone, build, start and health"}
-::
+![Advanced, Logs of the Immich project with the Deploy Logs tab open and the lines of the last deploy](../../assets/single-server-edition/git-deploy-logs.webp)
 
 ## Changing the branch
 
@@ -78,8 +77,7 @@ Environment variables are settings that your app reads when it starts, such as a
 
 Saving restarts the app container, and the new values are in place a few seconds later. If you untick **Restart the app container after saving** in the window, the panel only stores the variables and the next **Redeploy** applies them. **Restart** in **Advanced > Containers** does not apply them. A redeploy does not lose the variables.
 
-::docs-video{src="../../assets/single-server-edition/git-environment-variables.webm" title="The Environment variables page of Immich: Add variable opens a window where IMMICH_LOG_LEVEL and debug are typed and cancelled, then Import opens the window for a block of lines"}
-::
+![The Add variable window of Immich with the key IMMICH_LOG_LEVEL, the value debug and the box to restart the app container](../../assets/single-server-edition/git-environment-variables.webp)
 
 Every project that is not WordPress has this page. A WordPress project keeps its configuration in **Advanced > System Configuration** instead.
 
@@ -116,8 +114,7 @@ An HTTPS repository uses an **access token**, a password-like text that your Git
 
 The card shows `Token saved` or `No token saved`. The window never shows a token that you saved before. If the repository stops answering, the page shows `Cannot access the repository. Update your access token.` The panel does not save a token that your Git provider does not accept.
 
-::docs-video{src="../../assets/single-server-edition/git-access-token.webm" title="The Access token card of Immich shows Token saved, and Manage opens the Access token window with an empty field and Save token"}
-::
+![The Access token window of Immich with an empty token field, Save token and Cancel](../../assets/single-server-edition/git-access-token.webp)
 
 ## Deploy key
 
@@ -125,8 +122,7 @@ An SSH repository uses a **deploy key**, an SSH key you add to the repository so
 
 **Generate a new key replaces the old one, and pull and deploy stop working until you add the new key to the repository.** If you select **Delete key**, pull and deploy over SSH stop working. Remove the key at your Git provider as well.
 
-::docs-video{src="../../assets/single-server-edition/git-deploy-key.webm" title="The Deploy key (SSH) card of Immich with the public key and its Fingerprint, then Generate a new key opens a warning window that is cancelled, and the Delete key button"}
-::
+![The Deploy key (SSH) card of Immich with the public key, its fingerprint, Generate a new key and Delete key](../../assets/single-server-edition/git-deploy-key.webp)
 
 ## Auto-deploy
 
@@ -137,7 +133,6 @@ An SSH repository uses a **deploy key**, an SSH key you add to the repository so
 
 The panel adds a webhook at your Git provider with your saved token, so the token must be allowed to manage webhooks. If there is no token, or the provider refuses it, the switch goes back off and the panel shows the reason: [Troubleshooting: Git](../troubleshooting/git.md). Turning the switch off removes the webhook.
 
-::docs-video{src="../../assets/single-server-edition/git-auto-deploy.webm" title="The Auto-deploy card of Immich: the switch is turned off and then on again, and each time a message says Auto-deploy settings updated"}
-::
+![The Auto-deploy card of Immich with its switch turned on](../../assets/single-server-edition/git-auto-deploy.webp)
 
 Something not working? Messages and fixes: [Troubleshooting: Git](../troubleshooting/git.md).

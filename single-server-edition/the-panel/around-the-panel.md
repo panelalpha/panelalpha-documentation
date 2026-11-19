@@ -24,8 +24,7 @@ The bell shows a dot while there are notifications you have not seen. Select it 
 
 **Dismiss** closes one notification. **Clear Notifications** removes all of them.
 
-::docs-video{src="../../assets/single-server-edition/around-the-panel-top-bar.webm" title="The top bar with the tabs My Projects and Connect AI, the Add New button, the bell opening the list of notifications with Clear Notifications, and the user menu button"}
-::
+![The top bar with My Projects, Connect AI, Add New, the bell with its list of notifications and the user menu button](../../assets/single-server-edition/around-the-panel-top-bar.webp)
 
 ## The user menu
 
@@ -46,5 +45,4 @@ A warning dot on the avatar and on **Settings** means the server is not connecte
 ::docs-video{src="../../assets/single-server-edition/around-the-panel-dark-mode.webm" title="The user menu opens with Dark Mode at the top, selecting the Dark Mode row turns Settings dark, My Projects opens in the dark scheme, and Dark Mode is switched off again"}
 ::
 
-::docs-video{src="../../assets/single-server-edition/around-the-panel-my-server.webm" title="The user menu lists Dark Mode, Account Details, My Server, Tasks, Settings, Join Our Community and Log Out, and My Server shows RAM, CPU and Disk Space with the CPU Usage, Disk Throughput and Disk IOPS graphs"}
-::
+![My Server with the cards RAM, CPU and Disk Space and the graphs CPU Usage, Disk Throughput, Disk IOPS, Network Traffic and Network PPS](../../assets/single-server-edition/around-the-panel-my-server.webp)

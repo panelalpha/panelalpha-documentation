@@ -28,7 +28,7 @@ You cannot move the panel to a `panelalpha.direct` name later. The engine does n
 2. Open **Settings**. On the **General** tab, find **Application URL**.
 3. Replace the address. Use `https://` and a host, with no path, for example `https://panel.example.com` or `https://panel.example.com:8443`.
 
-   :docs-video{src="../../assets/single-server-edition/settings-general-tab.webm" title="Settings, General tab: Server name, the Default language list, the Default date format list with its four formats, Application URL, the help icon next to Default domain, and Save Changes"}
+   ![The General tab of Settings: the PanelAlpha Hub card, then Server name, Default language, Default date format, Application URL, Default domain and Save Changes](../../assets/single-server-edition/settings-general-tab.webp)
 
 4. Select **Save Changes**.
 

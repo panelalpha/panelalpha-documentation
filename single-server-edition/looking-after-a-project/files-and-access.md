@@ -40,8 +40,7 @@ Right-click a file or a folder to open its menu. The menu offers only what fits 
 - **Delete:** removes the item after you confirm.
 - **Properties:** shows the path and the date the item was changed.
 
-::docs-video{src="../../assets/single-server-edition/files-file-manager-menu.webm" title="Advanced > File Manager of Immich: the folders library, postgres, upload and backups and the files .env and docker-compose.yml, then the right-click menu of docker-compose.yml with Download, Copy, Cut, Rename, Zip, Delete and Properties, and the menu of the folder library with Open"}
-::
+![Advanced, File Manager of Immich with the menu of docker-compose.yml: Download, Copy, Cut, Rename, Zip, Delete and Properties](../../assets/single-server-edition/files-file-manager-menu.webp)
 
 ## FTP accounts
 

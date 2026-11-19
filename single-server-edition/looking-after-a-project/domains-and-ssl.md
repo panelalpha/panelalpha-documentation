@@ -49,8 +49,7 @@ The panel checks from your browser where the domain points. If the domain does n
 
 If DNS cannot point at the server yet, **Set Your Domain** also offers **Generate URL** under `Not live yet? Preview the site on the server`. It gives a temporary address so you can look at the site first: [Staging and preview](../projects/staging-and-preview.md).
 
-::docs-video{src="../../assets/single-server-edition/domains-dns-warning.webm" title="My Projects: pointing at the warning icon next to shop.example.com on the Bagisto card shows The A record may be missing, pointing elsewhere, or routed through a proxy such as Cloudflare, with the buttons Fix it now and Ignore"}
-::
+![The warning icon on the Bagisto card in My Projects with the text about the A record and the buttons Fix it now and Ignore](../../assets/single-server-edition/domains-dns-warning.webp)
 
 ## Adding a domain
 
@@ -108,8 +107,7 @@ Each domain has a certificate. It comes from Let's Encrypt or from you, or it is
 3. For **Let's Encrypt**, select **Generate**. The domain must already point at the server, or the certificate waits for DNS.
 4. For a certificate of your own, fill in **Certificate (CRT)** and **Private Key (KEY)**. **Certificate Authority Bundle (CABUNDLE)** is optional. Select **Install**.
 
-::docs-video{src="../../assets/single-server-edition/domains-ssl-dialog.webm" title="The padlock of photos.example.com in Advanced > Domains of Immich opens Set SSL Certificate: the installed and detected certificates, the SSL provider list switched from Let's Encrypt to Custom Certificate, which shows Certificate (CRT) and Private Key (KEY)"}
-::
+![The Set SSL Certificate window for photos.example.com](../../assets/single-server-edition/domains-ssl-dialog.webp)
 
 If installation fails, check that the DNS records are right and try again.
 

@@ -21,8 +21,7 @@ A project can have one staging copy. A staging copy cannot have its own.
 
 A site on the panel's free `panelalpha.online` address does not ask for a name. The window says `This site is on the free panelalpha.online address, so the panel gives the copy its own free address when it is created.` The copy gets its own free address, and you only select **Create Staging**.
 
-::docs-video{src="../../assets/single-server-edition/staging-create-form.webm" title="On the Immich project page Staging in the top bar opens the Create Staging window with the note about the free panelalpha.online address, and Create Staging shows Staging Installation In Progress and adds a staging tab and the Push To Staging button"}
-::
+![The Create Staging window of Immich with the note about the free panelalpha.online address and the Create Staging button](../../assets/single-server-edition/staging-create-form.webp)
 
 The panel shows `Staging Installation In Progress` and notifies you when the copy is ready. The copy appears under its live project, not as a separate project: as a `staging` tag on the live project's card, and as a `staging` tab in the project's top bar. Select either to open the copy.
 
@@ -62,8 +61,7 @@ Push To Staging copies the live project to its staging copy, so you can try chan
 2. Tick what to overwrite. A container project (from Git or from files) offers **Overwrite files** and **Overwrite volumes (including databases)**. A PHP hosting project offers **Overwrite files** and **Push full database**, with the table lists described in [Pushing staging to live](#pushing-staging-to-live).
 3. Confirm. The panel shows `Push To Staging In Progress`.
 
-::docs-video{src="../../assets/single-server-edition/staging-and-preview-push-to-staging.webm" title="On the live Immich project with a staging tab, Push To Staging in the top bar opens the Push To Staging window, Overwrite files and Overwrite volumes (including databases) are ticked and Push To Staging starts the copy with the message Push To Staging In Progress"}
-::
+![The Push To Staging window with Overwrite files and Overwrite volumes (including databases) ticked and the Push To Staging button](../../assets/single-server-edition/staging-and-preview-push-to-staging.webp)
 
 ## Deploying a Git project to staging
 
@@ -97,7 +95,6 @@ A preview link opens the site on a temporary address on this server, so you can 
 
 The domain warning on a project also has **Not live yet? Preview the site on the server** with a **Generate URL** button. On a project with a domain of your own, **Open Project** opens the same **Preview Site** window: [Projects](projects.md).
 
-::docs-video{src="../../assets/single-server-edition/staging-preview-link-window.webm" title="On the Stories project, which has a domain of its own, Open Project opens the Preview Site window, Get Temporary URL creates an address, and Copy URL and Visit Site appear"}
-::
+![The Preview Site window with the temporary URL of the site, the Copy URL button and the Visit Site button](../../assets/single-server-edition/staging-preview-link-window.webp)
 
 Something not working? Messages and fixes: [Troubleshooting: Projects](../troubleshooting/projects.md#staging-and-preview).

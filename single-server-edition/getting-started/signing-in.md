@@ -45,7 +45,7 @@ If you turned on two-factor authentication, a second screen called `Two-Factor A
 1. Open your authenticator app and read the current code.
 2. Enter it in **Enter your code** and select **Verify**. **Back** returns to the password step.
 
-:docs-video{src="../../assets/single-server-edition/signing-in-two-factor.webm" title="The password step, then the Two-Factor Authentication screen with the Enter your code field shown as dots, Back and Verify, and the My Projects page after Verify"}
+![The Two-Factor Authentication screen with the code field shown as dots, the Verify button and the Back button](../../assets/single-server-edition/signing-in-two-factor.webp)
 
 The screen says `If you don't have access to your Two-Factor Authentication code, use your backup code here.` Enter a backup code in the same field. A backup code works once. After you use one, the panel makes a new set of backup codes and shows them. Save them, tick `I confirm that I have copied and saved the backup codes in a safe place.` and select **Continue**.
 
@@ -62,7 +62,7 @@ A wrong code shows `The entered code is invalid.`
 
 :docs-video{src="../../assets/single-server-edition/signing-in-forgot-password.webm" title="The password step, Forgot password?, the Forgot password page with the email you@example.com, Send Password Reset Link and the message that a link was sent, and the pointer on the link Sign In"}
 
-:docs-video{src="../../assets/single-server-edition/signing-in-reset-password.webm" title="The Reset password page: Enter new password and Confirm Password shown as dots, Reset Password, then the login screen with the message Your password has been reset"}
+![The Reset password page with the new password and its confirmation shown as dots and the Reset Password button](../../assets/single-server-edition/signing-in-reset-password.webp)
 
 **False alert? Sign In** at the bottom of the Forgot password page takes you back to the login screen when you remembered the password after all.
 
@@ -75,7 +75,7 @@ If no email arrives, you can set a new password on the server: [On the server](o
 
 You come back to the login screen.
 
-:docs-video{src="../../assets/single-server-edition/signing-in-log-out.webm" title="My Projects, the user menu opened from the avatar, Log Out, and the login screen after it"}
+![My Projects with the user menu open: Dark Mode, Account Details, My Server, Tasks, Settings, Join Our Community and Log Out](../../assets/single-server-edition/signing-in-log-out.webp)
 
 To end the session of another browser, use **Active Devices**: [Your account](../the-panel/your-account.md#devices).
 

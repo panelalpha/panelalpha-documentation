@@ -29,8 +29,7 @@ Every tool connects the same way. You create a token in the panel, then put the 
 
 The **Connect AI** page shows the same steps. Pick your tool under **Your tool**. The page fills in your panel address and gives a **Copy** button for each part.
 
-::docs-video{src="../../assets/single-server-edition/connect-ai-tour.webm" title="Connect AI in the top menu opens the Claude Code steps, Your tool switches to ChatGPT and back, MCP URL & tokens shows the MCP Server URL and the API Tokens table, What You Can Do with AI opens a group of requests, and Activity Log lists each tool the assistant ran"}
-::
+![The Connect AI page with the Claude Code steps and the list on the left: Your tool, MCP URL & tokens, What You Can Do with AI and Activity Log](../../assets/single-server-edition/connect-ai-tour.webp)
 
 In the examples below the panel address is `https://panel.example.com`. Use your own.
 
@@ -214,7 +213,7 @@ Each row of the table has six columns:
 1. Open **MCP URL & tokens**. The table lists each token.
 2. In the token's row, point at the rotate arrow in **Actions** to read **Revoke**, then select it and confirm.
 
-:docs-video{src="../../assets/single-server-edition/connect-ai-tokens-table.webm" title="Connect AI, MCP URL & tokens: the MCP Server URL and the API Tokens table with Name, Token, Last Used, Created, Status and the Revoke and Delete actions"}
+![Connect AI, MCP URL & tokens with the MCP Server URL and the API Tokens table](../../assets/single-server-edition/connect-ai-tokens-table.webp)
 
 **A revoked token stops working at once.** It stays in the list with the status `Revoked`. To remove it from the list, select **Delete**, the bin in **Actions**. A delete cannot be undone.
 
@@ -234,4 +233,4 @@ For a request like "Update all my sites", the assistant goes through your projec
 
 **Activity Log** lists each tool the assistant runs: **Time** is when it ran, **Token** is the name of the token it used, **Tool** is what the assistant did, and **Status** is `Success` or `Error`. The list shows 20 entries a page. Filter by token with **Filter by token**. If there is nothing yet, the page says `No activity yet. Start using your AI tool to see logs here.`
 
-:docs-video{src="../../assets/single-server-edition/connect-ai-activity-log.webm" title="Connect AI, Activity Log: each tool the assistant ran with its Time, Token, Tool and Status, and the Filter by token list"}
+![Connect AI, Activity Log with each tool the assistant ran, its time, token and status](../../assets/single-server-edition/connect-ai-activity-log.webp)

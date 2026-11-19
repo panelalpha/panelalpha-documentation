@@ -26,8 +26,7 @@ Tasks are grouped by day: `Today`, `Yesterday`, then the date. Each row has five
 
 On a phone each task is a compact card.
 
-::docs-video{src="../../assets/single-server-edition/tasks-list.webm" title="Tasks opens from the user menu with the tasks grouped under Today and Yesterday, the status tabs All, Active, Failed, Completed and Cancelled are selected one by one, the Task type and Project lists open, and the Failed tab opens a task with its error in the details"}
-::
+![Tasks with the Failed tab open and the details of a failed task with its error](../../assets/single-server-edition/tasks-list.webp)
 
 
 ## Task details
@@ -41,7 +40,7 @@ Select a row to open its details: **Queued**, **Started**, **Finished** and **Ta
 3. Set **Project** to see the tasks of one project, for example Immich. The first choice, **All**, shows every project.
 4. Set **Task type** to narrow the list to one kind of work, such as `Deploy`, `Create backup`, `Restore backup`, `Create staging` or `Push staging`. The first choice, **All**, shows every kind.
 
-The filters work together. The clip goes through the tabs, then the two lists, and opens one failed task.
+The filters work together. The picture earlier on this page shows the **Failed** tab with one failed task open.
 
 If nothing matches, you see `No tasks` and `There are no tasks matching the filters.`
 

@@ -15,7 +15,7 @@ A project is one site or app on your server. You start every project in the same
 1. Go to **My Projects** and select **Add New** in the top bar. On an empty list, select **Create First Project**.
 2. The window **Choose how to create your project** opens. Select one of the four options, then select **Continue**.
 
-   :docs-video{src="../../assets/single-server-edition/create-project-choose-source.webm" title="Add New on My Projects opens Choose how to create your project, where WordPress, Git, Files and PanelAlpha GO! are selected one after another and Continue waits at the bottom"}
+   ![The window Choose how to create your project with WordPress, Git, Files and PanelAlpha GO!](../../assets/single-server-edition/create-project-choose-source.webp)
 
 You can also drop one archive on the project list. The panel then starts the Files way for you. A folder or another kind of file is refused before the project is created.
 
@@ -61,8 +61,7 @@ If the domain still needs DNS records, the panel lists them after the install. S
 2. Find an app. Type in the search field a name, a category or the app it replaces, for example `Notion`. Use at least 2 characters. You can also pick a category in the list on the left, for example **Monitoring**. A line above the cards counts the apps that match.
 3. Each card shows the app name, a short line about it and a picture. Select **Install** on the card to install the app. To read more first, select **Details**. The details page tells what the app does and has its own **Install** button.
 
-::docs-video{src="../../assets/single-server-edition/create-a-project-go-catalog-choose-app.webm" title="Choosing PanelAlpha GO! in Choose how to create your project, then Continue opens Choose an App, where the category Monitoring and the search uptime narrow the cards, and Details on the Uptime Kuma card opens its page with the Install button"}
-::
+![The PanelAlpha GO! catalog with the app cards, the categories and the search field](../../assets/single-server-edition/create-a-project-go-catalog-choose-app.webp)
 
 After **Install**, the panel creates a container project from the app's repository and shows `Your project is being created` with its live log. It does not ask for a name, a domain, a branch or environment variables. Select **Back To Dashboard** if you do not want to watch. The new project shows on the list with its progress and turns `live` when it runs. While it is created, its card shows `Deploy in progress` with **Show Logs** and **Cancel Deploy**. The project is then an ordinary Git project: [Git](git.md).
 

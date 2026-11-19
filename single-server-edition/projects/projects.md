@@ -31,8 +31,7 @@ Create one: [Create a project](create-a-project.md).
 
 **My Projects** is the first page after you sign in. It lists every project on your server. The list shows 8 projects at a time, newest first.
 
-::docs-video{src="../../assets/single-server-edition/projects-list.webm" title="My Projects with the Bagisto and Immich cards: the address, the Production and Clients tags, the live mark and the Manage and Open Project buttons on a card, then the Filters, Newest and search controls and the grid and list switch"}
-::
+![My Projects with the cards of Bagisto and Immich: the address, the tags, the live mark, Filters, Newest and the search field](../../assets/single-server-edition/projects-list.webp)
 
 ### The project card
 
@@ -127,8 +126,7 @@ The bell at the top right shows messages about your projects, for example a fini
 
 Select **Manage** on a card, or the name of the project, to open its page.
 
-::docs-video{src="../../assets/single-server-edition/projects-project-page.webm" title="Opening the Immich card shows its project page: the Open Project, Staging and Delete Project buttons and Change Domain are shown one after another, then the tabs Monitoring, Backups, Advanced and Project Details"}
-::
+![The Immich project page with Open Project, Staging and Delete Project, Change Domain, and the tabs Project Details, Monitoring, Backups and Advanced](../../assets/single-server-edition/projects-project-page.webp)
 
 ### The top bar
 
@@ -175,13 +173,11 @@ A project that is not WordPress has no pencil. Its name stays as it was when you
 - **Loading Speed** shows two scores from 0 to 100, one for a computer (**Desktop**) and one for a phone (**Mobile**). **Full Report** opens the complete report from Google PageSpeed.
 - **Project Analytics** shows the visitors, the time they stay and the data sent, for the last week or month. Choose the period in the box at the right.
 
-::docs-video{src="../../assets/single-server-edition/projects-source-card.webm" title="The Project Details tab of Immich: the Source card with the repository immich-app/immich and the PostgreSQL database, the Security card with Create Backup, the Loading Speed scores with Full Report, and Project Analytics below"}
-::
+![Project Details of Immich with the Source card: the repository immich-app/immich, the PostgreSQL database and the Redeploy button](../../assets/single-server-edition/projects-source-card.webp)
 
 To take a new picture of the site, hold the mouse over the picture and select **Refresh Thumbnail**.
 
-::docs-video{src="../../assets/single-server-edition/projects-refresh-thumbnail.webm" title="On the Immich project page the mouse goes over the picture of the site, and Refresh Thumbnail takes a new picture"}
-::
+![The picture of the Immich site with the Refresh Thumbnail button shown over it](../../assets/single-server-edition/projects-refresh-thumbnail.webp)
 
 ### Monitoring and Backups
 
@@ -191,8 +187,7 @@ To take a new picture of the site, hold the mouse over the picture and select **
 
 **Advanced** holds the rest, in a list on the left. Select an item to open its page.
 
-::docs-video{src="../../assets/single-server-edition/projects-advanced-pages.webm" title="The Advanced tab of Immich with its list on the left, opening Domains, MySQL Databases, Cron Jobs, File Manager, Containers and Logs one after another"}
-::
+![The Advanced tab of Immich with its list of pages on the left, from Project Details to Logs](../../assets/single-server-edition/projects-advanced-pages.webp)
 
 Every kind of project has pages for its details (which also show its usage and limits: [Usage and limits of a project](../looking-after-a-project/statistics-and-logs.md#usage-and-limits-of-a-project)), security, domains, databases, cron, files, logs and Git. A WordPress project also shows its version and **Installation Details** (the directory and the database name, user, host and password). Other projects have **Environment variables**. A WordPress project keeps its variables in **System Configuration**.
 
@@ -226,8 +221,7 @@ Each container also has its own actions: [Statistics and logs](../looking-after-
 2. The **Delete Project** window says `Any data stored on the server will be permanently erased` and `this action cannot be undone!` Under it is the name of the project. Tick the three boxes: one for the files, one for the databases, and `Yes, I understand and want to proceed with the removal of the project.`
 3. Select **Delete Project**. The button stays pale until every box is ticked. Select **Cancel** if you changed your mind.
 
-::docs-video{src="../../assets/single-server-edition/projects-delete-project.webm" title="The Delete Project window for Immich with its warning, the project name and three unticked boxes, the Delete Project button still pale, and Cancel closing it without deleting anything"}
-::
+![The Delete Project window of Immich with its warning, the project name and three unticked boxes](../../assets/single-server-edition/projects-delete-project.webp)
 
 A project that has a staging copy cannot be deleted. Delete the staging copy first: [Staging and preview](staging-and-preview.md).
 

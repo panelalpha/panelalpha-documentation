@@ -27,8 +27,7 @@ Both lists have a search box, **Enter search term**. The **Users** tab never sho
 
 A name starts with a letter, an underscore or a hyphen. It uses only letters, numbers, underscores and hyphens. The panel tells you if it is too long.
 
-::docs-video{src="../../assets/single-server-edition/databases-list-tab.webm" title="Advanced > MySQL Databases of Immich with the tabs Databases, Users and PHPMyAdmin: Add Database with the name newsletter, a message that the database has been created, and the new database immich_newsletter in the list with its Size and Updated columns"}
-::
+![Advanced, MySQL Databases of Immich with the tabs Databases, Users and PHPMyAdmin and the databases immich_app and immich_stats](../../assets/single-server-edition/databases-list-tab.webp)
 
 ## Creating a database user
 
@@ -61,8 +60,7 @@ Use them exactly as shown. The host works from the project's own code, not from 
 
 A WordPress project also lists its database name, user, password and host under **Advanced > Project Details**, in the **Installation Details** card. The user and password are masked. Select **Show** to read one.
 
-::docs-video{src="../../assets/single-server-edition/databases-access-details.webm" title="The Users tab of MySQL Databases in Immich with the columns User, Assigned Databases and Updated: the eye action of immich_user opens MySQL Access Details with MySQL User, MySQL Host and MySQL Port"}
-::
+![The MySQL Access Details window with the MySQL User, MySQL Host and MySQL Port](../../assets/single-server-edition/databases-access-details.webp)
 
 ## Renaming and deleting
 
@@ -78,8 +76,7 @@ phpMyAdmin is a web tool that lets you work on the records of a database directl
 2. Read the warning: `This feature should be used by advanced users only.` Changes made in phpMyAdmin go straight into the database.
 3. Select **Log In to PHPMyAdmin**. phpMyAdmin opens and you are already signed in.
 
-::docs-video{src="../../assets/single-server-edition/databases-phpmyadmin-tab.webm" title="The PHPMyAdmin tab of MySQL Databases in Immich with the warning This feature should be used by advanced users only and the pointer on the Log In to PHPMyAdmin button"}
-::
+![The PHPMyAdmin tab of MySQL Databases in Immich with the warning for advanced users and the button Log In to PHPMyAdmin](../../assets/single-server-edition/databases-phpmyadmin-tab.webp)
 
 If the project's domain does not point at the server yet, the panel warns that phpMyAdmin may not open and offers a temporary address until DNS is set.
 

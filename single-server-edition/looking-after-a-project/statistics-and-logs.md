@@ -26,8 +26,7 @@ Below the chart is one card for each question. Each card lists the biggest group
 
 The panel updates the statistics once a day. A new project shows `There is no data to display yet`. Check again the next day.
 
-::docs-video{src="../../assets/single-server-edition/statistics-monitoring-tab.webm" title="The Monitoring tab of Immich: the Visitors Chart with the total of visits, then the cards Visits By Country and Visits Chart (the pages) below it"}
-::
+![The Monitoring tab of Immich with the Visitors Chart, Visits By Country, the pages, Referrer, Device, OS and Browser cards](../../assets/single-server-edition/statistics-monitoring-tab.webp)
 
 The **Project Details** tab also shows **Unique Visitors**, **Average Session Time** and **Bandwidth**. The session time is an estimate.
 
@@ -77,8 +76,7 @@ Open the user menu and select **My Server**. The page shows how much **RAM**, **
 
 Choose **1 hour**, **12 hours** or **Live** in **Period**. **Live** is the last 5 minutes.
 
-::docs-video{src="../../assets/single-server-edition/statistics-server-usage.webm" title="My Server, Usage: RAM, CPU and Disk Space for the whole server, then the Period list set to Live and the graphs CPU Usage, Disk Throughput and Disk IOPS"}
-::
+![My Server, Usage with RAM, CPU and Disk Space and the graphs for the whole server](../../assets/single-server-edition/statistics-server-usage.webp)
 
 ## Logs
 
@@ -92,8 +90,7 @@ Open the project and go to **Advanced > Logs**. Which tabs you see depends on th
 
 Every tab except **Project Logs** has a **Download** button that saves the log you are looking at.
 
-::docs-video{src="../../assets/single-server-edition/statistics-logs-tabs.webm" title="Advanced > Logs of the Stories WordPress project: Project Logs, then WordPress Error Logs, PHP Logs and Webserver Logs with the access.log rows and the Download button"}
-::
+![Advanced, Logs of the Stories project with the tabs Project Logs, WordPress Error Logs, PHP Logs and Webserver Logs](../../assets/single-server-edition/statistics-logs-tabs.webp)
 
 A tab with nothing to show says `No PHP Logs Were Found...` or similar. The web server log often holds more detail.
 
@@ -118,8 +115,7 @@ The **Actions** menu at the top acts on the whole project:
 
 The panel asks for a confirmation before a restart, a stop or a redeploy.
 
-::docs-video{src="../../assets/single-server-edition/statistics-containers-page.webm" title="Advanced > Containers of Immich: the services immich-server, immich-machine-learning, redis and database with their image, state running, uptime and ports, then the Actions menu with Start All, Restart, Stop All and Pull & Redeploy"}
-::
+![Advanced, Containers of Immich with its services and the actions menu of immich-server open](../../assets/single-server-edition/statistics-containers-page.webp)
 
 ### Public URLs
 
