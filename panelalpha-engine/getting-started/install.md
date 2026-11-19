@@ -85,7 +85,7 @@ Or connect an assistant and ask in chat: [Put your project online](../index.md#3
 
 **The engine is already on this VPS.** Run the same `curl` line with `--repo` again. If a newer engine build is available, the installer asks whether to update the engine and deploy, or only deploy the project. Without an interactive terminal it only deploys the project. Pass `--update-engine` to update and deploy without being asked. Pass `--deploy-only` to deploy without updating.
 
-**Connect it to PanelAlpha Connect in the same run.** Add `--hub-code CODE` with the code from **Connect engine** in PanelAlpha Connect: [Install and connect in one step](connect-to-panelalpha-connect.md#install-and-connect-in-one-step).
+**Connect it to PanelAlpha Hub in the same run.** Add `--hub-code CODE` with the code from **Connect engine** in PanelAlpha Hub: [Install and connect in one step](connect-to-panelalpha-hub.md#install-and-connect-in-one-step).
 
 ## 2. Connect your AI assistant
 
@@ -180,7 +180,7 @@ Open these inbound ports in the provider's firewall:
 |---|---|---|
 | 80 | Visitors, and Let's Encrypt checking that a domain is yours | Everyone, if you want Let's Encrypt certificates |
 | 443 | Visitors to your sites | Everyone who should see your sites |
-| 2011 | Your AI assistant, REST API clients, PanelAlpha Connect and git hosts calling a [push-to-deploy](../capabilities/push-to-deploy.md) hook | Your own addresses, plus the addresses of those services |
+| 2011 | Your AI assistant, REST API clients, PanelAlpha Hub and git hosts calling a [push-to-deploy](../capabilities/push-to-deploy.md) hook | Your own addresses, plus the addresses of those services |
 | 22 | You, over SSH | Your own addresses |
 | 2222 | SFTP clients | Whoever uploads files over SFTP |
 | 21 and 30000-30009 | FTP clients | Whoever uploads files over FTP |

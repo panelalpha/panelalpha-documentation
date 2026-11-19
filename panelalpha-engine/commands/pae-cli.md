@@ -386,15 +386,15 @@ Context: [Security](../capabilities/security.md), [Limits on outbound connection
 
 Context: [Telemetry](../getting-started/what-is-collected.md).
 
-## PanelAlpha Connect
+## PanelAlpha Hub
 
 | Command | What it does |
 |---|---|
-| `pae hub:connect CODE` | Connects this engine to the PanelAlpha Connect account that created the code (**Connect engine** in Connect). `--ip`, `--replace`. |
-| `pae hub:status` | Shows the connection, Connect's own view of it, and the last calls Connect made. `--local` skips asking Connect. |
-| `pae hub:disconnect` | Revokes Connect's access at once, then tells Connect. |
+| `pae hub:connect CODE` | Connects this engine to the PanelAlpha Hub account that created the code (**Connect engine** in the Hub). `--ip`, `--replace`. |
+| `pae hub:status` | Shows the connection, the Hub's own view of it, and the last calls the Hub made. `--local` skips asking the Hub. |
+| `pae hub:disconnect` | Revokes the Hub's access at once, then tells the Hub. |
 
-Context: [Connect to PanelAlpha Connect](../getting-started/connect-to-panelalpha-connect.md).
+Context: [Connect to PanelAlpha Hub](../getting-started/connect-to-panelalpha-hub.md).
 
 ## Docker Hub login
 

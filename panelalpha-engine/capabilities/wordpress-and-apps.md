@@ -206,10 +206,10 @@ A test answers the domain the site would get, or why the import would fail: `unr
 The engine refuses a start in these cases:
 
 - 422 `domain_taken`: a project here already has the domain.
-- 422 `domain_required`: the source is given as an IP address and the engine has no PanelAlpha Connect.
+- 422 `domain_required`: the source is given as an IP address and the engine has no PanelAlpha Hub.
 - 409 `engine_address_private`: the source site could not reach this engine. See [Install](../getting-started/install.md).
 
-**While the domain still points to the old host.** With [PanelAlpha Connect](../getting-started/connect-to-panelalpha-connect.md), the import opens a preview of the site on a `panelalpha.online` address (`preview_url`). The import status shows the DNS record to set. Every 15 minutes the engine checks the domain; once it points here, the engine requests the certificate and removes the preview. Without Connect there is no preview: the site answers on its domain once DNS points here.
+**While the domain still points to the old host.** With [PanelAlpha Hub](../getting-started/connect-to-panelalpha-hub.md), the import opens a preview of the site on a `panelalpha.online` address (`preview_url`). The import status shows the DNS record to set. Every 15 minutes the engine checks the domain; once it points here, the engine requests the certificate and removes the preview. Without the Hub there is no preview: the site answers on its domain once DNS points here.
 
 **Following, resuming and cancelling.** The status shows how far the whole run is, the step it is on and the file or table it is sending. A failed import, or one that has not moved for 15 minutes, can be resumed. Cancelling removes the project, files and database the import made here, and on a `wp_admin` source the migrator plugin. A finished, failed or cancelled import can be deleted from the list.
 
@@ -418,7 +418,7 @@ Test whether https://example.com can be imported with the wp-admin user
 admin, then import it and tell me which DNS record to set.
 ```
 
-Mode: modify. Tools: `wordpress_migration_test`, `wordpress_migration_create`, `wordpress_migration_get`. Check: the test creates nothing and names the domain, the import runs to `completed`, and the status names the DNS record and, with PanelAlpha Connect, a `preview_url`.
+Mode: modify. Tools: `wordpress_migration_test`, `wordpress_migration_create`, `wordpress_migration_get`. Check: the test creates nothing and names the domain, the import runs to `completed`, and the status names the DNS record and, with PanelAlpha Hub, a `preview_url`.
 
 **New WordPress on traditional PHP hosting**
 

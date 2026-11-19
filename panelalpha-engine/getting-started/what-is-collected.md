@@ -57,7 +57,7 @@ Telemetry gives you four things. None of them is a reply in your inbox.
 
 Your VPS is identified by a fingerprint, not by name. The engine combines a few facts about the machine and stores a one-way hash of them. The facts themselves never leave your VPS.
 
-The installer also gives the engine a random ID, `APP_UID` in `.env-core`. The engine sends it in the `X-Engine-App-UID` header with every report and every request to PanelAlpha Connect, so both can tell one installation from another. It is not derived from anything on the machine. A value that is already set is never replaced, so you can choose it before installing.
+The installer also gives the engine a random ID, `APP_UID` in `.env-core`. The engine sends it in the `X-Engine-App-UID` header with every report and every request to PanelAlpha Hub, so both can tell one installation from another. It is not derived from anything on the machine. A value that is already set is never replaced, so you can choose it before installing.
 
 A report contains what kind of application it was, how long things took and the project's limits. It also includes the **public website names** the project answers on, such as `shop.example.com` or `blog-4f2a.panelalpha.online`. Those names leave your VPS in readable form, exactly as a visitor types them. A report needs them to say which site it is about. A name the engine gave the project contains the project's name. Some also contain the server's address, such as `blog.203-0-113-7.panelalpha.direct`.
 
