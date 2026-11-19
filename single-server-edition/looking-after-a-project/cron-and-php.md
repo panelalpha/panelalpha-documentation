@@ -2,7 +2,7 @@
 title: "Cron jobs and PHP"
 description: "A cron job runs a command on a schedule that you choose. PHP settings set the PHP version and limits of a PHP hosting project. Both are under Advanced."
 nav:
-  group: Looking After a Project
+  group: Looking after a project
   order: 5
 ---
 

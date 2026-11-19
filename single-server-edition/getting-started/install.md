@@ -2,7 +2,7 @@
 title: "Installing the panel"
 description: "One command as root on a fresh VPS installs PanelAlpha Engine and the panel. Check the requirements first, then run it and open the panel address."
 nav:
-  group: Getting Started
+  group: Getting started
   order: 2
 ---
 

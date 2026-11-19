@@ -2,7 +2,7 @@
 title: "Domains and SSL"
 description: "A project answers on one main domain. This page shows how to use your own domain, add more domains and give each one an SSL certificate."
 nav:
-  group: Looking After a Project
+  group: Looking after a project
   order: 1
 ---
 

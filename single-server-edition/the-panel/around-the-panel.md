@@ -2,7 +2,7 @@
 title: "Around the panel"
 description: "The top bar of the panel holds the menu, the notifications bell and the user menu. The project page adds a project search."
 nav:
-  group: The Panel
+  group: Getting started
   order: 5
 ---
 

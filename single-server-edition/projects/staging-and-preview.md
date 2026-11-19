@@ -3,7 +3,7 @@ title: "Staging and preview"
 description: "A staging copy is a second copy of a project for trying changes. A preview link shows a site on a temporary address before its domain points here."
 nav:
   group: Projects
-  order: 7
+  order: 4
 ---
 
 # Staging and preview

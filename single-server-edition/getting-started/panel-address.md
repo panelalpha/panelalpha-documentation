@@ -2,8 +2,8 @@
 title: "The panel address"
 description: "The panel address is the web address you open the panel on, for example https://panel.example.com. You can move it later in Settings."
 nav:
-  group: Getting Started
-  order: 5
+  group: Server and updates
+  order: 1
 ---
 
 # The panel address

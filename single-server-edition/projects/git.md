@@ -3,7 +3,7 @@ title: "Git"
 description: "A Git project is built from your repository. You redeploy it, change its branch, set variables and manage tokens and keys."
 nav:
   group: Projects
-  order: 6
+  order: 3
 ---
 
 # Git

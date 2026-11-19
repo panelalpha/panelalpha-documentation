@@ -2,7 +2,7 @@
 title: "Settings"
 description: "Settings holds the panel's own options: its name, language, date format, address, default domain for new projects and default backup schedule."
 nav:
-  group: The Panel
+  group: The panel
   order: 1
 ---
 

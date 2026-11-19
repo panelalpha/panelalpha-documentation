@@ -12,10 +12,12 @@ section:
     - title: Single Server Edition
       path: index.md
       collapsable: false
-    - title: Getting Started
+    - title: Getting started
     - title: Projects
-    - title: Looking After a Project
-    - title: The Panel
+    - title: WordPress
+    - title: Looking after a project
+    - title: The panel
+    - title: Server and updates
     - title: Troubleshooting
 card:
   title: Single Server Edition

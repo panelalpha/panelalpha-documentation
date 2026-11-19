@@ -2,7 +2,7 @@
 title: "First login"
 description: "At your first visit the setup wizard creates your account. This page shows the wizard and how to sign in later."
 nav:
-  group: Getting Started
+  group: Getting started
   order: 3
 ---
 

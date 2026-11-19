@@ -2,8 +2,8 @@
 title: "Importing a WordPress site"
 description: "Importing copies a WordPress site from another host into a new project on this server, using your WordPress admin login or the migration plugin."
 nav:
-  group: Projects
-  order: 5
+  group: WordPress
+  order: 3
 ---
 
 # Importing a WordPress site

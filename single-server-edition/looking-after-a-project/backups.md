@@ -2,7 +2,7 @@
 title: "Backups"
 description: "A backup is a copy of one project that you can restore later. This page shows how to make, schedule, restore and download backups."
 nav:
-  group: Looking After a Project
+  group: Looking after a project
   order: 3
 ---
 

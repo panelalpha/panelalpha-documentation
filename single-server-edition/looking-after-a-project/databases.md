@@ -2,7 +2,7 @@
 title: "Databases"
 description: "A project can have MySQL databases and database users. This page shows how to create them, give access and open phpMyAdmin."
 nav:
-  group: Looking After a Project
+  group: Looking after a project
   order: 2
 ---
 

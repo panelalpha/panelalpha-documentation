@@ -2,8 +2,8 @@
 title: "Your account"
 description: "Your account is your sign-in on the panel: your name, email address, password, two-factor authentication and the devices you are signed in on."
 nav:
-  group: The Panel
-  order: 3
+  group: The panel
+  order: 2
 ---
 
 # Your account

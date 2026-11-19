@@ -2,8 +2,8 @@
 title: "WordPress Advanced pages"
 description: "The Advanced tab of a WordPress site holds its themes, users, wp-config settings, automatic updates, security options and developer settings."
 nav:
-  group: Projects
-  order: 4
+  group: WordPress
+  order: 2
 ---
 
 # WordPress Advanced pages

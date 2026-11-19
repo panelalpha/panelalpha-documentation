@@ -2,7 +2,7 @@
 title: "Connect AI"
 description: "Connect AI lets an AI assistant such as Claude Code, ChatGPT or Cursor manage your projects by chat. This page has the steps for each tool."
 nav:
-  group: The Panel
+  group: The panel
   order: 4
 ---
 

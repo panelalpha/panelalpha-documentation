@@ -2,7 +2,7 @@
 title: "Requirements"
 description: "Check your VPS against the list below before you install PanelAlpha Single Server Edition. The installer sets up PanelAlpha Engine and the panel for you."
 nav:
-  group: Getting Started
+  group: Getting started
   order: 1
 ---
 

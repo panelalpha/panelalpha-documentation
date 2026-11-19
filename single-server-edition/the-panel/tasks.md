@@ -2,8 +2,8 @@
 title: "Tasks"
 description: "Tasks lists the work PanelAlpha Engine does for your projects, such as deploys, backups and staging copies, with its status and how long it took."
 nav:
-  group: The Panel
-  order: 2
+  group: The panel
+  order: 3
 ---
 
 # Tasks

@@ -2,7 +2,7 @@
 title: "Signing in"
 description: "How to sign in to the panel with your email and password or with PanelAlpha Hub, what to do when you forget the password, the two-factor code, and how to sign out."
 nav:
-  group: Getting Started
+  group: Getting started
   order: 4
 ---
 

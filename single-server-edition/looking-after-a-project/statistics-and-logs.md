@@ -2,7 +2,7 @@
 title: "Statistics and logs"
 description: "The panel shows who visits a project, how much disk and bandwidth it uses, and the logs it writes. Container projects also have a page for their containers."
 nav:
-  group: Looking After a Project
+  group: Looking after a project
   order: 6
 ---
 

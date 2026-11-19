@@ -2,7 +2,7 @@
 title: "Files and access"
 description: "You can work on a project's files in the panel's file manager, or with an FTP or SFTP account from a program such as FileZilla. All three are under Advanced."
 nav:
-  group: Looking After a Project
+  group: Looking after a project
   order: 4
 ---
 

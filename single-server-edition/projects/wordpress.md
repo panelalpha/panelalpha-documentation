@@ -2,8 +2,8 @@
 title: "Managing WordPress"
 description: "You log in to a WordPress site, update it, manage its plugins and themes and change its settings from the panel."
 nav:
-  group: Projects
-  order: 3
+  group: WordPress
+  order: 1
 ---
 
 # Managing WordPress
