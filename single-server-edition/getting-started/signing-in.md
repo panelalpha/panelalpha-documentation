@@ -19,7 +19,7 @@ The login screen asks for your email first and your password second.
 1. Enter your email address in **Email Address** and select **Log In**.
 2. The screen now reads `You are signing in as` followed by your address. Enter your password in **Password** and select **Log In**.
 
-:docs-video{src="../../assets/single-server/signing-in-email-password.webm" title="The Welcome Back screen: the email you@example.com and Log In, then the password step with You are signing in as you@example.com, the Password field, Remember Me, Forgot password?, the Sign in with PanelAlpha button and Log In, which opens My Projects"}
+:docs-video{src="../../assets/single-server-edition/signing-in-email-password.webm" title="The Welcome Back screen: the email you@example.com and Log In, then the password step with You are signing in as you@example.com, the Password field, Remember Me, Forgot password?, the Sign in with PanelAlpha button and Log In, which opens My Projects"}
 
 On the password step you also see these.
 
@@ -45,7 +45,7 @@ If you turned on two-factor authentication, a second screen called `Two-Factor A
 1. Open your authenticator app and read the current code.
 2. Enter it in **Enter your code** and select **Verify**. **Back** returns to the password step.
 
-:docs-video{src="../../assets/single-server/signing-in-two-factor.webm" title="The password step, then the Two-Factor Authentication screen with the Enter your code field shown as dots, Back and Verify, and the My Projects page after Verify"}
+:docs-video{src="../../assets/single-server-edition/signing-in-two-factor.webm" title="The password step, then the Two-Factor Authentication screen with the Enter your code field shown as dots, Back and Verify, and the My Projects page after Verify"}
 
 The screen says `If you don't have access to your Two-Factor Authentication code, use your backup code here.` Enter a backup code in the same field. A backup code works once. After you use one, the panel makes a new set of backup codes and shows them. Save them, tick `I confirm that I have copied and saved the backup codes in a safe place.` and select **Continue**.
 
@@ -60,9 +60,9 @@ A wrong code shows `The entered code is invalid.`
 5. On the **Reset password** page, enter the new password in **Enter new password** and again in **Confirm Password**, then select **Reset Password**. The password follows the same rules as in the wizard.
 6. A message reads `Your password has been reset.` and the panel takes you to the login screen. Sign in with the new password.
 
-:docs-video{src="../../assets/single-server/signing-in-forgot-password.webm" title="The password step, Forgot password?, the Forgot password page with the email you@example.com, Send Password Reset Link and the message that a link was sent, and the link Sign In to go back"}
+:docs-video{src="../../assets/single-server-edition/signing-in-forgot-password.webm" title="The password step, Forgot password?, the Forgot password page with the email you@example.com, Send Password Reset Link and the message that a link was sent, and the link Sign In to go back"}
 
-:docs-video{src="../../assets/single-server/signing-in-reset-password.webm" title="The Reset password page: Enter new password and Confirm Password shown as dots, Reset Password, then the login screen with the message Your password has been reset"}
+:docs-video{src="../../assets/single-server-edition/signing-in-reset-password.webm" title="The Reset password page: Enter new password and Confirm Password shown as dots, Reset Password, then the login screen with the message Your password has been reset"}
 
 **False alert? Sign In** at the bottom of the Forgot password page takes you back to the login screen when you remembered the password after all.
 
@@ -75,7 +75,7 @@ If no email arrives, you can set a new password on the server: [On the server](o
 
 You come back to the login screen.
 
-:docs-video{src="../../assets/single-server/signing-in-log-out.webm" title="My Projects, the user menu opened from the avatar, Log Out, and the login screen after it"}
+:docs-video{src="../../assets/single-server-edition/signing-in-log-out.webm" title="My Projects, the user menu opened from the avatar, Log Out, and the login screen after it"}
 
 To end the session of another browser, use **Active Devices**: [Your account](../the-panel/your-account.md#devices).
 

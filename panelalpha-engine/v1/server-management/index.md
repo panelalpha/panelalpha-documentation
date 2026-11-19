@@ -5,7 +5,7 @@ nav:
   group: Hosting Servers
   order: 7
   title: Engine Server Management
-  section: multi-server
+  section: multi-server-edition
 ---
 
 # Server Management

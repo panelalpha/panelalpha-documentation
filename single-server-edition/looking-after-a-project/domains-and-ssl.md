@@ -26,7 +26,7 @@ New projects get an address from the default domain set in the panel: [Settings]
 
    The dialog also holds **Change**, to pick another domain, **Generate URL**, a temporary address to preview the site, and **Close**.
 
-   :docs-video{src="../../assets/single-server/domains-set-your-domain-dns.webm" title="Bagisto on its free panelalpha.online address: Change Domain opens Set Your Domain, Change, the domain shop.example.com typed into Map your own domain, Use This Domain, and Set DNS Records with the A record and the CNAME record for www"}
+   :docs-video{src="../../assets/single-server-edition/domains-set-your-domain-dns.webm" title="Bagisto on its free panelalpha.online address: Change Domain opens Set Your Domain, Change, the domain shop.example.com typed into Map your own domain, Use This Domain, and Set DNS Records with the A record and the CNAME record for www"}
 
 5. Set these records at your domain provider and wait for them to spread. This takes from 2 minutes to a few hours.
 
@@ -49,7 +49,7 @@ The panel checks from your browser where the domain points. If the domain does n
 
 If DNS cannot point at the server yet, **Set Your Domain** also offers **Generate URL** under `Not live yet? Preview the site on the server`. It gives a temporary address so you can look at the site first: [Staging and preview](../projects/staging-and-preview.md).
 
-::docs-video{src="../../assets/single-server/domains-dns-warning.webm" title="My Projects: pointing at the warning icon next to shop.example.com on the Bagisto card shows The A record may be missing, pointing elsewhere, or routed through a proxy such as Cloudflare, with the buttons Fix it now and Ignore"}
+::docs-video{src="../../assets/single-server-edition/domains-dns-warning.webm" title="My Projects: pointing at the warning icon next to shop.example.com on the Bagisto card shows The A record may be missing, pointing elsewhere, or routed through a proxy such as Cloudflare, with the buttons Fix it now and Ignore"}
 ::
 
 ## Adding a domain
@@ -71,7 +71,7 @@ To add a domain:
 3. In **Type**, choose **Addon Domain** or **Subdomain**. For a subdomain, enter the name and choose the parent domain, for example `shop` under `example.com`.
 4. Select **Add Domain**. Select **Cancel** to close the window without a new domain.
 
-::docs-video{src="../../assets/single-server/domains-list.webm" title="Advanced > Domains of Immich with the columns Domain, SSL Status, Type and Points to: Add Domain opens Add New Domain with the type Addon Domain, example.org is added, and the pointer stops on Edit SSL in its row"}
+::docs-video{src="../../assets/single-server-edition/domains-list.webm" title="Advanced > Domains of Immich with the columns Domain, SSL Status, Type and Points to: Add Domain opens Add New Domain with the type Addon Domain, example.org is added, and the pointer stops on Edit SSL in its row"}
 ::
 
 Set the DNS records for the new domain at your domain provider, as above.
@@ -107,7 +107,7 @@ Each domain has a certificate. It comes from Let's Encrypt or from you, or it is
 3. For **Let's Encrypt**, select **Generate**. The domain must already point at the server, or the certificate waits for DNS.
 4. For a certificate of your own, fill in **Certificate (CRT)** and **Private Key (KEY)**. **Certificate Authority Bundle (CABUNDLE)** is optional. Select **Install**.
 
-::docs-video{src="../../assets/single-server/domains-ssl-dialog.webm" title="The padlock of photos.example.com in Advanced > Domains of Immich opens Set SSL Certificate: the installed and detected certificates, the SSL provider list switched from Let's Encrypt to Custom Certificate, which shows Certificate (CRT) and Private Key (KEY)"}
+::docs-video{src="../../assets/single-server-edition/domains-ssl-dialog.webm" title="The padlock of photos.example.com in Advanced > Domains of Immich opens Set SSL Certificate: the installed and detected certificates, the SSL provider list switched from Let's Encrypt to Custom Certificate, which shows Certificate (CRT) and Private Key (KEY)"}
 ::
 
 If installation fails, check that the DNS records are right and try again.

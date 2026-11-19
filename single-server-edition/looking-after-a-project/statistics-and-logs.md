@@ -26,7 +26,7 @@ Below the chart is one card for each question. Each card lists the biggest group
 
 The panel updates the statistics once a day. A new project shows `There is no data to display yet`. Check again the next day.
 
-::docs-video{src="../../assets/single-server/statistics-monitoring-tab.webm" title="The Monitoring tab of Immich: the Visitors Chart, then the cards below it scroll past, from the pages and referrers to the device, operating system and browser"}
+::docs-video{src="../../assets/single-server-edition/statistics-monitoring-tab.webm" title="The Monitoring tab of Immich: the Visitors Chart, then the cards below it scroll past, from the pages and referrers to the device, operating system and browser"}
 ::
 
 The **Project Details** tab also shows **Unique Visitors**, **Average Session Time** and **Bandwidth**. The session time is an estimate.
@@ -37,7 +37,7 @@ The country, continent and region cards stay empty until you download the visito
 
 **Advanced > Project Details** shows how much RAM, CPU and disk the project uses now, and the limits it may use. A limit stops one project from taking the whole server.
 
-::docs-video{src="../../assets/single-server/statistics-and-logs-usage-limits.webm" title="Advanced opens Project Details of Immich with the Project usage cards RAM, CPU and Disk, the Manage link in the Limits row opens Project limits, Advanced limits shows Inodes, Disk read speed and Disk write speed, Memory (GB) changes from 2 to 4, and Save closes the window"}
+::docs-video{src="../../assets/single-server-edition/statistics-and-logs-usage-limits.webm" title="Advanced opens Project Details of Immich with the Project usage cards RAM, CPU and Disk, the Manage link in the Limits row opens Project limits, Advanced limits shows Inodes, Disk read speed and Disk write speed, Memory (GB) changes from 2 to 4, and Save closes the window"}
 ::
 
 **Project usage** has three cards: **RAM**, **CPU** and **Disk**. Each card shows a ring with a percent, then **Used** and **Limit**. Above the cards, the panel says when the reading was taken, for example `Updated 2 minutes ago`.
@@ -77,7 +77,7 @@ Open the user menu and select **My Server**. The page shows how much **RAM**, **
 
 Choose **1 hour**, **12 hours** or **Live** in **Period**. **Live** is the last 5 minutes.
 
-::docs-video{src="../../assets/single-server/statistics-server-usage.webm" title="My Server, Usage: RAM, CPU and Disk Space for the whole server, then the graphs Disk Throughput, Network Traffic and CPU Usage one after another"}
+::docs-video{src="../../assets/single-server-edition/statistics-server-usage.webm" title="My Server, Usage: RAM, CPU and Disk Space for the whole server, then the graphs Disk Throughput, Network Traffic and CPU Usage one after another"}
 ::
 
 ## Logs
@@ -92,7 +92,7 @@ Open the project and go to **Advanced > Logs**. Which tabs you see depends on th
 
 Every tab except **Project Logs** has a **Download** button that saves the log you are looking at.
 
-::docs-video{src="../../assets/single-server/statistics-logs-tabs.webm" title="Advanced > Logs of the Stories WordPress project: Project Logs, then WordPress Error Logs, PHP Logs and Webserver Logs with the access.log rows and the Download button"}
+::docs-video{src="../../assets/single-server-edition/statistics-logs-tabs.webm" title="Advanced > Logs of the Stories WordPress project: Project Logs, then WordPress Error Logs, PHP Logs and Webserver Logs with the access.log rows and the Download button"}
 ::
 
 A tab with nothing to show says `No PHP Logs Were Found...` or similar. The web server log often holds more detail.
@@ -118,7 +118,7 @@ The **Actions** menu at the top acts on the whole project:
 
 The panel asks for a confirmation before a restart, a stop or a redeploy.
 
-::docs-video{src="../../assets/single-server/statistics-containers-page.webm" title="Advanced > Containers of Immich: the services immich-server, immich-machine-learning, redis and database with their image, state running, uptime and ports, then the Actions menu with Start All, Restart, Stop All and Pull & Redeploy"}
+::docs-video{src="../../assets/single-server-edition/statistics-containers-page.webm" title="Advanced > Containers of Immich: the services immich-server, immich-machine-learning, redis and database with their image, state running, uptime and ports, then the Actions menu with Start All, Restart, Stop All and Pull & Redeploy"}
 ::
 
 ### Public URLs

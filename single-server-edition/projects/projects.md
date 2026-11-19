@@ -31,7 +31,7 @@ Create one: [Create a project](create-a-project.md).
 
 **My Projects** is the first page after you sign in. It lists every project on your server. The list shows 8 projects at a time, newest first.
 
-::docs-video{src="../../assets/single-server/projects-list.webm" title="My Projects with the Bagisto and Immich cards: the address, the Production and Clients tags, the live mark and the Manage and Open Project buttons on a card, then the Filters, Newest and search controls and the grid and list switch"}
+::docs-video{src="../../assets/single-server-edition/projects-list.webm" title="My Projects with the Bagisto and Immich cards: the address, the Production and Clients tags, the live mark and the Manage and Open Project buttons on a card, then the Filters, Newest and search controls and the grid and list switch"}
 ::
 
 ### The project card
@@ -59,7 +59,7 @@ While a project is being created or deployed, its card shows the progress instea
 
 A tag is a coloured word you put on projects to group them, for example `Production`, `Clients` or `Personal`. A project can have several tags. Tags belong to your account, so the same tag can be on many projects.
 
-::docs-video{src="../../assets/single-server/projects-tags.webm" title="Add tags on the Karakeep card opens the Assigned Tags window with No tags assigned, the Assign existing tag list is opened and Personal is chosen, and the tag appears on the card"}
+::docs-video{src="../../assets/single-server-edition/projects-tags.webm" title="Add tags on the Karakeep card opens the Assigned Tags window with No tags assigned, the Assign existing tag list is opened and Personal is chosen, and the tag appears on the card"}
 ::
 
 1. On a card, select **Add tags**. If the project already has tags, select the round **+** button after them.
@@ -76,7 +76,7 @@ Select a tag on a card to show only the projects with that tag.
 
 The three controls on the right of the heading change what the list shows.
 
-::docs-video{src="../../assets/single-server/projects-filter-by-tag.webm" title="Filters opens the Tags list, Production is ticked and Apply shows only the three Production projects, then Filters and Clear Filter show all projects again"}
+::docs-video{src="../../assets/single-server-edition/projects-filter-by-tag.webm" title="Filters opens the Tags list, Production is ticked and Apply shows only the three Production projects, then Filters and Clear Filter show all projects again"}
 ::
 
 **Filters** filters by tag.
@@ -95,7 +95,7 @@ The three controls on the right of the heading change what the list shows.
 
 **Search** is the box that says **Enter search term**. Type part of a project name or address. The list shrinks while you type. Empty the box to see all projects.
 
-::docs-video{src="../../assets/single-server/projects-sort-search-pages.webm" title="The Newest box is changed to Name, grafana is typed in the search box and only Grafana is left, the search is cleared, then page 2 and Records Per Page 16 show more projects"}
+::docs-video{src="../../assets/single-server-edition/projects-sort-search-pages.webm" title="The Newest box is changed to Name, grafana is typed in the search box and only Grafana is left, the search is cleared, then page 2 and Records Per Page 16 show more projects"}
 ::
 
 ### Pages
@@ -127,7 +127,7 @@ The bell at the top right shows messages about your projects, for example a fini
 
 Select **Manage** on a card, or the name of the project, to open its page.
 
-::docs-video{src="../../assets/single-server/projects-project-page.webm" title="Opening the Immich card shows its project page: the Open Project, Staging and Delete Project buttons and Change Domain are shown one after another, then the tabs Monitoring, Backups, Advanced and Project Details"}
+::docs-video{src="../../assets/single-server-edition/projects-project-page.webm" title="Opening the Immich card shows its project page: the Open Project, Staging and Delete Project buttons and Change Domain are shown one after another, then the tabs Monitoring, Backups, Advanced and Project Details"}
 ::
 
 ### The top bar
@@ -159,7 +159,7 @@ You can rename a WordPress project. The name also becomes the WordPress site tit
 2. Type the new name.
 3. Select the check mark to save it, or the cross to leave without saving.
 
-::docs-video{src="../../assets/single-server/projects-rename-project.webm" title="On the Stories project page the pencil next to the name opens the name field, Stories Blog is typed, and the check mark and cross buttons appear; the cross leaves the name as it was"}
+::docs-video{src="../../assets/single-server-edition/projects-rename-project.webm" title="On the Stories project page the pencil next to the name opens the name field, Stories Blog is typed, and the check mark and cross buttons appear; the cross leaves the name as it was"}
 ::
 
 A project that is not WordPress has no pencil. Its name stays as it was when you created it.
@@ -175,12 +175,12 @@ A project that is not WordPress has no pencil. Its name stays as it was when you
 - **Loading Speed** shows two scores from 0 to 100, one for a computer (**Desktop**) and one for a phone (**Mobile**). **Full Report** opens the complete report from Google PageSpeed.
 - **Project Analytics** shows the visitors, the time they stay and the data sent, for the last week or month. Choose the period in the box at the right.
 
-::docs-video{src="../../assets/single-server/projects-source-card.webm" title="The Project Details tab of Immich: the Source card with the repository immich-app/immich and the PostgreSQL database, the Security card with Create Backup, the Loading Speed scores with Full Report, and Project Analytics below"}
+::docs-video{src="../../assets/single-server-edition/projects-source-card.webm" title="The Project Details tab of Immich: the Source card with the repository immich-app/immich and the PostgreSQL database, the Security card with Create Backup, the Loading Speed scores with Full Report, and Project Analytics below"}
 ::
 
 To take a new picture of the site, hold the mouse over the picture and select **Refresh Thumbnail**.
 
-::docs-video{src="../../assets/single-server/projects-refresh-thumbnail.webm" title="On the Immich project page the mouse goes over the picture of the site, and Refresh Thumbnail takes a new picture"}
+::docs-video{src="../../assets/single-server-edition/projects-refresh-thumbnail.webm" title="On the Immich project page the mouse goes over the picture of the site, and Refresh Thumbnail takes a new picture"}
 ::
 
 ### Monitoring and Backups
@@ -191,7 +191,7 @@ To take a new picture of the site, hold the mouse over the picture and select **
 
 **Advanced** holds the rest, in a list on the left. Select an item to open its page.
 
-::docs-video{src="../../assets/single-server/projects-advanced-pages.webm" title="The Advanced tab of Immich with its list on the left, opening Domains, MySQL Databases, Cron Jobs, File Manager, Containers and Logs one after another"}
+::docs-video{src="../../assets/single-server-edition/projects-advanced-pages.webm" title="The Advanced tab of Immich with its list on the left, opening Domains, MySQL Databases, Cron Jobs, File Manager, Containers and Logs one after another"}
 ::
 
 Every kind of project has pages for its details (which also show its usage and limits: [Usage and limits of a project](../looking-after-a-project/statistics-and-logs.md#usage-and-limits-of-a-project)), security, domains, databases, cron, files, logs and Git. A WordPress project also shows its version and **Installation Details** (the directory and the database name, user, host and password). Other projects have **Environment variables**. A WordPress project keeps its variables in **System Configuration**.
@@ -226,7 +226,7 @@ Each container also has its own actions: [Statistics and logs](../looking-after-
 2. The **Delete Project** window says `Any data stored on the server will be permanently erased` and `this action cannot be undone!` Under it is the name of the project. Tick the three boxes: one for the files, one for the databases, and `Yes, I understand and want to proceed with the removal of the project.`
 3. Select **Delete Project**. The button stays pale until every box is ticked. Select **Cancel** if you changed your mind.
 
-::docs-video{src="../../assets/single-server/projects-delete-project.webm" title="On the Immich project page Delete Project opens the Delete Project window with its warning and the boxes to tick, and Cancel closes it without deleting anything"}
+::docs-video{src="../../assets/single-server-edition/projects-delete-project.webm" title="On the Immich project page Delete Project opens the Delete Project window with its warning and the boxes to tick, and Cancel closes it without deleting anything"}
 ::
 
 A project that has a staging copy cannot be deleted. Delete the staging copy first: [Staging and preview](staging-and-preview.md).

@@ -29,7 +29,7 @@ Every tool connects the same way. You create a token in the panel, then put the 
 
 The **Connect AI** page shows the same steps. Pick your tool under **Your tool**. The page fills in your panel address and gives a **Copy** button for each part.
 
-::docs-video{src="../../assets/single-server/connect-ai-tour.webm" title="Connect AI in the top menu opens the Claude Code steps, Your tool switches to ChatGPT and back, MCP URL & tokens shows the MCP Server URL and the API Tokens table, What You Can Do with AI opens a group of requests, and Activity Log lists each tool the assistant ran"}
+::docs-video{src="../../assets/single-server-edition/connect-ai-tour.webm" title="Connect AI in the top menu opens the Claude Code steps, Your tool switches to ChatGPT and back, MCP URL & tokens shows the MCP Server URL and the API Tokens table, What You Can Do with AI opens a group of requests, and Activity Log lists each tool the assistant ran"}
 ::
 
 In the examples below the panel address is `https://panel.example.com`. Use your own.
@@ -44,7 +44,7 @@ You need a token for every tool except the Claude app.
 2. Under **Generate an MCP token**, select **Create Token**. Enter a **Token Name**, such as `Claude on my laptop`, and create it. If you already have a token, select **use one you already have** instead.
 3. **The token is shown once.** You cannot see it again after you close the dialog. Copy the token, then confirm with `I have saved my token in a safe place`.
 
-   :docs-video{src="../../assets/single-server/connect-ai-token-created.webm" title="Connect AI: Create Token, the Token Name Claude on my laptop, the new token shown once (hidden here) with the warning to save it, the confirmation I have saved my token in a safe place and Continue"}
+   :docs-video{src="../../assets/single-server-edition/connect-ai-token-created.webm" title="Connect AI: Create Token, the Token Name Claude on my laptop, the new token shown once (hidden here) with the warning to save it, the confirmation I have saved my token in a safe place and Continue"}
 
 In every step below, replace `YOUR_TOKEN` with your token.
 
@@ -214,7 +214,7 @@ Each row of the table has six columns:
 1. Open **MCP URL & tokens**. The table lists each token.
 2. In the token's row, point at the rotate arrow in **Actions** to read **Revoke**, then select it and confirm.
 
-:docs-video{src="../../assets/single-server/connect-ai-tokens-table.webm" title="Connect AI, MCP URL & tokens: the MCP Server URL and the API Tokens table with Name, Token, Last Used, Created, Status and the Revoke and Delete actions"}
+:docs-video{src="../../assets/single-server-edition/connect-ai-tokens-table.webm" title="Connect AI, MCP URL & tokens: the MCP Server URL and the API Tokens table with Name, Token, Last Used, Created, Status and the Revoke and Delete actions"}
 
 **A revoked token stops working at once.** It stays in the list with the status `Revoked`. To remove it from the list, select **Delete**, the bin in **Actions**. A delete cannot be undone.
 
@@ -234,4 +234,4 @@ For a request like "Update all my sites", the assistant goes through your projec
 
 **Activity Log** lists each tool the assistant runs: **Time** is when it ran, **Token** is the name of the token it used, **Tool** is what the assistant did, and **Status** is `Success` or `Error`. The list shows 20 entries a page. Filter by token with **Filter by token**. If there is nothing yet, the page says `No activity yet. Start using your AI tool to see logs here.`
 
-:docs-video{src="../../assets/single-server/connect-ai-activity-log.webm" title="Connect AI, Activity Log: each tool the assistant ran with its Time, Token, Tool and Status (Success or Error), and the Filter by token list"}
+:docs-video{src="../../assets/single-server-edition/connect-ai-activity-log.webm" title="Connect AI, Activity Log: each tool the assistant ran with its Time, Token, Tool and Status (Success or Error), and the Filter by token list"}

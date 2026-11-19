@@ -20,11 +20,11 @@ file, so you can also read it here on GitHub.
 
 ## What is inside
 
-**[Single Server Edition](single-server/index.md)**
+**[Single Server Edition](single-server-edition/index.md)**
 A web hosting panel you install on your own VPS. Installing it, creating projects, domains,
 backups, staging and the panel's settings.
 
-**[Multi Server Edition](multi-server/index.md)**
+**[Multi Server Edition](multi-server-edition/index.md)**
 PanelAlpha for hosting providers who run WordPress hosting on many servers. Servers, billing
 systems, migrations, the Admin Area and the Client Area.
 

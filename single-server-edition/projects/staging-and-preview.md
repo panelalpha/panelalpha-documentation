@@ -21,7 +21,7 @@ A project can have one staging copy. A staging copy cannot have its own.
 
 A site on the panel's free `panelalpha.online` address does not ask for a name. The window says `This site is on the free panelalpha.online address, so the panel gives the copy its own free address when it is created.` The copy gets its own free address, and you only select **Create Staging**.
 
-::docs-video{src="../../assets/single-server/staging-create-form.webm" title="On the Immich project page Staging in the top bar opens the Create Staging window, and Create Staging adds a staging tab and the Push To Staging button"}
+::docs-video{src="../../assets/single-server-edition/staging-create-form.webm" title="On the Immich project page Staging in the top bar opens the Create Staging window, and Create Staging adds a staging tab and the Push To Staging button"}
 ::
 
 The panel shows `Staging Installation In Progress` and notifies you when the copy is ready. The copy appears under its live project, not as a separate project: as a `staging` tag on the live project's card, and as a `staging` tab in the project's top bar. Select either to open the copy.
@@ -38,7 +38,7 @@ Push To Live copies the staging copy to the live project.
 2. Tick what to overwrite (see the options below).
 3. Confirm. The panel shows `Push To Live In Progress` and notifies you when the push finishes.
 
-::docs-video{src="../../assets/single-server/staging-push-to-live-dialog.webm" title="On the staging copy of Immich, Push To Live opens a window where Overwrite files is ticked and the option Overwrite volumes (including databases) is shown"}
+::docs-video{src="../../assets/single-server-edition/staging-push-to-live-dialog.webm" title="On the staging copy of Immich, Push To Live opens a window where Overwrite files is ticked and the option Overwrite volumes (including databases) is shown"}
 ::
 
 What you can tick depends on the project.
@@ -62,7 +62,7 @@ Push To Staging copies the live project to its staging copy, so you can try chan
 2. Tick what to overwrite. A container project (from Git or from files) offers **Overwrite files** and **Overwrite volumes (including databases)**. A PHP hosting project offers **Overwrite files** and **Push full database**, with the table lists described in [Pushing staging to live](#pushing-staging-to-live).
 3. Confirm. The panel shows `Push To Staging In Progress`.
 
-::docs-video{src="../../assets/single-server/staging-and-preview-push-to-staging.webm" title="On the live Immich project with a staging tab, Push To Staging in the top bar opens the Push To Staging window, Overwrite files and Overwrite volumes (including databases) are ticked and Push To Staging starts the copy"}
+::docs-video{src="../../assets/single-server-edition/staging-and-preview-push-to-staging.webm" title="On the live Immich project with a staging tab, Push To Staging in the top bar opens the Push To Staging window, Overwrite files and Overwrite volumes (including databases) are ticked and Push To Staging starts the copy"}
 ::
 
 ## Deploying a Git project to staging
@@ -97,7 +97,7 @@ A preview link opens the site on a temporary address on this server, so you can 
 
 The domain warning on a project also has **Not live yet? Preview the site on the server** with a **Generate URL** button. On a project with a domain of your own, **Open Project** opens the same **Preview Site** window: [Projects](projects.md).
 
-::docs-video{src="../../assets/single-server/staging-preview-link-window.webm" title="On the Stories project, which has a domain of its own, Open Project opens the Preview Site window, Get Temporary URL creates an address, and Copy URL and Visit Site appear"}
+::docs-video{src="../../assets/single-server-edition/staging-preview-link-window.webm" title="On the Stories project, which has a domain of its own, Open Project opens the Preview Site window, Get Temporary URL creates an address, and Copy URL and Visit Site appear"}
 ::
 
 Something not working? Messages and fixes: [Troubleshooting: Projects](../troubleshooting/projects.md#staging-and-preview).

@@ -26,7 +26,7 @@ Each card shows the name of the theme and a line about it. The active theme is m
 
 **Add New** opens **Available Themes**, the themes from wordpress.org. A search field and a row of tags (for example a style or a feature) help you narrow the list, and the sort menu, set to **Most Popular**, changes the order. The arrow next to the title goes back to your installed themes. On a card in this list, **Install This Theme** adds the theme to the site, and you can then use it. **You install a theme by its wordpress.org name.** Installing from a URL is not available.
 
-:docs-video{src="../../assets/single-server/wordpress-themes-tab.webm" title="Advanced, Installed Themes of the Stories project: the installed themes Twenty Twenty-Four, Astra and Twenty Twenty-Three, then Add New shows the featured themes Kadence, Hello Elementor and GeneratePress"}
+:docs-video{src="../../assets/single-server-edition/wordpress-themes-tab.webm" title="Advanced, Installed Themes of the Stories project: the installed themes Twenty Twenty-Four, Astra and Twenty Twenty-Three, then Add New shows the featured themes Kadence, Hello Elementor and GeneratePress"}
 
 ## Users
 
@@ -45,7 +45,7 @@ Select **Create User** to add one. The window has these fields:
 
 On each row, a button edits the user (the same fields, and an empty **Password** keeps the old one), **Reset Password** sets a new password after you confirm, and **Delete User** removes the user after you tick the confirmation box.
 
-:docs-video{src="../../assets/single-server/wordpress-users-page.webm" title="Advanced, Users of the Stories project: the users admin, sam and robin with their roles, then Create User opens the window with Username, Email, Display Name, Password, Role and Send email"}
+:docs-video{src="../../assets/single-server-edition/wordpress-users-page.webm" title="Advanced, Users of the Stories project: the users admin, sam and robin with their roles, then Create User opens the window with Username, Email, Display Name, Password, Role and Send email"}
 
 ## System Configuration
 
@@ -58,7 +58,7 @@ The table lists each setting with its **Name**, **Value** and **Type**. A type i
 - The delete button on a row removes the setting after you tick the confirmation (**Delete Configuration**).
 - **Remove by name** removes a setting when you type its name (**Remove Configuration by Name**).
 
-:docs-video{src="../../assets/single-server/wordpress-system-configuration.webm" title="Advanced, System Configuration of the Stories project: the settings DB_NAME, DB_PASSWORD (masked), WP_MEMORY_LIMIT, WP_DEBUG and table_prefix, then Create Configuration opens Name, Value and Type"}
+:docs-video{src="../../assets/single-server-edition/wordpress-system-configuration.webm" title="Advanced, System Configuration of the Stories project: the settings DB_NAME, DB_PASSWORD (masked), WP_MEMORY_LIMIT, WP_DEBUG and table_prefix, then Create Configuration opens Name, Value and Type"}
 
 ## Auto Updates
 
@@ -76,7 +76,7 @@ If WordPress itself blocks automatic updates with a setting in `wp-config.php`, 
 - **Force HTTPS Redirect.** When it is on, a visitor who opens `http://` goes to `https://` automatically. If other projects use the same domain, the panel lists them in a warning first, because the change applies to them too.
 - **Disable Search Engine Indexing.** When it is on, the site asks search engines not to list it. Turn it on for a site that is not ready or is only a test.
 
-:docs-video{src="../../assets/single-server/wordpress-security-and-auto-updates.webm" title="Advanced, Security of the Stories project with SSL Certificate Applied, Force HTTPS Redirect and Disable Search Engine Indexing, then Auto Updates with the switches Auto Upgrade Plugins and Auto Upgrade Themes"}
+:docs-video{src="../../assets/single-server-edition/wordpress-security-and-auto-updates.webm" title="Advanced, Security of the Stories project with SSL Certificate Applied, Force HTTPS Redirect and Disable Search Engine Indexing, then Auto Updates with the switches Auto Upgrade Plugins and Auto Upgrade Themes"}
 
 ## Developer Settings
 
@@ -88,7 +88,7 @@ If WordPress itself blocks automatic updates with a setting in `wp-config.php`, 
 
 **Debug Mode and Maintenance Mode should be off on a live site.** Check both switches before the site goes live.
 
-:docs-video{src="../../assets/single-server/wordpress-developer-settings.webm" title="Advanced, Developer Settings of the Stories project: the switches Debug Mode and Maintenance Mode, then the cards PHPMyAdmin, PHP Version with PHP 8.3 and PHP Settings"}
+:docs-video{src="../../assets/single-server-edition/wordpress-developer-settings.webm" title="Advanced, Developer Settings of the Stories project: the switches Debug Mode and Maintenance Mode, then the cards PHPMyAdmin, PHP Version with PHP 8.3 and PHP Settings"}
 
 PHP version and limits: [Cron jobs and PHP](../looking-after-a-project/cron-and-php.md).
 

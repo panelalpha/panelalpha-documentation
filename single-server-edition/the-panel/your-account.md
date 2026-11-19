@@ -20,7 +20,7 @@ The **Personal Information** tab has three parts. **Personal Information** holds
 2. Change **First Name**, **Last Name**, **Company Name** or **Language**. First and last name are required. **Language** is the language of the panel for you. **Email Address** is read-only here. To change it, use **Change Email Address**.
 3. Select **Save Changes**. You see `Personal information details have been updated.`
 
-   :docs-video{src="../../assets/single-server/account-personal-information.webm" title="My Account opened with Account Details in the user menu: First Name, Last Name, Company Name, the Language list, Change Email Address, Change Password, then Security Settings with the Two-Factor Authentication switch, the New Device Detection Notification list and Save Changes"}
+   :docs-video{src="../../assets/single-server-edition/account-personal-information.webm" title="My Account opened with Account Details in the user menu: First Name, Last Name, Company Name, the Language list, Change Email Address, Change Password, then Security Settings with the Two-Factor Authentication switch, the New Device Detection Notification list and Save Changes"}
 
 **New Device Detection Notification** sets what counts as a new device when you sign in. Choose one of: `New IP address, device and browser`, `New IP address and device`, `New IP address and browser`, `New device and browser`, `New IP address`, `New browser` or `New device`. Save Changes keeps your choice.
 
@@ -52,7 +52,7 @@ Two-factor authentication asks for a code from an app on your phone each time yo
 3. Enter the code the app shows.
 4. Save your backup codes and confirm that you did.
 
-   :docs-video{src="../../assets/single-server/account-two-factor-setup.webm" title="My Account, Security Settings: the Two-Factor Authentication switch opens the dialog with the QR code and the code to type by hand (both hidden here), the Code field, Confirm, then the backup codes (hidden here), the confirmation to tick and the button to go back to the account"}
+   :docs-video{src="../../assets/single-server-edition/account-two-factor-setup.webm" title="My Account, Security Settings: the Two-Factor Authentication switch opens the dialog with the QR code and the code to type by hand (both hidden here), the Code field, Confirm, then the backup codes (hidden here), the confirmation to tick and the button to go back to the account"}
 
 You see `Two-Factor Authentication has been enabled.`
 
@@ -64,7 +64,7 @@ To turn two-factor authentication off, open the same dialog and confirm. You see
 
 **Active Devices** lists where you are signed in, with **IP Address**, **Browser**, **Device** and **Last Login**. Your current one is marked `Current Device`. The search field above the table finds a device by what it shows. Select the logout icon (tip **Log Out Device**) on a row to end that session. The bin icon (tip **Forget Device**) removes a device you no longer use. If there is nothing to show, the page says `No Active Devices Found`.
 
-:docs-video{src="../../assets/single-server/account-active-devices.webm" title="My Account, Active Devices: each session with its IP address, browser, device and last login, the row marked Current Device, the search field, and the Log Out Device and Forget Device icons"}
+:docs-video{src="../../assets/single-server-edition/account-active-devices.webm" title="My Account, Active Devices: each session with its IP address, browser, device and last login, the row marked Current Device, the search field, and the Log Out Device and Forget Device icons"}
 
 ## Forgotten password
 

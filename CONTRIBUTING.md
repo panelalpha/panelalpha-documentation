@@ -22,7 +22,7 @@ A page is plain GitHub Markdown, so it also reads well in the GitHub preview.
   the heading id used by the site (lower case, dashes, `_` before a leading digit). GitHub may
   not jump to it in the preview.
 - **Images.** Put a new image in `assets/<product>/` and link it relatively. From
-  `single-server/projects/git.md` that is `![Git card](../../assets/single-server/git-card.png)`.
+  `single-server-edition/projects/git.md` that is `![Git card](../../assets/single-server-edition/git-card.png)`.
 - **Video and download button.** These two stay in the site format:
   `::docs-video{src="https://www.youtube.com/embed/..."}` followed by a line with `::`, and
   `:docs-button{href="https://..."}[Label]`. Their links must be full URLs.
@@ -42,7 +42,7 @@ nav:
   group: Direct Billing        # group title, declared in the section index
   order: 3                     # position in that group, starting at 1, unique per group
   title: Stripe Setup          # only when the sidebar label differs from the title
-  section: multi-server        # only when the group is in another section than the page folder
+  section: multi-server-edition        # only when the group is in another section than the page folder
 ---
 ```
 
@@ -83,15 +83,15 @@ href and label) and `cards` for cards that are not a section (external links), e
 Its text body is not published.
 
 The root `index.md` also lists the pages the home page highlights. Every page is a path in
-this repo, for example `single-server/getting-started/install.md`, and a page that does not
+this repo, for example `single-server-edition/getting-started/install.md`, and a page that does not
 exist fails the build.
 
 ```yaml
 popular:                       # chips under the search box
   - title: Backups             # text of the chip
-    page: single-server/looking-after-a-project/backups.md
+    page: single-server-edition/looking-after-a-project/backups.md
 guides:                        # cards under "Popular Guides", in this order
-  - single-server/projects/create-a-project.md   # title and description come from the page
+  - single-server-edition/projects/create-a-project.md   # title and description come from the page
 resources:                     # cards under "More Resources", in this order
   - card: troubleshooting-center   # a section card (folder name) or a root card with this id
   - card: api

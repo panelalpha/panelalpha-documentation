@@ -26,7 +26,7 @@ Tasks are grouped by day: `Today`, `Yesterday`, then the date. Each row has five
 
 On a phone each task is a compact card.
 
-::docs-video{src="../../assets/single-server/tasks-list.webm" title="Tasks opens from the user menu with the tasks grouped under Today and Yesterday, the status tabs All, Active, Failed, Completed and Cancelled are selected one by one, the Task type and Project lists open, and the Failed tab opens a task with its error in the details"}
+::docs-video{src="../../assets/single-server-edition/tasks-list.webm" title="Tasks opens from the user menu with the tasks grouped under Today and Yesterday, the status tabs All, Active, Failed, Completed and Cancelled are selected one by one, the Task type and Project lists open, and the Failed tab opens a task with its error in the details"}
 ::
 
 

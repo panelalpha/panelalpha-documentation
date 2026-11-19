@@ -14,7 +14,7 @@ At your first visit the setup wizard creates your account. Open `https://panel.e
 
 The wizard shows until the panel has an account. Every address on the panel leads to it until you finish. It has a start screen and four steps. The list of steps is on the left: **Sign in**, **Server name**, **Connect AI** and **Done**. The language list at the bottom of the screen changes the language of the wizard.
 
-:docs-video{src="../../assets/single-server/first-login-wizard.webm" title="The setup wizard of a new panel: Start Now, the Sign in step with the Connect with PanelAlpha Hub card and the link Create a local account instead, Connect with Hub, then the Name your server step with Connected to PanelAlpha Hub, Signed in as you@example.com and the Server name My server, and Continue to the Connect AI step"}
+:docs-video{src="../../assets/single-server-edition/first-login-wizard.webm" title="The setup wizard of a new panel: Start Now, the Sign in step with the Connect with PanelAlpha Hub card and the link Create a local account instead, Connect with Hub, then the Name your server step with Connected to PanelAlpha Hub, Signed in as you@example.com and the Server name My server, and Continue to the Connect AI step"}
 
 ### The start screen
 
@@ -45,7 +45,7 @@ The step is called `Connect your AI assistant`. It has one card, **Connect with 
 
 After you create a token the card reads `AI is connected to this panel.` **Create another token** makes one more, and **Continue** takes the place of **Skip for now**.
 
-:docs-video{src="../../assets/single-server/first-login-wizard-finish.webm" title="The Connect AI step: Create token, the Token Name Claude on my laptop, the new token shown once as dots, the confirmation I have saved my token in a safe place, Continue, then the last step You are all set with the server name, Hub account, panel address, Free version and Connected labels, and Create your first project"}
+:docs-video{src="../../assets/single-server-edition/first-login-wizard-finish.webm" title="The Connect AI step: Create token, the Token Name Claude on my laptop, the new token shown once as dots, the confirmation I have saved my token in a safe place, Continue, then the last step You are all set with the server name, Hub account, panel address, Community version and Connected labels, and Create your first project"}
 
 ### Step 4: Done
 
@@ -54,7 +54,7 @@ The last step reads `You're all set.` It lists what you set up:
 - **Server name**: the name you chose.
 - **Hub account** (after a Hub sign-in) or **Admin email** (with a local account): the address you sign in with.
 - **Panel address**: the address of this panel, with a copy button.
-- **Version**: `Free`.
+- **Version**: `Community`.
 - **PanelAlpha Hub**: `Connected` or `Not connected`.
 - **AI assistant**: `Connected` or `Not connected`.
 
@@ -73,7 +73,7 @@ A local account works on this server only. On the **Server name** step, fill in 
 
 **Connect with Hub instead**, under the title, goes back to the Hub card. **Back** returns to step 1. Select **Continue** to go on to step 3.
 
-:docs-video{src="../../assets/single-server/first-login-wizard-local-account.webm" title="The Name your server step of a local account: the link Connect with Hub instead, the Server name My server, Your Name Jane Doe, Email you@example.com, and the Password field with the list of rules, 1 uppercase character, 1 lowercase character, 1 number, 1 symbol and 8 characters"}
+:docs-video{src="../../assets/single-server-edition/first-login-wizard-local-account.webm" title="The Name your server step of a local account: the link Connect with Hub instead, the Server name My server, Your Name Jane Doe, Email you@example.com, and the Password field with the list of rules, 1 uppercase character, 1 lowercase character, 1 number, 1 symbol and 8 characters"}
 
 ## Connecting with PanelAlpha Hub
 
@@ -104,12 +104,8 @@ The card now reads `AI is connected to this panel.` You can also connect later: 
 
 **Remember Me** keeps you signed in. **Forgot password?** sends you a reset link. If you mistyped the address, select **Back** and correct it. Every way to sign in, step by step: [Signing in](signing-in.md).
 
-## What you see first
+## Next steps
 
-The project list is empty on a new server. The panel's own project is not in the list. The clip below is from a server that already has projects.
-
-:docs-video{src="../../assets/single-server/first-login-landing.webm" title="The user menu opened from the avatar with Dark Mode, Account Details, My Server, Tasks, Settings, Join Our Community and Log Out, and Settings opening with the PanelAlpha Hub card"}
-
-Open the user menu to reach **Tasks** and **Settings**: [Settings](../the-panel/settings.md). To create your first site: [Create a project](../projects/create-a-project.md).
+To create your first site: [Create a project](../projects/create-a-project.md). The user menu at the avatar holds **Tasks**, **Settings** and your account: [Around the panel](../the-panel/around-the-panel.md).
 
 Something not working? [Troubleshooting: The panel and your account](../troubleshooting/panel-and-account.md#first-login).

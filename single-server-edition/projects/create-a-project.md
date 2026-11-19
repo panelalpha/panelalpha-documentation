@@ -15,7 +15,7 @@ A project is one site or app on your server. You start every project in the same
 1. Go to **My Projects** and select **Add New** in the top bar. On an empty list, select **Create First Project**.
 2. The window **Choose how to create your project** opens. Select one of the four options, then select **Continue**.
 
-   :docs-video{src="../../assets/single-server/create-project-choose-source.webm" title="Add New on My Projects opens Choose how to create your project, where WordPress, Git, Files and PanelAlpha GO! are selected one after another and Continue waits at the bottom"}
+   :docs-video{src="../../assets/single-server-edition/create-project-choose-source.webm" title="Add New on My Projects opens Choose how to create your project, where WordPress, Git, Files and PanelAlpha GO! are selected one after another and Continue waits at the bottom"}
 
 You can also drop one archive on the project list. The panel then starts the Files way for you. A folder or another kind of file is refused before the project is created.
 
@@ -41,7 +41,7 @@ If you are not sure, start with WordPress for a website and PanelAlpha GO! for e
    - **Use a free subdomain.** Type a name in the first field (it shows `mydomain` until you type), and pick the ending from the list next to it, for example `panelalpha.online`. Use this to get a working address at once, with no DNS to set up.
 4. Select **Create Project**. **Maybe Later** closes the window and creates nothing.
 
-   :docs-video{src="../../assets/single-server/create-project-wordpress-form.webm" title="Creating a WordPress site: Add New, WordPress, Create New WordPress Project, Use a free subdomain with the name stories, Create Project, then Your site is now being created for you and Congratulations! Your site has been installed!"}
+   :docs-video{src="../../assets/single-server-edition/create-project-wordpress-form.webm" title="Creating a WordPress site: Add New, WordPress, Create New WordPress Project, Use a free subdomain with the name stories, Create Project, then Your site is now being created for you and Congratulations! Your site has been installed!"}
 
 The panel installs the newest WordPress and shows `Your site is now being created for you!`. It can take a few minutes. You can leave the page, and a notification tells you when it is done: [Around the panel](../the-panel/around-the-panel.md#notifications). The two buttons under the text are **Back To Dashboard** (back to the project list) and **Start Creating**.
 
@@ -61,12 +61,12 @@ If the domain still needs DNS records, the panel lists them after the install. S
 2. Find an app. Type in the search field a name, a category or the app it replaces, for example `Notion`. Use at least 2 characters. You can also pick a category in the list on the left, for example **Monitoring**. A line above the cards counts the apps that match.
 3. Each card shows the app name, a short line about it and a picture. Select **Install** on the card to install the app. To read more first, select **Details**. The details page tells what the app does and has its own **Install** button.
 
-::docs-video{src="../../assets/single-server/create-a-project-go-catalog-choose-app.webm" title="Choosing PanelAlpha GO! in Choose how to create your project, then Continue opens Choose an App, where the category Monitoring and the search uptime narrow the cards, and Details on the Uptime Kuma card opens its page with the Install button"}
+::docs-video{src="../../assets/single-server-edition/create-a-project-go-catalog-choose-app.webm" title="Choosing PanelAlpha GO! in Choose how to create your project, then Continue opens Choose an App, where the category Monitoring and the search uptime narrow the cards, and Details on the Uptime Kuma card opens its page with the Install button"}
 ::
 
 After **Install**, the panel creates a container project from the app's repository and shows `Your project is being created` with its live log. It does not ask for a name, a domain, a branch or environment variables. Select **Back To Dashboard** if you do not want to watch. The new project shows on the list with its progress and turns `live` when it runs. The project is then an ordinary Git project: [Git](git.md).
 
-::docs-video{src="../../assets/single-server/create-a-project-go-catalog-deploy.webm" title="Install on the Uptime Kuma card opens Your project is being created with the live log, Back To Dashboard shows Uptime Kuma on the project list while it is created, and then the card turns live"}
+::docs-video{src="../../assets/single-server-edition/create-a-project-go-catalog-deploy.webm" title="Install on the Uptime Kuma card opens Your project is being created with the live log, Back To Dashboard shows Uptime Kuma on the project list while it is created, and then the card turns live"}
 ::
 
 If PanelAlpha GO! cannot be reached, the catalog says `The catalog is unavailable`. Your other ways to create a project still work. Select **Try Again** to load it again later.
@@ -80,7 +80,7 @@ You need the address of the repository, for example `https://github.com/bagisto/
 3. Leave **Private repository** off for a public repository. For a private repository over HTTPS, turn the switch on. A field **Access token** appears. Paste a personal access token from your Git provider. It lets the panel read the repository. The eye icon in the field shows or hides the token. A link under the field points to the documentation that tells how to create a token.
 4. Select **Continue**.
 
-   :docs-video{src="../../assets/single-server/create-project-git-form.webm" title="Creating a project from Git: the Repository URL https://github.com/bagisto/bagisto, the Private repository switch that shows the Access token field, Continue, the Environment variables step, then Your project is being created with the live log"}
+   :docs-video{src="../../assets/single-server-edition/create-project-git-form.webm" title="Creating a project from Git: the Repository URL https://github.com/bagisto/bagisto, the Private repository switch that shows the Access token field, Continue, the Environment variables step, then Your project is being created with the live log"}
 
 The panel connects to the repository, finds its branches and looks for a file named `.env.example`. Then the **Environment variables** step opens. It is optional. This step has:
 
@@ -113,7 +113,7 @@ Pack your project into one `.zip` or `.tar.gz` archive first. If it has a databa
 3. Read the list **What can I upload?** under the area. It names the three things that work: your project folder (as a compressed copy), a database dump (`.sql`, `.sql.gz`, `.sqlite` or `.db`) and a backup archive from your old host. The panel unpacks the archive for you.
 4. Select **Continue**. If the archive has an `.env.example` file, the **Environment variables** step opens, the same as for Git. Then the deploy starts.
 
-   :docs-video{src="../../assets/single-server/create-project-files-upload.webm" title="Creating a project from files: Add New, Files, the drop area with click to browse, the archive landing.zip added, Continue, then Your project is being created with the live log until Congratulations!"}
+   :docs-video{src="../../assets/single-server-edition/create-project-files-upload.webm" title="Creating a project from files: Add New, Files, the drop area with click to browse, the archive landing.zip added, Continue, then Your project is being created with the live log until Congratulations!"}
 
 Keep the window open until the upload is done. After that the panel unpacks the files and runs the project. You see the same live log as for Git, with the step **Unpacking your files**.
 

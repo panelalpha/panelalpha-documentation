@@ -35,7 +35,7 @@ Each step below is one window. The progress dots at the bottom show how far you 
    - **Install the plugin manually.** Select **Download Plugin** and install and activate it in the WordPress admin of the old site. Then come back and select **Continue**.
 7. Select **Continue** to start.
 
-:docs-video{src="../../assets/single-server/importing-wordpress-connect.webm" title="Importing a WordPress site: Add New, WordPress, Import Existing WordPress Project, the URL stories.example.net, Simple Method, Use WordPress admin login credentials with the URL, Username and Password (hidden), Continue, until The import process has been started!"}
+:docs-video{src="../../assets/single-server-edition/importing-wordpress-connect.webm" title="Importing a WordPress site: Add New, WordPress, Import Existing WordPress Project, the URL stories.example.net, Simple Method, Use WordPress admin login credentials with the URL, Username and Password (hidden), Continue, until The import process has been started!"}
 
 The new project gets the domain of the source site, without `www.`.
 
@@ -48,7 +48,7 @@ The project card shows **Migration is in progress** with a bar and the name of t
 - **Cancel Migration** stops it and removes what was entered.
 - **Try Again** retries a failed import.
 
-:docs-video{src="../../assets/single-server/importing-wordpress-progress.webm" title="The stories.example.net card in My Projects shows Migration is in progress, and Show Logs opens Migration Logs with the progress of the current step, Migrating Database, and the status of each step"}
+:docs-video{src="../../assets/single-server-edition/importing-wordpress-progress.webm" title="The stories.example.net card in My Projects shows Migration is in progress, and Show Logs opens Migration Logs with the progress of the current step, Migrating Database, and the status of each step"}
 
 ## After the import
 

@@ -35,7 +35,7 @@ To silence alerts from a server for a while, turn them off and save. Remember to
 
 The alert is the admin notification **Server Alert**. PanelAlpha sends it to two groups of active admins: those whose admin group has full access, and those whose group has **Server Alert** among its notifications.
 
-The alert arrives as an email and as a notification in the admin area. You can turn either one on or off, and edit the email template, in **Configuration → Notifications** under admin notifications: [Notifications](../../../multi-server/system-configuration/notifications.md).
+The alert arrives as an email and as a notification in the admin area. You can turn either one on or off, and edit the email template, in **Configuration → Notifications** under admin notifications: [Notifications](../../../multi-server-edition/system-configuration/notifications.md).
 
 ## Responding to alerts
 

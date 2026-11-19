@@ -21,7 +21,7 @@ A **cron job** is a command that the server runs again and again on a schedule, 
 5. Enter the **Command**. It must be on one line. It is the text the server runs, for example `find /home/app/project/upload/tmp -type f -mtime +7 -delete`.
 6. Select **Add Cron Job**. Select **Cancel** to close the window without saving.
 
-   :docs-video{src="../../assets/single-server/cron-add-form.webm" title="Adding a cron job to Immich: Add Cron Job, Common Settings set to Once a day, the service immich-server, the command find /home/app/project/upload/tmp -type f -mtime +7 -delete, and the new job in the list"}
+   :docs-video{src="../../assets/single-server-edition/cron-add-form.webm" title="Adding a cron job to Immich: Add Cron Job, Common Settings set to Once a day, the service immich-server, the command find /home/app/project/upload/tmp -type f -mtime +7 -delete, and the new job in the list"}
 
 You can edit or delete a job from its row. If the schedule is not valid, the panel does not save it and shows the reason.
 
@@ -70,7 +70,7 @@ The dialog always lists four settings:
 
 An empty value means this project does not set that setting, so the server's own value applies. To go back to it, clear the value and save.
 
-::docs-video{src="../../assets/single-server/php-settings-dialog.webm" title="Advanced > Developer Settings of Stories: the cards Debug Mode, Maintenance Mode, PHPMyAdmin, PHP Version and PHP Settings, Manage on PHP Version opens Set PHP Version with 8.3, then Manage on PHP Settings lists memory_limit, upload_max_filesize, post_max_size and max_execution_time, memory_limit is changed to 256M and Save Changes closes it"}
+::docs-video{src="../../assets/single-server-edition/php-settings-dialog.webm" title="Advanced > Developer Settings of Stories: the cards Debug Mode, Maintenance Mode, PHPMyAdmin, PHP Version and PHP Settings, Manage on PHP Version opens Set PHP Version with 8.3, then Manage on PHP Settings lists memory_limit, upload_max_filesize, post_max_size and max_execution_time, memory_limit is changed to 256M and Save Changes closes it"}
 ::
 
 Something not working? Messages and fixes: [Troubleshooting: Looking after a project](../troubleshooting/looking-after-a-project.md#cron-jobs-and-php).

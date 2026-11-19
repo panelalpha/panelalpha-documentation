@@ -18,22 +18,22 @@ community:
       label: Join Discord
 popular:
   - title: Installing the panel
-    page: single-server/getting-started/install.md
+    page: single-server-edition/getting-started/install.md
   - title: Backups
-    page: single-server/looking-after-a-project/backups.md
+    page: single-server-edition/looking-after-a-project/backups.md
   - title: Domains and SSL
-    page: single-server/looking-after-a-project/domains-and-ssl.md
+    page: single-server-edition/looking-after-a-project/domains-and-ssl.md
   - title: WHMCS
-    page: multi-server/billing-systems-integrations/whmcs.md
+    page: multi-server-edition/billing-systems-integrations/whmcs.md
   - title: Connect your AI
     page: panelalpha-engine/connecting-your-ai/your-assistant.md
 guides:
-  - single-server/projects/create-a-project.md
+  - single-server-edition/projects/create-a-project.md
   - panelalpha-engine/getting-started/how-a-deploy-works.md
-  - multi-server/migrations/index.md
-  - single-server/looking-after-a-project/backups.md
-  - multi-server/hosting-servers/hosting-scenarios.md
-  - single-server/the-panel/connect-ai.md
+  - multi-server-edition/migrations/index.md
+  - single-server-edition/looking-after-a-project/backups.md
+  - multi-server-edition/hosting-servers/hosting-scenarios.md
+  - single-server-edition/the-panel/connect-ai.md
 resources:
   - card: api
 cards:
@@ -44,4 +44,4 @@ cards:
     order: 4
 ---
 
-This page holds the texts and the external cards of the documentation home page. It is not published as a page. Each section card is set in the frontmatter of the section index (for example `single-server/index.md`).
+This page holds the texts and the external cards of the documentation home page. It is not published as a page. Each section card is set in the frontmatter of the section index (for example `single-server-edition/index.md`).

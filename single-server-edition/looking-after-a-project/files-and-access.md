@@ -40,7 +40,7 @@ Right-click a file or a folder to open its menu. The menu offers only what fits 
 - **Delete:** removes the item after you confirm.
 - **Properties:** shows the path and the date the item was changed.
 
-::docs-video{src="../../assets/single-server/files-file-manager-menu.webm" title="Advanced > File Manager of Immich: the folders library, postgres, upload and backups and the files .env and docker-compose.yml, then the right-click menu of docker-compose.yml with Download, Copy, Cut, Rename, Zip, Delete and Properties, and the menu of the folder library with Open"}
+::docs-video{src="../../assets/single-server-edition/files-file-manager-menu.webm" title="Advanced > File Manager of Immich: the folders library, postgres, upload and backups and the files .env and docker-compose.yml, then the right-click menu of docker-compose.yml with Download, Copy, Cut, Rename, Zip, Delete and Properties, and the menu of the folder library with Open"}
 ::
 
 ## FTP accounts
@@ -60,7 +60,7 @@ Right-click a file or a folder to open its menu. The menu offers only what fits 
 
 **To see the details to connect**, select the eye button on the row. The window shows **FTP Username**, **FTP Host** and **FTP Port**. The host is the main domain of the project, and the port is 21. On a project on a `panelalpha.online` address, use the server's IP address as the host. The window does not show the password. Use the one you set.
 
-::docs-video{src="../../assets/single-server/files-ftp-login-details.webm" title="Adding an FTP account to Immich: Add Account, the name editor, a hidden password, Add Account again, then the eye button of the new row opens the login details with FTP Username, FTP Host and FTP Port"}
+::docs-video{src="../../assets/single-server-edition/files-ftp-login-details.webm" title="Adding an FTP account to Immich: Add Account, the name editor, a hidden password, Add Account again, then the eye button of the new row opens the login details with FTP Username, FTP Host and FTP Port"}
 ::
 
 ## SFTP accounts
@@ -76,7 +76,7 @@ Right-click a file or a folder to open its menu. The menu offers only what fits 
 
 To see the details to connect, select the eye button on the row. The window shows **SFTP Username**, **SFTP Host** and **SFTP Port**. The host is the main domain of the project, and the port is 2222. On a `panelalpha.online` address, use the server's IP address as the host.
 
-::docs-video{src="../../assets/single-server/files-sftp-login-details.webm" title="The SFTP Accounts page of Immich: Add Account with the username upload after the prefix immich_, Authentication Method switched from Password to SSH Key, Cancel, and the eye button of immich_deploy opens the login details with SFTP Username, SFTP Host and SFTP Port"}
+::docs-video{src="../../assets/single-server-edition/files-sftp-login-details.webm" title="The SFTP Accounts page of Immich: Add Account with the username upload after the prefix immich_, Authentication Method switched from Password to SSH Key, Cancel, and the eye button of immich_deploy opens the login details with SFTP Username, SFTP Host and SFTP Port"}
 ::
 
 To cut off everyone at once, open **Actions** and select **Disconnect All**. The panel asks you to confirm.

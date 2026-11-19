@@ -19,7 +19,7 @@ Install PanelAlpha Engine 1.x on a server with the installer, then connect it to
 
 ## Download and install
 
-The PanelAlpha installation wizard shows the same commands. See [Access the Wizard](../../../multi-server/getting-started/installation.md#access-the-wizard).
+The PanelAlpha installation wizard shows the same commands. See [Access the Wizard](../../../multi-server-edition/getting-started/installation.md#access-the-wizard).
 
 1. Log in to the server as root:
    ```bash
@@ -75,8 +75,8 @@ If you install PanelAlpha and PanelAlpha Engine together, you can add the Engine
 
 ## Next steps
 
-1. [Add the server](../../../multi-server/hosting-servers/engine.md#configure-in-panelalpha) in PanelAlpha, if you did not do it in the wizard.
-2. [Set up a plan](../../../multi-server/system-configuration/plans.md#hosting-server) that uses the server.
+1. [Add the server](../../../multi-server-edition/hosting-servers/engine.md#configure-in-panelalpha) in PanelAlpha, if you did not do it in the wizard.
+2. [Set up a plan](../../../multi-server-edition/system-configuration/plans.md#hosting-server) that uses the server.
 3. Check the [Firewall (CSF)](../server-management/firewall.md) rules, and set up [Outgoing Mail](../server-management/outgoing-mail.md) so sites can send email.
 
 ## Troubleshooting
