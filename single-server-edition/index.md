@@ -66,6 +66,11 @@ The panel is one project on PanelAlpha Engine. When you create a site, the panel
 
 Removing the panel deletes only the panel's project. Your sites keep running: [Removing the panel](getting-started/removing.md).
 
+A short tour of the panel, from installing an app to the settings:
+
+::docs-video{src="../assets/single-server-edition/panel-tour.webm" title="Tour of the panel: Add New and PanelAlpha GO!, the app Uptime Kuma installed, the Immich project with its details, monitoring, a new backup, usage limits and the Advanced pages, a staging copy pushed to live, Connect AI, My Server, Tasks, Settings with PanelAlpha Hub, and dark mode"}
+::
+
 ## Getting started
 
 ### 1. Install the panel on your VPS
