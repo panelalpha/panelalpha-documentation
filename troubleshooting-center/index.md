@@ -64,7 +64,7 @@ Use the **Search tool** across both the [Documentation](../index.md) and the **T
 
 If you cannot find a solution here, follow these steps before contacting support:
 
-1. **Check System Status**: Review the [Health Check](../multi-server/system-configuration/diagnostic-mode-and-health-check.md) to verify system components.
+1. **Check System Status**: Review the [Health Check](../multi-server-edition/system-configuration/diagnostic-mode-and-health-check.md) to verify system components.
 2. **Prepare Information**: Collect relevant error messages and system logs.
 3. **Contact Support**: Reach out to our [technical support team](https://manage.panelalpha.com/contact) for personalized assistance.
 
@@ -72,6 +72,6 @@ If you cannot find a solution here, follow these steps before contacting support
 
 Providing system logs helps our team resolve issues faster:
 
-1. **Download the system logs** from **Admin Area → Logs** (available in `.zip` format). See detailed instructions in the [Logs documentation](../multi-server/admin-area/logs.md).
+1. **Download the system logs** from **Admin Area → Logs** (available in `.zip` format). See detailed instructions in the [Logs documentation](../multi-server-edition/admin-area/logs.md).
 2. **Attach the log file** to your support ticket.
 3. **Include relevant details** about when the issue occurred and steps to reproduce it.

@@ -96,7 +96,7 @@ This can help recover task processing when queue jobs stop progressing.
 bash /opt/panelalpha/app/letsencrypt-renew.sh
 ```
 
-Follow the instructions in [Renew Let's Encrypt Certificate](../../multi-server/getting-started/ssl-configuration.md#certificate-renewal).
+Follow the instructions in [Renew Let's Encrypt Certificate](../../multi-server-edition/getting-started/ssl-configuration.md#certificate-renewal).
 
 ### Emails Sent from WordPress Are Not Visible in the Queue
 

@@ -61,5 +61,5 @@ A DNS Entry For 'example.com' Already Exists. You Must Remove This DNS Entry Fro
 
 ## See Also
 
-- [cPanel hosting server setup](../../multi-server/hosting-servers/cpanel.md)
+- [cPanel hosting server setup](../../multi-server-edition/hosting-servers/cpanel.md)
 - [Common Error Solutions](../common/common-error-solutions.md)

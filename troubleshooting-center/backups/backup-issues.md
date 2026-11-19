@@ -23,6 +23,6 @@ nav:
 **Problem:** Restore operations fail, or downloads return an error even though backup tasks were marked as completed.
 
 **Solution:**
-1. Validate remote backup storage settings and credentials in [Remote Backups](../../multi-server/system-configuration/remote-backups.md).
+1. Validate remote backup storage settings and credentials in [Remote Backups](../../multi-server-edition/system-configuration/remote-backups.md).
 2. Verify backup files exist in the selected storage and are readable by the configured account.
 3. Check server task logs in **Admin Area → Logs → Tasks** for the exact failing step, then retry after fixing permissions or connectivity.

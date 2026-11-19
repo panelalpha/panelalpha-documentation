@@ -28,7 +28,7 @@ You have two options:
 - Choose a different domain name that does not contain blocked profanity terms.
 - Contact your administrator to review and adjust the profanity blacklist settings.
 
-For more details, see the [Plans documentation](../../multi-server/system-configuration/plans.md#domains).
+For more details, see the [Plans documentation](../../multi-server-edition/system-configuration/plans.md#domains).
 
 ## Managing Existing Instances
 

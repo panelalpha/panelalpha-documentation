@@ -23,7 +23,7 @@ This page covers common Cloudflare-related issues in PanelAlpha, including DNS, 
 
 **Problem:** The test connection fails with Cloudflare.
 
-**Solution:** Check your API privileges and follow the instructions in the [Cloudflare documentation](../../multi-server/dns-servers/cloudflare.md).
+**Solution:** Check your API privileges and follow the instructions in the [Cloudflare documentation](../../multi-server-edition/dns-servers/cloudflare.md).
 
 ### Server Name in Cloudflare Server Configuration
 

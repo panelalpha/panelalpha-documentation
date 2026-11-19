@@ -37,7 +37,7 @@ The **SyncWordPressData** job will automatically reinstall the must-use plugin d
 
 **Problem:** The number of website visitors and bandwidth is not calculated or displayed in the instance details.
 
-**Solution:** When using PanelAlpha Engine, visitor and bandwidth data will not display unless you configure the [Matomo](../../multi-server/integrations/matomo.md) or [Google Analytics](../../multi-server/integrations/google-analytics.md) integrations.
+**Solution:** When using PanelAlpha Engine, visitor and bandwidth data will not display unless you configure the [Matomo](../../multi-server-edition/integrations/matomo.md) or [Google Analytics](../../multi-server-edition/integrations/google-analytics.md) integrations.
 
 ### Instance Details Are Outdated or Out of Sync
 
@@ -74,7 +74,7 @@ docker compose -f /opt/panelalpha/app/docker-compose.yml exec api php artisan ap
 
 **Problem:** The website preview in the "My Instances" section shows "Preview not available."
 
-**Solution:** Enable and configure the **Google PageSpeed Insights** integration. For more information, see the [Google PageSpeed Insights](../../multi-server/integrations/google-pagespeed-insights.md) documentation.
+**Solution:** Enable and configure the **Google PageSpeed Insights** integration. For more information, see the [Google PageSpeed Insights](../../multi-server-edition/integrations/google-pagespeed-insights.md) documentation.
 
 ### Domain Does Not Point to the Instance
 
