@@ -8,7 +8,7 @@ nav:
 
 # Installation
 
-Install PanelAlpha Engine 1.x on a server with the installer, then connect it to PanelAlpha Single Server or Multi Server.
+Install PanelAlpha Engine 1.x on a server with the installer, then connect it to PanelAlpha Multi Server Edition.
 
 ## Before you begin
 
