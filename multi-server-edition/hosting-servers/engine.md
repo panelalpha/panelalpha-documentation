@@ -41,7 +41,7 @@ When the server is added, use it as the hosting server in your [Plans](../system
 
 ## Server Management
 
-To manage the server, click **Manage** next to it in **Configuration → Servers → Hosting Servers**. The tabs (details and updates, IP addresses, CSF firewall, ModSecurity, outgoing mail and alerts) are the same in PanelAlpha Single Server and Multi Server. They are described in the Engine v1 documentation: [Server Management](../../panelalpha-engine/v1/server-management/index.md).
+To manage the server, click **Manage** next to it in **Configuration → Servers → Hosting Servers**. The tabs (details and updates, IP addresses, CSF firewall, ModSecurity, outgoing mail and alerts) are described in the Engine v1 documentation: [Server Management](../../panelalpha-engine/v1/server-management/index.md).
 
 ## Plan Configuration
 
