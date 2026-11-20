@@ -1,6 +1,6 @@
 ---
 title: Installation
-description: Install PanelAlpha Engine over SSH. Download the installer, run it with your licence key and connect the server in the wizard.
+description: Install PanelAlpha Engine 1.x over SSH for Multi Server Edition or Single Server Edition before 2.0. Download the installer, run it with your licence key and connect the server in the wizard.
 nav:
   group: Installation & Updates
   order: 1
@@ -8,7 +8,7 @@ nav:
 
 # Installation
 
-Install PanelAlpha Engine 1.x on a server with the installer, then connect it to PanelAlpha Multi Server Edition.
+Install PanelAlpha Engine 1.x on a server with the installer, then connect it to PanelAlpha Multi Server Edition or to PanelAlpha Single Server Edition before version 2.0. Single Server Edition 2.0 and later runs on [PanelAlpha Engine 2.3.0 and later](../../index.md).
 
 ## Before you begin
 
