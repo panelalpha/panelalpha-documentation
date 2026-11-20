@@ -9,7 +9,7 @@ nav:
 
 # PanelAlpha Engine
 
-This page is for **PanelAlpha Engine 2.0+** on a standalone VPS (install and update with `get.panelalpha.com/engine`, projects driven from an AI assistant or `pae`). PanelAlpha Single Server Edition 2.0 and later works with **Engine 2.3.0 and later**. PanelAlpha Multi Server Edition and PanelAlpha Single Server Edition before version 2.0 use **Engine 1.x**. For that stack, use the [Engine v1 documentation](../../panelalpha-engine/v1/index.md).
+This page is for **PanelAlpha Engine 2.0+** on a standalone VPS (install and update with `get.panelalpha.com/engine`, projects driven from an AI assistant or `pae`). PanelAlpha Single Server Edition works with **Engine 2.3.0 and later**. PanelAlpha Multi Server Edition still uses **Engine 1.x**. For that stack, use the [Engine v1 documentation](../../panelalpha-engine/v1/index.md).
 
 The full operator guide lives under [PanelAlpha Engine documentation](../../panelalpha-engine/index.md).
 

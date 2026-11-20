@@ -8,7 +8,7 @@ nav:
 
 # Troubleshooting
 
-These fixes are for PanelAlpha Engine 1.x, the version used with PanelAlpha Multi Server Edition and PanelAlpha Single Server Edition before version 2.0. For Engine 2.0+, see the [Troubleshooting Center](../../troubleshooting-center/servers/panelalpha-engine.md).
+These fixes are for PanelAlpha Engine 1.x, the version used with PanelAlpha Multi Server Edition. For Engine 2.0+, see the [Troubleshooting Center](../../troubleshooting-center/servers/panelalpha-engine.md).
 
 Run the commands on this page as root on the Engine server. For what the paths mean, see [Files, Logs and Services](server-management/files-and-logs.md).
 
