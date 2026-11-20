@@ -9,7 +9,7 @@ nav:
 
 # PanelAlpha Engine
 
-This page is for **PanelAlpha Engine 2.0+** on a standalone VPS (install and update with `get.panelalpha.com/engine`, projects driven from an AI assistant or `pae`). PanelAlpha Single Server and Multi Server still use **Engine 1.x**. For that stack, use the [Engine v1 documentation](../../panelalpha-engine/v1/index.md) and the troubleshooting that matches your panel version.
+This page is for **PanelAlpha Engine 2.0+** on a standalone VPS (install and update with `get.panelalpha.com/engine`, projects driven from an AI assistant or `pae`). PanelAlpha Single Server Edition works with **Engine 2.3.0 and later**. PanelAlpha Multi Server Edition still uses **Engine 1.x**. For that stack, use the [Engine v1 documentation](../../panelalpha-engine/v1/index.md).
 
 The full operator guide lives under [PanelAlpha Engine documentation](../../panelalpha-engine/index.md).
 
@@ -91,7 +91,7 @@ Update runs also log under `/opt/panelalpha/log/engine-updates/`.
 
 **Problem:** You expect the PanelAlpha control panel to manage this host.
 
-**Solution:** Engine **2.0+ is not supported** by Single Server or Multi Server yet. Those products use Engine 1.x. See [Engine v1 documentation](../../panelalpha-engine/v1/index.md).
+**Solution:** Single Server Edition needs Engine **2.3.0 or later**. On an older engine, update it first: [Updating](../../panelalpha-engine/getting-started/updating.md). Multi Server Edition does not support Engine 2.x yet. It uses Engine 1.x: [Engine v1 documentation](../../panelalpha-engine/v1/index.md).
 
 ### Docker containers not starting
 

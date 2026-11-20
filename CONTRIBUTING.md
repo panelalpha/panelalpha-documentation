@@ -96,7 +96,7 @@ resources:                     # cards under "More Resources", in this order
   - card: troubleshooting-center   # a section card (folder name) or a root card with this id
   - card: api
   - title: PanelAlpha Engine 1.x   # or any page, with its own title and description
-    description: The guide for the Engine 1.x used by Single Server and Multi Server panels.
+    description: The guide for the Engine 1.x used by Multi Server panels.
     page: panelalpha-engine/v1/index.md
 ```
 

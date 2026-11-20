@@ -10,7 +10,7 @@ nav:
 # Overview
 
 > [!NOTE]
-> **This documentation covers PanelAlpha Engine v1.x**, the version used by PanelAlpha Multi Server Edition and older PanelAlpha Single Server installations. PanelAlpha Single Server Edition runs on Engine 2.0 and later: [PanelAlpha Engine](../index.md).
+> **This documentation covers PanelAlpha Engine v1.x**, the version used by PanelAlpha Multi Server Edition. PanelAlpha Single Server Edition runs on Engine 2.3.0 and later: [PanelAlpha Engine](../index.md).
 
 PanelAlpha Engine is the hosting server for PanelAlpha. You install it on its own server. PanelAlpha then creates and manages hosting accounts and WordPress instances on it through the Engine API (the way the panel sends orders to the Engine). Each hosting account runs PHP in its own Docker container. Each container has its own limits for disk, memory, CPU and other resources.
 
@@ -63,7 +63,7 @@ The Engine is a Docker Compose project in `/opt/panelalpha/shared-hosting`. The 
 
 ### Can I use PanelAlpha Engine 1.x without PanelAlpha?
 
-No. You manage Engine 1.x only through PanelAlpha Single Server or Multi Server. [Engine 2.0+](../index.md) can run on its own, but PanelAlpha Single Server and Multi Server do not support it yet.
+No. You manage Engine 1.x only through PanelAlpha Multi Server Edition. [Engine 2.0+](../index.md) can run on its own. PanelAlpha Single Server Edition works with Engine 2.3.0 and later. Multi Server Edition does not support Engine 2.x yet. Support will come in a later version.
 
 ### Can I change the web server after installation?
 
