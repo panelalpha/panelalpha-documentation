@@ -14,8 +14,7 @@ A licence is optional. You can connect without one and attach a licence later in
 
 ## Before you start
 
-- The Hub must be able to reach your engine at `https://<your server's public IP>:2011`. Allow inbound TCP 2011 from the internet, or at least from the Hub.
-- The server must be able to open `https://hub.panelalpha.com` (set `PANELALPHA_HUB` in `.env-core` to use another).
+- The server must be able to open `https://hub.panelalpha.com` (set `PANELALPHA_HUB` in `.env-core` to use another). The engine reports to the Hub. The Hub never connects to your server, so port 2011 can stay closed to it.
 - The server clock must be roughly correct.
 
 ## Connect
@@ -49,7 +48,7 @@ The Hub then shows "Engine connected". A code works once. If it has expired or b
 
 | Option | What it does |
 |---|---|
-| `--ip=203.0.113.10` | The address the Hub should use, when the server's main IPv4 is not the public one. It must be a public address. |
+| `--ip=203.0.113.10` | The address PanelAlpha Hub shows for the engine, when it should not be the server's main IPv4. Any IP works, a private one behind NAT too. The Hub never connects to the engine. |
 | `--replace` | Connect an engine that is already connected. The old connection is dropped only after the new one works. |
 
 ### Install and connect in one step
@@ -64,19 +63,23 @@ On a server that already runs an engine, the same command only connects it. Add 
 
 A code lasts ten minutes from when you create it, and a fresh install takes a few of those minutes. Create the code just before you start the installer. If the connect fails, the engine is still installed. The installer prints why. Connect with a new code and `pae hub:connect CODE`.
 
-## What the Hub can do on your server
+## What the engine sends to the Hub
 
-The Hub gets an API token limited to a few read-only routes:
+Every minute the engine sends the Hub a signed report. It contains:
 
 - The engine version and host details.
-- CPU/RAM/disk usage and its history.
-- The project list, with each project's status and backup history.
+- CPU/RAM/disk usage.
+- The project list, with each project's status, usage and disk.
 
-The Hub works out monitoring events itself from what it reads. It cannot deploy, change settings, read files or credentials, or use the assistant (MCP) interface.
+When the Hub asks, the report adds each project's backup history. After connecting or after an outage, the engine also uploads its own usage history so the charts have no gaps.
 
-Admin login into apps is a separate permission. It is off unless it was ticked when the code was created. With it, the Hub may also list an app's users and ask for a one-time login link. The engine records every call the Hub makes. `pae hub:status` shows the last ones.
+The Hub works out monitoring events from these reports. It holds no token and never calls your server. So it cannot deploy, change settings, read files or credentials, or use the assistant (MCP) interface.
 
-The Hub replaces its token every week by itself. The token expires after 30 days if the Hub stops doing so.
+Admin login into apps is a separate permission. It is off unless it was ticked when the code was created. With it, the Hub hands your browser a login ticket that lasts a minute and works once. The browser posts the ticket to the app's own domain, and the engine logs you in as the app's administrator. The engine records every login. `pae hub:status` shows the last ones. Apps created before the engine was updated get the login route within a few minutes of connecting.
+
+The secret that signs the reports is replaced every week, by itself.
+
+An engine connected before reports existed switches to them by itself after the update. Its connection, account and permissions stay. The token the Hub held stops working.
 
 ## Check and disconnect
 
@@ -84,25 +87,23 @@ The Hub replaces its token every week by itself. The token expires after 30 days
 pae hub:status
 ```
 
-This shows the account, address, permissions, when the token expires and the last 20 calls the Hub made (admin logins highlighted). When the Hub says it no longer knows the connection, the engine revokes the Hub's tokens and forgets the connection.
+This shows the account, the permissions, the report interval, the last 20 reports, the last history upload and the last admin logins. When the Hub says it no longer knows the connection, the engine forgets it and stops reporting.
 
 ```bash
 pae hub:disconnect
 ```
 
-This revokes the Hub's access at once, then tells the Hub. It works even when the Hub cannot be reached.
+This stops reporting and forgets the connection at once, then tells the Hub. It works even when the Hub cannot be reached.
 
 ## When it does not work
 
 | Message | What to do |
 |---|---|
-| `The Hub could not reach https://…:2011` | Open inbound TCP 2011, or pass the right public address with `--ip`. |
-| `… is not a public address` | The server's main address is private (NAT). Pass the public one with `--ip`. |
+| `The first report to PanelAlpha Hub failed` | The server cannot reach `https://hub.panelalpha.com`, or its clock is off. Fix that, create a new code and connect again. |
+| `… is not an IP address` | `--ip` names a host, not an address. Pass an IP, or leave `--ip` out. |
 | `That code is not valid any more` | The code expired, was cancelled or was already used. Create a new one in the Hub. |
 | `The code expired` | Create a new code in the Hub and run the command within 10 minutes. |
 | `Denied on the Hub.` | The code was cancelled in the Hub. Create a new one. |
 | `This engine is already connected to …` | Run the command again with `--replace` to move it. |
-| `The certificate on :2011 changed during connect` | Run the command again. |
 | `The Hub answered: … (HTTP 403)` from `pae hub:status` | Something in front of the Hub refused the call, such as a firewall or bot rule. The engine changed nothing. If you removed the connection in the Hub, run `pae hub:disconnect`. |
-
-When the engine's certificate is renewed with a new key, the engine tells the Hub before it starts to serve the new certificate. If the Hub still reports a certificate problem, create a new code in the Hub and run `pae hub:connect CODE --replace`.
+| The Hub shows the engine as unreachable | The engine has not reported for 10 minutes. Check that the server can open `https://hub.panelalpha.com`. `pae hub:status` shows how the last reports went. |

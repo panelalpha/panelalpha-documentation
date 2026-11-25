@@ -118,8 +118,8 @@ A `package.json` whose install scripts set up git hooks (husky, lefthook and the
 
 **Submodules.** A repository that uses git submodules gets them fetched on every pull, branch change and push. A submodule that moved in the repository is deployed at its new commit.
 
-- Once the project has deployed, a submodule that the last deployed commit already had keeps its old copy when it cannot be fetched. The deploy log warns.
-- A submodule that cannot be fetched fails the first deploy. It also fails a deploy whose commit adds the submodule, and a rebuild that would lose a copy the previous deploy had. See Troubleshooting below.
+- A submodule that cannot be fetched keeps whatever copy it had, or is left out. The deploy log warns with its name, and the deploy goes on.
+- Only a rebuild that would lose a copy the running app has fails. See Troubleshooting below.
 - A submodule addressed over SSH (`git@host:...`) is fetched over HTTPS unless the project has a deploy key.
 
 **Checks before the work starts.** The engine checks the request at once: the repository answers, and the branch or commit exists. Connecting a folder of the project to a repository is checked the same way, before the connection is saved. These are refused, and the folder keeps its files and the connection it had:
@@ -204,7 +204,7 @@ Instead of asking for a pull each time, you can have your git host redeploy the 
 **The clone failed with "repository not found".**
 The URL is wrong, or the repository is private and no token was saved. Check that the URL is `https://` with no username in it. For a private repository, ask the assistant to send the paste page again.
 
-**The deploy failed with "The repository's submodules could not be fetched".**
+**The deploy warned, or a rebuild failed, with "The repository's submodules could not be fetched".**
 The engine fetches the repository's submodules with the same token on every deploy, including after a pull or a push.
 
 - A private submodule on another account or forge needs a token that can read it too.

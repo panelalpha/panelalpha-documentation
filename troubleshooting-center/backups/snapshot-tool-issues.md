@@ -93,8 +93,8 @@ sudo docker ps
    | Installation | Environment file | Password variable | Database user | Container |
    |---|---|---|---|---|
    | Control Panel | `/opt/panelalpha/app/.env` | `API_MYSQL_PASSWORD` | `panelalpha` | `database-api` |
-   | Engine | `/opt/panelalpha/engine/.env` or `.env-core` | `CORE_MYSQL_PASSWORD` | `core` | `database-core` |
-   | Engine | `/opt/panelalpha/engine/.env` or `.env-core` | `USERS_MYSQL_ROOT_PASSWORD` | `root` | `database-users` |
+   | Engine | `/opt/panelalpha/shared-hosting/.env` or `.env-core` | `CORE_MYSQL_PASSWORD` | `core` | `database-core` |
+   | Engine | `/opt/panelalpha/shared-hosting/.env` or `.env-core` | `USERS_MYSQL_ROOT_PASSWORD` | `root` | `database-users` |
 
    Control Panel example:
    ```bash
@@ -192,7 +192,7 @@ sudo docker ps
    ```
 2. Verify database connectivity:
    ```bash
-   docker compose exec database-api mysql -u panelalpha -p -e "SELECT 1;"
+   docker compose exec database-api mariadb -u panelalpha -p -e "SELECT 1;"
    ```
 3. Restart all services:
    ```bash
@@ -200,16 +200,46 @@ sudo docker ps
    docker compose down
    docker compose up -d
    ```
-4. Check file permissions:
+
+### nginx Does Not Start After Restoration
+
+**Problem:** After a restore the `nginx` container keeps restarting, and its log shows `PEM` or `no start line` errors.
+
+**Cause:** nginx loads the certificate from the files that `SSL_CERT_FULLCHAIN` and `SSL_CERT_PRIVKEY` in `/opt/panelalpha/app/.env` point to. When a file is missing, Docker creates an empty directory in its place. The restore log names the missing file: `SSL_CERT_FULLCHAIN points to a missing file`.
+
+**Solution:**
+1. Remove the empty directory Docker created at that path, if there is one.
+2. Put the certificate there, or point `SSL_CERT_FULLCHAIN` and `SSL_CERT_PRIVKEY` at existing files. The installer's own certificate is in `/opt/panelalpha/app/crt/`.
+3. For a Let's Encrypt certificate, renew it:
    ```bash
-   sudo chown -R 1000:1000 /opt/panelalpha/app/storage
+   bash /opt/panelalpha/app/letsencrypt-renew.sh
    ```
+4. Start the panel:
+   ```bash
+   cd /opt/panelalpha/app && docker compose up -d
+   ```
+
+### Restore Asks About Another Panel Version
+
+**Problem:** The restore stops with `Snapshot was taken on panel version ..., this server runs ...`.
+
+**Cause:** The restore puts the snapshot's database next to the code installed on this server. With different versions the database and the code do not match.
+
+**Solution:** Type `no`, install the panel version from the message, then run the restore again. After the restore, update the panel as usual.
+
+### "--restore latest" Restored an Old Snapshot
+
+**Problem:** `--restore latest` brought back an older snapshot instead of the newest one.
+
+**Cause:** Versions before 1.4.0 picked the oldest snapshot.
+
+**Solution:** Update the tool with `sudo /opt/panelalpha/pasnap.sh --update`. Until then, pass the ID from `--list-snapshots` instead of `latest`.
 
 ### Restored Instance Shows Wrong Domain/IP Addresses
 
 **Problem:** The restored instance shows incorrect domain or IP addresses.
 
-**Solution:** The restore process should automatically update IP addresses. If needed:
+**Solution:** The restore writes this server's IP address to the `host_ip_address` setting and keeps **Trusted Hosts** as they were in the snapshot. Versions before 1.4.0 replaced Trusted Hosts with the server hostname. If you restored with such a version:
 1. Update trusted hosts in PanelAlpha admin:
    - Go to **Admin Area → Configuration → General**
    - Update **Trusted Hosts** with the new server **domain names** (do not add the raw public IP)
@@ -355,9 +385,7 @@ sudo docker ps
    df -h
    iostat -x 1
    ```
-2. Use incremental backups for large installations:
-   - Modify the backup strategy in configuration
-   - Keep fewer full backups and more incrementals
+2. Expect the first snapshot to take the longest. Restic uploads only data that changed since the previous snapshot, so later snapshots upload much less.
 3. Optimize the storage location:
    - Use local storage for faster initial backups
    - Consider a faster network connection for remote storage

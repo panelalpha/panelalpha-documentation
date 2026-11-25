@@ -29,7 +29,7 @@ You need a VPS that meets all five:
 The installer checks the operating system and refuses any other. It does not check the rest, so check them yourself.
 
 > [!NOTE]
-> **Why the VPS has to be brand new.** The installer takes the machine over. It installs Docker, a firewall and a watchdog. It turns on disk quota and mounts `/home` with `nosuid,nodev` (see [Troubleshooting](#troubleshooting)). It also takes over how the machine looks up domain names. That is fine on an empty VPS and destructive on one that already does a job. Do not use your laptop, a VPS that runs a website or control panel, or anything you would mind reinstalling.
+> **Why the VPS has to be brand new.** The installer takes the machine over. It installs Docker with the Sysbox runtime (0.7.2 or newer), a firewall and a watchdog. It turns on disk quota and mounts `/home` with `nosuid,nodev` (see [Troubleshooting](#troubleshooting)). It also takes over how the machine looks up domain names. That is fine on an empty VPS and destructive on one that already does a job. Do not use your laptop, a VPS that runs a website or control panel, or anything you would mind reinstalling.
 
 **With no public IPv4 address,** the engine still works, but the install command is different. Read [Troubleshooting](#troubleshooting) first.
 
@@ -71,8 +71,8 @@ Below that is the same information for connecting your AI assistant as after a n
 | `--git-token TOKEN` | Access token that lets the installer read a private repository. Without it, the installer refuses a private or missing repository before the install starts. |
 | `--password PASS` | Site password for the new project. |
 | `--no-password` | Do not set a site password on the project. |
-| `--email ADDR` | Contact email for install and monitoring notices. With `--full-privileges` it is also the panel's admin. |
-| `--full-privileges` | Trust the project with this engine: it is the PanelAlpha panel. **Give it only to an application you trust with the whole server.** The project gets an Engine API token for every project. It may take the server's own name and its public ports. Once it is live, it is a system project: no API or assistant token but its own can see it, and it is protected: [System projects](../capabilities/projects.md#system-projects). It needs `--repo`. No site password is set unless you pass `--password`. `--email` becomes the panel's admin, with a generated password printed at the end. `--hub-code` goes to the panel, which connects itself to PanelAlpha Hub on its first start (the engine is not connected). It needs `--email` too. Run the install again with the same `--repo` and `--full-privileges` and it deploys that project again instead of making a second one. The project keeps its admin, settings and data, so no new password is printed. |
+| `--email ADDR` | Contact email for install and monitoring notices. |
+| `--full-privileges` | Trust the project with this engine: it is the PanelAlpha panel. **Give it only to an application you trust with the whole server.** The project gets an Engine API token for every project. It may take the server's own name and its public ports. Once it is live, it is a system project: no API or assistant token but its own can see it, and it is protected: [System projects](../capabilities/projects.md#system-projects). It needs `--repo`. No site password is set unless you pass `--password`. The installer makes no panel admin. You create your account in the panel's setup wizard, at the address printed at the end. `--hub-code` goes to the panel, which connects itself to PanelAlpha Hub on its first start (the engine is not connected). Once the Hub accepts it, the panel makes your PanelAlpha account its admin. Otherwise the setup wizard opens. It needs `--email`, the address of that account. Run the install again with the same `--repo` and `--full-privileges` and it deploys that project again instead of making a second one. The project keeps its admin, settings and data. |
 | `--env-var KEY=VALUE` | An environment variable for the project. Repeat it for more. It needs `--repo`. The installer never prints the value. |
 
 If the deploy fails, the engine is still installed and works. The installer prints what went wrong. Deploy again from the VPS:
@@ -180,7 +180,7 @@ Open these inbound ports in the provider's firewall:
 |---|---|---|
 | 80 | Visitors, and Let's Encrypt checking that a domain is yours | Everyone, if you want Let's Encrypt certificates |
 | 443 | Visitors to your sites | Everyone who should see your sites |
-| 2011 | Your AI assistant, REST API clients, PanelAlpha Hub and git hosts calling a [push-to-deploy](../capabilities/push-to-deploy.md) hook | Your own addresses, plus the addresses of those services |
+| 2011 | Your AI assistant, REST API clients and git hosts calling a [push-to-deploy](../capabilities/push-to-deploy.md) hook | Your own addresses, plus the addresses of those services |
 | 22 | You, over SSH | Your own addresses |
 | 2222 | SFTP clients | Whoever uploads files over SFTP |
 | 21 and 30000-30009 | FTP clients | Whoever uploads files over FTP |

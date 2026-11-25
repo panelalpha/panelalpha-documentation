@@ -15,6 +15,7 @@ nav:
 - What assistants are allowed to do.
 - Tokens for your own software.
 - How many jobs run at once.
+- How much a backup or restore may load the server.
 - The Docker Hub login that image downloads use.
 - Which base images are kept ready.
 - The memory the site database keeps for caches.
@@ -40,6 +41,7 @@ When you leave, the wizard prints what it wrote. If you changed nothing, it says
 - **MCP tokens.** Connect an assistant, decide which commands every assistant is offered, or give one assistant fewer of them. A token can only receive commands that the engine offers to everyone.
 - **API tokens.** A token for software you run yourself, not for an assistant. You can limit which parts of the engine the token may call, or revoke it.
 - **Queue.** How many deploys, backups or staging copies run at the same time. They share one queue. The wizard asks for a number from 1 to 32 and applies it.
+- **Backups.** How hard a backup or a restore may push on this server. Two numbers: the CPU priority (`nice`, 0 to 19) and the disk priority (`ionice` best-effort or idle) that its archive commands run at. Both are off by default, so an archive competes with every live site. Raise them on a busy server: [Backups](../capabilities/backups.md#backups-and-the-live-sites-on-the-same-server).
 - **Docker Hub.** The Docker Hub account that every image download on this server uses. Without one, all projects share one anonymous limit for your server's address. Busy servers hit that limit, and deploys then fail with "Docker Hub temporarily refused further downloads". Use a Docker Hub access token with the **Public Repo Read-only** scope. The wizard checks the token with Docker Hub. It warns you if the token can read private repositories, because every project on this server could then download them.
 - **Prewarmed images.** Which base images the server keeps ready before any project asks for them, and how much disk that may use. By default it keeps none. The first deploy that needs an image builds or downloads it. Later deploys reuse it. The server deletes it after a few days without use. A later deploy still downloads a newer release of the same version, such as a Node.js security release, when one is out.
 
@@ -57,7 +59,7 @@ To open one area without the menu, name it:
 pae configure mcp-tokens
 ```
 
-The names are `address`, `api-access`, `mcp-tokens`, `api-tokens`, `queue`, `docker-hub`, `prewarm`, `sites-db` and `telemetry`. Add `--dry-run` to see what would be written and write nothing.
+The names are `address`, `api-access`, `mcp-tokens`, `api-tokens`, `queue`, `backups`, `docker-hub`, `prewarm`, `sites-db` and `telemetry`. Add `--dry-run` to see what would be written and write nothing.
 
 The wizard needs the terminal you have over SSH. It does not run from a script.
 
@@ -109,3 +111,32 @@ Mode: read. Tools: `system_info`. Check: the version matches `pae system:version
 ## From the server
 
 The same areas as single commands: [CLI commands](../commands/pae-cli.md#configuring-the-engine).
+
+## From the API
+
+A panel or a script can read every area and change most of them. A token limited to some projects is refused all of them.
+
+| Area | Read | Change |
+|---|---|---|
+| Address and certificate | `GET /system/engine-address` | `PUT /system/engine-address`: `cert_domain`, `cert_email`, `default_tunnel`. Requesting the certificate is `PUT /system/engine-certificate`. The address itself is not a setting. The engine is bound to it, and the API refuses `url`. |
+| Engine API access | `GET /system/api-access` | `PUT`, `POST …/rotate` and `DELETE /system/api-access/{project}` |
+| MCP tokens | `GET /mcp-tokens`, `GET /mcp-tokens/commands`, `GET /system/mcp-scope` | `PUT /system/mcp-scope`: `permission_mode`, `commands`. `POST /mcp-tokens` (with `expires_in`, `projects`, `commands`), `PUT /mcp-tokens/{id}/commands`, `/projects` and `/revoke`, `DELETE /mcp-tokens/{id}` |
+| API tokens | `GET /api-tokens`, `GET /api-tokens/operations`, `GET /api-tokens/openapi` (this API's OpenAPI document) | `POST /api-tokens` (with `expires_in`, `routes`, `projects`), `PUT /api-tokens/{id}/routes` and `/revoke`, `DELETE /api-tokens/{id}`. These are not MCP tools. |
+| Prewarmed images | `GET /system/prewarm` | `PUT /system/prewarm`: `images`, `budget`, `reserve` |
+| Site database | `GET /system/sites-db` | `PUT /system/sites-db`: `innodb_buffer_pool_size`, `key_buffer_size`, `aria_pagecache_buffer_size`. The database restarts, as from the wizard. |
+| Telemetry | `GET /system/telemetry` | `PUT /system/telemetry`: `sending`, `tier`, `source_bundle`, `bug_reports` |
+
+A token you mint or change over the API stays within the token that makes the call. You can hand out a token with a lower scope than yours and nothing more.
+
+- It gets only what your token has. It has MCP only if your token has MCP. It has only the operations, MCP commands and projects your token is limited to. Its expiry is no later than your token's. Asking for MCP your token lacks is refused with 403. Asking for more of the rest is refused with 422, naming the field.
+- Your token sees, changes, revokes and deletes only the tokens that stay within it, itself included. Any other token is refused with 403 and left out of the list.
+- Your token can narrow itself but never widen itself.
+- `routes` names at least one operation. An empty list is refused with 422. Leave it out or send `null` for every operation your token has, or revoke the token to stop it.
+- A token scoped to some projects is refused on these routes altogether.
+- Revoking a token does not revoke the tokens it minted. Revoke those too.
+
+What the API and the wizard change is kept in the engine database. It wins over the same key in `.env-core`. Each value in a read says where it came from: `setting` for the database, `env` for `.env-core`, `default` for the engine's own. Sending `null` for a field removes it from the database, so `.env-core` or the default applies again. A change applies on the engine's next request. A deploy already running in the queue keeps what it started with. Secrets are never read back.
+
+The site database's cache sizes are read by compose, outside the engine, so they stay in the engine's `.env`. The API writes them through the engine's root helper. The helper accepts those three keys in that file and nothing else, and it never writes `.env-core`.
+
+A token limited to part of the API cannot widen another token's commands. The token routes and `/system/mcp-scope` are for a panel. They are not assistant tools.

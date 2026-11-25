@@ -1,6 +1,6 @@
 ---
 title: PanelAlpha Snapshot Tool
-description: Create encrypted backups, schedule automation, and restore or migrate PanelAlpha with the Snapshot Tool.
+description: "Take encrypted snapshots of a whole PanelAlpha server and restore them on the same server or a new one."
 nav:
   group: System Configuration
   order: 15
@@ -9,326 +9,171 @@ nav:
 
 # PanelAlpha Snapshot Tool
 
-The PanelAlpha Snapshot Tool is a command-line utility for creating secure, encrypted backups (snapshots) of complete PanelAlpha installations. It supports comprehensive backup management, automated scheduling, and reliable restoration.
+The PanelAlpha Snapshot Tool is a script, `pasnap.sh`, that saves everything a PanelAlpha server needs to come back after a failure: the database, Docker volumes, configuration files and certificates. Each saved copy is a **snapshot**. You run the script as `root` on the server.
 
-## Overview
+Snapshots go to a **repository**, the place they are stored: a folder on the server, another server over SFTP, or an S3 bucket. The tool uses [Restic](https://restic.net), so every snapshot is encrypted with your password before it is written.
 
-The Snapshot Tool allows you to:
+The Snapshot Tool recovers the whole installation. To restore one WordPress site, use the instance backups in the Admin Area or the Client Area.
 
-- Create complete backups of PanelAlpha (databases, files, configuration)
-- Automatically create backups at scheduled times
-- Restore the system on the same or new server
-- Securely store backups in the cloud or locally
+The source code and the full reference are on GitHub: [PanelAlpha Snapshot Tool](https://github.com/panelalpha/PanelAlpha-Snapshot-Tool).
 
-## What Gets Backed Up
+## What a snapshot contains
 
-### Databases
-- **PanelAlpha API Database**: Complete MySQL dump with routines and triggers
+On a Multi Server installation (`/opt/panelalpha/app`) a snapshot contains:
 
-### Docker Volumes
-- `api-storage`: PanelAlpha application data
-- `database-api-data`: MySQL data files
-- `redis-data`: Redis cache and session data
+- The panel database (`panelalpha` in the `database-api` container)
+- The `api-storage`, `database-api-data` and `redis-data` volumes
+- `.env`, `.env-api`, `docker-compose.yml` and the `version` file
+- `packages/`, the panel code, including `vendor/`
+- Certificates: `crt/`, `/etc/letsencrypt` and any other file that `SSL_CERT_FULLCHAIN` or `SSL_CERT_PRIVKEY` in `.env` points to
+- The jobs in the `root` crontab that run PanelAlpha scripts, for example `letsencrypt-renew.sh`
+- On panels older than 1.8.5: the Matomo database and the `matomo` volume
 
-### Configuration Files
-- `docker-compose.yml`: Container orchestration configuration
-- `.env` files: Environment variables and secrets
-- `packages/`: Custom packages and extensions
-- SSL certificates: Let's Encrypt certificates
-- Nginx configurations: Web server settings
+The tool takes a snapshot while the panel runs. It does not stop any service.
 
-## Installation
-
-Download and install the snapshot tool on your PanelAlpha server:
+## Installing
 
 ```bash
-# Download the tool
-wget -P /opt/panelalpha/ https://raw.githubusercontent.com/panelalpha/PanelAlpha-Snapshot-Tool/refs/heads/main/pasnap.sh
-
-# Make it executable
+wget -O /opt/panelalpha/pasnap.sh https://raw.githubusercontent.com/panelalpha/PanelAlpha-Snapshot-Tool/main/pasnap.sh
 chmod +x /opt/panelalpha/pasnap.sh
-
-# Install required dependencies
 sudo /opt/panelalpha/pasnap.sh --install
 ```
 
-## Initial Configuration
+`--install` installs `restic`, `jq` and `rsync` with `apt` and checks that Docker runs. The server needs Debian or Ubuntu, Docker with the `docker compose` plugin and at least 3 GB free in `/var/tmp`.
 
-Configure the backup storage location by running the setup wizard:
+## Setting up the repository
 
 ```bash
 sudo /opt/panelalpha/pasnap.sh --setup
 ```
 
-The setup wizard guides you through configuring:
+The setup asks for:
 
-- Storage backend type (local, S3, SFTP)
-- Connection credentials
-- Encryption password
-- Backup retention settings
+- The repository type and its details
+- The encryption password
+- How many days to keep snapshots (30 by default)
+- The hour of the daily snapshot (2 by default)
 
-### Storage Options
+It then connects to the repository and checks that it can log in to the panel database.
 
-#### Local Storage
-- **Best for**: Development, testing, quick local backups
-- **Repository format**: `local:/backup/panelalpha-snapshots`
-- **Pros**: Fast, simple setup
-- **Cons**: Single point of failure
+| Type | Example repository | Good for |
+|:---|:---|:---|
+| `local` | `/backup/panelalpha` | Tests. The snapshots are lost with the server. |
+| `sftp` | `sftp:backup@backup.example.com:/backups/panelalpha` | Another server you reach over SSH as `root`, with a key and no password |
+| `s3` | `s3:s3.eu-west-1.amazonaws.com/my-bucket/pasnap` | AWS S3, Hetzner, MinIO, DigitalOcean Spaces |
 
-#### SFTP Storage
-- **Best for**: Remote server backups, existing SSH infrastructure
-- **Repository format**: `sftp:backup-user@backup.example.com:/backups/panelalpha`
-- **Pros**: Secure, widely supported
-- **Requires**: SSH access to remote server
+> [!IMPORTANT]
+> **Without the encryption password, no snapshot can be restored.** Nobody, PanelAlpha included, can open a snapshot without it. Keep it outside the server, in a password manager or on paper.
 
-#### S3-Compatible Storage
-- **Best for**: Production environments, scalable storage
-- **Repository format**: `s3:s3.eu-west-1.amazonaws.com/my-bucket/panelalpha-snapshots`
-- **Supports**: AWS S3, Hetzner Storage, MinIO, DigitalOcean Spaces
-- **Pros**: Highly available, scalable, cost-effective
-
-## Basic Operations
-
-### Creating Snapshots
-
-Create a manual backup:
+## Taking a snapshot
 
 ```bash
 sudo /opt/panelalpha/pasnap.sh --snapshot
 ```
 
-### Listing Snapshots
+At the end the tool prints `SUCCESS` and the snapshot ID, for example `a1b2c3d4`.
 
-View all available backups:
-
-```bash
-sudo /opt/panelalpha/pasnap.sh --list-snapshots
-```
-
-### Testing Connection
-
-Verify repository connectivity:
-
-```bash
-sudo /opt/panelalpha/pasnap.sh --test-connection
-```
-
-Verify database credentials before creating snapshots:
-
-```bash
-sudo /opt/panelalpha/pasnap.sh --verify-database
-```
-
-## Backup Restoration
-
-### Same Server Restoration
-
-To restore PanelAlpha to a previous state on the same server:
-
-1. **List available backups**:
-   ```bash
-   sudo /opt/panelalpha/pasnap.sh --list-snapshots
-   ```
-
-2. **Restore from a specific backup**:
-   ```bash
-   sudo /opt/panelalpha/pasnap.sh --restore a1b2c3d4
-   ```
-
-3. **Restore from the latest backup**:
-   ```bash
-   sudo /opt/panelalpha/pasnap.sh --restore latest
-   ```
-
-**Note:** Restoration replaces all current data. Ensure you have recent backups before proceeding.
-
-### Migration to New Server
-
-To migrate PanelAlpha to a new server:
-
-**On the source server:**
-1. Create a final backup:
-   ```bash
-   sudo /opt/panelalpha/pasnap.sh --snapshot
-   ```
-2. Note the backup ID from the command output.
-
-**On the target server:**
-1. Install PanelAlpha (basic installation only).
-2. Copy and install the snapshot tool:
-   ```bash
-   sudo /opt/panelalpha/pasnap.sh --install
-   ```
-3. Configure the repository (use the same settings as the source server):
-   ```bash
-   sudo /opt/panelalpha/pasnap.sh --setup
-   ```
-4. Test the connection:
-   ```bash
-   sudo /opt/panelalpha/pasnap.sh --test-connection
-   ```
-5. Restore from backup:
-   ```bash
-   sudo /opt/panelalpha/pasnap.sh --restore a1b2c3d4
-   ```
-
-The restore process automatically:
-- Updates database connection settings
-- Adjusts server IP addresses in system settings
-- Configures trusted hosts
-- Recreates Docker volumes
-- Restores SSL certificates
-
-## Automated Backups
-
-### Enable Automation
-
-Install automatic daily backups:
+To take a snapshot every day at the hour from the setup:
 
 ```bash
 sudo /opt/panelalpha/pasnap.sh --cron install
 ```
 
-### Check Status
+After each snapshot the tool keeps one snapshot per day for the number of days in `BACKUP_RETENTION_DAYS` and deletes the older ones of this server.
 
-Monitor automation status:
+## Restoring
 
 ```bash
-sudo /opt/panelalpha/pasnap.sh --cron status
+sudo /opt/panelalpha/pasnap.sh --list-snapshots
+sudo /opt/panelalpha/pasnap.sh --restore a1b2c3d4
 ```
 
-### Disable Automation
+`--restore latest` picks the newest snapshot of this server.
 
-Remove automatic backups:
+> [!WARNING]
+> **A restore replaces the panel's current data.** Anything created after the snapshot was taken is gone. The tool asks `Continue with restore? (yes/no)` and does nothing until you type `yes`.
+
+During a restore the tool:
+
+1. Stops the panel's containers.
+2. Removes the database volume and imports the database from the snapshot.
+3. Puts back the `api-storage` volume, the configuration files, `packages/` and the certificates.
+4. Starts the panel with an empty Redis. Jobs that were waiting in the queue when the snapshot was taken have already run since then, so they are not run again.
+5. Writes this server's IP address to the `host_ip_address` setting.
+6. Adds the PanelAlpha jobs from the old `root` crontab that this server does not have.
+
+The tool asks once more before it goes on when the snapshot comes from another panel version than the one installed. The restored database would not match the installed code.
+
+**Trusted Hosts** stay as they were in the snapshot. If `SANCTUM_STATEFUL_DOMAINS` in `.env-api` lists hosts, the tool adds this server's hostname and IP address to it. When it is empty, the default, it stays empty.
+
+If a certificate file named in `.env` is still missing after the restore, the tool names it. nginx does not start until that file is in place.
+
+## Moving to a new server
+
+1. On the old server, take a fresh snapshot and note its ID.
+2. On the new server, install PanelAlpha **in the same version** as the old one.
+3. Install the Snapshot Tool and run `--setup` with the same repository and the same encryption password.
+4. Check that the snapshot is listed:
+   ```bash
+   sudo /opt/panelalpha/pasnap.sh --list-snapshots
+   ```
+5. Restore it:
+   ```bash
+   sudo /opt/panelalpha/pasnap.sh --restore a1b2c3d4
+   ```
+6. Point your domains at the new server.
+7. Schedule the daily snapshot again with `--cron install`. The tool does not copy its own schedule, because the script may sit in another place on the new server.
+
+To bring back an older panel version, install that version first, restore, then update the panel as usual.
+
+## Commands
+
+| Command | What it does |
+|:---|:---|
+| `--install` | Installs `restic`, `jq` and `rsync` |
+| `--setup` | Asks for the repository and password, saves them |
+| `--quickstart` | `--install`, `--setup` and `--snapshot` in one go |
+| `--snapshot` | Takes a snapshot |
+| `--snapshot-bg` | Takes a snapshot in the background, so you can close the terminal |
+| `--list-snapshots` | Lists the snapshots in the repository |
+| `--restore <id>` | Restores a snapshot, or the newest one with `latest` |
+| `--delete-snapshots <id>` | Deletes one snapshot |
+| `--test-connection` | Checks that the repository answers |
+| `--verify-database` | Checks that the tool can log in to the panel database |
+| `--cron install` | Adds the daily snapshot to the `root` crontab |
+| `--cron status` | Shows the daily snapshot and the last lines of the log |
+| `--cron remove` | Removes the daily snapshot |
+| `--update` | Updates the script to the newest version |
+| `--version` | Shows the version and the installation it found |
+
+## Settings file
+
+The setup saves its answers in `/opt/panelalpha/pasnap/.env-backup`, readable only by `root`:
 
 ```bash
-sudo /opt/panelalpha/pasnap.sh --cron remove
-```
-
-## Configuration File
-
-Advanced configuration is stored in `/opt/panelalpha/pasnap/.env-backup`:
-
-> [!NOTE]
-> **Note:** Older installations may have a legacy file at `/opt/panelalpha/app/.env-backup`. The tool migrates it to `/opt/panelalpha/pasnap/.env-backup` automatically on first run.
-
-```bash
-# Repository settings
-RESTIC_REPOSITORY="s3:s3.eu-west-1.amazonaws.com/my-bucket/panelalpha-snapshots"
+RESTIC_REPOSITORY="s3:s3.eu-west-1.amazonaws.com/my-bucket/pasnap"
 RESTIC_PASSWORD="your-encryption-password"
-
-# S3 credentials (if applicable)
 AWS_ACCESS_KEY_ID="your-access-key"
 AWS_SECRET_ACCESS_KEY="your-secret-key"
-
-# Snapshot settings
 BACKUP_RETENTION_DAYS=30
 BACKUP_HOUR=2
-BACKUP_TAG_PREFIX="panelalpha"
-
-# System paths
 LOG_FILE="/var/log/pasnap.log"
 BACKUP_TEMP_DIR="/var/tmp"
 RESTIC_CACHE_DIR="/var/cache/restic"
 ```
 
-## Backup Management
+Older versions kept this file in `/opt/panelalpha/app/.env-backup`. The tool moves it on its first run.
 
-### Delete Old Backups
+## Updates
 
-Remove specific snapshots to free up storage space:
+Once a day the script checks GitHub for a newer version. When it runs from cron, it updates itself. In a terminal, it asks first. Set `PASNAP_DISABLE_AUTO_UPDATE=1` to stop updates from cron, or `PASNAP_SKIP_UPDATE_CHECK=1` to stop the check.
 
-```bash
-sudo /opt/panelalpha/pasnap.sh --delete-snapshots a1b2c3d4
-```
+## Logs
 
-### Check Disk Usage
-
-Monitor storage consumption:
+Every run writes to `/var/log/pasnap.log`. When a database dump or import fails, the log has the last lines of the error from MariaDB.
 
 ```bash
-# Check available disk space
-df -h
-
-# Check backup repository size
-sudo /opt/panelalpha/pasnap.sh --repository-stats
+sudo tail -n 50 /var/log/pasnap.log
 ```
 
-## Security Features
-
-The Snapshot Tool implements enterprise-grade security:
-
-- **Encryption**: All snapshots are encrypted using AES-256
-- **Access Control**: Configuration files have restricted permissions (600)
-- **Credential Management**: Cloud credentials are only exported during operations
-- **Network Security**: HTTPS/TLS for all remote communications
-
-## Monitoring and Logs
-
-### Log Files
-
-Monitor backup operations in `/var/log/pasnap.log`:
-
-```bash
-# View recent activity
-sudo tail -f /var/log/pasnap.log
-
-# Search for errors
-sudo grep ERROR /var/log/pasnap.log
-```
-
-### Automatic Backup Monitoring
-
-Check the status of scheduled backups:
-
-```bash
-sudo /opt/panelalpha/pasnap.sh --cron status
-```
-
-## Troubleshooting
-
-### Common Issues
-
-**Permission Denied**
-```bash
-# Ensure running with sudo
-sudo /opt/panelalpha/pasnap.sh --snapshot
-```
-
-**Docker Not Running**
-```bash
-sudo systemctl start docker
-sudo systemctl enable docker
-```
-
-**Repository Connection Failed**
-```bash
-# Test connection
-sudo /opt/panelalpha/pasnap.sh --test-connection
-
-# Verify credentials
-sudo nano /opt/panelalpha/pasnap/.env-backup
-```
-
-**Insufficient Disk Space**
-```bash
-# Check available space
-df -h /var/tmp
-
-# Clean up old snapshots
-sudo /opt/panelalpha/pasnap.sh --delete-snapshots old-snapshot-id
-```
-
-**Database Connection Errors**
-1. Run database diagnostics: `sudo /opt/panelalpha/pasnap.sh --verify-database`
-2. Verify PanelAlpha is running: `docker compose ps`
-3. For Control Panel, confirm `API_MYSQL_PASSWORD` is set in `/opt/panelalpha/app/.env`
-4. Review logs: `sudo tail -f /var/log/pasnap.log`
-
-### Getting Help
-
-If you encounter issues:
-
-1. Check logs for specific error messages.
-2. Run a connection test to validate repository access.
-3. Contact PanelAlpha support.
+Known problems and fixes: [Snapshot Tool Issues](../../troubleshooting-center/backups/snapshot-tool-issues.md).

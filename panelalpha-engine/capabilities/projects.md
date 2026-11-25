@@ -252,7 +252,7 @@ A website made only of files (a static site) gets them too: the container servin
 
 Only the keys you name are changed; the rest are left alone. To see what is set, ask the assistant to list the project's environment variables. Values are hidden in the list.
 
-If your repository commits its own `.env` file, the engine leaves that file exactly as committed. Your environment variables go into a separate file, `.env.panelalpha`. Each service that loads `.env` loads this file after it, so your values win.
+If your repository commits its own `.env` file, the engine leaves that file exactly as committed. Your environment variables go into a separate file, `.env.panelalpha`. It also holds a generated value for each of the app's own secrets (such as `JWT_SECRET` or `SESSION_SECRET`) that your `.env.example` names and the committed `.env` leaves out. Each service that loads `.env` loads this file after it, so your values win.
 
 Two things do not see your variables: code that reads `.env` straight from disk, and a build step that reads `.env` while the site is being built, as Vite and Next.js do. Only the running application's environment has them. If you need a value at build time, either stop committing `.env`, or make the build read the value from the environment rather than from the file.
 

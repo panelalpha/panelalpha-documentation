@@ -32,6 +32,28 @@ A folder of files with `index.html` (or `index.htm`) at the top is a static site
 
 A hand-written site of pages such as `home.html` and `about.html`, with no `index.html`, is still a website. Every file has to be something a browser can open: a page, stylesheet, script, image, font or media file. If the repository has even one `package.json` or `composer.json`, it is no longer treated this way.
 
+### Sites made with a site generator
+
+Hugo, Jekyll, VitePress, Eleventy, MkDocs, Docusaurus and Gatsby turn your source files into a folder of finished pages. **The engine does not run these generators, so it does not build the site from the repository.** Depending on the repository, you get the "Project not configured" page, a failed deploy, a site that does not answer, or pages that show the generator's own tags, such as `{% for post in posts %}`, instead of your content.
+
+Put such a site online in one of two ways.
+
+**Deploy the built pages.** Build the site on your computer or in your CI. Then deploy the output folder as a zip: [How a deploy works](../getting-started/how-a-deploy-works.md). The folder has `index.html` at the top, so the engine shows it as a static site.
+
+| Generator | Build command | Output folder |
+|---|---|---|
+| Hugo | `hugo` | `public/` |
+| Jekyll | `bundle exec jekyll build` | `_site/` |
+| VitePress | `npx vitepress build docs` | `docs/.vitepress/dist/` |
+| Eleventy | `npx @11ty/eleventy` | `_site/` |
+| MkDocs | `mkdocs build` | `site/` |
+| Docusaurus | `npm run build` | `build/` |
+| Gatsby | `npm run build` | `public/` |
+
+For VitePress, `docs` is the folder your pages sit in. Use your own folder name if it is different.
+
+**Add a Dockerfile** that builds the site and serves the result, for example with nginx. The engine then starts the image: [If you already pack the app in Docker](#if-you-already-pack-the-app-in-docker).
+
 ## WordPress and ready-made apps
 
 WordPress, Matomo, phpBB, Magento, Passbolt, OpenCart, osTicket, Flarum, SuiteCRM, Chamilo, MantisBT, Easy!Appointments, Roundcube, Adminer and phpMyAdmin are recognised as PHP apps and started for you.
@@ -52,7 +74,7 @@ These are projects with a `package.json` at the top of the repository. Commit th
 
 ### Apps that stay running
 
-These apps keep running on the server: Next.js, Nuxt, SvelteKit, Remix, Astro (when it runs on the server), NestJS, TanStack Start, Express, Fastify and a plain Node app. A plain Node app also needs a `start` script in `package.json`, or a file such as `index.js`, `server.js` or `app.js`.
+These apps keep running on the server: Next.js, Nuxt, SvelteKit, Remix, React Router (framework mode), Astro (when it runs on the server), NestJS, TanStack Start, Express, Fastify and a plain Node app. A plain Node app also needs a `start` script in `package.json`, or a file such as `index.js`, `server.js` or `app.js`.
 
 They start from the `start` script when there is one.
 
@@ -135,7 +157,7 @@ These are the short names the engine uses when you inspect a repository and in d
 | `nextjs` | Next.js, including a static export |
 | `nuxt` | Nuxt |
 | `sveltekit` | SvelteKit, including static |
-| `remix` | Remix |
+| `remix` | Remix and React Router (framework mode) |
 | `astro` | Astro, including when it runs on the server |
 | `nestjs` | NestJS |
 | `tanstack-start` | TanStack Start |

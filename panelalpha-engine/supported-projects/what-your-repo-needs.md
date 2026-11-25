@@ -39,7 +39,7 @@ PHP and Laravel run Apache **inside the project's container**. The VPS still ser
 | Rust | `Cargo.toml` | `cargo build --release` |
 | Java | `pom.xml`, or `build.gradle` / `build.gradle.kts` | The packaged jar |
 | .NET | A `.csproj` or `.sln` file (it may sit one or two folders down) | The published application |
-| Next.js, Nuxt, Nest, Remix, Express, Fastify | The framework in your dependencies, or its config file | The `start` script from `package.json` when there is one |
+| Next.js, Nuxt, Nest, Remix, Express, Fastify | The framework in your dependencies, or its config file | The `start` script from `package.json` when there is one. Without one, an Express server in `server.js`, `server.ts`, `server/index.js` or `server/index.ts` ([A server beside a Vite site](#a-server-beside-a-vite-site)) |
 | A Node app with no framework | `package.json`, plus a `start` script or a file such as `index.js` or `server.js` | The `start` script, or that file |
 | Vite, Angular, CRA, Astro static, Next.js export | The framework's own markers | nginx serving the built files |
 | Static site | An `index.html` or `index.htm`, and **none** of the language files above | nginx |
@@ -92,21 +92,29 @@ The lockfile in the project decides which package manager runs:
 | `yarn.lock` | yarn |
 | `package-lock.json` | npm |
 
+A `bun.lock` or `bun.lockb` next to a `package-lock.json` is installed with npm, unless your `package.json` asks for Bun. It asks for Bun with a `packageManager` of `bun@…`, an `engines.bun`, the `bun-types` or `@types/bun` package, or a script that runs `bun`. Some project generators commit a Bun lockfile you never use. If npm is not what you want, delete `package-lock.json`. If the first one fails, the engine also tries the others whose lockfile is in the project ([When the first match fails](how-detection-works.md#when-the-first-match-fails)).
+
 **Commit your lockfile.** Without one, dependency versions are not pinned, and a build that worked last week can fail this week because something upstream released a new version.
 
 The engine never adds a lockfile to your repository. If none was committed, the install generates one. The engine keeps it out of the project's changes on the server and never pushes it. The same holds for a PHP project's `composer.lock`.
 
 A `start` script in your `package.json` takes precedence over the default the engine would use.
 
+## A server beside a Vite site
+
+Apps made with Lovable and similar tools often pair a Vite site with a small Express server in `server/`, and leave out a `start` script. With no `start` script, the engine looks for that server in `server.js`, `server.ts`, `server/index.js` and `server/index.ts`, in that order. A TypeScript server runs with `tsx` when `package.json` lists it.
+
+If the server serves the built site itself (`express.static` or `sendFile`), it is all that runs. If it only answers API calls, the engine serves the built site from `dist/` and passes everything else to your server. That covers the paths under `/api`, the paths your `vite.config` proxies, any request that is not a page, and WebSocket connections. Your server gets its own `PORT`. If it listens on a port of its own choosing instead, the engine finds that port. If the server stops, the whole app restarts, so the deploy log shows the error.
+
+A Vite site bakes its `VITE_` values in when it is built. Your code may fall back to a local address, as in `import.meta.env.VITE_API_URL || "http://localhost:3001"`. Then the engine sets that variable to the app's own address for the build, keeping the path. A value you set yourself, or that your `.env` gives, is used instead.
+
+A server that needs a signing secret, such as `JWT_SECRET` or `SESSION_SECRET`, gets a generated one in two cases. Either your `.env.example` names it and the repository's own `.env` leaves it out, or the example only has a placeholder like `change-this-to-a-secure-random-string`. Other keys in `.env.example`, and credentials for other services such as `STRIPE_SECRET_KEY`, are never filled in for you. See [Environment variables](../capabilities/projects.md#environment-variables).
+
 ## Git submodules
 
-The engine fetches submodules with the repository, and again on every pull, branch change and push, at the commit the repository records. A submodule that cannot be fetched fails the first deploy.
+The engine fetches submodules with the repository, and again on every pull, branch change and push, at the commit the repository records. A submodule that cannot be fetched is left out, or keeps the copy it had. The deploy log warns with its name and git's reason, and the deploy goes on.
 
-After the first deploy:
-
-- A submodule the last deployed commit already had keeps whatever copy it had, and the deploy log warns.
-- A submodule the new commit adds fails the deploy.
-- A rebuild clones the repository afresh, so it cannot keep a copy. A submodule the previous deploy had checked out fails the rebuild instead of deploying the app without it.
+A rebuild clones the repository afresh, so it cannot keep a copy. A submodule the running app has checked out fails the rebuild instead of deploying the app without it.
 
 A submodule addressed over SSH (`git@host:...`) is fetched over HTTPS unless the project has a deploy key.
 

@@ -46,7 +46,7 @@ On the old server, create a snapshot using the Snapshot Tool.
 
 Install the Snapshot Tool on the new server, connect it to the same repository, and restore the snapshot.
 
-For exact commands and the restore sequence, follow: [Snapshot Tool – Migration to New Server](snapshot-tool.md#migration-to-new-server).
+For exact commands and the restore sequence, follow: [Moving to a new server](snapshot-tool.md#moving-to-a-new-server).
 
 **Important:** Restoring a snapshot on the destination server will **replace the current PanelAlpha data** on that server.
 

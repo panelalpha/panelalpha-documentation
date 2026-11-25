@@ -109,6 +109,22 @@ You choose the parts with `only` or `exclude`, never both. Each is an object wit
 
 **Deleting a backup removes its files, and that copy of the project can never be restored.** Deleting a store that still holds backups is refused unless you ask to delete the backups with it. Then they are gone for good. The assistant says what will be lost and asks you to confirm first.
 
+### Into a new project
+
+A backup can also be restored into a **new project**, under a new name and domain. The project it was taken from is not touched. The engine creates the new project. It restores the backup's files, volumes and application database into it, under its own database prefix. Then it starts the application on its own domain. The original project keeps running and keeps its backups.
+
+The new project signs in to its own database. Its environment variables and the login that a recipe generated come from the original, because the restored data was set up with them. Some files in the restored code hold the original's database password, such as the configuration Matomo writes during its setup. Those files get the new project's database login and domain instead. A database that runs in the project's own containers comes back from its volume and belongs to the new project alone.
+
+```text
+Restore the newest backup of tshop into a new project called tshop2.
+```
+
+Only a backup of a container project can be restored this way. A traditional PHP hosting backup carries an application configuration that names the original project's databases. Restoring it beside the original would leave both projects sharing one database. Use a container project, or the WordPress migration for a traditional PHP site. For the same reason, a backup that holds databases besides the project's application database is refused. The new project would still sign in to the original's copies of them.
+
+A restore into a new project runs as a task. The call answers with the new project and a task ID. The project's `async_status.restore` becomes `completed` or `failed`. A failed one leaves the new project in place, marked failed like a failed deploy, with the reason in its error. You can inspect it and delete it.
+
+A token limited to some projects can restore only its own projects' backups. It can restore them only into a new project name that is in its list.
+
 ## Download one part
 
 A backup is stored as separate items, for example the home folder and one dump per database. To take one item off the server, ask:
@@ -140,6 +156,22 @@ To look at the schedule or turn it off, ask:
 ```text
 Show the backup schedule of this project. Then remove it.
 ```
+
+## Backups and the live sites on the same server
+
+A backup reads the whole project and compresses it. It does this on the same server that serves every site. On a large project that is minutes of CPU and a lot of disk reading, at the same priority as the sites themselves.
+
+You can put it out of the way instead:
+
+```bash
+pae configure backups
+```
+
+It asks for two numbers. The **CPU priority** is `nice`, 0 to 19. A higher number means the archive waits longer for the CPU and the sites get it first. The **disk priority** is an `ionice` class, either 2 (best-effort) or 3 (idle). Idle gives a backup the disk only when nothing else is asking for it. Both are off by default, which is how every engine starts. Answer empty or `off` to switch either back off. The next archive runs at the new priority. One that is already running keeps the priority it started with.
+
+It covers the archives: the `tar` of a project, of a home directory or of a stored volume, and the extraction of a volume archive on restore. Database dumps are not included.
+
+Over the API the same two values are `GET /system/backup-settings` and `PUT /system/backup-settings`. With an assistant they are `system_backup_settings_get` and `system_backup_settings_set`. All three read and write the same stored setting, so they always agree.
 
 ## Troubleshooting
 
@@ -282,6 +314,14 @@ Back up tshop while a push to its staging copy is running.
 
 Mode: modify. Tools: `backup_create`, `project_push`, `task_get`. Check: the backup is refused as busy, and works once the push has finished. After any backup the app is running again. Skip when you cannot start both within the push's run time.
 
+**Restore into a new project**
+
+```text
+Restore the newest backup of tshop into a new project called tshop2.
+```
+
+Mode: modify. Tools: `backup_restore_into` with `name` (the source project), `id`, `new_name` and `domain`, `task_get`, `project_get`. Check: the call answers 202 with the new project and a `task_id`. Poll until `details.async_status.restore` is `completed`. `tshop` still serves and its backup list is unchanged. `tshop2` answers on its own domain.
+
 **Delete a backup**
 
 ```text
@@ -292,4 +332,4 @@ Mode: full. Tools: `backup_delete`, `backup_list`. Check: only that backup is go
 
 ## From the server
 
-Creating and restoring backups, setting up a store, scheduling and downloading: [CLI commands](../commands/pae-cli.md#backups). The schedule and the download have their own commands, `pae project:backup:schedule` and `pae project:backup:download`.
+Creating and restoring backups, setting up a store, scheduling and downloading: [CLI commands](../commands/pae-cli.md#backups). The schedule and the download have their own commands, `pae project:backup:schedule` and `pae project:backup:download`. A restore into a new project is `pae project:backup:restore-into`.
