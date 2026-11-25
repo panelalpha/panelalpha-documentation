@@ -17,7 +17,7 @@ Update when PanelAlpha releases a fix. If a deploy failed for a reason PanelAlph
 
 The update restarts the engine. A connected assistant disconnects for about a minute, then reconnects.
 
-An update installs only a release newer than the one running. This holds for an update started from the engine (the API or your assistant) and for the updater on the server.
+An update installs only a release newer than the one running. This holds for an update started from the engine (the API, your assistant or `pae system:update`) and for the updater on the server.
 
 - **You already run the newest release**, the same version from the same commit: the update says `Already up to date` and changes nothing.
 - **A fix published under the same version number** is installed as an update within that release.
@@ -31,6 +31,7 @@ An update installs only a release newer than the one running. This holds for an 
 - The webserver for your sites restarts only when its configuration changed.
 - The SFTP service is recreated only when the start-up script that a release ships for it changed. This is how a fix to the way uploads are written reaches your server. An SFTP session that is open at that moment ends.
 - The engine's own certificate is requested again only when it is due for renewal.
+- Container projects stop for a moment only when the update upgrades Sysbox, the runtime their containers run on. Those that were running start again on their own: [Before you update to 2.4](#before-you-update-to-24).
 - While the engine's database is being migrated, its scheduler and background workers wait. No job runs new code against the old database.
 - The engine's own images are downloaded for the version being installed. A newer build of them for the same version, such as one with operating system security fixes, is downloaded on the next update. An image is built on the server only when none is published for exactly that version's sources.
 
@@ -55,6 +56,18 @@ If an update fails after it started replacing the engine's files, it puts the pr
 Once the new release is running and has migrated, a later failure leaves the new release in place. The code is not taken back from under its database.
 
 Every update is recorded with the versions it moved between, how it ended and why. The engine information your assistant reads shows the last run. The result is one of `installed`, `updated`, `up_to_date`, `refused`, `rolled_back` or `failed`.
+
+## Before you update to 2.4
+
+Read this if you update from 2.3 or earlier.
+
+- **The update takes longer.** It builds the engine's images again, which takes about 10 minutes. The engine is down for only a few seconds of that, and your sites keep running.
+- **Sysbox 0.7.2 or newer is required.** Older Sysbox releases have a security issue. The update installs 0.7.2 when the server has an older one. It checks the downloaded package against the checksum that GitHub publishes for it. While Sysbox is upgraded, the container projects that are running stop and then start again, so their sites are offline for a moment. A project you stopped stays stopped. Every project still starts after a reboot. Traditional PHP hosting projects are not affected.
+- **Software that calls the engine's API** should check these changes:
+  - A deploy can now be `waiting`. This is the first deploy of an empty container project, until its files arrive: [How a deploy works](how-a-deploy-works.md).
+  - An API token's `routes` must name at least one operation. `"routes": []` is refused with 422. Before, it meant every operation. Leave `routes` out or send `null` for every operation, or revoke the token to stop it.
+  - Limiting the operations of an older all-access (`*`) token keeps it to the REST API. Limiting its commands keeps it to MCP.
+  - A token can no longer be created or changed to reach more than the token that makes the call: [Configure the engine](configure-the-engine.md#from-the-api).
 
 ## Before you update to 2.3
 
@@ -105,10 +118,10 @@ Write it down. If anything goes wrong, this is the version you ask PanelAlpha to
 To see whether a newer release exists without changing anything:
 
 ```bash
-bash /opt/panelalpha/shared-hosting/updater.sh --check
+pae system:update --check
 ```
 
-It prints the running version and the newest release, each with its commit, and says whether an update is available. `bash /opt/panelalpha/shared-hosting/updater.sh --help` lists every option and starts nothing.
+It prints the running version and the newest release. For the newest release it also gives the day it was published and where its changes are described. It says whether an update is available. The newest release is what the PanelAlpha Hub publishes, read from `https://hub.panelalpha.com/api/v1/public/releases`. The answer is kept for an hour. `--refresh` asks again. The same answer is `GET /system/update` in the API and the `system_update_check` tool for your assistant. Without the engine running, `bash /opt/panelalpha/shared-hosting/updater.sh --check` gives it on the server. `bash /opt/panelalpha/shared-hosting/updater.sh --help` lists every option and starts nothing.
 
 ### 2. Run the update
 
@@ -116,13 +129,15 @@ It prints the running version and the newest release, each with its commit, and 
 curl -fsSL https://get.panelalpha.com/engine | sh
 ```
 
-It runs on its own for a few minutes and ends with:
+It runs on its own for a few minutes, or about 10 when a release builds the engine's images again. It ends with:
 
 ```text
 PanelAlpha engine has been successfully updated!
 ```
 
-While it runs, your AI assistant loses its connection for about a minute and reconnects on its own. Your websites stay up.
+While it runs, your AI assistant loses its connection for about a minute and reconnects on its own. Your websites stay up. Only when the update upgrades Sysbox do running container projects stop for a moment and start again.
+
+`pae system:update` starts the same update from the engine instead. It shows both versions and asks before it starts (`--force` does not ask). It runs in the background. `pae system:update --status` says how it ended.
 
 ### 3. Check it worked
 
@@ -193,7 +208,15 @@ There is no automatic way back from an update that succeeded, because the update
 
 ## More requests to try
 
-**Mode** is the lowest permission mode that allows it: read, modify or full ([Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do)). To see whether a newer release exists, run `updater.sh --check` on the server, as in step 1 above.
+**Mode** is the lowest permission mode that allows it: read, modify or full ([Decide what the assistant may do](../connecting-your-ai/your-assistant.md#decide-what-the-assistant-may-do)). To see whether a newer release exists, run `pae system:update --check`, as in step 1 above, or use the `system_update_check` tool.
+
+**Is there a newer release**
+
+```text
+Is a newer engine release available? Tell me the version running now and the newest one.
+```
+
+Mode: read. Tools: `system_update_check`. Check: the answer gives both versions and whether an update would install anything, and nothing changes.
 
 **What the last update did**
 

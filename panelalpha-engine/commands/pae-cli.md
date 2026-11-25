@@ -26,12 +26,13 @@ Throughout this page, `{project}` means the project's name, the value shown as `
 
 | Command | What it does |
 |---|---|
-| `pae configure` | Opens the menu: address and certificate, assistant tokens, API tokens, the queue, the Docker Hub login, prewarmed images, the site database caches, telemetry and the projects allowed to call the engine's API. Pick one, do it, come back for the next. |
+| `pae configure` | Opens the menu: address and certificate, assistant tokens, API tokens, the queue, backup priority, the Docker Hub login, prewarmed images, the site database caches, telemetry and the projects allowed to call the engine's API. Pick one, do it, come back for the next. |
 | `pae configure address` | The address clients connect to, the certificate on that name, and whether a new project without a tunnel is published under a free PanelAlpha name or under the engine's own name. |
 | `pae configure api-access` | Let a project call the engine's API, rotate its token, or take that access away. Same as [Engine API for projects](#engine-api-for-projects). |
 | `pae configure mcp-tokens` | Connect an assistant, or change what assistants may use. |
 | `pae configure api-tokens` | Mint a token for your own software, and limit it to part of the API. |
 | `pae configure queue` | How many deploys, backups or staging jobs run at once. A number from 1 to 32. Left unset, it is 1 on a server with less than 4 GB of RAM and 2 otherwise. |
+| `pae configure backups` | How hard a backup or a restore may push: the CPU priority (`nice`, 0-19) and disk priority (`ionice` best-effort or idle) its archives run at. Both unset by default. |
 | `pae configure docker-hub` | The Docker Hub account image downloads go out under. |
 | `pae configure prewarm` | Which base images are kept ready before a deploy asks, and the disk budget and reserve for them. None by default. |
 | `pae configure sites-db` | How much memory the database for hosted PHP sites keeps for its caches. Defaults are 32M, 8M and 8M. Changing one restarts that database for a few seconds. |
@@ -44,7 +45,7 @@ Choosing assistant tokens, then **Global scope**, opens:
 
 ```text
  Groups      40 of 40 groups on
- Commands    311 of 311 commands on
+ Commands    319 of 319 commands on
  Ceiling     full — they may do anything, including delete
  Review and save
  Back
@@ -114,7 +115,7 @@ An application that manages the engine, such as a hosting panel:
 pae project:create --repo=https://github.com/org/panel --full-privileges
 ```
 
-What this does: before the first deploy, it does what `pae system:api-access:allow {project} --scope=all` and `pae system:public-routing:allow {project} --host-domain --ports` do. That first deploy then already gives the application its Engine API token and can move it to the server's own name. Once the application is live, it is a system project, as with `pae project:settings:set system on`: hidden from every token but its own, and protected. If the deploy fails, it is neither. `--full-privileges` needs a container project: `--repo`, or `--template=dind`.
+What this does: before the first deploy, it does what `pae system:api-access:allow {project} --scope=all --mcp` and `pae system:public-routing:allow {project} --host-domain --ports` do. That first deploy then already gives the application its Engine API token and can move it to the server's own name. Once the application is live, it is a system project, as with `pae project:settings:set system on`: hidden from every token but its own, and protected. If the deploy fails, it is neither. `--full-privileges` needs a container project: `--repo`, or `--template=dind`.
 
 To deploy the project that already runs this repository again, instead of creating a second one:
 
@@ -197,6 +198,7 @@ Context: [Connecting with Git](../capabilities/connecting-with-git.md), [Push to
 | `pae project:backup:download {project} {id} {item} --output=/opt/panelalpha/file` | Copies one item of a finished backup to a file. Write it under `/opt/panelalpha`, which the engine's container can reach. Without `--output` the file contents go to the screen. `pae project:backup:show {project} {id}` lists the item numbers. |
 | `pae project:backup:show {project} {id}` | Shows one backup's details. |
 | `pae project:backup:restore {project} {id}` | Restores a backup. **This overwrites the live site.** |
+| `pae project:backup:restore-into {project} {id} --as={new project} [--domain={domain}]` | Restores a backup into a new project, leaving the original project and its backups alone. Container projects only. |
 | `pae project:backup:delete {project} {id}` | Deletes one backup. |
 | `pae backup:container:show {store}` | Shows a store's settings, and whether it is the default. |
 | `pae backup:container:update {store}` | Changes a store's connection details. `--default` makes it the store a panel uses when nobody configured one. |
@@ -285,7 +287,7 @@ Context: [WordPress and known apps](../capabilities/wordpress-and-apps.md).
 | `pae mcp:tool:list` | Lists what a connected assistant is currently allowed to do. |
 | `pae configure mcp-tokens` | Changes that, by asking. See [Configuring the engine](#configuring-the-engine). |
 | `pae mcp:log:list` | Lists recent assistant requests. `--limit=` sets how many (20 by default). `--token-id=` keeps the requests made with that token, even one deleted since; repeat it for several. `--token-name=` keeps the requests whose token name contains that text, ignoring case. `--project=` keeps the requests that named that project. |
-| `pae api:token:create {name}` | Creates a token for your own software. Not for assistants. It is refused at the assistant endpoint unless you pass `--mcp`. `--expires=90d` makes it temporary. |
+| `pae api:token:create {name}` | Creates a token for your own software. Not for assistants. It is refused at the assistant endpoint unless you pass `--mcp`. Without `--mcp` it also cannot mint assistant tokens over the API. `--expires=90d` makes it temporary. |
 | `pae api:token:list` | Lists those software tokens. A project's Engine API token is on it while it works; one that was replaced, denied, or whose project was deleted is removed, so no token that no longer works is left looking live. |
 | `pae api:token:delete {id}` | Removes a software token. |
 
@@ -381,6 +383,8 @@ Context: [Security](../capabilities/security.md), [Limits on outbound connection
 | `pae telemetry:ship` | Sends queued reports now. `--dry-run` shows the batch without sending it. |
 | `pae telemetry:bug-report {project}` | Files a bug about one deployed application. |
 | `pae system:version` | Prints the engine version. |
+| `pae system:update --check` | Says whether a newer engine release is available, as the PanelAlpha Hub publishes it, and changes nothing. The answer is kept for an hour. `--refresh` asks again. `--json` prints it for scripts. |
+| `pae system:update` | Updates the engine to the newest release, after asking (`--force` does not ask). It runs the updater whatever `--check` says, as the API does. The updater refuses an older release and changes nothing when the newest is already running. `pae system:update --status` says how the last update ended. |
 | `pae settings:get {name}` / `pae settings:set {name} {value}` | Reads and writes an engine setting. |
 | `pae settings:set default_tunnel none` | A new project created without naming a tunnel is published under the engine's own name (the certificate name, or the base domain if one is set), and nothing is registered with PanelAlpha Online. `panelalpha` is the default: a base domain if there is one, otherwise a free `panelalpha.online` name. Any other value is refused. A tunnel named in the request always wins. |
 
@@ -391,8 +395,10 @@ Context: [Telemetry](../getting-started/what-is-collected.md).
 | Command | What it does |
 |---|---|
 | `pae hub:connect CODE` | Connects this engine to the PanelAlpha Hub account that created the code (**Connect engine** in the Hub). `--ip`, `--replace`. |
-| `pae hub:status` | Shows the connection, the Hub's own view of it, and the last calls the Hub made. `--local` skips asking the Hub. |
-| `pae hub:disconnect` | Revokes the Hub's access at once, then tells the Hub. |
+| `pae hub:status` | Shows the connection, the Hub's own view of it, the last reports and the last admin logins. `--local` skips asking the Hub. |
+| `pae hub:report` | Sends the minute report now. It runs every minute by itself. `--now` skips waiting for this engine's second of the minute. |
+| `pae hub:sso-routes` | Gives every app domain the route that the Hub's admin login arrives on. It runs by itself once after connecting. `--force` renders them again. |
+| `pae hub:disconnect` | Stops reporting and forgets the connection at once, then tells the Hub. |
 
 Context: [Connect to PanelAlpha Hub](../getting-started/connect-to-panelalpha-hub.md).
 
@@ -439,7 +445,7 @@ A cache helps a deploy of the same commit; once the repository moves on, build i
 
 The engine ships more commands than belong on a daily list. Most are for support to point you at, or for server upkeep the engine normally handles on its own. Each one describes itself with `pae <command> --help`. The main groups:
 
-- **Server upkeep:** `system:version`, `system:database:test`, `system:ip:sync`, `system:domain:rebuild`, `system:modsec:rebuild`, `system:sftp:rebuild`, `system:exim:rebuild`, `system:webserver:update`.
+- **Server upkeep:** `system:version`, `system:update`, `system:database:test`, `system:ip:sync`, `system:domain:rebuild`, `system:modsec:rebuild`, `system:sftp:rebuild`, `system:exim:rebuild`, `system:webserver:update`.
 - **Scheduled jobs:** `backups:run-scheduled` (every minute: starts the automatic backups that are due, set with `project:backup:schedule`), `metrics:projects:disk` (every 15 minutes: measures each project's disk use for `project:usage`), `metrics:projects:sample` (every minute: CPU and memory of each project and its containers), `metrics:projects:rollup` (every hour: hourly averages of those), `metrics:projects:bandwidth` (every hour: this month's transfer on each project), `tunnels:expire` (every five minutes: removes a tunnel whose lifetime has passed and whose removal at that lifetime, which the engine queues when it creates one, did not run), `proxy:rule:refresh-certificates` (every hour: serves each extra route on port 443 with the certificate on the server that covers it now, so a renewed, removed or newly added one is picked up), `git:credentials:sweep` (every hour: removes leftover git credential helpers and deploy keys from account homes).
 - **Scheduled cleanup:** `task:prune` (keeps the newest tasks of each project; a deleted project's tasks stay as its record, and `--project=<name> --keep=0 --keep-other=0` removes them), `metrics:prune`, `deploy:cache:prune` (runs once a day and deletes build caches unused for 24 hours; `--older-than=7d` changes the window, `--dry-run` only prints), `system:image:prune` (runs once a day; while a deploy is running the image half waits and is retried the next hour: removes deploy base images and host build images (`panelalpha/build-node`, `panelalpha/build-rust`) not selected in `pae configure prewarm` that no deploy has pulled, built or named for 3 days, except the newest of each kind (an old PHP recipe goes once unused), never your own base images, their tags in the cache registry (then garbage-collected), and host build cache unused for 24 hours; `--older-than`, `--build-cache-older-than` and `--dry-run` as above, `--due-after=20h` skips the image half when it last completed within that window, `--until-free=35G` (or a share, 15%) repeats the image half with the window halved, down to any age, until that much is free on the Docker root and is not deferred by a deploy, which keeps only what its log names, defaults in `DEPLOY_HOST_IMAGE_RETENTION` and `DEPLOY_HOST_BUILD_CACHE_RETENTION`), `system:disk:guard` (every five minutes: keeps host build cache under `DEPLOY_HOST_BUILD_CACHE_MAX`, 10G, and while free space on the Docker root or /home is below `DEPLOY_DISK_PRESSURE_FREE`, 15% by default, prunes the oldest build cache and then base images unused for 6 hours, 3, 1.5 and less until enough is free; `--dry-run` only prints), `deploy:log:prune`, `acme:challenge:prune`, `vault:purge` (removes expired paste slots, never a filled engine-wide secret).
 - **Per-project repair:** `project:permission:fix`, `project:quota:rebuild`, `project:domain:fix`, `project:domain:rebuild`, `project:domain:cleanup`, `project:mapping:check` (every five minutes: recreates a running project container whose image the container runtime no longer maps, or that started before the container runtime's file layer last did, which a runtime restart or a host crash leaves behind, and prints what it found in each; `--dry-run` only prints).
